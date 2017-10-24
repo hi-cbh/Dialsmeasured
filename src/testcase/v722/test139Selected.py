@@ -8,27 +8,16 @@ from src.base.baseAdb import BaseAdb
 from src.mail.mailOperation import EmailOperation
 from src.psam.psam import Psam
 from src.testcase.v722.easycase.login import Login
+from src.testcase.v722.initData import InitData
+
 
 # sys.path.append(r"/Users/apple/git/pytest/")
 
-# ======== Reading user_db.ini setting ===========
-base_dir = str(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
-file_path = base_dir + "/user_db.ini"
+d= InitData().getUsers()
+print(d)
+user = {"name": d['user2'], 'pwd': d['pwd2']}
 
-cf = cparser.ConfigParser()
-cf.read(file_path)
-
-username = cf.get("userconf", "user1")
-pwd = cf.get("userconf", "pwd1")
-username2 = cf.get("userconf", "user2")
-pwd2 = cf.get("userconf", "pwd2")
-filename = cf.get("userconf", "filename")
-
-user2 = {"name": username, 'pwd': pwd}
-user1 = {"name": username2, 'pwd': pwd2}
-
-##====================
-
+print(user)
 
 class TestSelect(unittest.TestCase):
 
@@ -52,12 +41,13 @@ class TestSelect(unittest.TestCase):
         time.sleep(5)
         # AppiumServer2().stop_server()
 
+
     def testCaseSelected(self):
         '''测试139精选'''
 
         try:
             print("=>登录")
-            Login(self.driver,user1['name'], user1['pwd']).loginAction()
+            Login(self.driver,user['name'], user['pwd']).loginAction()
 
             time.sleep(10)
             print("首先通过http协议，访问链接是否更改，再运行")

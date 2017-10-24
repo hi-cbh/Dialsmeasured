@@ -153,7 +153,7 @@ class Send(unittest.TestCase):
             time.sleep(10)
 
             # 点击第一封
-            print('=>点击第一封邮件')
+            print('=>点击第一封邮件，判断是否存在【暂无邮件】字段')
             self.assertTrue(self.driver.get_element(u"uiautomator=>暂无邮件") == None, "收件箱没有邮件")
             els = self.driver.get_sub_element(r"id=>android:id/list","class=>android.widget.LinearLayout")
             time.sleep(2)

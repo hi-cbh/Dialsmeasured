@@ -2,33 +2,26 @@
 # encoding:utf-8
 
 import os,time,unittest
-import configparser as cparser
 from src.aserver.AppiumServer import AppiumServer2
 from src.base.baseAdb import BaseAdb
 from src.mail.mailOperation import EmailOperation
 from src.psam.psam import Psam
 from src.testcase.v722.easycase.login import Login
 from src.testcase.v722.easycase.send import Send
-
+from src.testcase.v722.initData import InitData
 
 # sys.path.append(r"/Users/apple/git/pytest/")
 
-# ======== Reading user_db.ini setting ===========
-base_dir = str(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
-file_path = base_dir + "/user_db.ini"
+d = InitData().getUsers()
 
-cf = cparser.ConfigParser()
-cf.read(file_path)
+username = d['user1']
+pwd = d['pwd1']
+username2 = d['user2']
+pwd2 = d['pwd2']
 
-username = cf.get("userconf", "user1")
-pwd = cf.get("userconf", "pwd1")
-username2 = cf.get("userconf", "user2")
-pwd2 = cf.get("userconf", "pwd2")
-filename = cf.get("userconf", "filename")
+filename = InitData().getFile()['filename']
+
 path = r'/mnt/sdcard/139PushEmail/download/%s@139.com/*%s.rar'  %(username, filename)
-
-
-##====================
 
 
 class TestSend(unittest.TestCase):

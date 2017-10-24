@@ -2,7 +2,6 @@
 # encoding:utf-8
 
 import os,time,unittest
-import configparser as cparser
 from src.aserver.AppiumServer import AppiumServer2
 from src.base.baseAdb import BaseAdb
 from src.mail.mailOperation import EmailOperation
@@ -10,27 +9,19 @@ from src.psam.psam import Psam
 from src.testcase.v722.easycase.login import Login
 from src.testcase.v722.easycase.receive import WebReceive
 from src.mail.sendEmailSmtp import SendMail
+from src.testcase.v722.initData import InitData
+
 
 # sys.path.append(r"/Users/apple/git/pytest/")
 
-# ======== Reading user_db.ini setting ===========
-base_dir = str(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
-file_path = base_dir + "/user_db.ini"
+d = InitData().getUsers()
+user1 = {"name": d['user1'], 'pwd': d['pwd1']} # 发送者
+user2 = {"name": d['user2'], 'pwd': d['pwd2']} # 接收者
 
-cf = cparser.ConfigParser()
-cf.read(file_path)
+'''
+用户没有做到参数化
 
-username = cf.get("userconf", "user1")
-pwd = cf.get("userconf", "pwd1")
-username2 = cf.get("userconf", "user2")
-pwd2 = cf.get("userconf", "pwd2")
-filename = cf.get("userconf", "filename")
-
-user2 = {"name": username, 'pwd': pwd}
-user1 = {"name": username2, 'pwd': pwd2}
-
-##====================
-
+'''
 
 class TestPush(unittest.TestCase):
     '''
@@ -48,7 +39,7 @@ class TestPush(unittest.TestCase):
             print("setUp启动出错！")
 
         else:
-            EmailOperation(user1['name']+"@139.com", user1['pwd']).seen()
+            EmailOperation(user2['name']+"@139.com", user2['pwd']).seen()
             time.sleep(10)
 
 
@@ -62,25 +53,32 @@ class TestPush(unittest.TestCase):
 
     def testCasePush(self):
         '''推送测试测试'''
+        self.Push(user1, user2)
+
+
+
+    def Push(self, sender, reveicer):
+        '''推送测试测试方法'''
 
         try:
             print("=>登录")
-            Login(self.driver,user1['name'], user1['pwd']).loginAction()
+            Login(self.driver,reveicer['name'], reveicer['pwd']).loginAction()
 
             print('=>注销账号')
             self.logout()
 
             print("=>重新登录")
-            Login(self.driver,user1['name'], user1['pwd']).loginAction()
+            Login(self.driver,reveicer['name'], reveicer['pwd']).loginAction()
 
 
             print("=>点击Home键")
             BaseAdb.adbHome()
             time.sleep(5)
 
-            print("=>Web端发送邮件")
+            # print("=>Web端发送邮件")
             # self.assertTrue(self.receive(),"邮件发送失败")
-            s = SendMail(user2['name'], user2['pwd'], user1['name'])
+            print("=>第三方发送邮件")
+            s = SendMail(sender['name'], sender['pwd'], reveicer['name'])
             self.assertTrue(s.sendMail('sendsmtpEmail','测试邮件...'),"邮件发送失败")
             time.sleep(10)
 
@@ -123,10 +121,10 @@ class TestPush(unittest.TestCase):
         time.sleep(10)
 
 
-    def receive(self):
-        '''接收邮件'''
-        r = WebReceive(user2['name'], user2['pwd'], user1['name'] +'@139.com')
-        return r.sendEmail()
+    # def receive(self):
+    #     '''接收邮件'''
+    #     r = WebReceive(sender['name'], sender['pwd'], receiver['name'] +'@139.com')
+    #     return r.sendEmail()
 
     def waitforNotification(self):
         '''找到需要的通知栏信息'''

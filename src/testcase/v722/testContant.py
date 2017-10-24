@@ -2,38 +2,17 @@
 # encoding:utf-8
 
 import os,time,unittest,sys
-import configparser as cparser
-from src.base.baseTime import BaseTime
-from src.db.sqlhelper import SQLHelper
 from src.aserver.AppiumServer import AppiumServer2
 from src.base.baseAdb import BaseAdb
-from src.mail.mailOperation import EmailOperation
 from src.psam.psam import Psam
 from src.testcase.v722.easycase.login import Login
-from src.testcase.v722.easycase.openDown import OpenDown
-from src.testcase.v722.easycase.receive import Receive
-from src.testcase.v722.easycase.send import Send
-
+from src.testcase.v722.initData import InitData
 
 # sys.path.append(r"/Users/apple/git/pytest/")
 
-# ======== Reading user_db.ini setting ===========
-base_dir = str(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
-file_path = base_dir + "/user_db.ini"
+d = InitData().getUsers()
+user = {"name": d['user2'], 'pwd': d['pwd2']}
 
-cf = cparser.ConfigParser()
-cf.read(file_path)
-
-username = cf.get("userconf", "user1")
-pwd = cf.get("userconf", "pwd1")
-username2 = cf.get("userconf", "user2")
-pwd2 = cf.get("userconf", "pwd2")
-filename = cf.get("userconf", "filename")
-path = r'/mnt/sdcard/139PushEmail/download/%s@139.com/*%s.rar'  %(username, filename)
-
-versionID = cf.get("verconf", "versionid")
-
-##====================
 
 
 class TestContant(unittest.TestCase):
@@ -61,7 +40,7 @@ class TestContant(unittest.TestCase):
 
     def testCaseCheckAddressList(self):
         '''测试通讯录是否同步成功'''
-        login=Login(self.driver,username, pwd)
+        login=Login(self.driver,user['name'], user['pwd'])
         login.loginAction()
 
         time.sleep(5)
