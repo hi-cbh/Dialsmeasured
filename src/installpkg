@@ -1,0 +1,6 @@
+pip3 install pyzmail  # 邮件
+pip3 install selenium # webdriver
+pip3 install Appium-Python-Client # webdriver
+pip3 install pysql # 数据库
+pip3 install imapclient # 邮件
+下载对应的 chromedirver
