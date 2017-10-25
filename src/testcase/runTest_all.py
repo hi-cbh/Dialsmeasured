@@ -81,7 +81,7 @@ if __name__ == "__main__":
 
 
     # 将错误结果写入 记录
-    if testResultReport.failures > 0:
+    if int(testResultReport.failures) > 0:
 
         resulttxt = []
         resulttxt.append('\n'+now + " 运行错误：" + '\n')

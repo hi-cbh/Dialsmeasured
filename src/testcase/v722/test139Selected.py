@@ -69,7 +69,7 @@ class TestSelect(unittest.TestCase):
 
 
         except BaseException as error:
-            self.fail("测试139精选过程中出错！")
+            self.fail("【139精选】出错！")
 
     def logout(self):
         '''注销账户'''

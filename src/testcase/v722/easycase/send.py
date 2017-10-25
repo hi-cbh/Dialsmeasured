@@ -138,7 +138,7 @@ class Send(unittest.TestCase):
             BaseAdb.adbBack()
             time.sleep(2)
         except BaseException as error:
-            self.fail('发送正文带附件，过程中出现出错了！！！')
+            self.fail('【带附件邮件发送】出错')
             #添加截图
 
     def sendFwd(self):
@@ -212,7 +212,7 @@ class Send(unittest.TestCase):
             self.assertTrue(text.find("Fwd")!= -1, "没有找到转发邮件")
 
         except BaseException as error:
-            self.fail("转发邮件（带附件），过程中，出现异常")
+            self.fail("【转发邮件（带附件）】出错")
 
         else:
             BaseAdb.adbBack()

@@ -40,19 +40,22 @@ class TestContant(unittest.TestCase):
 
     def testCaseCheckAddressList(self):
         '''测试通讯录是否同步成功'''
-        login=Login(self.driver,user['name'], user['pwd'])
-        login.loginAction()
+        try:
+            login=Login(self.driver,user['name'], user['pwd'])
+            login.loginAction()
 
-        time.sleep(5)
+            time.sleep(5)
 
-        print("验证点：页面是否存在联系人字段")
-        self.assertTrue(self.driver.get_element(u"uiautomator=>联系人") !=None, "页面找不到联系人字段")
+            print("验证点：页面是否存在联系人字段")
+            self.assertTrue(self.driver.get_element(u"uiautomator=>联系人") !=None, "页面找不到联系人字段")
 
-        print("=>点击联系人")
-        self.driver.click(u"uiautomator=>联系人")
+            print("=>点击联系人")
+            self.driver.click(u"uiautomator=>联系人")
 
-        print("验证点：是否获取通知栏信息")
-        self.assertTrue(self.waitforNotification(),"通讯录同步失败！！")
+            print("验证点：是否获取通知栏信息")
+            self.assertTrue(self.waitforNotification(),"通讯录同步失败！！")
+        except BaseException :
+            self.fail("【联系人同步】出错")
 
 
 
