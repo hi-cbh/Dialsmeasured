@@ -68,7 +68,7 @@ class Login(unittest.TestCase):
             print('验证点：等待收件箱底部导航栏出现')
             self.assertTrue(self.driver.get_element("id=>cn.cj.pe:id/message_list_bottom_email") != None, "登录失败！")
         except BaseException as error:
-            self.fail("登录过程中出现错误！！！！！")
+            self.fail("密码登录过程中，出现错误！！！！！")
             # 添加截图
         # else:
         #     self. 添加OK写入操作

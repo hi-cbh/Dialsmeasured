@@ -85,7 +85,7 @@ class TestPush(unittest.TestCase):
             print("验证点：等待推送信息")
             self.assertTrue(self.waitforNotification(),"接收推送失败")
         except BaseException as error:
-            self.fail("接收推送过程中出错！")
+            self.fail("接收推送过程中，出错！")
 
         else:
             appPackage = "cn.cj.pe"  # 程序的package

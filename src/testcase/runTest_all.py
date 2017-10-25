@@ -8,6 +8,7 @@ print("path: %s" %p)
 
 sys.path.append(p+"/")
 reportPath = p + "/report/"
+logPath = p + "/logs/"
 print("report: %s" %reportPath)
 
 from src.testcase.v722.testSend import TestSend
@@ -74,6 +75,19 @@ if __name__ == "__main__":
     fp = open(filename, 'wb')
     runner = HTMLTestRunner(stream=fp,
                             title='Test Report',
-                            description='Example with: ')
-    runner.run(suite)
+                            description='DialsMeasured with: ')
+    testResultReport = runner.run(suite)
     fp.close()
+
+
+    # 将错误结果写入 记录
+    if testResultReport.failures > 0:
+
+        resulttxt = []
+        resulttxt.append('\n'+now + " 运行错误：" + '\n')
+        for case, reason in testResultReport.failures:
+            resulttxt.append(reason[reason.find("AssertionError")+16:] + '\n')
+
+        for line in resulttxt:
+            with open(logPath + "run.log",'a+') as fn:
+                fn.write(line)
