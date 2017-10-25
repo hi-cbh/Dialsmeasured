@@ -101,4 +101,4 @@ if __name__ == "__main__":
 
     # print(line)
 
-    s.sendMailLog('testErrorLog',line)
+    s.sendMailLog('拨测出现异常',line)

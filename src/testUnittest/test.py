@@ -51,6 +51,9 @@ if __name__ == '__main__':
     print(len(testResultReport.failures))
     # print('Failed case and reason')
     # print(testResultReport.failures)
+
+
+
     l = []
     for case, reason in testResultReport.failures:
         # print(case.id())
