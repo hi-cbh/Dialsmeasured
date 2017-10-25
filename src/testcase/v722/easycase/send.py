@@ -143,14 +143,26 @@ class Send(unittest.TestCase):
 
     def sendFwd(self):
         try:
-            # 这里优化一下，用一个循环，知道邮件出现
-            time.sleep(10)
-            print("下拉")
-            self.driver.swipeDown();
-            time.sleep(10)
-            print("下拉")
-            self.driver.swipeDown();
-            time.sleep(10)
+            print("加载本地邮件封邮件")
+            timeout = int(round(time.time() * 1000)) + 1*60 * 1000
+            # 找到邮件结束
+            while int(round(time.time() * 1000)) < timeout :
+
+                el = self.driver.element_wait(u"uiautomator=>暂无邮件",secs = 1)
+                if el != None:
+                    print("下拉")
+                    self.driver.swipeDown();
+                    time.sleep(1)
+                    self.driver.swipeDown();
+                else:
+                    break;
+
+                time.sleep(1)
+
+                print("判断是否结束")
+                if self.driver.element_wait(u"uiautomator=>暂无邮件",secs = 1) == None :
+                    break
+
 
             # 点击第一封
             print('=>点击第一封邮件，判断是否存在【暂无邮件】字段')
