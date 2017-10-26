@@ -155,13 +155,10 @@ class Send(unittest.TestCase):
                     time.sleep(1)
                     self.driver.swipeDown();
                 else:
+                    print("列表有邮件，退出循环")
                     break;
 
                 time.sleep(1)
-
-                print("判断是否结束")
-                if self.driver.element_wait(u"uiautomator=>暂无邮件",secs = 1) == None :
-                    break
 
 
             # 点击第一封

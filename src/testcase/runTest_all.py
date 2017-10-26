@@ -15,45 +15,12 @@ from src.testcase.v722.testSend import TestSend
 from src.testcase.v722.testContant import TestContant
 from src.testcase.v722.test139Selected import TestSelect
 from src.testcase.v722.testPush import TestPush
-
 from src.testcase.HTMLTestRunner import HTMLTestRunner
+from src.mail.sendEmailSmtp import SendMail
 # from src.testcase.v722.firstLogin import InitData
 # from src.base.baseAdb import BaseAdb
 
 if __name__ == "__main__":
-    # # apkpath = ""
-    # apkpath = r"/Users/apple/Downloads/Pushemail-ANDROID-V7.2.2-20170928_24603__2008001.apk"
-    # try:
-    #     if len(sys.argv) > 1:
-    #         apkpath = sys.argv[1]
-    #         if apkpath not in [None, ""]:
-    #             print("获得的路径为：%s" %apkpath)
-    #         else:
-    #             print("安装包路径有问题....")
-    #     else:
-    #         print("外部传参路径有问题！，使用默认apk")
-    #
-    #
-    #     '''卸载旧包'''
-    #     if BaseAdb.adbApkExist("cn.cj.pe") == True:
-    #         print('delete new apk')
-    #         BaseAdb.uninstallAPP("cn.cj.pe")
-    #         time.sleep(8)
-    #
-    #     if apkpath != None:
-    #         # 安装新包
-    #         print('install new apk')
-    #         BaseAdb.installApp(apkpath)
-    #         print(u'等待10秒')
-    #         time.sleep(20)
-    #         print(u"等待完成")
-    #
-    #     if BaseAdb.adbApkExist("cn.cj.pe") == False:
-    #         print("安装包失败，不运行后续步骤，直接退出")
-    #         os._exit(0)
-    # except BaseException as e:
-    #     print(e)
-
 
 
     suite = unittest.TestSuite()
@@ -88,6 +55,23 @@ if __name__ == "__main__":
         for case, reason in testResultReport.failures:
             resulttxt.append(reason[reason.find("AssertionError")+16:] + '\n')
 
+        #所有问题
         for line in resulttxt:
-            with open(logPath + "run.log",'a+') as fn:
+            with open(logPath + "errorAll.log",'a+') as fn:
                 fn.write(line)
+
+        # 每一轮文件
+        for line in resulttxt:
+            with open(logPath + "tmprun.log",'w') as fn:
+                fn.write(line)
+
+        time.sleep(5)
+
+
+        line = []
+        with open(logPath + "tmprun.log",'r') as fn:
+            line.append(fn.readlines())
+
+        # print(line)
+        s = SendMail("13580491603","chinasoft123","13697485262")
+        s.sendMailMan('拨测出现异常',line)
