@@ -98,6 +98,7 @@ class Send(unittest.TestCase):
     def sendAction(self):
         '''正常的发送邮件'''
         try:
+
             # 点击写邮件按钮
             self.assertTrue(self.driver.get_element(r"id=>cn.cj.pe:id/actionbar_right_view") != None, "页面没有找到写信按钮")
             print('=>点击写邮件按钮')
@@ -137,12 +138,14 @@ class Send(unittest.TestCase):
             print('返回收件箱')
             BaseAdb.adbBack()
             time.sleep(2)
+
         except BaseException as error:
             self.fail('【带附件邮件发送】出错')
             #添加截图
 
     def sendFwd(self):
         try:
+
             print("加载本地邮件封邮件")
             timeout = int(round(time.time() * 1000)) + 2*60 * 1000
             # 找到邮件结束
@@ -212,7 +215,9 @@ class Send(unittest.TestCase):
 
             self.assertTrue(text.find("Fwd")!= -1, "没有找到转发邮件")
 
+
         except BaseException as error:
+
             self.fail("【转发邮件（带附件）】出错")
 
         else:

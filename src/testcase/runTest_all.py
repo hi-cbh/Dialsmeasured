@@ -25,12 +25,12 @@ if __name__ == "__main__":
 
     suite = unittest.TestSuite()
     # suite.addTest(InitData("testCase"))
-    suite.addTest(TestSend('testCaseLogin'))
-    suite.addTest(TestSend('testCaseSend'))
-    suite.addTest(TestSend('testCaseFwdSend'))
+    # suite.addTest(TestSend('testCaseLogin'))
+    # suite.addTest(TestSend('testCaseSend'))
+    # suite.addTest(TestSend('testCaseFwdSend'))
     suite.addTest(TestContant('testCaseCheckAddressList'))
     suite.addTest(TestSelect('testCaseSelected'))
-    suite.addTest(TestPush('testCasePush'))
+    # suite.addTest(TestPush('testCasePush'))
 
     runner = unittest.TextTestRunner()
 
@@ -51,29 +51,31 @@ if __name__ == "__main__":
     if len(testResultReport.failures) > 0:
 
         resulttxt = []
-        resulttxt.append('\n'+"================================")
-        resulttxt.append('\n'+now + " 运行错误：" + '\n')
+        sendresult = []
+        resulttxt.append('\n'+"================"+now +"================"+'\n')
         for case, reason in testResultReport.failures:
-            # resulttxt.append(reason[reason.find("AssertionError")+16:] + '\n')
-            resulttxt.append(reason + '\n')
 
+            if reason.find("fail") != -1:
+                resulttxt.append(reason[reason.find("fail"):] + '\n')
+                print("打印：%s" %resulttxt)
+            # resulttxt.append(reason + '\n')
+
+        print("打印：%s" %resulttxt)
+
+
+        print("写入")
 
         #所有问题
         for line in resulttxt:
             with open(logPath + "errorAll.log",'a+') as fn:
                 fn.write(line)
+                sendresult.append(line)
 
-        # 每一轮文件
-        for line in resulttxt:
-            with open(logPath + "tmprun.log",'w') as fn:
-                fn.write(line)
 
         time.sleep(5)
 
+        print("发送 %s：" %sendresult)
 
-        line = []
-        with open(logPath + "tmprun.log",'r') as fn:
-            line.append(fn.readlines())
 
         # print(line)
         s = SendMail("13580491603","chinasoft123","13697485262")

@@ -25,6 +25,9 @@ class MyTest(unittest.TestCase):
         print("testCase02")
         self.fail("testCase02 错误")
 
+    def testCase03(self):
+        print("testCase02")
+        self.fail("testCase02 错误")
     # @unittest.skipIf(unittest.testRun , "当条件为True跳过测试")
     # def test_skip_if(self):
     #     print("test bbb")
@@ -63,11 +66,12 @@ if __name__ == '__main__':
         # print(reason)
         print(reason)
         # print("find: %r" %reason.find("AssertionError"))
-        print(reason[reason.find("AssertionError")+16:])
-        l.append(reason[reason.find("AssertionError")+16:]+'\n')
+        # print(reason[reason.find("AssertionError")+16:])
+        # l.append(reason[reason.find("AssertionError")+16:]+'\n')
+        l.append(reason+'\n')
 
 
-    with open("/Users/apple/autoTest/workspace/DialsMeasured/logs/run.log",'a+') as fn:
+    with open("/Users/apple/autoTest/workspace/DialsMeasured/logs/logrun.log",'w') as fn:
         for line in l:
             fn.write(line)
 

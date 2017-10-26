@@ -46,6 +46,10 @@ class TestSelect(unittest.TestCase):
         '''测试139精选'''
 
         try:
+            self.assertTrue(False, "测试错误")
+
+
+
             print("=>登录")
             Login(self.driver,user['name'], user['pwd']).loginAction()
 

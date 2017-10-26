@@ -41,6 +41,8 @@ class TestContant(unittest.TestCase):
     def testCaseCheckAddressList(self):
         '''测试通讯录是否同步成功'''
         try:
+            self.assertTrue(False, "测试错误")
+
             login=Login(self.driver,user['name'], user['pwd'])
             login.loginAction()
 
