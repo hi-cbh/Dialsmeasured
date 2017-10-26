@@ -1,0 +1,130 @@
+
+================2017-10-26 15_33_51================
+Traceback (most recent call last):
+  File "/Users/apple/autoTest/workspace/DialsMeasured/src/testcase/v722/easycase/send.py", line 101, in sendAction
+    self.assertTrue(False, "测试错误")
+  File "/usr/local/Cellar/python3/3.6.2/Frameworks/Python.framework/Versions/3.6/lib/python3.6/unittest/case.py", line 682, in assertTrue
+    raise self.failureException(msg)
+AssertionError: False is not true : 测试错误
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/apple/autoTest/workspace/DialsMeasured/src/testcase/v722/testSend.py", line 65, in testCaseSend
+    send.sendAction()
+  File "/Users/apple/autoTest/workspace/DialsMeasured/src/testcase/v722/easycase/send.py", line 144, in sendAction
+    self.fail('【带附件邮件发送】出错')
+AssertionError: 【带附件邮件发送】出错
+
+
+================2017-10-26 15_39_02================
+Error: False is not true : 测试错误
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/apple/autoTest/workspace/DialsMeasured/src/testcase/v722/testSend.py", line 65, in testCaseSend
+    send.sendAction()
+  File "/Users/apple/autoTest/workspace/DialsMeasured/src/testcase/v722/easycase/send.py", line 144, in sendAction
+    self.fail('【带附件邮件发送】出错')
+AssertionError: 【带附件邮件发送】出错
+
+
+================2017-10-26 15_41_57================
+Error: False is not true : 测试错误
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/apple/autoTest/workspace/DialsMeasured/src/testcase/v722/testContant.py", line 60, in testCaseCheckAddressList
+    self.fail("【联系人同步】出错")
+AssertionError: 【联系人同步】出错
+
+
+================2017-10-26 15_47_07================
+Error: False is not true : 测试错误
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/apple/autoTest/workspace/DialsMeasured/src/testcase/v722/testContant.py", line 60, in testCaseCheckAddressList
+    self.fail("【联系人同步】出错")
+AssertionError: 【联系人同步】出错
+
+Error: False is not true : 测试错误
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/apple/autoTest/workspace/DialsMeasured/src/testcase/v722/test139Selected.py", line 76, in testCaseSelected
+    self.fail("【139精选】出错！")
+AssertionError: 【139精选】出错！
+
+
+================2017-10-26 15_53_26================
+fail("【联系人同步】出错")
+AssertionError: 【联系人同步】出错
+
+fail("【139精选】出错！")
+AssertionError: 【139精选】出错！
+
+
+================2017-10-26 15_57_25================
+fail("【联系人同步】出错")
+AssertionError: 【联系人同步】出错
+
+fail("【139精选】出错！")
+AssertionError: 【139精选】出错！
+
+
+================2017-10-26 16_03_05================
+fail("【联系人同步】出错")
+AssertionError: 【联系人同步】出错
+
+fail("【139精选】出错！")
+AssertionError: 【139精选】出错！
+
+
+================2017-10-26 16_06_37================
+Error: False is not true : 测试错误
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/apple/autoTest/workspace/DialsMeasured/src/testcase/v722/testContant.py", line 60, in testCaseCheckAddressList
+    self.fail("【联系人同步】出错")
+AssertionError: 【联系人同步】出错
+
+Error: False is not true : 测试错误
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/apple/autoTest/workspace/DialsMeasured/src/testcase/v722/test139Selected.py", line 76, in testCaseSelected
+    self.fail("【139精选】出错！")
+AssertionError: 【139精选】出错！
+
+
+================2017-10-26 16_10_46================
+fail("【联系人同步】出错")
+AssertionError: 【联系人同步】出错
+
+fail("【139精选】出错！")
+AssertionError: 【139精选】出错！
+
+
+================================
+fail("testCase01 错误")
+AssertionError: testCase01 错误
+
+fail("testCase02 错误")
+AssertionError: testCase02 错误
+
+
+================================
+fail("testCase01 错误")
+AssertionError: testCase01 错误
+
+fail("testCase02 错误")
+AssertionError: testCase02 错误
+
