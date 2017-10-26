@@ -1,8 +1,9 @@
 import unittest
-import re
+from src.mail.sendEmailSmtp import  SendMail
+import time
 
 
-
+logPath = "/Users/apple/autoTest/workspace/DialsMeasured/logs/"
 
 class MyTest(unittest.TestCase):
 
@@ -56,22 +57,29 @@ if __name__ == '__main__':
     # print(testResultReport.failures)
 
 
-
-    l = []
+    resulttxt = []
+    sendresult = []
+    resulttxt.append('\n'+"================================"+'\n')
     for case, reason in testResultReport.failures:
-        # print(case.id())
-        # print(reason, )
-        # l.append(case.id()+'\n')
-        # l.append(reason +'\n')
-        # print(reason)
-        print(reason)
-        # print("find: %r" %reason.find("AssertionError"))
-        # print(reason[reason.find("AssertionError")+16:])
-        # l.append(reason[reason.find("AssertionError")+16:]+'\n')
-        l.append(reason+'\n')
+
+        if reason.find("fail") != -1:
+            resulttxt.append(reason[reason.find("fail"):] + '\n')
+            print("打印：%s" %resulttxt)
 
 
-    with open("/Users/apple/autoTest/workspace/DialsMeasured/logs/logrun.log",'w') as fn:
-        for line in l:
+    #所有问题
+    for line in resulttxt:
+        with open(logPath + "errorAll.log",'a+') as fn:
             fn.write(line)
+            sendresult.append(line)
+
+
+    time.sleep(5)
+
+    print("发送 %s：" %sendresult)
+
+
+    # print(line)
+    s = SendMail("13580491603","chinasoft123","13697485262")
+    s.sendMailMan('拨测出现异常',sendresult)
 

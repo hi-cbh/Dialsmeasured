@@ -58,12 +58,7 @@ if __name__ == "__main__":
             if reason.find("fail") != -1:
                 resulttxt.append(reason[reason.find("fail"):] + '\n')
                 print("打印：%s" %resulttxt)
-            # resulttxt.append(reason + '\n')
 
-        print("打印：%s" %resulttxt)
-
-
-        print("写入")
 
         #所有问题
         for line in resulttxt:

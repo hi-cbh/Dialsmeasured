@@ -95,16 +95,16 @@ class SendMail():
         from_mail = self.username + '@139.com'
         mail_pass = self.pwd
         # to_mail = self.receive + '@139.com'
-        areceiver = '13533348571@139.com,13501538531@139.com,wujun11121@163.com'
+        # areceiver = '13533348571@139.com,13501538531@139.com,wujun11121@163.com'
+        areceiver = '13533348571@139.com'
 
         body = []
-        for ts in message:
-            for txt in ts:
-                if len(txt) > 2 :
-                    txt = txt[:-1]
-                    txt = "<p>"+ txt +"</p>"
-                    body.append(txt)
-                    # print(txt)
+        for txt in message:
+            if len(txt) > 2 :
+                txt = txt[:-1]
+                txt = "<p>"+ txt +"</p>"
+                body.append(txt)
+                # print(txt)
 
 
         body=''.join(body)

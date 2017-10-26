@@ -5,6 +5,7 @@ import time
 import unittest
 from src.base.baseAdb import BaseAdb
 from src.base.baseFile import BaseFile
+from src.mail.sendEmailSmtp import SendMail
 # from src.otherApk.gt.gtutil import GTTest
 
 
@@ -133,7 +134,7 @@ class Send(unittest.TestCase):
             self.driver.get_element("id=>cn.cj.pe:id/txt_send").click()
             
             print('=>等待已完成出现')
-            self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",120) != None, "发送邮件失败！")
+            self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",300) != None, "发送邮件失败！")
 
             print('返回收件箱')
             BaseAdb.adbBack()
@@ -143,8 +144,13 @@ class Send(unittest.TestCase):
             self.fail('【带附件邮件发送】出错')
             #添加截图
 
-    def sendFwd(self):
+    def sendFwd(self, reveicer, sender ):
         try:
+
+            print("=>第三方发送邮件")
+            s = SendMail(sender['name'], sender['pwd'], reveicer['name'])
+            self.assertTrue(s.sendMail('sendsmtpEmail','测试邮件...'),"邮件发送失败")
+            time.sleep(10)
 
             print("加载本地邮件封邮件")
             timeout = int(round(time.time() * 1000)) + 2*60 * 1000
@@ -180,6 +186,16 @@ class Send(unittest.TestCase):
 
             print("输入收件人")
             self.driver.set_value(r"id=>cn.cj.pe:id/to_wrapper",self.username)
+
+
+            # 添加附件
+            print('=>添加附件')
+            self.driver.click(r"id=>cn.cj.pe:id/add_attachment")
+            self.driver.click(u"uiautomator=>本地文件夹") # appium 1.6
+            self.driver.click(r"uiautomator=>0")
+            self.driver.click(r"uiautomator=>0.")
+            self.driver.click(r"uiautomator=>test2M.rar")
+            self.driver.click(r"id=>cn.cj.pe:id/check_button")
 
             # 点击发送按钮
             print('=>点击发送按钮')
