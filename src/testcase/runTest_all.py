@@ -25,12 +25,12 @@ if __name__ == "__main__":
 
     suite = unittest.TestSuite()
     # suite.addTest(InitData("testCase"))
-    # suite.addTest(TestSend('testCaseLogin'))
-    # suite.addTest(TestSend('testCaseSend'))
-    # suite.addTest(TestSend('testCaseFwdSend'))
+    suite.addTest(TestSend('testCaseLogin'))
+    suite.addTest(TestSend('testCaseSend'))
+    suite.addTest(TestSend('testCaseFwdSend'))
     suite.addTest(TestContant('testCaseCheckAddressList'))
     suite.addTest(TestSelect('testCaseSelected'))
-    # suite.addTest(TestPush('testCasePush'))
+    suite.addTest(TestPush('testCasePush'))
 
     runner = unittest.TextTestRunner()
 
