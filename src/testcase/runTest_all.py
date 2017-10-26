@@ -51,9 +51,12 @@ if __name__ == "__main__":
     if len(testResultReport.failures) > 0:
 
         resulttxt = []
+        resulttxt.append('\n'+"================================")
         resulttxt.append('\n'+now + " 运行错误：" + '\n')
         for case, reason in testResultReport.failures:
-            resulttxt.append(reason[reason.find("AssertionError")+16:] + '\n')
+            # resulttxt.append(reason[reason.find("AssertionError")+16:] + '\n')
+            resulttxt.append(reason + '\n')
+
 
         #所有问题
         for line in resulttxt:
