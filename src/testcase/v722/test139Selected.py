@@ -58,8 +58,8 @@ class TestSelect(unittest.TestCase):
             print('点击 139精选')
             self.driver.click(u'uiautomator=>139精选')
 
-            print("等待10秒")
-            time.sleep(10)
+            print("等待30秒")
+            time.sleep(30)
 
             print('验证点：页面是否显示正常')
             self.assertTrue(self.driver.page_source().__contains__(u"阅读全文"),"页面显示不正常")

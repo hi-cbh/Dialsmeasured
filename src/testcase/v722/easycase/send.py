@@ -144,7 +144,7 @@ class Send(unittest.TestCase):
     def sendFwd(self):
         try:
             print("加载本地邮件封邮件")
-            timeout = int(round(time.time() * 1000)) + 1*60 * 1000
+            timeout = int(round(time.time() * 1000)) + 2*60 * 1000
             # 找到邮件结束
             while int(round(time.time() * 1000)) < timeout :
 
@@ -189,11 +189,15 @@ class Send(unittest.TestCase):
             BaseAdb.adbBack()
             time.sleep(2)
 
-            print("等待邮件出现")
-            self.driver.swipeDown();
-            time.sleep(5)
-            self.driver.swipeDown();
-            time.sleep(5)
+            print("等待邮件出现，等待FW邮件出现，这里需要优化，或等待1分钟")
+            timeout = int(round(time.time() * 1000)) + 1*60 * 1000
+            # 找到邮件结束
+            while int(round(time.time() * 1000)) < timeout :
+
+                self.driver.swipeDown();
+                time.sleep(5)
+                self.driver.swipeDown();
+                time.sleep(5)
 
             # 点击第一封
             print('=>点击第一封邮件')
