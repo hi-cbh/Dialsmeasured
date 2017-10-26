@@ -16,7 +16,9 @@ from src.testcase.v722.testContant import TestContant
 from src.testcase.v722.test139Selected import TestSelect
 from src.testcase.v722.testPush import TestPush
 from src.testcase.HTMLTestRunner import HTMLTestRunner
+from src.testcase.v722.testLogin import TestLogin
 from src.mail.sendEmailSmtp import SendMail
+
 # from src.testcase.v722.firstLogin import InitData
 # from src.base.baseAdb import BaseAdb
 
@@ -25,7 +27,7 @@ if __name__ == "__main__":
 
     suite = unittest.TestSuite()
     # suite.addTest(InitData("testCase"))
-    suite.addTest(TestSend('testCaseLogin'))
+    suite.addTest(TestLogin('testCaseLogin'))
     suite.addTest(TestSend('testCaseSend'))
     suite.addTest(TestSend('testCaseFwdSend'))
     suite.addTest(TestContant('testCaseCheckAddressList'))
