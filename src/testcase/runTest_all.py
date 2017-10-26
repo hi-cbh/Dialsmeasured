@@ -79,4 +79,4 @@ if __name__ == "__main__":
 
         # print(line)
         s = SendMail("13580491603","chinasoft123","13697485262")
-        s.sendMailMan('拨测出现异常',line)
+        s.sendMailMan('拨测出现异常',sendresult)
