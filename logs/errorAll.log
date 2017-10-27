@@ -128,3 +128,25 @@ AssertionError: testCase01 错误
 fail("testCase02 错误")
 AssertionError: testCase02 错误
 
+
+================================
+fail("testCase01 错误")
+AssertionError: testCase01 错误
+
+fail("testCase02 错误")
+AssertionError: testCase02 错误
+
+fail("MyTest2 testCase02 错误")
+AssertionError: MyTest2 testCase02 错误
+
+
+================================
+fail("testCase01 错误")
+AssertionError: testCase01 错误
+
+fail("testCase02 错误")
+AssertionError: testCase02 错误
+
+fail("MyTest2 testCase02 错误")
+AssertionError: MyTest2 testCase02 错误
+

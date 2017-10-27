@@ -109,6 +109,9 @@ class SendMail():
 
         body=''.join(body)
 
+        print("邮件正式发送内容： %s" %body)
+
+
         msg = MIMEText(body, 'html', 'utf-8')
         # Header对中文进行转码
         msg['From'] = self._formatAddr(u"发送者 <%s>" %from_mail)

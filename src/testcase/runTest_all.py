@@ -10,6 +10,8 @@ sys.path.append(p+"/")
 reportPath = p + "/report/"
 logPath = p + "/logs/"
 print("report: %s" %reportPath)
+print("report: %s" %logPath)
+
 
 from src.testcase.v722.testSend import TestSend
 from src.testcase.v722.testContant import TestContant
@@ -56,10 +58,11 @@ if __name__ == "__main__":
         sendresult = []
         resulttxt.append('\n'+"================"+now +"================"+'\n')
         for case, reason in testResultReport.failures:
-
+            print("所有打印：%s" %reason)
             if reason.find("fail") != -1:
                 resulttxt.append(reason[reason.find("fail"):] + '\n')
-                print("打印：%s" %resulttxt)
+
+        print("过滤日志，写入日志：%s" %resulttxt)
 
 
         #所有问题
@@ -71,7 +74,7 @@ if __name__ == "__main__":
 
         time.sleep(5)
 
-        print("发送 %s：" %sendresult)
+        print("预备发送 %s：" %sendresult)
 
 
         # print(line)
