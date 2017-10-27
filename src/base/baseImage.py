@@ -5,8 +5,10 @@ import os
 from src.base.baseTime import BaseTime
 
 base_dir = str(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
-base_dir = base_dir.replace('\\', '/')
+# base_dir = base_dir.replace('\\', '/')
 PCpath = base_dir + "/pics/"
+
+print(PCpath)
 
 class BaseImage(object):
     
@@ -24,3 +26,8 @@ class BaseImage(object):
             
             
 BaseImage = BaseImage()
+
+
+if __name__ == "__main__":
+
+    BaseImage.screenshot()

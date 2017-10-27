@@ -74,6 +74,10 @@ class TestSelect(unittest.TestCase):
 
         except BaseException as error:
             self.fail("【139精选】出错！")
+            BaseImage.screenshot(self.driver, "SelectedError")
+            time.sleep(5)
+
+
 
     def logout(self):
         '''注销账户'''

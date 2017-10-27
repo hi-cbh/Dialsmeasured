@@ -6,6 +6,7 @@ import unittest
 from src.base.baseAdb import BaseAdb
 from src.base.baseFile import BaseFile
 from src.mail.sendEmailSmtp import SendMail
+from src.base.baseImage import BaseImage
 # from src.otherApk.gt.gtutil import GTTest
 
 
@@ -143,6 +144,9 @@ class Send(unittest.TestCase):
         except BaseException as error:
             self.fail('【带附件邮件发送】出错')
             #添加截图
+            BaseImage.screenshot(self.driver, "sendEmailError")
+            time.sleep(5)
+
 
     def sendFwd(self, reveicer, sender ):
         try:
@@ -235,6 +239,9 @@ class Send(unittest.TestCase):
         except BaseException as error:
 
             self.fail("【转发邮件（带附件）】出错")
+            BaseImage.screenshot(self.driver, "sendFwdError")
+            time.sleep(5)
+
 
         else:
             BaseAdb.adbBack()

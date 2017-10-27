@@ -86,6 +86,8 @@ class TestPush(unittest.TestCase):
             self.assertTrue(self.waitforNotification(),"接收推送失败")
         except BaseException as error:
             self.fail("【接收邮件推送】出错！")
+            BaseImage.screenshot(self.driver, "PushError")
+            time.sleep(5)
 
         else:
             appPackage = "cn.cj.pe"  # 程序的package

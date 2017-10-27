@@ -70,6 +70,8 @@ class Login(unittest.TestCase):
         except BaseException as error:
             self.fail("【手动输入账号/密码-登录】出现错误")
             # 添加截图
+            BaseImage.screenshot(self.driver, "LoginError")
+            time.sleep(5)
         # else:
         #     self. 添加OK写入操作
 
