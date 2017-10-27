@@ -4,7 +4,7 @@
 import time
 import unittest
 from src.base.baseAdb import BaseAdb
-
+from src.base.baseImage import BaseImage
 
 class Login(unittest.TestCase):
     

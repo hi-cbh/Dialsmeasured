@@ -10,7 +10,7 @@ from src.testcase.v722.easycase.login import Login
 from src.testcase.v722.easycase.receive import WebReceive
 from src.mail.sendEmailSmtp import SendMail
 from src.testcase.v722.initData import InitData
-
+from src.base.baseImage import BaseImage
 
 # sys.path.append(r"/Users/apple/git/pytest/")
 

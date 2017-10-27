@@ -9,7 +9,7 @@ from src.mail.mailOperation import EmailOperation
 from src.psam.psam import Psam
 from src.testcase.v722.easycase.login import Login
 from src.testcase.v722.initData import InitData
-
+from src.base.baseImage import BaseImage
 
 # sys.path.append(r"/Users/apple/git/pytest/")
 
