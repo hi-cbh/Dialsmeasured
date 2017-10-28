@@ -7,8 +7,9 @@ p = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 print("path: %s" %p)
 
 sys.path.append(p+"/")
-reportPath = p + "/report/"
-logPath = p + "/logs/"
+localPath = "/tmp/appiumRunLog"
+reportPath = localPath + "/report/"
+logPath = localPath + "/logs/"
 print("report: %s" %reportPath)
 print("report: %s" %logPath)
 
@@ -41,6 +42,8 @@ if __name__ == "__main__":
 
 
     now = time.strftime("%Y-%m-%d %H_%M_%S")
+    filename_now = time.strftime("%Y_%m_%d_%H_%M_%S")
+
     filename = reportPath + now + '_result.html'
     # filename = r'/Users/apple/git/pytest/report/index.html'
     fp = open(filename, 'wb')
