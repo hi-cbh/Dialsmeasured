@@ -142,10 +142,11 @@ class Send(unittest.TestCase):
             time.sleep(2)
 
         except BaseException as error:
+            BaseImage.screenshot(self.driver, "LoginError")
+            time.sleep(5)
+
             self.fail('【带附件邮件发送】出错')
             #添加截图
-            BaseImage.screenshot(self.driver, "sendEmailError")
-            time.sleep(5)
 
 
     def sendFwd(self, reveicer, sender ):
@@ -237,10 +238,9 @@ class Send(unittest.TestCase):
 
 
         except BaseException as error:
-
-            self.fail("【转发邮件（带附件）】出错")
-            BaseImage.screenshot(self.driver, "sendFwdError")
+            BaseImage.screenshot(self.driver, "LoginError")
             time.sleep(5)
+            self.fail("【转发邮件（带附件）】出错")
 
 
         else:

@@ -7,6 +7,7 @@ from src.base.baseTime import BaseTime
 base_dir = str(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
 # base_dir = base_dir.replace('\\', '/')
 PCpath = base_dir + "/pics/"
+local = "/tmp/appiumRunLog"+ "/pics/"
 
 print(PCpath)
 
@@ -17,7 +18,7 @@ class BaseImage(object):
         try:
             
             filename = picName + "-"+ BaseTime.currentTime() + ".png" 
-            filepath = PCpath + filename
+            filepath = local + filename
             driver.screenshot(filepath)
             
         except BaseException as e:

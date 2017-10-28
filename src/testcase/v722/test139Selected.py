@@ -73,9 +73,10 @@ class TestSelect(unittest.TestCase):
 
 
         except BaseException as error:
-            self.fail("【139精选】出错！")
-            BaseImage.screenshot(self.driver, "SelectedError")
+            BaseImage.screenshot(self.driver, "CheckAddressListError")
             time.sleep(5)
+
+            self.fail("【139精选】出错！")
 
 
 

@@ -57,9 +57,11 @@ class TestContant(unittest.TestCase):
             print("验证点：是否获取通知栏信息")
             self.assertTrue(self.waitforNotification(),"通讯录同步失败！！")
         except BaseException :
-            self.fail("【联系人同步】出错")
             BaseImage.screenshot(self.driver, "CheckAddressListError")
             time.sleep(5)
+
+            self.fail("【联系人同步】出错")
+
 
 
 
