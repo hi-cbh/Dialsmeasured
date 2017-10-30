@@ -64,7 +64,7 @@ if __name__ == "__main__":
         for case, reason in testResultReport.failures:
             print("所有打印：%s" %reason)
             if reason.find("fail") != -1:
-                resulttxt.append(reason[reason.find("fail"):] + '\n')
+                resulttxt.append(reason[reason.find("fail("):] + '\n')
 
         print("过滤日志，写入日志：%s" %resulttxt)
 
