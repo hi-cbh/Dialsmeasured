@@ -54,10 +54,10 @@ class TestSelect(unittest.TestCase):
             Login(self.driver,user['name'], user['pwd']).loginAction()
 
             time.sleep(10)
-            print("首先通过http协议，访问链接是否更改，再运行")
+            # print("首先通过http协议，访问链接是否更改，再运行")
 
-            print("验证页面是饭后存在139精选")
-            self.assertTrue(self.driver.get_element(u'uiautomator=>139精选'),'页面没有139精选')
+            print("验证页面是否存在139精选")
+            self.assertTrue(self.driver.get_element(u'uiautomator=>139精选'),'收件箱列表没有139精选')
 
             print('点击 139精选')
             self.driver.click(u'uiautomator=>139精选')

@@ -9,6 +9,7 @@ print("path: %s" %p)
 sys.path.append(p+"/")
 localPath = "/tmp/appiumRunLog"
 reportPath = localPath + "/report/"
+# failReport = localPath + "/failReport/"
 logPath = localPath + "/logs/"
 print("report: %s" %reportPath)
 print("report: %s" %logPath)
@@ -82,4 +83,4 @@ if __name__ == "__main__":
 
         # print(line)
         s = SendMail("13580491603","chinasoft123","13697485262")
-        s.sendMailMan('拨测出现异常',sendresult)
+        s.sendMailMan('拨测出现异常<测试邮件请勿回复>',sendresult)

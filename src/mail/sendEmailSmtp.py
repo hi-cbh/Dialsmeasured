@@ -95,8 +95,8 @@ class SendMail():
         from_mail = self.username + '@139.com'
         mail_pass = self.pwd
         # to_mail = self.receive + '@139.com'
-        # areceiver = '13533348571@139.com,13501538531@139.com,wujun11121@163.com'
-        areceiver = '13533348571@139.com'
+        areceiver = '13533348571@139.com,13501538531@139.com,wujun11121@163.com'
+        # areceiver = '13533348571@139.com'
 
         body = []
         for txt in message:
