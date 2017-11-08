@@ -58,56 +58,85 @@ class MyTest2(unittest.TestCase):
         print("MyTest2 tearDown......")
 
 
-    def testCase01(self):
+    def testCase03(self):
         print("testCase01")
 
-    def testCase02(self):
+    def testCase04(self):
         try:
             self.assertTrue(False, "测试错误")
-            print("testCase01")
+            print("testCase03")
         except BaseException:
-            self.fail("MyTest2 testCase02 错误")
+            self.fail("MyTest2 testCase04 错误")
 
         else:
             print("testCase01")
 
 if __name__ == '__main__':
+    result = {'testCase01':'Success','testCase02':'Success','testCase03':'Success','testCase04':'Success'}
+    testtxt = {'用例1':'testCase01','用例2':'testCase02','用例3':'testCase03','用例4':'testCase04'}
+
     suite = unittest.TestSuite()
     suite.addTest(MyTest('testCase01'))
     suite.addTest(MyTest('testCase02'))
-    suite.addTest(MyTest2('testCase01'))
-    suite.addTest(MyTest2('testCase02'))
+    suite.addTest(MyTest2('testCase03'))
+    suite.addTest(MyTest2('testCase04'))
+
 
     runner = unittest.TextTestRunner(verbosity=2)
     testResultReport = runner.run(suite)
 
     # print('All case number')
-    # print(testResultReport.testsRun)
-    print('Failed case number')
-    print(len(testResultReport.failures))
-    # print('Failed case and reason')
     # print(testResultReport.failures)
+
+    time.sleep(2)
+
+    l = []
+    for case, reason in testResultReport.failures:
+        print("case：%s" % case)
+        l.append(str(case))
+
+    # print('ces %s'  %l)
+
+    for k, v in result.items():
+        for line in l:
+            if line.find(k) != -1:
+                result[k] = 'Fail'
+
+    # print(result)
+    # print(testtxt)
+
+
+    for k1, v1 in result.items():
+        for k2, v2 in testtxt.items():
+            if k1 == v2:
+                testtxt[k2] = result[k1]
+
+    print(testtxt)
+
 
 
     resulttxt = []
     sendresult = []
     resulttxt.append('\n'+"================================"+'\n')
-    for case, reason in testResultReport.failures:
-        print("所有打印：%s" %reason)
-        if reason.find("fail") != -1:
-            resulttxt.append(reason[reason.find("fail"):] + '\n')
+    for case, reason in testtxt.items():
+        resulttxt.append('case：%s , result：%s \n' %(case, reason) )
+        if reason == 'Fail':
+            sendresult.append('case：<font size="3" color="blue"> %s </font> , result：<font size="4" color="red"> %s </font>\n' %(case, reason) )
+        else:
+            sendresult.append('case：<font size="3" color="blue"> %s </font> , result：<font size="3" color="green"> %s </font>\n' %(case, reason) )
 
 
     print("过滤日志，写入日志：%s" %resulttxt)
+    # print("过滤日志，写入日志：%s" %sendresult)
 
 
 
 
     #所有问题
     for line in resulttxt:
-        with open(logPath + "errorAll.log",'a+') as fn:
+        with open(logPath + "testLog.log",'a+') as fn:
             fn.write(line)
-            sendresult.append(line)
+            # sendresult.append(line)
 
 
     time.sleep(5)
@@ -117,5 +146,5 @@ if __name__ == '__main__':
 
     # # print(line)
     s = SendMail("13580491603","chinasoft123","13697485262")
-    s.sendMailMan('拨测出现异常',sendresult)
+    s.sendMailMan2('拨测出现异常',sendresult)
 

@@ -132,6 +132,48 @@ class SendMail():
         else:
             return True
 
+    def sendMailMan2(self, subject, message=[]):
+        '''发送邮件，固定格式'''
+        smtp_server = 'smtp.139.com'
+        from_mail = self.username + '@139.com'
+        mail_pass = self.pwd
+        # to_mail = self.receive + '@139.com'
+        # areceiver = '13533348571@139.com,13501538531@139.com,wujun11121@163.com'
+        areceiver = '13533348571@139.com'
+
+        body = []
+        for txt in message:
+            if len(txt) > 2 :
+                txt = txt[:-1]
+                txt = "<p>"+ txt +"</p>"
+                body.append(txt)
+                # print(txt)
+
+
+        body=''.join(body)
+
+        print("邮件正式发送内容： %s" %body)
+
+
+        msg = MIMEText(body, 'html', 'utf-8')
+        # Header对中文进行转码
+        msg['From'] = self._formatAddr(u"发送者 <%s>" %from_mail)
+        # msg['To'] = self._formatAddr(u"接收者 <%s>" %to_mail)
+        msg['To'] = areceiver
+        msg['Subject'] = Header(subject, 'utf-8')
+
+        try:
+            s = smtplib.SMTP()
+            s.connect(smtp_server, "25")
+            s.login(from_mail, mail_pass)
+            s.sendmail(from_mail, areceiver.split(','), msg.as_string())
+            s.quit()
+            print("发送成功")
+        except smtplib.SMTPException as e:
+            print("Error: %s" % e)
+            return False
+        else:
+            return True
 
 if __name__ == "__main__":
 
