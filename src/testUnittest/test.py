@@ -72,8 +72,17 @@ class MyTest2(unittest.TestCase):
             print("testCase01")
 
 if __name__ == '__main__':
-    result = {'testCase01':'Success','testCase02':'Success','testCase03':'Success','testCase04':'Success'}
-    testtxt = {'用例1':'testCase01','用例2':'testCase02','用例3':'testCase03','用例4':'testCase04'}
+    result = {}
+    result['testCase01'] = 'Success'
+    result['testCase02'] = 'Success'
+    result['testCase03'] = 'Success'
+    result['testCase04'] = 'Success'
+
+    testtxt = {}
+    testtxt['用例1'] = 'testCase01'
+    testtxt['用例2'] = 'testCase02'
+    testtxt['用例3'] = 'testCase03'
+    testtxt['用例4'] = 'testCase04'
 
     suite = unittest.TestSuite()
     suite.addTest(MyTest('testCase01'))

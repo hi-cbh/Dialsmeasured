@@ -22,6 +22,7 @@ from src.testcase.v722.testPush import TestPush
 from src.testcase.HTMLTestRunner import HTMLTestRunner
 from src.testcase.v722.testLogin import TestLogin
 from src.mail.sendEmailSmtp import SendMail
+from src.testcase.v722.testDownFile import TestDownFile
 
 # from src.testcase.v722.firstLogin import InitData
 # from src.base.baseAdb import BaseAdb
@@ -37,14 +38,32 @@ from src.mail.sendEmailSmtp import SendMail
 
 
 if __name__ == "__main__":
-    result = {'testCaseLogin':'Success','testCaseSend':'Success','testCaseFwdSend':'Success','testCaseCheckAddressList':'Success','testCaseSelected':'Success','testCasePush':'Success'}
-    testtxt = {'账号登录':'testCaseLogin','发送邮件带附件':'testCaseSend','转发邮件带附件':'testCaseFwdSend','联系人同步':'testCaseCheckAddressList','收件箱列表中精选':'testCaseSelected','推送':'testCasePush'}
+    result = {}
+    testtxt = {}
+
+    result['testCaseLogin'] = 'Success'
+    result['testCaseSend'] = 'Success'
+    result['testCaseFwdSend'] = 'Success'
+    result['testDownFile'] = 'Success'
+    result['testCaseCheckAddressList'] = 'Success'
+    result['testCaseSelected'] = 'Success'
+    result['testCasePush'] = 'Success'
+
+    # 用例名 与用例说明
+    testtxt['账号登录'] = 'testCaseLogin'
+    testtxt['发送邮件带附件'] = 'testCaseSend'
+    testtxt['转发邮件带附件'] = 'testCaseFwdSend'
+    testtxt['附件下载'] = 'testDownFile'
+    testtxt['联系人同步'] = 'testCaseCheckAddressList'
+    testtxt['收件箱列表中精选'] = 'testCaseSelected'
+    testtxt['接收推送'] = 'testCasePush'
 
     suite = unittest.TestSuite()
     # suite.addTest(InitData("testCase"))
     suite.addTest(TestLogin('testCaseLogin'))
     suite.addTest(TestSend('testCaseSend'))
     suite.addTest(TestSend('testCaseFwdSend'))
+    suite.addTest(TestDownFile('testDownFile'))
     suite.addTest(TestContant('testCaseCheckAddressList'))
     suite.addTest(TestSelect('testCaseSelected'))
     suite.addTest(TestPush('testCasePush'))
@@ -123,7 +142,7 @@ if __name__ == "__main__":
 
     # print(line)
     s = SendMail("13580491603","chinasoft123","13697485262")
-    s.sendMailMan('拨测出现异常<测试邮件请勿回复>',sendresult)
+    s.sendMailMan('139Android客户端V722版本_功能拨测<请勿回复>',sendresult)
 
 
 
