@@ -1,5 +1,6 @@
 import unittest
 from src.mail.sendEmailSmtp import  SendMail
+from src.otherApk.testSpeed import TestSpeed
 import time
 
 
@@ -72,6 +73,15 @@ class MyTest2(unittest.TestCase):
             print("testCase01")
 
 if __name__ == '__main__':
+    speed = ''
+    ts = TestSpeed()
+    ts.setUp()
+    speed = ts.testCase()
+    ts.tearDown()
+
+    print("speed: %s" %speed)
+
+
     result = {}
     result['testCase01'] = 'Success'
     result['testCase02'] = 'Success'
@@ -83,6 +93,9 @@ if __name__ == '__main__':
     testtxt['用例2'] = 'testCase02'
     testtxt['用例3'] = 'testCase03'
     testtxt['用例4'] = 'testCase04'
+
+
+
 
     suite = unittest.TestSuite()
     suite.addTest(MyTest('testCase01'))
@@ -127,6 +140,7 @@ if __name__ == '__main__':
     resulttxt = []
     sendresult = []
     resulttxt.append('\n'+"================================"+'\n')
+    sendresult.append(speed+'\n')
     for case, reason in testtxt.items():
         resulttxt.append('case：%s , result：%s \n' %(case, reason) )
         if reason == 'Fail':

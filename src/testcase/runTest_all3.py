@@ -3,6 +3,7 @@
 
 import unittest,os,sys
 import time
+from src.otherApk.testSpeed import TestSpeed
 p = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 print("path: %s" %p)
 
@@ -38,6 +39,15 @@ from src.testcase.v722.testDownFile import TestDownFile
 
 
 if __name__ == "__main__":
+    # 获取当前网速
+    speed = ''
+    ts = TestSpeed()
+    ts.setUp()
+    speed = ts.testCase()
+    ts.tearDown()
+
+    print("speed: %s" %speed)
+
     result = {}
     testtxt = {}
 
@@ -71,10 +81,9 @@ if __name__ == "__main__":
     runner = unittest.TextTestRunner()
 
 
-
+    # 生成html
     now = time.strftime("%Y-%m-%d %H_%M_%S")
     filename_now = time.strftime("%Y_%m_%d_%H_%M_%S")
-
     filename = reportPath + now + '_result.html'
     # filename = r'/Users/apple/git/pytest/report/index.html'
     fp = open(filename, 'wb')
@@ -86,6 +95,7 @@ if __name__ == "__main__":
 
 
 
+    '''以下是结果筛选，写入日志，并发送简单的汇报邮件'''
     time.sleep(2)
 
     l = []
@@ -115,10 +125,13 @@ if __name__ == "__main__":
 
 
 
-    resulttxt = []
-    sendresult = []
-    resulttxt.append('\n'+"================"+now +"================"+'\n')
-    sendresult.append('\n'+"================"+now +"================"+'\n')
+    resulttxt = [] # 写入日志
+    sendresult = [] # 邮件发送正文
+    resulttxt.append('\n'+"====="+now +"====="+'\n')
+    resulttxt.append(speed +'\n')
+    sendresult.append('\n'+"====="+now +"====="+'\n')
+    sendresult.append(speed +'\n')
+
     for case, reason in testtxt.items():
         resulttxt.append('case：%s , result：%s \n' %(case, reason) )
         if reason == 'Fail':
@@ -134,7 +147,6 @@ if __name__ == "__main__":
         with open(logPath + "All.log",'a+') as fn:
             fn.write(line)
 
-
     time.sleep(5)
 
     print("预备发送 %s：" %sendresult)
@@ -143,7 +155,3 @@ if __name__ == "__main__":
     # print(line)
     s = SendMail("13580491603","chinasoft123","13697485262")
     s.sendMailMan('139Android客户端V722版本_功能拨测<请勿回复>',sendresult)
-
-
-
-

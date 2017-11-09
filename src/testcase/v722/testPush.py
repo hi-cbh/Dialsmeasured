@@ -34,7 +34,7 @@ class TestPush(unittest.TestCase):
             # time.sleep(10)
 
             BaseAdb.adbIntallUiautmator()
-            self.driver = Psam("6.0")
+            self.driver = Psam()
         except BaseException as error:
             print("setUp启动出错！")
 

@@ -9,13 +9,13 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 class Psam(object):
     
-    def __init__(self, version="6.0"):
+    def __init__(self,appPackage='appPackage',appActivity='com.mail139.about.LaunchActivity', version="6.0"):
         desired_caps = {}
         desired_caps['platformName'] = 'Android'
         desired_caps['platformVersion'] = version
         desired_caps['deviceName'] = 'android'
-        desired_caps['appPackage'] = 'cn.cj.pe'
-        desired_caps['appActivity'] = 'com.mail139.about.LaunchActivity'
+        desired_caps['appPackage'] = appPackage
+        desired_caps['appActivity'] = appActivity
         desired_caps['newCommandTimeout'] = 7200
         desired_caps["unicodeKeyboard"] = "True"
         desired_caps["resetKeyboard"] = "True"
