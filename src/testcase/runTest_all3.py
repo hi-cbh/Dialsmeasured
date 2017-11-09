@@ -3,7 +3,8 @@
 
 import unittest,os,sys
 import time
-from src.otherApk.testSpeed import TestSpeed
+
+
 p = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 print("path: %s" %p)
 
@@ -24,7 +25,7 @@ from src.testcase.HTMLTestRunner import HTMLTestRunner
 from src.testcase.v722.testLogin import TestLogin
 from src.mail.sendEmailSmtp import SendMail
 from src.testcase.v722.testDownFile import TestDownFile
-
+from src.otherApk.testSpeed import TestSpeed
 # from src.testcase.v722.firstLogin import InitData
 # from src.base.baseAdb import BaseAdb
 
