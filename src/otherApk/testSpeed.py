@@ -28,9 +28,11 @@ class TestSpeed(unittest.TestCase):
             # time.sleep(10)
 
             BaseAdb.adbIntallUiautmator()
-            self.driver = Psam("org.zwanoo.android.speedtest","com.ookla.speedtest.softfacade.MainActivity")
+            self.driver = Psam('6.0',"org.zwanoo.android.speedtest","com.ookla.speedtest.softfacade.MainActivity")
         except BaseException as error:
             print("setUp启动出错！")
+            self.driver.quit()
+            self.fail("setUp启动出错！")
 
 
     #释放实例,释放资源

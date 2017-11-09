@@ -41,14 +41,16 @@ from src.otherApk.testSpeed import TestSpeed
 
 if __name__ == "__main__":
     # 获取当前网速
-    speed = ''
     ts = TestSpeed()
     ts.setUp()
     speed = ts.testCase()
     ts.tearDown()
 
-    print("speed: %s" %speed)
 
+    print("speed: %s" %speed)
+    time.sleep(10)
+
+    print('正式运行脚本')
     result = {}
     testtxt = {}
 

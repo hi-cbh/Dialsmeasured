@@ -27,6 +27,8 @@ class TestContant(unittest.TestCase):
             self.driver = Psam()
         except BaseException as error:
             print("setUp启动出错！")
+            self.driver.quit()
+            self.fail("setUp启动出错！")
 
 
     #释放实例,释放资源

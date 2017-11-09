@@ -40,6 +40,8 @@ class TestDownFile(unittest.TestCase):
             self.driver = Psam()
         except BaseException as error:
             print("setUp启动出错！")
+            self.driver.quit()
+            self.fail("setUp启动出错！")
 
         else:
             EmailOperation(username+"@139.com", pwd).clearForlder(['INBOX'])

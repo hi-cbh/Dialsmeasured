@@ -37,7 +37,8 @@ class TestPush(unittest.TestCase):
             self.driver = Psam()
         except BaseException as error:
             print("setUp启动出错！")
-
+            self.driver.quit()
+            self.fail("setUp启动出错！")
         else:
             EmailOperation(user2['name']+"@139.com", user2['pwd']).seen()
             time.sleep(10)

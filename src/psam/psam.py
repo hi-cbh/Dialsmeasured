@@ -9,7 +9,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 class Psam(object):
     
-    def __init__(self,appPackage='appPackage',appActivity='com.mail139.about.LaunchActivity', version="6.0"):
+    def __init__(self,version="6.0",appPackage='cn.cj.pe',appActivity='com.mail139.about.LaunchActivity' ):
         desired_caps = {}
         desired_caps['platformName'] = 'Android'
         desired_caps['platformVersion'] = version
@@ -19,9 +19,10 @@ class Psam(object):
         desired_caps['newCommandTimeout'] = 7200
         desired_caps["unicodeKeyboard"] = "True"
         desired_caps["resetKeyboard"] = "True"
+
         self.driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_caps)
 #         self.driver.implicitly_wait(10)
-    
+
     def element_wait(self, css, secs = 10):
         '''
         Waiting for an element to display.
