@@ -4,6 +4,7 @@
 import os,time,unittest
 from src.aserver.AppiumServer import AppiumServer2
 from src.base.baseAdb import BaseAdb
+from src.base.baseTime import BaseTime
 from src.mail.mailOperation import EmailOperation
 from src.psam.psam import Psam
 from src.testcase.v731.easycase.login import Login
@@ -56,6 +57,7 @@ class TestLogin(unittest.TestCase):
     def testCaseLogin(self):
         '''开始登录时延测试'''
         for i in range(1000):
+            print('%s: 当前次数：%s' %( BaseTime.getCurrentTime(), i))
             login=Login(self.driver,username, pwd)
             bl = login.loginAction()
 
