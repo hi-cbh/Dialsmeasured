@@ -3,7 +3,7 @@
 
 import unittest,os,sys
 import time, datetime
-from src.readwriteconf.rwconf import ReadWriteConfFile
+
 
 
 p = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -30,7 +30,7 @@ from src.otherApk.testSpeed import TestSpeed
 from src.base.baseTime import BaseTime
 # from src.testcase.v722.firstLogin import InitData
 # from src.base.baseAdb import BaseAdb
-
+from src.readwriteconf.rwconf import ReadWriteConfFile
 
 logfileName= BaseTime.getDateHour() + '.log'
 
