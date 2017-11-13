@@ -1,9 +1,11 @@
 # urs/bin/python
 # encoding:utf-8
+import datetime
 import os,time,unittest,sys
 import configparser as cparser
 from src.aserver.AppiumServer import AppiumServer2
-from src.base.baseAdb import BaseAdb
+from src.base.baseTime import BaseTime
+
 from src.psam.psam import Psam
 from src.testcase.v722.easycase.login import Login
 
@@ -17,35 +19,38 @@ from src.base.baseImage import BaseImage
 
 
 
+class DataTest(object):
 
-class InitData(unittest.TestCase):
+    def __init__(self):
+        pass
 
-    def setUp(self):
+    # 每天晚上8点后，返回更改的时间戳
+    def getTestData(self):
+        return BaseTime.getCurrentTime()
 
-        BaseAdb.adbIntallUiautmator()
-        self.driver = Psam()
-        # 点击允许
-        time.sleep(4)
+    def getCode(self):
+
+        i = datetime.datetime.now()
+        print ("当前的日期和时间是 %s" % i)
+        print ("ISO格式的日期和时间是 %s" % i.isoformat() )
+        print ("当前的年份是 %s" %i.year)
+        print ("当前的月份是 %s" %i.month)
+        print ("当前的日期是  %s" %i.day)
+        print ("dd/mm/yyyy 格式是  %s/%s/%s" % (i.day, i.month, i.year) )
+        print ("当前小时是 %s" %i.hour)
+        print ("当前分钟是 %s" %i.minute)
+        print ("当前秒是  %s" %i.second)
+
+        i = datetime.datetime.now()
+
+        h = i.hour
+        d = i.day
+        if int(h) >= 20:
+            d = d+1
+
+        name = str(i.year) +str(i.month) + str(d)
+        print(name)
 
 
-    #释放实例,释放资源
-    def tearDown(self):
-        self.driver.quit()
-        print("运行结束")
-        time.sleep(5)
-        # AppiumServer2().stop_server()
 
-
-    def testCase(self):
-
-        network = BaseAdb.getNetworkType()
-        print('当前网络状态：%s' %network)
-        BaseImage.screenshot(self.driver, "testpic")
-
-
-
-if __name__ == "__main__":
-    suite = unittest.TestSuite()
-    suite.addTest(InitData('testCase'))
-    runner = unittest.TextTestRunner(verbosity=2)
-    runner.run(suite)
+DataTest().getCode()

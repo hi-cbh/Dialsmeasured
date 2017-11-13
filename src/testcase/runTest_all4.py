@@ -1,116 +1,107 @@
-import unittest
-from src.mail.sendEmailSmtp import  SendMail
-from src.otherApk.testSpeed import TestSpeed
+# urs/bin/python
+# encoding:utf-8
+
+import unittest,os,sys
 import time, datetime
-from src.base.baseTime import BaseTime
 from src.readwriteconf.rwconf import ReadWriteConfFile
 
-logPath = "/Users/apple/autoTest/workspace/DialsMeasured/logs/"
+
+p = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+print("path: %s" %p)
+
+sys.path.append(p+"/")
+localPath = "/tmp/appiumRunLog"
+reportPath = localPath + "/report/"
+# failReport = localPath + "/failReport/"
+logPath = localPath + "/logs/"
+print("report: %s" %reportPath)
+print("report: %s" %logPath)
+
+
+from src.testcase.v722.testSend import TestSend
+from src.testcase.v722.testContant import TestContant
+from src.testcase.v722.test139Selected import TestSelect
+from src.testcase.v722.testPush import TestPush
+from src.testcase.HTMLTestRunner import HTMLTestRunner
+from src.testcase.v722.testLogin import TestLogin
+from src.mail.sendEmailSmtp import SendMail
+from src.testcase.v722.testDownFile import TestDownFile
+from src.otherApk.testSpeed import TestSpeed
+from src.base.baseTime import BaseTime
+# from src.testcase.v722.firstLogin import InitData
+# from src.base.baseAdb import BaseAdb
+
+
 logfileName= BaseTime.getDateHour() + '.log'
-class MyTest(unittest.TestCase):
+
+'''
+优化测试结果：
+1、成功是每天晚上8点发送邮件。
+2、失败次数达到N次后，发送邮件。
+
+'''
 
 
-    @classmethod
-    def setUpClass(self):
-        print("setUp.....")
-        self.testRun = False
+if __name__ == "__main__":
+    # 获取当前网速
+    ts = TestSpeed()
+    ts.setUp()
+    speed = ts.testCase()
+    ts.tearDown()
 
-    @classmethod
-    def tearDownClass(self):
-        print("tearDown......")
-
-
-    def testCase01(self):
-        try:
-            self.assertTrue(False, "测试错误")
-            print("testCase01")
-        except BaseException:
-            self.fail("testCase01 错误")
-
-        else:
-            print("testCase01")
-
-
-    def testCase02(self):
-        try:
-            self.assertTrue(False, "测试错误")
-            print("testCase02")
-        except BaseException:
-            self.fail("testCase02 错误")
-
-        else:
-            print("testCase02")
-
-    # @unittest.skipIf(unittest.testRun , "当条件为True跳过测试")
-    # def test_skip_if(self):
-    #     print("test bbb")
-    #
-    # @unittest.skipUnless(testRun, "当条件为True执行测试")
-    # def test_skip_unless(self):
-    #     print("test ccc")
-
-class MyTest2(unittest.TestCase):
-
-
-    def setUp(self):
-        print("MyTest2 setUp.....")
-        self.testRun = False
-
-    def tearDown(self):
-        print("MyTest2 tearDown......")
-
-
-    def testCase03(self):
-        print("testCase01")
-
-    def testCase04(self):
-        try:
-            self.assertTrue(False, "测试错误")
-            print("testCase03")
-        except BaseException:
-            self.fail("MyTest2 testCase04 错误")
-
-        else:
-            print("testCase01")
-
-if __name__ == '__main__':
-    speed = ''
-    # ts = TestSpeed()
-    # ts.setUp()
-    # speed = ts.testCase()
-    # ts.tearDown()
 
     print("speed: %s" %speed)
+    time.sleep(10)
 
-
+    print('需要运行的脚本')
     result = {}
-    result['testCase01'] = 'Success'
-    result['testCase02'] = 'Success'
-    result['testCase03'] = 'Success'
-    result['testCase04'] = 'Success'
-
     testtxt = {}
-    testtxt['用例1'] = 'testCase01'
-    testtxt['用例2'] = 'testCase02'
-    testtxt['用例3'] = 'testCase03'
-    testtxt['用例4'] = 'testCase04'
 
+    result['testCaseLogin'] = 'Success'
+    result['testCaseSend'] = 'Success'
+    result['testCaseFwdSend'] = 'Success'
+    result['testDownFile'] = 'Success'
+    result['testCaseCheckAddressList'] = 'Success'
+    result['testCaseSelected'] = 'Success'
+    result['testCasePush'] = 'Success'
 
-
+    # 用例名 与用例说明
+    testtxt['账号登录'] = 'testCaseLogin'
+    testtxt['发送邮件带附件'] = 'testCaseSend'
+    testtxt['转发邮件带附件'] = 'testCaseFwdSend'
+    testtxt['附件下载'] = 'testDownFile'
+    testtxt['联系人同步'] = 'testCaseCheckAddressList'
+    testtxt['收件箱列表中精选'] = 'testCaseSelected'
+    testtxt['接收推送'] = 'testCasePush'
 
     suite = unittest.TestSuite()
-    suite.addTest(MyTest('testCase01'))
-    suite.addTest(MyTest('testCase02'))
-    suite.addTest(MyTest2('testCase03'))
-    suite.addTest(MyTest2('testCase04'))
+    # suite.addTest(InitData("testCase"))
+    suite.addTest(TestLogin('testCaseLogin'))
+    suite.addTest(TestSend('testCaseSend'))
+    suite.addTest(TestSend('testCaseFwdSend'))
+    suite.addTest(TestDownFile('testDownFile'))
+    suite.addTest(TestContant('testCaseCheckAddressList'))
+    suite.addTest(TestSelect('testCaseSelected'))
+    suite.addTest(TestPush('testCasePush'))
+
+    runner = unittest.TextTestRunner()
 
 
-    runner = unittest.TextTestRunner(verbosity=2)
+    # 生成html
+    now = time.strftime("%Y-%m-%d %H_%M_%S")
+    filename_now = time.strftime("%Y_%m_%d_%H_%M_%S")
+    filename = reportPath + now + '_result.html'
+    # filename = r'/Users/apple/git/pytest/report/index.html'
+    fp = open(filename, 'wb')
+    runner = HTMLTestRunner(stream=fp,
+                            title='Test Report',
+                            description='DialsMeasured with: ')
     testResultReport = runner.run(suite)
+    fp.close()
 
-    # print('All case number')
-    # print(testResultReport.failures)
 
+
+    '''以下是结果筛选，写入日志，并发送简单的汇报邮件'''
     time.sleep(2)
 
     l = []
@@ -119,6 +110,7 @@ if __name__ == '__main__':
         l.append(str(case))
 
     # print('ces %s'  %l)
+
     errortimes = 0
     for k, v in result.items():
         for line in l:
@@ -133,10 +125,12 @@ if __name__ == '__main__':
         x = int(x) + 1
         ReadWriteConfFile.setSectionValue( 'sendconf','error',str(x))
 
+
     # print(result)
     # print(testtxt)
 
 
+    # 将两个字典合并，将测试结果整理
     for k1, v1 in result.items():
         for k2, v2 in testtxt.items():
             if k1 == v2:
@@ -146,10 +140,13 @@ if __name__ == '__main__':
 
 
 
-    resulttxt = []
-    sendresult = []
-    resulttxt.append('\n'+"================================"+'\n')
-    sendresult.append(speed+'\n')
+    resulttxt = [] # 写入日志
+    sendresult = [] # 邮件发送正文
+    resulttxt.append('\n'+"====="+now +"====="+'\n')
+    resulttxt.append(speed +'\n')
+    sendresult.append('\n'+"====="+now +"====="+'\n')
+    sendresult.append(speed +'\n')
+
     for case, reason in testtxt.items():
         resulttxt.append('case：%s , result：%s \n' %(case, reason) )
         if reason == 'Fail':
