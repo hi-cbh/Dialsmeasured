@@ -4,3 +4,8 @@ pip3 install Appium-Python-Client # webdriver
 pip3 install pysql # 数据库
 pip3 install imapclient # 邮件
 下载对应的 chromedirver
+
+需要创建文件夹
+sudo mkdir /var/appiumRunLog && cd /var/appiumRunLog
+sudo mkdir ini logs report pics
+copy user_db.ini /var/appiumRunLog/ini/

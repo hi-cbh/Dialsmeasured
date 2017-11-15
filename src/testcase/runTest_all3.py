@@ -9,7 +9,7 @@ p = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 print("path: %s" %p)
 
 sys.path.append(p+"/")
-localPath = "/tmp/appiumRunLog"
+localPath = "/var/appiumRunLog"
 reportPath = localPath + "/report/"
 # failReport = localPath + "/failReport/"
 logPath = localPath + "/logs/"

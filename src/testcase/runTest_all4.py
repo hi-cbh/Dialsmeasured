@@ -10,10 +10,11 @@ p = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 print("path: %s" %p)
 
 sys.path.append(p+"/")
-localPath = "/tmp/appiumRunLog"
+localPath = "/var/appiumRunLog"
 reportPath = localPath + "/report/"
 # failReport = localPath + "/failReport/"
 logPath = localPath + "/logs/"
+iniPath = localPath + '/ini/'
 print("report: %s" %reportPath)
 print("report: %s" %logPath)
 
@@ -178,7 +179,7 @@ if __name__ == "__main__":
     with open(logPath + '1_'+logfileName,'r') as fs:
         allSendtxt = fs.readlines()
 
-    print("预备发送 %s：" %allSendtxt)
+    # print("预备发送 %s：" %allSendtxt)
 
     ReadWriteConfFile.addSection( 'sendconf')
     changetime = ReadWriteConfFile.getSectionValue( 'sendconf','changetime',)

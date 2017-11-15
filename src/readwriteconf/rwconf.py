@@ -6,7 +6,8 @@ import configparser as cparser
 
 class ReadWriteConfFile:
     base_dir = str((os.path.dirname(os.path.dirname(__file__))))
-    file_path = base_dir + "/user_db.ini"
+    file_path ="/var/appiumRunLog/ini/user_db.ini"
+    # file_path = base_dir + "/user_db.ini"
     print(file_path)
 
     @staticmethod
