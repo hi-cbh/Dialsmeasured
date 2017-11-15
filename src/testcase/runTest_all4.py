@@ -45,12 +45,12 @@ logfileName= BaseTime.getDateHour() + '.log'
 
 if __name__ == "__main__":
     # 获取当前网速
-    ts = TestSpeed()
-    ts.setUp()
-    speed = ts.testCase()
-    ts.tearDown()
+    # ts = TestSpeed()
+    # ts.setUp()
+    # speed = ts.testCase()
+    # ts.tearDown()
 
-
+    speed='调试中'
     print("speed: %s" %speed)
     time.sleep(10)
 
@@ -214,3 +214,6 @@ if __name__ == "__main__":
             s = SendMail("13580491603","chinasoft123","13697485262")
             s.sendMailMan2('拨测出现异常',allSendtxt)
             ReadWriteConfFile.setSectionValue('sendconf','error','0')
+
+    print('运行结束')
+    time.sleep(15)
