@@ -25,8 +25,9 @@ class TestSpeed(unittest.TestCase):
         try:
             # time.sleep(10)
             # AppiumServer2().start_server()
-            # time.sleep(10)
-
+            time.sleep(10)
+            BaseAdb.adbClear('org.zwanoo.android.speedtest')
+            time.sleep(5)
             BaseAdb.adbIntallUiautmator()
             self.driver = Psam('6.0',"org.zwanoo.android.speedtest","com.ookla.speedtest.softfacade.MainActivity")
         except BaseException as error:
@@ -70,6 +71,8 @@ class TestSpeed(unittest.TestCase):
 
         else:
             BaseAdb.adbHome()
+            BaseAdb.adbClear('org.zwanoo.android.speedtest')
+
             return network +'状态，网速测试结果如下，上传 ' + load + ' , 下载 ' + down
 
 

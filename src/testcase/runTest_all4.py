@@ -45,10 +45,12 @@ logfileName= BaseTime.getDateHour() + '.log'
 
 if __name__ == "__main__":
     # 获取当前网速
-    # ts = TestSpeed()
-    # ts.setUp()
-    # speed = ts.testCase()
-    # ts.tearDown()
+
+
+    ts = TestSpeed()
+    ts.setUp()
+    speed = ts.testCase()
+    ts.tearDown()
 
     speed='调试中'
     print("speed: %s" %speed)
@@ -196,7 +198,7 @@ if __name__ == "__main__":
         if sendOrNot == 'False':
             print('到点发送邮件')
             s = SendMail("13580491603","chinasoft123","13697485262")
-            s.sendMailMan2('拨测出现异常',allSendtxt)
+            s.sendMailMan('139Android客户端V722版本_功能拨测<请勿回复>',allSendtxt)
             ReadWriteConfFile.setSectionValue('sendconf','send','True')
             ReadWriteConfFile.setSectionValue('sendconf','error','0')
 
@@ -212,7 +214,7 @@ if __name__ == "__main__":
         # 错误次数
         if int(error) >= int(maxtimes):
             s = SendMail("13580491603","chinasoft123","13697485262")
-            s.sendMailMan2('拨测出现异常',allSendtxt)
+            s.sendMailMan('139Android客户端V722版本_功能拨测<请勿回复>',allSendtxt)
             ReadWriteConfFile.setSectionValue('sendconf','error','0')
 
     print('运行结束')

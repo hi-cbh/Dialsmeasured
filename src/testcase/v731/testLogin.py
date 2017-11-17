@@ -32,8 +32,8 @@ class TestLogin(unittest.TestCase):
             # AppiumServer2().start_server()
             # time.sleep(10)
 
-            BaseAdb.adbIntallUiautmator()
-            self.driver = Psam("6.0")
+            # BaseAdb.adbIntallUiautmator()
+            self.driver = Psam("5.1")
         except BaseException as error:
             print("setUp启动出错！")
 
@@ -55,14 +55,20 @@ class TestLogin(unittest.TestCase):
 
 
     def testCaseLogin(self):
-        '''开始登录时延测试'''
-        for i in range(1000):
-            print('%s: 当前次数：%s' %( BaseTime.getCurrentTime(), i))
-            login=Login(self.driver,username, pwd)
-            bl = login.loginAction()
 
-            if bl == False:
-                break
+
+        '''开始登录时延测试'''
+        login=Login(self.driver,username, pwd)
+        # bl = login.loginAction()
+
+
+        # for i in range(2):
+        #     print('%s: 当前次数：%s' %( BaseTime.getCurrentTime(), i))
+        #     login=Login(self.driver,username, pwd)
+        #     bl = login.loginAction()
+        #
+        #     if bl == False:
+        #         break
 
 
 
