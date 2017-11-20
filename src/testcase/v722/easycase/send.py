@@ -215,9 +215,17 @@ class Send(unittest.TestCase):
             # 点击发送按钮
             print('=>点击发送按钮')
             self.driver.get_element("id=>cn.cj.pe:id/txt_send").click()
+            start = time.time()
+
 
             print('验证点：发送是否成功')
             self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",120) != None, "发送邮件失败！")
+
+            print('=>记录当前时间，时间差')
+            valueTime = str(round((time.time() - start), 2))
+            print('[转发邮件带附件]: %r'  %valueTime)
+            save.save("转发邮件带附件:%s" %valueTime)
+
 
             print('返回收件箱')
             BaseAdb.adbBack()
