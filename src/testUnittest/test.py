@@ -3,10 +3,15 @@ from src.mail.sendEmailSmtp import  SendMail
 from src.otherApk.testSpeed import TestSpeed
 import time, datetime
 from src.base.baseTime import BaseTime
-from src.readwriteconf.rwconf import ReadWriteConfFile
+from src.readwriteconf.rwconf import ReadWriteConfFile as rwc
+from src.readwriteconf.initData import InitData
+from src.readwriteconf.saveData import save
 
-logPath = "/Users/apple/autoTest/workspace/DialsMeasured/logs/"
+logPath = InitData().getsysPath()["savepath"]+"/logs/"
 logfileName= BaseTime.getDateHour() + '.log'
+
+
+
 class MyTest(unittest.TestCase):
 
 
@@ -22,10 +27,16 @@ class MyTest(unittest.TestCase):
 
     def testCase01(self):
         try:
-            self.assertTrue(False, "测试错误")
+            start = time.time()
+            self.assertTrue(True, "测试错误")
             print("testCase01")
+            time.sleep(1)
+            print('=>记录当前时间，时间差')
+            valueTime = str(round((time.time() - start), 2))
+            print('[登录时延]: %r'  %valueTime)
+            save.save("用例1:%s" %valueTime)
         except BaseException:
-            self.fail("testCase01 错误")
+            self.fail("用例1 错误")
 
         else:
             print("testCase01")
@@ -41,37 +52,46 @@ class MyTest(unittest.TestCase):
         else:
             print("testCase02")
 
-    # @unittest.skipIf(unittest.testRun , "当条件为True跳过测试")
-    # def test_skip_if(self):
-    #     print("test bbb")
-    #
-    # @unittest.skipUnless(testRun, "当条件为True执行测试")
-    # def test_skip_unless(self):
-    #     print("test ccc")
 
 class MyTest2(unittest.TestCase):
 
 
     def setUp(self):
+        time.sleep(1)
         print("MyTest2 setUp.....")
         self.testRun = False
+
 
     def tearDown(self):
         print("MyTest2 tearDown......")
 
 
+
     def testCase03(self):
         print("testCase01")
+        start = time.time()
+        time.sleep(1)
+        print('=>记录当前时间，时间差')
+        valueTime = str(round((time.time() - start), 2))
+        print('[登录时延]: %r'  %valueTime)
+        save.save("用例3:%s" %valueTime)
+
 
     def testCase04(self):
         try:
             self.assertTrue(False, "测试错误")
             print("testCase03")
+
         except BaseException:
             self.fail("MyTest2 testCase04 错误")
-
         else:
-            print("testCase01")
+            print("testCase04 return")
+            return 0
+
+
+
+
+
 
 if __name__ == '__main__':
     speed = ''
@@ -81,7 +101,6 @@ if __name__ == '__main__':
     # ts.tearDown()
 
     print("speed: %s" %speed)
-
 
     result = {}
     result['testCase01'] = 'Success'
@@ -95,9 +114,6 @@ if __name__ == '__main__':
     testtxt['用例3'] = 'testCase03'
     testtxt['用例4'] = 'testCase04'
 
-
-
-
     suite = unittest.TestSuite()
     suite.addTest(MyTest('testCase01'))
     suite.addTest(MyTest('testCase02'))
@@ -107,6 +123,7 @@ if __name__ == '__main__':
 
     runner = unittest.TextTestRunner(verbosity=2)
     testResultReport = runner.run(suite)
+    time.sleep(2)
 
     # print('All case number')
     # print(testResultReport.failures)
@@ -119,6 +136,7 @@ if __name__ == '__main__':
         l.append(str(case))
 
     # print('ces %s'  %l)
+    # 将用例错误标识
     errortimes = 0
     for k, v in result.items():
         for line in l:
@@ -128,15 +146,15 @@ if __name__ == '__main__':
 
     if errortimes != 0:
         # 这里设置添加错误次数
-        ReadWriteConfFile.addSection( 'sendconf')
-        x = ReadWriteConfFile.getSectionValue('sendconf','error')
+        rwc.addSection( 'sendconf')
+        x = rwc.getSectionValue('sendconf','error')
         x = int(x) + 1
-        ReadWriteConfFile.setSectionValue( 'sendconf','error',str(x))
+        rwc.setSectionValue( 'sendconf','error',str(x))
 
     # print(result)
     # print(testtxt)
 
-
+    # 用例中文-英文替换
     for k1, v1 in result.items():
         for k2, v2 in testtxt.items():
             if k1 == v2:
@@ -144,18 +162,32 @@ if __name__ == '__main__':
 
     print(testtxt)
 
+    # 获取时间
+    demotime=save.getValue()
+    print("时延：%s" %demotime)
 
 
     resulttxt = []
     sendresult = []
     resulttxt.append('\n'+"================================"+'\n')
     sendresult.append(speed+'\n')
+    # 写入文件，并添加发送邮件格式
     for case, reason in testtxt.items():
-        resulttxt.append('case：%s , result：%s \n' %(case, reason) )
-        if reason == 'Fail':
-            sendresult.append('case：<font size="3" color="blue"> %s </font> , result：<font size="4" color="red"> %s </font>\n' %(case, reason) )
+
+        if case in demotime:
+            resulttxt.append('case：%s , 时延：%s, result：%s \n' %(case,demotime[case], reason ))
+            if reason == 'Fail':
+                sendresult.append('case：<font size="3" color="blue"> %s </font> ,result：<font size="4" color="red"> %s </font>\n' %(case, reason) )
+            else:
+                sendresult.append('case：<font size="3" color="blue"> %s </font> , 时延：%s,  result：<font size="3" color="green"> %s </font>\n' %(case,demotime[case], reason) )
+
         else:
-            sendresult.append('case：<font size="3" color="blue"> %s </font> , result：<font size="3" color="green"> %s </font>\n' %(case, reason) )
+
+            resulttxt.append('case：%s , result：%s \n' %(case, reason) )
+            if reason == 'Fail':
+                sendresult.append('case：<font size="3" color="blue"> %s </font> , result：<font size="4" color="red"> %s </font>\n' %(case, reason) )
+            else:
+                sendresult.append('case：<font size="3" color="blue"> %s </font> , result：<font size="3" color="green"> %s </font>\n' %(case, reason) )
 
 
     print("过滤日志，写入日志：%s" %resulttxt)
@@ -176,15 +208,15 @@ if __name__ == '__main__':
     time.sleep(5)
 
 
-
+    # 发送内容读取
     allSendtxt = []
     with open(logPath + '1_'+logfileName,'r') as fs:
         allSendtxt = fs.readlines()
 
     print("预备发送 %s：" %allSendtxt)
 
-    ReadWriteConfFile.addSection( 'sendconf')
-    changetime = ReadWriteConfFile.getSectionValue( 'sendconf','changetime',)
+    rwc.addSection( 'sendconf')
+    changetime = rwc.getSectionValue( 'sendconf','changetime')
     changetime = int (changetime)
 
 
@@ -192,27 +224,26 @@ if __name__ == '__main__':
     print('对比时间：%s ' %changetime)
     # 当前小时 大于晚上8点(20-23)
     if datetime.datetime.now().hour >= changetime:
-
-        sendOrNot = ReadWriteConfFile.getSectionValue('sendconf','send')
+        # 是否发送
+        sendOrNot = rwc.getSectionValue('sendconf','send')
         print('sendOrNot %s' %sendOrNot)
         if sendOrNot == 'False':
             print('到点发送邮件')
             s = SendMail("13580491603","chinasoft123","13697485262")
             s.sendMailMan2('拨测出现异常',allSendtxt)
-            ReadWriteConfFile.setSectionValue('sendconf','send','True')
-            ReadWriteConfFile.setSectionValue('sendconf','error','0')
+            rwc.setSectionValue('sendconf','send','True')
+            rwc.setSectionValue('sendconf','error','0')
 
     # 1 - 20
     else:
         if datetime.datetime.now().hour in [1, 2]:
-            ReadWriteConfFile.setSectionValue('sendconf','send','False')
+            rwc.setSectionValue('sendconf','send','False')
 
-
-        error = ReadWriteConfFile.getSectionValue('sendconf','error')
-        maxtimes = ReadWriteConfFile.getSectionValue('sendconf','maxtimes')
+        error = rwc.getSectionValue('sendconf','error')
+        maxtimes = rwc.getSectionValue('sendconf','maxtimes')
 
         # 错误次数
         if int(error) >= int(maxtimes):
             s = SendMail("13580491603","chinasoft123","13697485262")
             s.sendMailMan2('拨测出现异常',allSendtxt)
-            ReadWriteConfFile.setSectionValue('sendconf','error','0')
+            rwc.setSectionValue('sendconf','error','0')

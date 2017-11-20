@@ -7,6 +7,7 @@ from src.base.baseAdb import BaseAdb
 from src.base.baseFile import BaseFile
 from src.mail.sendEmailSmtp import SendMail
 from src.base.baseImage import BaseImage
+from src.readwriteconf.saveData import save
 # from src.otherApk.gt.gtutil import GTTest
 
 
@@ -132,10 +133,19 @@ class Send(unittest.TestCase):
          
             # 点击发送按钮
             print('=>点击发送按钮')
-            self.driver.get_element("id=>cn.cj.pe:id/txt_send").click()
-            
+            btn = self.driver.get_element("id=>cn.cj.pe:id/txt_send")
+
+            print('=>开始记录时间')
+            start = time.time()
+            btn.click()
+
             print('=>等待已完成出现')
             self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",300) != None, "发送邮件失败！")
+
+            print('=>记录当前时间，时间差')
+            valueTime = str(round((time.time() - start), 2))
+            print('[登录时延]: %r'  %valueTime)
+            save.save("发送邮件带附件:%s" %valueTime)
 
             print('返回收件箱')
             BaseAdb.adbBack()
@@ -165,12 +175,12 @@ class Send(unittest.TestCase):
                 el = self.driver.element_wait(u"uiautomator=>暂无邮件",secs = 1)
                 if el != None:
                     print("下拉")
-                    self.driver.swipeDown();
+                    self.driver.swipeDown()
                     time.sleep(1)
-                    self.driver.swipeDown();
+                    self.driver.swipeDown()
                 else:
                     print("列表有邮件，退出循环")
-                    break;
+                    break
 
                 time.sleep(1)
 
@@ -218,9 +228,9 @@ class Send(unittest.TestCase):
             # 找到邮件结束
             while int(round(time.time() * 1000)) < timeout :
 
-                self.driver.swipeDown();
+                self.driver.swipeDown()
                 time.sleep(5)
-                self.driver.swipeDown();
+                self.driver.swipeDown()
                 time.sleep(5)
 
             # 点击第一封

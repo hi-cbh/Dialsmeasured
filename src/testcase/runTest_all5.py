@@ -44,7 +44,7 @@ logfileName= BaseTime.getDateHour() + '.log'
 
 
 if __name__ == "__main__":
-    for i in range(100):
+    for i in range(3):
         # 获取当前网速
         ts = TestSpeed()
         ts.setUp()

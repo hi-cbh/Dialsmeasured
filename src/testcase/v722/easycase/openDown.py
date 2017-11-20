@@ -6,6 +6,7 @@ import unittest
 from src.base.baseAdb import BaseAdb
 from src.base.baseFile import BaseFile
 from src.base.baseImage import BaseImage
+from src.readwriteconf.saveData import save
 class OpenDown(unittest.TestCase):
     
     def __init__(self,driver, path, filename):
@@ -70,10 +71,18 @@ class OpenDown(unittest.TestCase):
             self.assertTrue(self.driver.get_element(r"id=>cn.cj.pe:id/message_detail_attachment_download"),'没有下载按钮')
             self.driver.click(r"id=>cn.cj.pe:id/message_detail_attachment_download")
 
+
+            print('=>记录当前时')
+            start = time.time()
+
             # 等待文件出现
             print('=>等待文件出现')
             self.assertTrue(BaseFile.waitforfile(self.path, self.filename, 300),'下载附件出错')
-             
+
+            print('=>记录当前时间，时间差')
+            valueTime = str(round((time.time() - start), 2))
+            print('[登录时延]: %r'  %valueTime)
+            save.save("附件下载:%s" %valueTime)
 
             print('=>返回收件箱')
             BaseAdb.adbBack()

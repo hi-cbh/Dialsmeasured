@@ -8,7 +8,7 @@ from src.mail.mailOperation import EmailOperation
 from src.psam.psam import Psam
 from src.testcase.v722.easycase.login import Login
 from src.testcase.v722.easycase.send import Send
-from src.testcase.v722.initData import InitData
+from src.readwriteconf.initData import InitData
 
 # sys.path.append(r"/Users/apple/git/pytest/")
 
@@ -47,8 +47,7 @@ class TestSend(unittest.TestCase):
             EmailOperation(username+"@139.com", pwd).clearForlder(['INBOX'])
             time.sleep(10)
 
-            login=Login(self.driver,username, pwd)
-            login.loginAction()
+            Login(self.driver,username, pwd).loginAction(isSave=False)
 
 
 
@@ -63,13 +62,11 @@ class TestSend(unittest.TestCase):
 
     def testCaseSend(self):
         '''发送邮件测试'''
-        send = Send(self.driver,username+'@139.com')
-        send.sendAction()
+        Send(self.driver,username+'@139.com').sendAction()
 
     def testCaseFwdSend(self):
         '''转发邮件测试'''
-        send = Send(self.driver,username+'@139.com')
-        send.sendFwd(receiver, sender)
+        Send(self.driver,username+'@139.com').sendFwd(receiver, sender)
 
 
 

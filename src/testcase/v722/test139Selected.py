@@ -8,7 +8,7 @@ from src.base.baseAdb import BaseAdb
 from src.mail.mailOperation import EmailOperation
 from src.psam.psam import Psam
 from src.testcase.v722.easycase.login import Login
-from src.testcase.v722.initData import InitData
+from src.readwriteconf.initData import InitData
 from src.base.baseImage import BaseImage
 
 # sys.path.append(r"/Users/apple/git/pytest/")
@@ -48,11 +48,8 @@ class TestSelect(unittest.TestCase):
 
         try:
             # self.assertTrue(False, "测试错误")
-
-
-
             print("=>登录")
-            Login(self.driver,user['name'], user['pwd']).loginAction()
+            Login(self.driver,user['name'], user['pwd']).loginAction(isSave=False)
 
             time.sleep(10)
             # print("首先通过http协议，访问链接是否更改，再运行")
@@ -62,12 +59,16 @@ class TestSelect(unittest.TestCase):
 
             print('点击 139精选')
             self.driver.click(u'uiautomator=>139精选')
-
+            start = time.time()
             print("等待30秒")
             time.sleep(30)
 
             print('验证点：页面是否显示正常')
             self.assertTrue(self.driver.page_source().__contains__(u"阅读全文"),"页面显示不正常")
+
+            print('=>记录当前时间，时间差')
+            valueTime = str(round((time.time() - start), 2))
+            print('[登录时延]: %r'  %valueTime)
 
             # print('=>注销账号')
             # self.logout()

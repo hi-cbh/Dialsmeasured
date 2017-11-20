@@ -9,7 +9,7 @@ from src.psam.psam import Psam
 from src.testcase.v731.easycase.login import Login
 from src.testcase.v722.easycase.receive import WebReceive
 from src.mail.sendEmailSmtp import SendMail
-from src.testcase.v731.initData import InitData
+from src.readwriteconf.initData import InitData
 from src.base.baseImage import BaseImage
 
 # sys.path.append(r"/Users/apple/git/pytest/")

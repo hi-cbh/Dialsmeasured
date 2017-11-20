@@ -8,7 +8,7 @@ from src.mail.mailOperation import EmailOperation
 from src.psam.psam import Psam
 from src.testcase.v731.easycase.login import Login
 from src.testcase.v731.easycase.send import Send
-from src.testcase.v731.initData import InitData
+from src.readwriteconf.initData import InitData
 from src.testcase.v731.easycase.openDown import OpenDown
 
 # sys.path.append(r"/Users/apple/git/pytest/")

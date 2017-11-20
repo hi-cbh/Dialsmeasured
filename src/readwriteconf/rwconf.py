@@ -3,10 +3,13 @@
 
 import os
 import configparser as cparser
+from src.readwriteconf.initData import InitData
 
 class ReadWriteConfFile:
-    base_dir = str((os.path.dirname(os.path.dirname(__file__))))
-    file_path ="/var/appiumRunLog/ini/user_db.ini"
+    # base_dir = str((os.path.dirname(os.path.dirname(__file__))))
+    # 固定路径
+    # file_path ="/var/appiumRunLog/ini/user_db.ini"
+    file_path = InitData().getsysPath()['rwconf']
     # file_path = base_dir + "/user_db.ini"
     print(file_path)
 
@@ -15,15 +18,18 @@ class ReadWriteConfFile:
         cf=cparser.ConfigParser()
         cf.read(ReadWriteConfFile.file_path)
         return cf
+
     @staticmethod
     def writeConfigParser(cf):
-        f=open(ReadWriteConfFile.file_path,"w");
+        f=open(ReadWriteConfFile.file_path,"w")
         cf.write(f)
-        f.close();
+        f.close()
+
     @staticmethod
     def getSectionValue(section,key):
         cf=ReadWriteConfFile.getConfigParser()
         return cf.get(section, key)
+
     @staticmethod
     def addSection(section):
         cf=ReadWriteConfFile.getConfigParser()
@@ -33,6 +39,7 @@ class ReadWriteConfFile:
         else:
             cf.add_section(section)
             ReadWriteConfFile.writeConfigParser(cf)
+
     @staticmethod
     def setSectionValue(section,key,value):
         cf=ReadWriteConfFile.getConfigParser()
@@ -42,6 +49,6 @@ class ReadWriteConfFile:
 
 if __name__ == '__main__':
     ReadWriteConfFile.addSection( 'sendconf')
-    ReadWriteConfFile.setSectionValue( 'sendconf','send','True')
-    x=ReadWriteConfFile.getSectionValue( 'sendconf','send')
+    ReadWriteConfFile.setSectionValue( 'sendconf','error','0')
+    x=ReadWriteConfFile.getSectionValue( 'sendconf','error')
     print(x)

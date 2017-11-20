@@ -13,7 +13,7 @@ class Login(unittest.TestCase):
         self.pwd = pwd
         self.driver = driver
         
-    def loginAction(self, firstLogin=False):
+    def loginAction(self, firstLogin=False, save = True):
         # firstLogin 首次安装后，登录为true
         try:
             '''最基础的登录'''

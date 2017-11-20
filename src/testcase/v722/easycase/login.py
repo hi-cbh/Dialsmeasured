@@ -5,6 +5,7 @@ import time
 import unittest
 from src.base.baseAdb import BaseAdb
 from src.base.baseImage import BaseImage
+from src.readwriteconf.saveData import save
 
 class Login(unittest.TestCase):
     
@@ -13,7 +14,7 @@ class Login(unittest.TestCase):
         self.pwd = pwd
         self.driver = driver
         
-    def loginAction(self, firstLogin=False):
+    def loginAction(self, firstLogin=False, isSave=True):
         # firstLogin 首次安装后，登录为true
         try:
             '''最基础的登录'''
@@ -59,7 +60,12 @@ class Login(unittest.TestCase):
             els[1].set_value(self.pwd)   # appium 1.6
 
             print('=>点击登录')
-            self.driver.get_element("id=>cn.cj.pe:id/login").click()
+            loginbtn = self.driver.get_element("id=>cn.cj.pe:id/login")
+
+            print('=>记录当前时间、点击登录')
+            start = time.time()
+            loginbtn.click()
+
 
             if firstLogin == True:
                 self.driver.click(u"uiautomator=>允许")
@@ -67,8 +73,18 @@ class Login(unittest.TestCase):
 
             print('验证点：等待收件箱底部导航栏出现')
             self.assertTrue(self.driver.get_element("id=>cn.cj.pe:id/message_list_bottom_email") != None, "登录失败！")
+
+            print('=>记录当前时间，')
+            valueTime = str(round((time.time() - start), 2))
+            print('[登录时延]: %r'  %valueTime)
+            # 运行正确才记录数据
+            # 这里添加判断，是否记录时间
+            if isSave:
+                save.save("账号登录:%s" %valueTime)
+
         except BaseException as error:
             BaseImage.screenshot(self.driver, "LoginError")
+            # 超时，数据超时
             time.sleep(5)
             self.fail("【手动输入账号/密码-登录】出现错误")
             # 添加截图

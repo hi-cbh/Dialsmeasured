@@ -5,18 +5,18 @@ import unittest,os,sys
 import time, datetime
 
 
-
+# 添加环境路径，脚本
 p = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 print("path: %s" %p)
-
 sys.path.append(p+"/")
+
+
 localPath = "/var/appiumRunLog"
+# 信息存储路径
 reportPath = localPath + "/report/"
-# failReport = localPath + "/failReport/"
 logPath = localPath + "/logs/"
 iniPath = localPath + '/ini/'
-print("report: %s" %reportPath)
-print("report: %s" %logPath)
+
 
 
 from src.testcase.v722.testSend import TestSend
@@ -31,8 +31,10 @@ from src.otherApk.testSpeed import TestSpeed
 from src.base.baseTime import BaseTime
 # from src.testcase.v722.firstLogin import InitData
 # from src.base.baseAdb import BaseAdb
-from src.readwriteconf.rwconf import ReadWriteConfFile
+from src.readwriteconf.rwconf import ReadWriteConfFile as rwc
+from src.readwriteconf.saveData import save
 
+# 文件名
 logfileName= BaseTime.getDateHour() + '.log'
 
 '''
@@ -52,7 +54,7 @@ if __name__ == "__main__":
     speed = ts.testCase()
     ts.tearDown()
 
-    speed='调试中'
+    # speed='调试中'
     print("speed: %s" %speed)
     time.sleep(10)
 
@@ -62,20 +64,20 @@ if __name__ == "__main__":
 
     result['testCaseLogin'] = 'Success'
     result['testCaseSend'] = 'Success'
-    result['testCaseFwdSend'] = 'Success'
-    result['testDownFile'] = 'Success'
-    result['testCaseCheckAddressList'] = 'Success'
-    result['testCaseSelected'] = 'Success'
-    result['testCasePush'] = 'Success'
+    # result['testCaseFwdSend'] = 'Success'
+    # result['testDownFile'] = 'Success'
+    # result['testCaseCheckAddressList'] = 'Success'
+    # result['testCaseSelected'] = 'Success'
+    # result['testCasePush'] = 'Success'
 
     # 用例名 与用例说明
     testtxt['账号登录'] = 'testCaseLogin'
     testtxt['发送邮件带附件'] = 'testCaseSend'
-    testtxt['转发邮件带附件'] = 'testCaseFwdSend'
-    testtxt['附件下载'] = 'testDownFile'
-    testtxt['联系人同步'] = 'testCaseCheckAddressList'
-    testtxt['收件箱列表中精选'] = 'testCaseSelected'
-    testtxt['接收推送'] = 'testCasePush'
+    # testtxt['转发邮件带附件'] = 'testCaseFwdSend'
+    # testtxt['附件下载'] = 'testDownFile'
+    # testtxt['联系人同步'] = 'testCaseCheckAddressList'
+    # testtxt['收件箱列表中精选'] = 'testCaseSelected'
+    # testtxt['接收推送'] = 'testCasePush'
 
     suite = unittest.TestSuite()
     # suite.addTest(InitData("testCase"))
@@ -123,10 +125,10 @@ if __name__ == "__main__":
 
     if errortimes != 0:
         # 这里设置添加错误次数
-        ReadWriteConfFile.addSection( 'sendconf')
-        x = ReadWriteConfFile.getSectionValue('sendconf','error')
+        rwc.addSection( 'sendconf')
+        x = rwc.getSectionValue('sendconf','error')
         x = int(x) + 1
-        ReadWriteConfFile.setSectionValue( 'sendconf','error',str(x))
+        rwc.setSectionValue( 'sendconf','error',str(x))
 
 
     # print(result)
@@ -141,6 +143,9 @@ if __name__ == "__main__":
 
     print(testtxt)
 
+    # 获取时间
+    demotime=save.getValue()
+    print("时延：%s" %demotime)
 
 
     resulttxt = [] # 写入日志
@@ -150,12 +155,23 @@ if __name__ == "__main__":
     sendresult.append('\n'+"====="+now +"====="+'\n')
     sendresult.append(speed +'\n')
 
+    # 写入文件，并添加发送邮件格式
     for case, reason in testtxt.items():
-        resulttxt.append('case：%s , result：%s \n' %(case, reason) )
-        if reason == 'Fail':
-            sendresult.append('case：<font size="3" color="blue"> %s </font> , result：<font size="4" color="red"> %s </font>\n' %(case, reason) )
+
+        if case in demotime:
+            resulttxt.append('case：%s , 时延：%s, result：%s \n' %(case,demotime[case], reason ))
+            if reason == 'Fail':
+                sendresult.append('case：<font size="3" color="blue"> %s </font> ,result：<font size="4" color="red"> %s </font>\n' %(case, reason) )
+            else:
+                sendresult.append('case：<font size="3" color="blue"> %s </font> , 时延：%s,  result：<font size="3" color="green"> %s </font>\n' %(case,demotime[case], reason) )
+
         else:
-            sendresult.append('case：<font size="3" color="blue"> %s </font> , result：<font size="3" color="green"> %s </font>\n' %(case, reason) )
+
+            resulttxt.append('case：%s , result：%s \n' %(case, reason) )
+            if reason == 'Fail':
+                sendresult.append('case：<font size="3" color="blue"> %s </font> , result：<font size="4" color="red"> %s </font>\n' %(case, reason) )
+            else:
+                sendresult.append('case：<font size="3" color="blue"> %s </font> , result：<font size="3" color="green"> %s </font>\n' %(case, reason) )
 
 
     print("过滤日志，写入日志：%s" %resulttxt)
@@ -183,8 +199,8 @@ if __name__ == "__main__":
 
     # print("预备发送 %s：" %allSendtxt)
 
-    ReadWriteConfFile.addSection( 'sendconf')
-    changetime = ReadWriteConfFile.getSectionValue( 'sendconf','changetime',)
+    rwc.addSection( 'sendconf')
+    changetime = rwc.getSectionValue( 'sendconf','changetime',)
     changetime = int (changetime)
 
 
@@ -193,29 +209,29 @@ if __name__ == "__main__":
     # 当前小时 大于晚上8点(20-23)
     if datetime.datetime.now().hour >= changetime:
 
-        sendOrNot = ReadWriteConfFile.getSectionValue('sendconf','send')
+        sendOrNot = rwc.getSectionValue('sendconf','send')
         print('sendOrNot %s' %sendOrNot)
         if sendOrNot == 'False':
             print('到点发送邮件')
             s = SendMail("13580491603","chinasoft123","13697485262")
             s.sendMailMan('139Android客户端V722版本_功能拨测<请勿回复>',allSendtxt)
-            ReadWriteConfFile.setSectionValue('sendconf','send','True')
-            ReadWriteConfFile.setSectionValue('sendconf','error','0')
+            rwc.setSectionValue('sendconf','send','True')
+            rwc.setSectionValue('sendconf','error','0')
 
     # 1 - 20
     else:
         if datetime.datetime.now().hour in [1, 2]:
-            ReadWriteConfFile.setSectionValue('sendconf','send','False')
+            rwc.setSectionValue('sendconf','send','False')
 
 
-        error = ReadWriteConfFile.getSectionValue('sendconf','error')
-        maxtimes = ReadWriteConfFile.getSectionValue('sendconf','maxtimes')
+        error = rwc.getSectionValue('sendconf','error')
+        maxtimes = rwc.getSectionValue('sendconf','maxtimes')
 
         # 错误次数
         if int(error) >= int(maxtimes):
             s = SendMail("13580491603","chinasoft123","13697485262")
             s.sendMailMan('139Android客户端V722版本_功能拨测<请勿回复>',allSendtxt)
-            ReadWriteConfFile.setSectionValue('sendconf','error','0')
+            rwc.setSectionValue('sendconf','error','0')
 
     print('运行结束')
     time.sleep(15)

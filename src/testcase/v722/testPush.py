@@ -9,8 +9,9 @@ from src.psam.psam import Psam
 from src.testcase.v722.easycase.login import Login
 from src.testcase.v722.easycase.receive import WebReceive
 from src.mail.sendEmailSmtp import SendMail
-from src.testcase.v722.initData import InitData
+from src.readwriteconf.initData import InitData
 from src.base.baseImage import BaseImage
+from src.readwriteconf.saveData import save
 
 # sys.path.append(r"/Users/apple/git/pytest/")
 
@@ -63,13 +64,13 @@ class TestPush(unittest.TestCase):
 
         try:
             print("=>登录")
-            Login(self.driver,reveicer['name'], reveicer['pwd']).loginAction()
+            Login(self.driver,reveicer['name'], reveicer['pwd']).loginAction(isSave=False)
 
             print('=>注销账号')
             self.logout()
 
             print("=>重新登录")
-            Login(self.driver,reveicer['name'], reveicer['pwd']).loginAction()
+            Login(self.driver,reveicer['name'], reveicer['pwd']).loginAction(isSave=False)
 
 
             print("=>点击Home键")
@@ -81,10 +82,18 @@ class TestPush(unittest.TestCase):
             print("=>第三方发送邮件")
             s = SendMail(sender['name'], sender['pwd'], reveicer['name'])
             self.assertTrue(s.sendMail('sendsmtpEmail','测试邮件...'),"邮件发送失败")
+            start = time.time()
             time.sleep(10)
 
             print("验证点：等待推送信息")
             self.assertTrue(self.waitforNotification(),"接收推送失败")
+
+            print('=>记录当前时间，时间差')
+            valueTime = str(round((time.time() - start), 2))
+            # print('[接收推送]: %r'  %valueTime)
+            save.save("接收推送:%s" %valueTime)
+
+
         except BaseException as error:
 
 
