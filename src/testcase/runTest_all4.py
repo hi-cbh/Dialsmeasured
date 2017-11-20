@@ -64,20 +64,20 @@ if __name__ == "__main__":
 
     result['testCaseLogin'] = 'Success'
     result['testCaseSend'] = 'Success'
-    # result['testCaseFwdSend'] = 'Success'
-    # result['testDownFile'] = 'Success'
-    # result['testCaseCheckAddressList'] = 'Success'
-    # result['testCaseSelected'] = 'Success'
-    # result['testCasePush'] = 'Success'
+    result['testCaseFwdSend'] = 'Success'
+    result['testDownFile'] = 'Success'
+    result['testCaseCheckAddressList'] = 'Success'
+    result['testCaseSelected'] = 'Success'
+    result['testCasePush'] = 'Success'
 
     # 用例名 与用例说明
     testtxt['账号登录'] = 'testCaseLogin'
     testtxt['发送邮件带附件'] = 'testCaseSend'
-    # testtxt['转发邮件带附件'] = 'testCaseFwdSend'
-    # testtxt['附件下载'] = 'testDownFile'
-    # testtxt['联系人同步'] = 'testCaseCheckAddressList'
-    # testtxt['收件箱列表中精选'] = 'testCaseSelected'
-    # testtxt['接收推送'] = 'testCasePush'
+    testtxt['转发邮件带附件'] = 'testCaseFwdSend'
+    testtxt['附件下载'] = 'testDownFile'
+    testtxt['联系人同步'] = 'testCaseCheckAddressList'
+    testtxt['收件箱列表中精选'] = 'testCaseSelected'
+    testtxt['接收推送'] = 'testCasePush'
 
     suite = unittest.TestSuite()
     # suite.addTest(InitData("testCase"))
