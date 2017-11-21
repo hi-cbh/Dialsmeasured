@@ -92,9 +92,9 @@ class CalcSuccess(object):
 
         for k, v in self.suclist.items():
             if k in self.speedlist and self.speedlist[k][0] != 0:
-                result.append("case: %s, 成功率: %s , 平均时延: %s \n" %(k, v[0], self.speedlist[k][1]))
+                result.append("case: <font size='3' color='blue'> %s </font>, 成功率: <font size='3' color='blue'> %s </font> , 平均时延: <font size='3' color='blue'> %s </font> \n" %(k, v[0], self.speedlist[k][1]))
             else:
-                result.append("case: %s, 成功率: %s \n" %(k, v[0]))
+                result.append("case: <font size='3' color='blue'> %s </font>, 成功率: <font size='3' color='blue'> %s </font> \n" %(k, v[0]))
         print(result)
         return result
 
