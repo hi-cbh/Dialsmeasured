@@ -6,6 +6,7 @@ from src.base.baseTime import BaseTime
 from src.readwriteconf.rwconf import ReadWriteConfFile as rwc
 from src.readwriteconf.initData import InitData
 from src.readwriteconf.saveData import save
+from src.readwriteconf.calcSucPer import CalcSuccess
 
 logPath = InitData().getsysPath()["savepath"]+"/logs/"
 logfileName= BaseTime.getDateHour() + '.log'
@@ -114,6 +115,8 @@ if __name__ == '__main__':
     testtxt['用例3'] = 'testCase03'
     testtxt['用例4'] = 'testCase04'
 
+    testcaselist = ["用例1", "用例2","用例3", "用例4"]
+
     suite = unittest.TestSuite()
     suite.addTest(MyTest('testCase01'))
     suite.addTest(MyTest('testCase02'))
@@ -206,12 +209,23 @@ if __name__ == '__main__':
 
 
     time.sleep(5)
+    cs = CalcSuccess(testcaselist,logPath + logfileName)
 
-
-    # 发送内容读取
+    # =============发送内容读取============
     allSendtxt = []
+    # 汇总信息添加
+    allSendtxt.append("====="+BaseTime.getCurrentTime()+"  当天运行记录结果汇总=====")
+    for cline in cs.getSuccessercentage():
+        allSendtxt.append(cline)
+    # 详细结果
+    allSendtxt.append("=====详细结果如下=====")
     with open(logPath + '1_'+logfileName,'r') as fs:
-        allSendtxt = fs.readlines()
+        tmplist = fs.readlines()
+
+    for cline in tmplist:
+        allSendtxt.append(cline)
+    #==============发送内容读取=========
+
 
     print("预备发送 %s：" %allSendtxt)
 

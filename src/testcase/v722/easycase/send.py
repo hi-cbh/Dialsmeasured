@@ -98,7 +98,7 @@ class Send(unittest.TestCase):
             time.sleep(2)
             return data
 
-    def sendAction(self):
+    def sendAction(self, isSave=True):
         '''正常的发送邮件'''
         try:
 
@@ -145,7 +145,8 @@ class Send(unittest.TestCase):
             print('=>记录当前时间，时间差')
             valueTime = str(round((time.time() - start), 2))
             print('[登录时延]: %r'  %valueTime)
-            save.save("发送邮件带附件:%s" %valueTime)
+            if isSave:
+                save.save("发送邮件带附件:%s" %valueTime)
 
             print('返回收件箱')
             BaseAdb.adbBack()

@@ -1,6 +1,6 @@
 
-path1 = "/var/appiumRunLog/logs/20171121.log"
 
+# 计算成功率
 class CalcSuccess(object):
     caselist2 = [] # 数量统计
     caselist3 = [] # 错误统计
@@ -55,12 +55,19 @@ class CalcSuccess(object):
 
 
         print(self.caselist2)
-        return self.caselist2
+        result = []
+
+        for k, v in self.caselist2.items():
+            result.append("case: %s, 成功率: %s \n" %(k, v))
+
+        return result
 
 
 
-caselist = ["用例1","用例2","用例3","用例4"]
 
-CalcSuccess(caselist, path1).getSuccessercentage()
+if __name__ == "__main__":
+    caselist = ["用例1","用例2","用例3","用例4"]
+    path1 = "/var/appiumRunLog/logs/20171121.log"
+    CalcSuccess(caselist, path1).getSuccessercentage()
 
 

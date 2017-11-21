@@ -91,7 +91,7 @@ class TestPush(unittest.TestCase):
             print('=>记录当前时间，时间差')
             valueTime = str(round((time.time() - start), 2))
             # print('[接收推送]: %r'  %valueTime)
-            save.save("接收推送:%s" %valueTime)
+            # save.save("接收推送:%s" %valueTime)
 
 
 

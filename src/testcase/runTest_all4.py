@@ -33,7 +33,7 @@ from src.base.baseTime import BaseTime
 # from src.base.baseAdb import BaseAdb
 from src.readwriteconf.rwconf import ReadWriteConfFile as rwc
 from src.readwriteconf.saveData import save
-
+from src.readwriteconf.calcSucPer import CalcSuccess
 # 文件名
 logfileName= BaseTime.getDateHour() + '.log'
 
@@ -78,6 +78,16 @@ if __name__ == "__main__":
     testtxt['联系人同步'] = 'testCaseCheckAddressList'
     testtxt['收件箱列表中精选'] = 'testCaseSelected'
     testtxt['接收推送'] = 'testCasePush'
+
+    testcaselist = []
+    testcaselist.append("账号登录")
+    testcaselist.append("发送邮件带附件")
+    testcaselist.append("转发邮件带附件")
+    testcaselist.append("附件下载")
+    testcaselist.append("联系人同步")
+    testcaselist.append("收件箱列表中精选")
+    testcaselist.append("接收推送")
+
 
     suite = unittest.TestSuite()
     # suite.addTest(InitData("testCase"))
@@ -191,13 +201,24 @@ if __name__ == "__main__":
 
     time.sleep(5)
 
+    cs = CalcSuccess(testcaselist,logPath + logfileName)
 
-
+    # =============发送内容读取============
     allSendtxt = []
+    # 汇总信息添加
+    allSendtxt.append("====="+BaseTime.getCurrentTime()+"  当天运行记录结果汇总=====")
+    for cline in cs.getSuccessercentage():
+        allSendtxt.append(cline)
+    # 详细结果
+    allSendtxt.append("=====详细结果如下=====")
     with open(logPath + '1_'+logfileName,'r') as fs:
-        allSendtxt = fs.readlines()
+        tmplist = fs.readlines()
 
-    # print("预备发送 %s：" %allSendtxt)
+    for cline in tmplist:
+        allSendtxt.append(cline)
+    #==============发送内容读取=========
+
+    print("预备发送 %s：" %allSendtxt)
 
     rwc.addSection( 'sendconf')
     changetime = rwc.getSectionValue( 'sendconf','changetime',)
