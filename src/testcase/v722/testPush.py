@@ -83,15 +83,15 @@ class TestPush(unittest.TestCase):
             s = SendMail(sender['name'], sender['pwd'], reveicer['name'])
             self.assertTrue(s.sendMail('sendsmtpEmail','测试邮件...'),"邮件发送失败")
             start = time.time()
-            time.sleep(10)
+            # time.sleep(10)
 
             print("验证点：等待推送信息")
             self.assertTrue(self.waitforNotification(),"接收推送失败")
 
             print('=>记录当前时间，时间差')
             valueTime = str(round((time.time() - start), 2))
-            # print('[接收推送]: %r'  %valueTime)
-            # save.save("接收推送:%s" %valueTime)
+            print('[接收推送]: %r'  %valueTime)
+            save.save("接收推送:%s" %valueTime)
 
 
 
@@ -144,12 +144,12 @@ class TestPush(unittest.TestCase):
 
     def waitforNotification(self):
         '''找到需要的通知栏信息'''
-        for i in range(3):
+        for i in range(6):
             print("检查通知栏信息")
             if BaseAdb.dumpsysNotification("新邮件") == True :
                 print('找到了')
                 return True
-            time.sleep(20)
+            time.sleep(10)
         print('找不到了')
         return False
 
