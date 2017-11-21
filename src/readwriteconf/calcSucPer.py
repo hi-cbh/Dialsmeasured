@@ -51,7 +51,7 @@ class CalcSuccess(object):
                     if self.caselist3[case1] == 0:
                         self.caselist2[case1] = "100%"
                     else:
-                        self.caselist2[case1] = str(round(value2/value1, 2)*100)+"%"
+                        self.caselist2[case1] = str((round(1-value2/value1, 2))*100)+"%"
 
 
         print(self.caselist2)

@@ -60,33 +60,31 @@ if __name__ == "__main__":
 
     print('需要运行的脚本')
     result = {}
-    testtxt = {}
+    testtxt = []
 
-    result['testCaseLogin'] = 'Success'
-    result['testCaseSend'] = 'Success'
-    result['testCaseFwdSend'] = 'Success'
-    result['testDownFile'] = 'Success'
-    result['testCaseCheckAddressList'] = 'Success'
-    result['testCaseSelected'] = 'Success'
-    result['testCasePush'] = 'Success'
+    testtxt.append(('账号登录',"testCaseLogin"))
+    testtxt.append(('发送邮件带附件',"testCaseSend"))
+    testtxt.append(('转发邮件带附件',"testCaseFwdSend"))
+    testtxt.append(('附件下载',"testDownFile"))
+    testtxt.append(('联系人同步',"testCaseCheckAddressList"))
+    testtxt.append(('收件箱列表中精选',"testCaseSelected"))
+    testtxt.append(('接收推送',"testCasePush"))
 
     # 用例名 与用例说明
-    testtxt['账号登录'] = 'testCaseLogin'
-    testtxt['发送邮件带附件'] = 'testCaseSend'
-    testtxt['转发邮件带附件'] = 'testCaseFwdSend'
-    testtxt['附件下载'] = 'testDownFile'
-    testtxt['联系人同步'] = 'testCaseCheckAddressList'
-    testtxt['收件箱列表中精选'] = 'testCaseSelected'
-    testtxt['接收推送'] = 'testCasePush'
+    testtxt = dict(testtxt)
 
+    # 统计用例结果字典
+    result = {}
+    # 传入发送邮件结果列表
     testcaselist = []
-    testcaselist.append("账号登录")
-    testcaselist.append("发送邮件带附件")
-    testcaselist.append("转发邮件带附件")
-    testcaselist.append("附件下载")
-    testcaselist.append("联系人同步")
-    testcaselist.append("收件箱列表中精选")
-    testcaselist.append("接收推送")
+
+    for k, v in testtxt.items():
+        testcaselist.append(k)
+        result[v] = "Success"
+
+    print(result)
+    print(testcaselist)
+
 
 
     suite = unittest.TestSuite()
@@ -218,7 +216,7 @@ if __name__ == "__main__":
         allSendtxt.append(cline)
     #==============发送内容读取=========
 
-    print("预备发送 %s：" %allSendtxt)
+    # print("预备发送 %s：" %allSendtxt)
 
     rwc.addSection( 'sendconf')
     changetime = rwc.getSectionValue( 'sendconf','changetime',)
