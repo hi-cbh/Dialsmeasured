@@ -208,7 +208,7 @@ if __name__ == "__main__":
     for cline in cs.getSuccessercentage():
         allSendtxt.append(cline)
     # 详细结果
-    allSendtxt.append("=====详细结果如下=====")
+    allSendtxt.append("=========详细结果如下=========\n")
     with open(logPath + '1_'+logfileName,'r') as fs:
         tmplist = fs.readlines()
 
@@ -219,7 +219,7 @@ if __name__ == "__main__":
     # print("预备发送 %s：" %allSendtxt)
 
     rwc.addSection( 'sendconf')
-    changetime = rwc.getSectionValue( 'sendconf','changetime',)
+    changetime = rwc.getSectionValue( 'sendconf','changetime')
     changetime = int (changetime)
 
 
@@ -239,7 +239,7 @@ if __name__ == "__main__":
 
     # 1 - 20
     else:
-        if datetime.datetime.now().hour in [1, 2]:
+        if rwc.getSectionValue("sendconf","send") == "True":
             rwc.setSectionValue('sendconf','send','False')
 
 
