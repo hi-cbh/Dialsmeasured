@@ -95,7 +95,7 @@ class SendMail():
         from_mail = self.username + '@139.com'
         mail_pass = self.pwd
         # to_mail = self.receive + '@139.com'
-        areceiver = '13533348571@139.com,13501538531@139.com,wujun11121@163.com'
+        areceiver = '13533348571@139.com,13790383896@139.com,18022340679@139.com'
         # areceiver = '13533348571@139.com'
 
         body = []
@@ -180,10 +180,10 @@ if __name__ == "__main__":
     s = SendMail("13580491603","chinasoft123","13697485262")
     # s.sendMail('testEmail','Python 邮件发送测试...')
 
-    line = []
-    with open("/Users/apple/autoTest/workspace/DialsMeasured/logs/run.log",'r') as fn:
-        line.append(fn.readlines())
+    line = ["testemail"]
+    # with open("/Users/apple/autoTest/workspace/DialsMeasured/logs/run.log",'r') as fn:
+    #     line.append(fn.readlines())
 
     # print(line)
 
-    s.sendMailMan('拨测出现异常',line)
+    s.sendMailMan('测试,是否收到邮件',line)

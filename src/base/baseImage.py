@@ -7,7 +7,7 @@ from src.base.baseTime import BaseTime
 base_dir = str(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
 # base_dir = base_dir.replace('\\', '/')
 PCpath = base_dir + "/pics/"
-local = "/tmp/appiumRunLog"+ "/pics/"
+local = "/var/appiumRunLog"+ "/pics/"
 
 print(PCpath)
 
