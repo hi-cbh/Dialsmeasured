@@ -47,15 +47,13 @@ logfileName= BaseTime.getDateHour() + '.log'
 
 if __name__ == "__main__":
     # 获取当前网速
-
-
     ts = TestSpeed()
     ts.setUp()
     speed = ts.testCase()
     ts.tearDown()
 
     # speed='调试中'
-    print("speed: %s" %speed)
+    # print("speed: %s" %speed)
     time.sleep(10)
 
     print('需要运行的脚本')
@@ -82,8 +80,8 @@ if __name__ == "__main__":
         testcaselist.append(k)
         result[v] = "Success"
 
-    print(result)
-    print(testcaselist)
+    # print(result)
+    # print(testcaselist)
 
 
 
@@ -104,11 +102,8 @@ if __name__ == "__main__":
     now = time.strftime("%Y-%m-%d %H_%M_%S")
     filename_now = time.strftime("%Y_%m_%d_%H_%M_%S")
     filename = reportPath + now + '_result.html'
-    # filename = r'/Users/apple/git/pytest/report/index.html'
     fp = open(filename, 'wb')
-    runner = HTMLTestRunner(stream=fp,
-                            title='Test Report',
-                            description='DialsMeasured with: ')
+    runner = HTMLTestRunner(stream=fp,title='Test Report', description='DialsMeasured with: ')
     testResultReport = runner.run(suite)
     fp.close()
 
@@ -119,7 +114,7 @@ if __name__ == "__main__":
 
     l = []
     for case, reason in testResultReport.failures:
-        print("case：%s" % case)
+        # print("case：%s" % case)
         l.append(str(case))
 
     # print('ces %s'  %l)
@@ -149,11 +144,11 @@ if __name__ == "__main__":
             if k1 == v2:
                 testtxt[k2] = result[k1]
 
-    print(testtxt)
+    # print(testtxt)
 
     # 获取时间
     demotime=save.getValue()
-    print("时延：%s" %demotime)
+    # print("时延：%s" %demotime)
 
 
     resulttxt = [] # 写入日志
@@ -182,7 +177,7 @@ if __name__ == "__main__":
                 sendresult.append('case：<font size="3" color="blue"> %s </font> , result：<font size="3" color="green"> %s </font>\n' %(case, reason) )
 
 
-    print("过滤日志，写入日志：%s" %resulttxt)
+    # print("过滤日志，写入日志：%s" %resulttxt)
     # print("过滤日志，写入日志：%s" %sendresult)
 
 
@@ -223,7 +218,7 @@ if __name__ == "__main__":
     changetime = int (changetime)
 
 
-    print('当前时间：%s ' %datetime.datetime.now().hour)
+    print('当前时间：%s ' %datetime.datetime.now().hour )
     print('对比时间：%s ' %changetime)
     # 当前小时 大于晚上8点(20-23)
     if datetime.datetime.now().hour >= changetime:

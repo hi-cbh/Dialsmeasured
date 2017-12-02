@@ -22,6 +22,7 @@ class BaseTime(object):
 
     def getDateHour(self):
         '''获取固定的文件名'''
+        # 可能这里出错，导致Jenkins运行失败
         #
         # i = datetime.datetime.now()
         # print ("当前的日期和时间是 %s" % i)

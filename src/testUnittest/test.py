@@ -129,8 +129,6 @@ if __name__ == '__main__':
     suite.addTest(MyTest('testCase02'))
     suite.addTest(MyTest2('testCase03'))
     suite.addTest(MyTest2('testCase04'))
-
-
     runner = unittest.TextTestRunner(verbosity=2)
     testResultReport = runner.run(suite)
     time.sleep(2)
@@ -216,6 +214,7 @@ if __name__ == '__main__':
 
 
     time.sleep(5)
+    # 计算成功率
     cs = CalcSuccess(testcaselist,logPath + logfileName)
 
     # =============发送内容读取============
@@ -231,6 +230,7 @@ if __name__ == '__main__':
 
     for cline in tmplist:
         allSendtxt.append(cline)
+
     #==============发送内容读取=========
 
 

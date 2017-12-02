@@ -63,6 +63,7 @@ class TestPush(unittest.TestCase):
         '''推送测试测试方法'''
 
         try:
+            # self.assertTrue(False,"测试")
             print("=>登录")
             Login(self.driver,reveicer['name'], reveicer['pwd']).loginAction(isSave=False)
 
