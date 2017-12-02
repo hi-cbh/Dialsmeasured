@@ -101,7 +101,7 @@ class Send(unittest.TestCase):
     def sendAction(self, isSave=True):
         '''正常的发送邮件'''
         try:
-            self.assertTrue(False,"测试")
+            # self.assertTrue(False,"测试")
             # 点击写邮件按钮
             self.assertTrue(self.driver.get_element(r"id=>cn.cj.pe:id/actionbar_right_view") != None, "页面没有找到写信按钮")
             print('=>点击写邮件按钮')
