@@ -8,7 +8,7 @@ class SaveData(object):
 
 
     def save(self, msg=None):
-
+        '''写入的数据格式与 runTest的格式一致（中文名）'''
         if msg == None:
             print('不保存数据')
             return

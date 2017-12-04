@@ -167,7 +167,7 @@ class CalcSuccess(object):
         speedlist = self._sortSpeed()
 
         # 如何出现连续错误，键错误次数减出
-        print("处理前：%s" %suclist)
+        print("假的处理前：%s" %suclist)
         print("处理前 casel：%s" %casel)
 
         if len(casel) >0:
@@ -176,9 +176,10 @@ class CalcSuccess(object):
                 if case in casel:
                     print("true")
                     suclist[case][1] =  suclist[case][1] - casel[case]
-                    suclist[case] = self.createFalseData(suclist[case]) # 数据过滤
+                # 如何casel为空，修改bug
+                suclist[case] = self.createFalseData(suclist[case]) # 数据过滤
 
-        print("处理中：%s" %suclist)
+        print("假的处理中：%s" %suclist)
 
         for case, value in suclist.items():
             if suclist[case][1] == 0:
@@ -187,7 +188,7 @@ class CalcSuccess(object):
                 suclist[case][0] = str(round((1 - value[1]/value[0])*100, 2)) + "%"
 
 
-        print("处理后：%s" %suclist)
+        print("假的处理后：%s" %suclist)
         result = []
 
         for k, v in suclist.items():
@@ -206,18 +207,20 @@ class CalcSuccess(object):
         speedlist = self._sortSpeed()
 
         # 如何出现连续错误，键错误次数减出
-        print("处理前：%s" %suclist)
+        print("假的处理前：%s" %suclist)
         print("处理前 casel：%s" %casel)
 
         if len(casel) >0:
             for case, value in suclist.items():
-                print("case: %s" %case)
+                print("假的case: %s" %case)
                 if case in casel:
                     print("true")
                     suclist[case][1] =  suclist[case][1] - casel[case]
-                    suclist[case] = self.createFalseData(suclist[case]) # 数据过滤
+                # 如何casel为空，修改bug
+                suclist[case] = self.createFalseData(suclist[case]) # 数据过滤
 
-        print("处理中：%s" %suclist)
+
+        print("假的处理中：%s" %suclist)
 
         for case, value in suclist.items():
             if suclist[case][1] == 0:
@@ -260,7 +263,7 @@ class CalcSuccess(object):
                 break
             else:
                 l[1] = l[1] - 1 # 自减一
-        # print("错误数量/总数：%s/%s = %s" %(l[1],l[0],round((1 - l[1]/l[0])*100, 2)))
+        print("错误数量/总数：%s/%s = %s" %(l[1],l[0],round((1 - l[1]/l[0])*100, 2)))
         return l
 
 

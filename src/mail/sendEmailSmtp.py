@@ -109,7 +109,7 @@ class SendMail():
 
         body=''.join(body)
 
-        print("邮件正式发送内容： %s" %body)
+        # print("邮件正式发送内容： %s" %body)
 
 
         msg = MIMEText(body, 'html', 'utf-8')
@@ -188,7 +188,7 @@ class SendMail():
         body.append(message)
         body=''.join(body)
 
-        print("邮件正式发送内容： %s" %body)
+        # print("邮件正式发送内容： %s" %body)
         print('邮件正式发送')
 
         msg = MIMEText(body, 'html', 'utf-8')

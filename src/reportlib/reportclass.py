@@ -229,7 +229,7 @@ class ReportClass(object):
 
         # 中文用例名：连续错误次数
         caselt = self._getAddConf()
-
+        print("连续错误次数：%s" %caselt)
         time.sleep(5)
         # 计算成功率
         cs = CalcSuccess(ReportClass._testcaselist,logPath + "org_"+logfileName)
@@ -263,6 +263,7 @@ class ReportClass(object):
 
 
         # 写入成功率--> 假数据(需要修改成功率)
+        print("写入成功率--> 假数据(需要修改成功率)")
         with open(logPath + 'false_'+logfileName,'a+') as fq, open(logPath + 'html_'+logfileName,'r') as fp:
             fq.write("====="+BaseTime.getCurrentTime()+"  当天运行记录结果汇总===== \n")
             for cline in cs.getSuccessercentageFail(caselt):
@@ -294,7 +295,7 @@ class ReportClass(object):
                             value[1] = value[1] - 1
                     fq.write(line)
 
-
+        print("写入成功率--> 假数据(需要修改成功率)")
         with open(logPath + 'savef_'+logfileName,'a+') as fq, open(logPath + 'org_'+logfileName,'r') as fp:
             fq.write("====="+BaseTime.getCurrentTime()+"  当天运行记录结果汇总===== \n")
             for cline in cs.getSuccessercentageFailNotType(caselt):
@@ -306,7 +307,7 @@ class ReportClass(object):
             failcnt = cs._sortData()
             # 获取一个字典，第一个总数量
             cnt = sorted(failcnt.items())[0][1][0]
-
+            print("总数量：%s" %cnt)
             if cnt < 35:
 
                 # 读取详细文件，拷贝到其他文件
