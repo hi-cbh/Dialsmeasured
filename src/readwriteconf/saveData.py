@@ -17,7 +17,7 @@ class SaveData(object):
             fn.write(msg+'\n')
 
     def getValue(self):
-
+        '''主要不错数据格式：中文名(case固定):时延'''
         # 读取文件
         with open(SaveData._path, 'r') as fn:
             txt = fn.readlines()
@@ -30,12 +30,11 @@ class SaveData(object):
         for line in txt:
             key = line.split(":")[0]
             value = line.split(":")[1][:-1]
-            print(key, value)
+            # print(key, value)
             txt2.append((key, value))
         # 返回字典格式
-        txt2 = dict(txt2)
 
-        return txt2
+        return dict(txt2)
 
 
 save = SaveData()

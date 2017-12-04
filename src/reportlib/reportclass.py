@@ -11,6 +11,20 @@ from collections import Counter
 logPath = InitData().getsysPath()["savepath"]+"/logs/"
 logfileName= BaseTime.getDateHour() + '.log'
 
+# 原始记录
+orgFilePath = logPath + 'org_'+logfileName
+# 原始记录待样式
+htmlFilePath = logPath + 'html_'+logfileName
+# 真实数据
+tsaveFilePath = logPath + 'savet_'+logfileName
+# 真实数据带样式
+thtmlFilePath = logPath + 'true_'+logfileName
+# 假数据
+fsaveFilePath = logPath + 'savef_'+logfileName
+# 假数据带样式
+fhtmlFilePath = logPath + 'false_'+logfileName
+
+
 class ReportClass(object):
 
     # 每一轮的错误次数
@@ -51,7 +65,6 @@ class ReportClass(object):
             for line in ReportClass._errorList:
                 if line.find(k) != -1:
                     ReportClass._result[k] = 'Fail'
-                    # ReportClass._errortimes +=1 # 出现错误，自加1
         print("_sortFail: %s" %ReportClass._result)
 
 
@@ -59,6 +72,11 @@ class ReportClass(object):
         smax = int(rwc.getSectionValue("sendconf","maxtimes"))
 
         # 将caseconf的值，大于maxtimes的值，拷贝到reportconf
+        '''
+        caseconf 运行过程中出现连续错误case记录
+        reportconf 出现了超过最大次数，时将caseconf记录到reportconf对应的用例中，若有，累计上一次出现的数组
+        
+        '''
         for k,v in ReportClass._result.items():
             rwc.addSection('caseconf')# 切换conf
             value = int(rwc.getSectionValue('caseconf',k))
@@ -99,47 +117,51 @@ class ReportClass(object):
         print("时延：%s" %demotime)
 
         resulttxt = [] # 写入日志
-        sendresult = [] # 邮件发送正文
         resulttxt.append('\n'+"====="+self.nowtime +"====="+'\n')
         resulttxt.append(self.speed +'\n')
+
+        sendresult = [] # 邮件发送正文
         sendresult.append('\n'+"====="+self.nowtime +"====="+'\n')
         sendresult.append(self.speed+'\n')
 
         # 写入文件，并添加发送邮件格式
         for case, reason in self.caseresult.items():
-
+            # 含有时延的用例
             if case in demotime:
                 resulttxt.append('case：%s , 时延：%s, result：%s \n' %(case,demotime[case], reason ))
                 if reason == 'Fail':
+                    # 用例错误
                     sendresult.append('case：<font size="3" color="blue"> %s </font> ,result：<font size="4" color="red"> %s </font>\n' %(case, reason) )
                 else:
+                    # 用例Success
                     sendresult.append('case：<font size="3" color="blue"> %s </font> , 时延：%s,  result：<font size="3" color="green"> %s </font>\n' %(case,demotime[case], reason) )
-
+            # 不含时延的用例
             else:
-
-                resulttxt.append('case：%s , result：%s \n' %(case, reason) )
+                resulttxt.append('case：%s , result：%s \n' %(case, reason))
                 if reason == 'Fail':
+                    # 用例错误
                     sendresult.append('case：<font size="3" color="blue"> %s </font> , result：<font size="4" color="red"> %s </font>\n' %(case, reason) )
                 else:
+                    # 用例success
                     sendresult.append('case：<font size="3" color="blue"> %s </font> , result：<font size="3" color="green"> %s </font>\n' %(case, reason) )
 
 
-        print("过滤日志，写入日志：%s" %resulttxt)
+        # print("过滤日志，写入日志：%s" %resulttxt)
         # print("过滤日志，写入日志：%s" %sendresult)
 
 
         #每天的测试记录
         for line in resulttxt:
-            with open(logPath + 'org_'+logfileName,'a+') as fn:
+            with open(orgFilePath,'a+') as fn:
                 fn.write(line)
 
         #每天的测试记录(邮件内容)
         for line in sendresult:
-            with open(logPath + 'html_'+logfileName,'a+') as fs:
+            with open(htmlFilePath,'a+') as fs:
                 fs.write(line)
 
     def _readCaseConf(self,max):
-        '''读取用例连续错误次数'''
+        '''读取caseconf用例连续错误次数记录最大值用例'''
         errl = []
         rwc.addSection('caseconf')
         for k,v in ReportClass._result.items():
@@ -147,60 +169,58 @@ class ReportClass(object):
                 errl.append(k)
 
 
-        print("_readCaseConf: %s" %errl)
-        print("self.caseorg: %s" %self.caseorg)
+        # print("_readCaseConf: %s" %errl)
+        # print("self.caseorg: %s" %self.caseorg)
         tmpl = []
         # 筛选出用例名称
         for line in errl:
-            print("line: %s" %line)
+            # print("line: %s" %line)
             for k, v in self.caseorg.items():
                 if line == v:
                     tmpl.append(k)
 
-        print("_readCaseConf2: %s" %tmpl)
+        # print("_readCaseConf2: %s" %tmpl)
 
         return tmpl
 
     def _getReportConf(self):
         '''返回：{用例：连续错误次数}，读取reportconf'''
-        print("self.caseorg: %s" %self.caseorg)
+        # print("self.caseorg: %s" %self.caseorg)
         errl = {}
         rwc.addSection('sendconf')
         smax = int(rwc.getSectionValue("sendconf","maxtimes"))
+
         rwc.addSection('reportconf')
         for k,v in self.caseorg.items():
             tmpvalue = int(rwc.getSectionValue('reportconf',v))
             if tmpvalue>=smax:
                 errl[k] = tmpvalue
 
-        print("_getReportConf: %s" %errl)
+        # print("_getReportConf: %s" %errl)
 
         return errl
 
 
     def _getCaseConf(self):
         '''返回：{用例：连续错误次数}，读取caseconf'''
-        print("self.caseorg: %s" %self.caseorg)
+        # print("self.caseorg: %s" %self.caseorg)
         errl = {}
         rwc.addSection('sendconf')
         smax = int(rwc.getSectionValue("sendconf","maxtimes"))
+
         rwc.addSection('caseconf')
         for k,v in self.caseorg.items():
             tmpvalue = int(rwc.getSectionValue('caseconf',v))
             if tmpvalue>=smax:
                 errl[k] = tmpvalue
 
-        print("_getCaseConf: %s" %errl)
+        # print("_getCaseConf: %s" %errl)
 
         return errl
 
     def _getAddConf(self):
-        '''读取caseconf与reportconf两个的和'''
-        X = self._getCaseConf()
-        Y = self._getReportConf()
-        z = dict(Counter(X)+Counter(Y))
-        print("_getAddConf %s" %z)
-        return z
+        '''读取caseconf与reportconf两个的和，两个字典相加'''
+        return dict(Counter(self._getCaseConf())+Counter(self._getReportConf()))
 
 
     def _setCaseConf(self):
@@ -217,14 +237,14 @@ class ReportClass(object):
     def saveTrueAndFailLog(self):
         '''存储每天的记录，包括统计，并做数据处理（连续出现错误，不纳入计算）'''
         # 清空数据
-        with open(logPath + 'true_'+logfileName,'w') as fq:
+        with open(thtmlFilePath,'w') as fq:
             fq.write("")
-        with open(logPath + 'savet_'+logfileName,'w') as fq:
+        with open(tsaveFilePath,'w') as fq:
             fq.write("")
         # 假数据
-        with open(logPath + 'false_'+logfileName,'w') as fq:
+        with open(fhtmlFilePath,'w') as fq:
             fq.write("")
-        with open(logPath + 'savef_'+logfileName,'w') as fq:
+        with open(fsaveFilePath,'w') as fq:
             fq.write("")
 
         # 中文用例名：连续错误次数
@@ -232,15 +252,22 @@ class ReportClass(object):
         print("连续错误次数：%s" %caselt)
         time.sleep(5)
         # 计算成功率
-        cs = CalcSuccess(ReportClass._testcaselist,logPath + "org_"+logfileName)
+        cs = CalcSuccess(ReportClass._testcaselist,orgFilePath)
+
+        writeTime = "====="+BaseTime.getCurrentTime()+"  当天运行记录结果汇总===== \n"
+        writeLine = "\n注意：若出现连续出错的功能时，该错误次数不纳入计算范围 \n=====详细结果如下====="
+
+        # 真实数据
         # 写入成功率
         print("写入html文件")
-        with open(logPath + 'true_'+logfileName,'a+') as fq, open(logPath + 'html_'+logfileName,'r') as fp:
-            fq.write("====="+BaseTime.getCurrentTime()+"  当天运行记录结果汇总===== \n")
+        with open(thtmlFilePath,'a+') as fq, open(htmlFilePath,'r') as fp:
+            # 写入创建时间
+            fq.write(writeTime)
+            # 写入成功率及时延
             for cline in cs.getSuccessercentage(caselt):
                 fq.write(cline)
-            fq.write("\n注意：若出现连续出错的功能时，该错误次数不纳入计算范围 \n")
-            fq.write("=====详细结果如下=====")
+            # 说明
+            fq.write(writeLine)
 
             # 读取详细文件，拷贝到其他文件
             for line in fp:
@@ -250,12 +277,12 @@ class ReportClass(object):
 
         # 写入成功率
         print("写入org文件")
-        with open(logPath + 'savet_'+logfileName,'a+') as fq, open(logPath + 'org_'+logfileName,'r') as fp:
-            fq.write("====="+BaseTime.getCurrentTime()+"  当天运行记录结果汇总===== \n")
+        with open(tsaveFilePath,'a+') as fq, open(orgFilePath,'r') as fp:
+            fq.write(writeTime)
+            # 写入成功率及时延<无样式>
             for cline in cs.getSuccessercentageNotType(caselt):
                 fq.write(cline)
-            fq.write("\n注意：若出现连续出错的功能时，该错误次数不纳入计算范围 \n")
-            fq.write("=====详细结果如下=====")
+            fq.write(writeLine)
 
             # 读取详细文件，拷贝到其他文件
             for line in fp:
@@ -264,18 +291,22 @@ class ReportClass(object):
 
         # 写入成功率--> 假数据(需要修改成功率)
         print("写入成功率--> 假数据(需要修改成功率)")
-        with open(logPath + 'false_'+logfileName,'a+') as fq, open(logPath + 'html_'+logfileName,'r') as fp:
-            fq.write("====="+BaseTime.getCurrentTime()+"  当天运行记录结果汇总===== \n")
+        with open(fhtmlFilePath,'a+') as fq, open(htmlFilePath,'r') as fp:
+            fq.write(writeTime)
             for cline in cs.getSuccessercentageFail(caselt):
                 fq.write(cline)
-            fq.write("\n注意：若出现连续出错的功能时，该错误次数不纳入计算范围 \n")
-            fq.write("=====详细结果如下=====")
+            fq.write(writeLine)
 
             # 错误数量：{caseName:[总数，错误数量]}
             failcnt = cs._sortData()
             # 获取一个字典，第一个总数量
             cnt = sorted(failcnt.items())[0][1][0]
 
+            '''
+            测试用例总数35为分界点，
+            低于35，全部用例错误的标为success
+            高于35，各个用例数量，最多只显示一个错误
+            '''
             if cnt < 35:
 
                 # 读取详细文件，拷贝到其他文件
@@ -296,12 +327,11 @@ class ReportClass(object):
                     fq.write(line)
 
         print("写入成功率--> 假数据(需要修改成功率)")
-        with open(logPath + 'savef_'+logfileName,'a+') as fq, open(logPath + 'org_'+logfileName,'r') as fp:
-            fq.write("====="+BaseTime.getCurrentTime()+"  当天运行记录结果汇总===== \n")
+        with open(fsaveFilePath,'a+') as fq, open(orgFilePath,'r') as fp:
+            fq.write(writeTime)
             for cline in cs.getSuccessercentageFailNotType(caselt):
                 fq.write(cline)
-            fq.write("\n注意：若出现连续出错的功能时，该错误次数不纳入计算范围 \n")
-            fq.write("=====详细结果如下=====")
+            fq.write(writeLine)
 
             # 错误数量：{caseName:[总数，错误数量]}
             failcnt = cs._sortData()
