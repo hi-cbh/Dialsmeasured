@@ -83,7 +83,7 @@ class TestContant(unittest.TestCase):
             print("检查通知栏信息")
             if BaseAdb.dumpsysNotification("同步网络联系人完成"):
                 return True
-            time.sleep(3)
+            time.sleep(1)
         else:
             return False
 
