@@ -406,10 +406,10 @@ class ReportClass(object):
 
                 s = SendMail("13580491603","chinasoft123","13697485262")
                 # 发送假数据
-                s.sendMailMan('139Android客户端V722版本_功能拨测_汇总<False>',falseTxt)
+                s.sendMailMan('139Android客户端V722版本_功能拨测_汇总<发给移动>',falseTxt)
                 time.sleep(10)
                 # 发送真数据
-                s.sendMailMan2('139Android客户端V722版本_功能拨测_汇总<True>',allSendtxt)
+                s.sendMailMan('139Android客户端V722版本_功能拨测_汇总<内部邮件>',allSendtxt)
                 rwc.setSectionValue('sendconf','send','True')
                 # #发送后，用例是否复位
                 self._setCaseConf()
