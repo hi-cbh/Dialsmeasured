@@ -129,7 +129,9 @@ class Send(unittest.TestCase):
             self.driver.click(r"uiautomator=>0.")
             self.driver.click(r"uiautomator=>test2M.rar")
             self.driver.click(r"id=>cn.cj.pe:id/check_button")
-         
+
+            print("等待2秒")
+            time.sleep(2)
          
             # 点击发送按钮
             print('=>点击发送按钮')
