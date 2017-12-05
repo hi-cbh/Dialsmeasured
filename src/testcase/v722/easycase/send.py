@@ -136,10 +136,11 @@ class Send(unittest.TestCase):
             # 点击发送按钮
             print('=>点击发送按钮')
             btn = self.driver.get_element("id=>cn.cj.pe:id/txt_send")
+            btn.click()
 
             print('=>开始记录时间')
             start = time.time()
-            btn.click()
+
 
             print('=>等待已完成出现')
             self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",300) != None, "发送邮件失败！")
