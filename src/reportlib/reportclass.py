@@ -165,7 +165,8 @@ class ReportClass(object):
         errl = []
         rwc.addSection('caseconf')
         for k,v in ReportClass._result.items():
-            if int(rwc.getSectionValue('caseconf',k)) % max == 0: # 最大值的倍数才加入列表
+            tmp = int(rwc.getSectionValue('caseconf',k))
+            if tmp >= max and tmp % max == 0: # 最大值的倍数才加入列表
                 errl.append(k)
 
 
