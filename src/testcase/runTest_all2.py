@@ -15,12 +15,12 @@ print("report: %s" %reportPath)
 print("report: %s" %logPath)
 
 
-from src.testcase.v731.testSend import TestSend
-from src.testcase.v731.testContant import TestContant
-from src.testcase.v731.test139Selected import TestSelect
-from src.testcase.v731.testPush import TestPush
+from src.testcase.v732.testSend import TestSend
+from src.testcase.v732.testContant import TestContant
+from src.testcase.v732.test139Selected import TestSelect
+from src.testcase.v732.testPush import TestPush
 from src.testcase.HTMLTestRunner import HTMLTestRunner
-from src.testcase.v731.testLogin import TestLogin
+from src.testcase.v732.testLogin import TestLogin
 from src.mail.sendEmailSmtp import SendMail
 
 # from src.testcase.v722.firstLogin import InitData

@@ -47,8 +47,7 @@ class TestDownFile(unittest.TestCase):
             EmailOperation(username+"@139.com", pwd).clearForlder(['INBOX'])
             time.sleep(10)
 
-            login=Login(self.driver,username, pwd)
-            login.loginAction()
+            Login(self.driver,username, pwd).loginAction(isSave=False)
 
 
 

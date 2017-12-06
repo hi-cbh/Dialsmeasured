@@ -6,12 +6,11 @@ from src.aserver.AppiumServer import AppiumServer2
 from src.base.baseAdb import BaseAdb
 from src.mail.mailOperation import EmailOperation
 from src.psam.psam import Psam
-from src.testcase.v731.easycase.login import Login
-from src.testcase.v731.easycase.receive import WebReceive
+from src.testcase.v732.easycase.login import Login
+from src.testcase.v722.easycase.receive import WebReceive
 from src.mail.sendEmailSmtp import SendMail
 from src.readwriteconf.initData import InitData
 from src.base.baseImage import BaseImage
-from src.readwriteconf.saveData import save
 
 # sys.path.append(r"/Users/apple/git/pytest/")
 
@@ -35,11 +34,10 @@ class TestPush(unittest.TestCase):
             # time.sleep(10)
 
             BaseAdb.adbIntallUiautmator()
-            self.driver = Psam()
+            self.driver = Psam("6.0")
         except BaseException as error:
             print("setUp启动出错！")
-            self.driver.quit()
-            self.fail("setUp启动出错！")
+
         else:
             EmailOperation(user2['name']+"@139.com", user2['pwd']).seen()
             time.sleep(10)
@@ -63,15 +61,14 @@ class TestPush(unittest.TestCase):
         '''推送测试测试方法'''
 
         try:
-            # self.assertTrue(False,"测试")
             print("=>登录")
-            Login(self.driver,reveicer['name'], reveicer['pwd']).loginAction(isSave=False)
+            Login(self.driver,reveicer['name'], reveicer['pwd']).loginAction()
 
             print('=>注销账号')
             self.logout()
 
             print("=>重新登录")
-            Login(self.driver,reveicer['name'], reveicer['pwd']).loginAction(isSave=False)
+            Login(self.driver,reveicer['name'], reveicer['pwd']).loginAction()
 
 
             print("=>点击Home键")
@@ -83,19 +80,10 @@ class TestPush(unittest.TestCase):
             print("=>第三方发送邮件")
             s = SendMail(sender['name'], sender['pwd'], reveicer['name'])
             self.assertTrue(s.sendMail('sendsmtpEmail','测试邮件...'),"邮件发送失败")
-            start = time.time()
-            # time.sleep(10)
+            time.sleep(10)
 
             print("验证点：等待推送信息")
             self.assertTrue(self.waitforNotification(),"接收推送失败")
-
-            print('=>记录当前时间，时间差')
-            valueTime = str(round((time.time() - start), 2))
-            print('[接收推送]: %r'  %valueTime)
-            save.save("接收推送:%s" %valueTime)
-
-
-
         except BaseException as error:
 
 
@@ -145,12 +133,12 @@ class TestPush(unittest.TestCase):
 
     def waitforNotification(self):
         '''找到需要的通知栏信息'''
-        for i in range(6):
+        for i in range(3):
             print("检查通知栏信息")
             if BaseAdb.dumpsysNotification("新邮件") == True :
                 print('找到了')
                 return True
-            time.sleep(10)
+            time.sleep(20)
         print('找不到了')
         return False
 

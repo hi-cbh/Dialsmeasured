@@ -6,9 +6,10 @@ from src.aserver.AppiumServer import AppiumServer2
 from src.base.baseAdb import BaseAdb
 from src.mail.mailOperation import EmailOperation
 from src.psam.psam import Psam
-from src.testcase.v731.easycase.login import Login
-from src.testcase.v731.easycase.send import Send
+from src.testcase.v732.easycase.login import Login
+from src.testcase.v732.easycase.send import Send
 from src.readwriteconf.initData import InitData
+from src.testcase.v732.easycase.openDown import OpenDown
 
 # sys.path.append(r"/Users/apple/git/pytest/")
 
@@ -19,12 +20,15 @@ pwd = d['pwd1']
 username2 = d['user2']
 pwd2 = d['pwd2']
 
+receiver = {'name':username, 'pwd':pwd}
+sender = {'name':username2, 'pwd':pwd2}
+
 filename = InitData().getFile()['filename']
 
 path = r'/mnt/sdcard/139PushEmail/download/%s@139.com/*%s.rar'  %(username, filename)
 
 
-class TestLogin(unittest.TestCase):
+class TestDownFile(unittest.TestCase):
 
     def setUp(self):
         try:
@@ -43,6 +47,8 @@ class TestLogin(unittest.TestCase):
             EmailOperation(username+"@139.com", pwd).clearForlder(['INBOX'])
             time.sleep(10)
 
+            login=Login(self.driver,username, pwd)
+            login.loginAction()
 
 
 
@@ -55,15 +61,25 @@ class TestLogin(unittest.TestCase):
         time.sleep(5)
         # AppiumServer2().stop_server()
 
+    def testDownFile(self):
+        '''下载附件'''
+        # 发送带附件邮件
+        send = Send(self.driver,username+'@139.com')
+        send.sendAction()
 
-    def testCaseLogin(self):
-        '''开始登录时延测试'''
-        Login(self.driver,username, pwd).loginAction()
+        # 打开附件
+        od = OpenDown(self.driver, path, filename)
+        # 打开附件
+        od.openAction()
+        # 下载附件
+        od.downAction()
+
 
 
 
 
 if __name__ == "__main__":
     suite = unittest.TestSuite()
+    suite.addTest(TestDownFile('testDownFile'))
     runner = unittest.TextTestRunner(verbosity=2)
     runner.run(suite)

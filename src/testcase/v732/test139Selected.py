@@ -7,10 +7,10 @@ from src.aserver.AppiumServer import AppiumServer2
 from src.base.baseAdb import BaseAdb
 from src.mail.mailOperation import EmailOperation
 from src.psam.psam import Psam
-from src.testcase.v731.easycase.login import Login
+from src.testcase.v732.easycase.login import Login
 from src.readwriteconf.initData import InitData
 from src.base.baseImage import BaseImage
-from src.readwriteconf.saveData import save
+
 # sys.path.append(r"/Users/apple/git/pytest/")
 
 d= InitData().getUsers()
@@ -28,10 +28,9 @@ class TestSelect(unittest.TestCase):
             # time.sleep(10)
 
             BaseAdb.adbIntallUiautmator()
-            self.driver = Psam()
+            self.driver = Psam("6.0")
         except BaseException as error:
             print("setUp启动出错！")
-            self.fail("setUp启动出错！")
 
 
     #释放实例,释放资源
@@ -48,8 +47,11 @@ class TestSelect(unittest.TestCase):
 
         try:
             # self.assertTrue(False, "测试错误")
+
+
+
             print("=>登录")
-            Login(self.driver,user['name'], user['pwd']).loginAction(isSave=False)
+            Login(self.driver,user['name'], user['pwd']).loginAction()
 
             time.sleep(10)
             # print("首先通过http协议，访问链接是否更改，再运行")
@@ -59,33 +61,13 @@ class TestSelect(unittest.TestCase):
 
             print('点击 139精选')
             self.driver.click(u'uiautomator=>139精选')
-            start = time.time()
-            # print("等待30秒")
-            # time.sleep(30)
 
             print("等待30秒")
-            # 等待两分钟
-            timeout = int(round(time.time() * 1000)) + 30 * 1000
-            try:
-                while (int(round(time.time() * 1000) < timeout)):
-
-                    if self.driver.page_source().__contains__(u"阅读全文") == True:
-                        # print('find it')
-                        break
-                    time.sleep(1)
-                    # print("超时")
-            except BaseException as msg:
-                print(msg)
-
+            time.sleep(30)
 
             print('验证点：页面是否显示正常')
             self.assertTrue(self.driver.page_source().__contains__(u"阅读全文"),"页面显示不正常")
 
-            print('=>记录当前时间，时间差')
-            valueTime = str(round((time.time() - start), 2))
-
-            print('[139精选出现时间]: %r'  %valueTime)
-            save.save("收件箱列表中精选:%s" %valueTime)
             # print('=>注销账号')
             # self.logout()
 
@@ -98,27 +80,27 @@ class TestSelect(unittest.TestCase):
 
 
 
-    # def logout(self):
-    #     '''注销账户'''
-    #     time.sleep(2)
-    #     print('=>点击 我的')
-    #     self.driver.click(u"uiautomator=>我的")
-    #     time.sleep(2)
-    #     print('=>点击 设置')
-    #     self.driver.click(u"uiautomator=>设置")
-    #     time.sleep(2)
-    #
-    #     print('=>点击 账号')
-    #     self.driver.click(r"id=>cn.cj.pe:id/account_name")
-    #     time.sleep(2)
-    #
-    #     print('=>点击 注销账号')
-    #     self.driver.click(u"uiautomator=>注销账号")
-    #     time.sleep(2)
-    #
-    #     print('=>点击 确定')
-    #     self.driver.click(u"uiautomator=>确定")
-    #     time.sleep(10)
+    def logout(self):
+        '''注销账户'''
+        time.sleep(2)
+        print('=>点击 我的')
+        self.driver.click(u"uiautomator=>我的")
+        time.sleep(2)
+        print('=>点击 设置')
+        self.driver.click(u"uiautomator=>设置")
+        time.sleep(2)
+
+        print('=>点击 账号')
+        self.driver.click(r"id=>cn.cj.pe:id/account_name")
+        time.sleep(2)
+
+        print('=>点击 注销账号')
+        self.driver.click(u"uiautomator=>注销账号")
+        time.sleep(2)
+
+        print('=>点击 确定')
+        self.driver.click(u"uiautomator=>确定")
+        time.sleep(10)
 
 
 if __name__ == "__main__":

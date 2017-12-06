@@ -5,7 +5,6 @@ import time
 import unittest
 from src.base.baseAdb import BaseAdb
 from src.base.baseImage import BaseImage
-from src.readwriteconf.saveData import save
 
 class Login(unittest.TestCase):
     
@@ -14,7 +13,7 @@ class Login(unittest.TestCase):
         self.pwd = pwd
         self.driver = driver
         
-    def loginAction(self, firstLogin=False, isSave=True):
+    def loginAction(self, firstLogin=False, save = True):
         # firstLogin 首次安装后，登录为true
         try:
             '''最基础的登录'''
@@ -27,17 +26,17 @@ class Login(unittest.TestCase):
 
             self.driver.swipeRight()
             self.driver.swipeRight()
-            # self.driver.swipeRight()
+            self.driver.swipeRight()
             # self.driver.swipeRight()
             print("点击坐标")
-            # BaseAdb.adbTap(700, 2300)  # vivo 1603  w * 0.5, h * 0.899
-            #
+            # BaseAdb.adbTap(700, 2200)  # vivo 1603  w * 0.5, h * 0.885
+
             w = self.driver.get_window_size()['width']
             h = self.driver.get_window_size()['height']
 
-            BaseAdb.adbTap(w/2, int(h * 0.899))
+            BaseAdb.adbTap(w/2, int(h * 0.885))
             # BaseAdb.adbTap(500, 1700) #其他手机需要调试
-            # self.driver.click(u"name=>立即体验")
+
             time.sleep(4)
 
             print('=>选择139邮箱')
@@ -60,34 +59,31 @@ class Login(unittest.TestCase):
             els[1].set_value(self.pwd)   # appium 1.6
 
             print('=>点击登录')
-            loginbtn = self.driver.get_element("id=>cn.cj.pe:id/login")
-
-            print('=>记录当前时间、点击登录')
-            start = time.time()
-            loginbtn.click()
-
+            self.driver.get_element("id=>cn.cj.pe:id/login").click()
 
             if firstLogin == True:
                 self.driver.click(u"uiautomator=>允许")
                 time.sleep(1)
 
-            print('验证点：等待收件箱底部导航栏出现')
-            self.assertTrue(self.driver.get_element("id=>cn.cj.pe:id/message_list_bottom_email") != None, "登录失败！")
+            print('验证点：等待弹窗广告出现')
+            self.assertTrue(self.driver.get_element("id=>cn.cj.pe:id/btn") != None, "登录失败！")
 
-            print('=>记录当前时间，')
-            valueTime = str(round((time.time() - start), 2))
-            print('[登录时延]: %r'  %valueTime)
-            # 运行正确才记录数据
-            # 这里添加判断，是否记录时间
-            if isSave:
-                save.save("账号登录:%s" %valueTime)
+            self.driver.click("id=>cn.cj.pe:id/btn")
+
+            self.driver.click(u"id=>cn.cj.pe:id/actionbar_left_view")
+            time.sleep(1)
+
+            print('验证点：等待[testmail]导航栏出现')
+            self.assertTrue(self.driver.get_element(u"uiautomator=>testmail") != None, "邮件验证失败！")
+
 
         except BaseException as error:
             BaseImage.screenshot(self.driver, "LoginError")
-            # 超时，数据超时
             time.sleep(5)
             self.fail("【手动输入账号/密码-登录】出现错误")
-            # 添加截图
+            return False
+        else:
+            return True
 
         # else:
         #     self. 添加OK写入操作
@@ -184,5 +180,5 @@ class Login(unittest.TestCase):
 #         time.sleep(1)
         self.driver.click(u"uiautomator=>数据网络下自动下载邮件图片")
 #         time.sleep(1)
-        self.driver.click(r"name=>cn.cj.pe:id/hjl_headicon")
+        self.driver.click(r"id=>cn.cj.pe:id/hjl_headicon")
         time.sleep(2)     

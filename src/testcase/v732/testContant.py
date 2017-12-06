@@ -5,10 +5,9 @@ import os,time,unittest,sys
 from src.aserver.AppiumServer import AppiumServer2
 from src.base.baseAdb import BaseAdb
 from src.psam.psam import Psam
-from src.testcase.v731.easycase.login import Login
+from src.testcase.v732.easycase.login import Login
 from src.readwriteconf.initData import InitData
 from src.base.baseImage import BaseImage
-from src.readwriteconf.saveData import save
 # sys.path.append(r"/Users/apple/git/pytest/")
 
 d = InitData().getUsers()
@@ -25,11 +24,9 @@ class TestContant(unittest.TestCase):
             # time.sleep(10)
 
             BaseAdb.adbIntallUiautmator()
-            self.driver = Psam()
+            self.driver = Psam("6.0")
         except BaseException as error:
             print("setUp启动出错！")
-            self.driver.quit()
-            self.fail("setUp启动出错！")
 
 
     #释放实例,释放资源
@@ -47,7 +44,7 @@ class TestContant(unittest.TestCase):
             # self.assertTrue(False, "测试错误")
 
             login=Login(self.driver,user['name'], user['pwd'])
-            login.loginAction(isSave=False)
+            login.loginAction()
 
             time.sleep(5)
 
@@ -56,16 +53,9 @@ class TestContant(unittest.TestCase):
 
             print("=>点击联系人")
             self.driver.click(u"uiautomator=>联系人")
-            start = time.time()
 
             print("验证点：是否获取通知栏信息")
             self.assertTrue(self.waitforNotification(),"通讯录同步失败！！")
-
-            print('=>记录当前时间，时间差')
-            valueTime = str(round((time.time() - start), 2))
-            print('[联系人同步]: %r'  %valueTime)
-            save.save("联系人同步:%s" %valueTime)
-
         except BaseException :
             BaseImage.screenshot(self.driver, "CheckAddressListError")
             time.sleep(5)
@@ -83,7 +73,7 @@ class TestContant(unittest.TestCase):
             print("检查通知栏信息")
             if BaseAdb.dumpsysNotification("同步网络联系人完成"):
                 return True
-            time.sleep(1)
+            time.sleep(3)
         else:
             return False
 

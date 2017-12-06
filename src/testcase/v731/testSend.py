@@ -36,16 +36,18 @@ class TestSend(unittest.TestCase):
             # time.sleep(10)
 
             BaseAdb.adbIntallUiautmator()
-            self.driver = Psam("6.0")
+            self.driver = Psam()
         except BaseException as error:
             print("setUp启动出错！")
+            self.driver.quit()
+            self.fail("setUp启动出错！")
+
 
         else:
             EmailOperation(username+"@139.com", pwd).clearForlder(['INBOX'])
             time.sleep(10)
 
-            login=Login(self.driver,username, pwd)
-            login.loginAction()
+            Login(self.driver,username, pwd).loginAction(isSave=False)
 
 
 
@@ -60,13 +62,11 @@ class TestSend(unittest.TestCase):
 
     def testCaseSend(self):
         '''发送邮件测试'''
-        send = Send(self.driver,username+'@139.com')
-        send.sendAction()
+        Send(self.driver,username+'@139.com').sendAction()
 
     def testCaseFwdSend(self):
         '''转发邮件测试'''
-        send = Send(self.driver,username+'@139.com')
-        send.sendFwd(receiver, sender)
+        Send(self.driver,username+'@139.com').sendFwd(receiver, sender)
 
 
 

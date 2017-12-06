@@ -71,12 +71,20 @@ class Login(unittest.TestCase):
                 self.driver.click(u"uiautomator=>允许")
                 time.sleep(1)
 
-            print('验证点：等待收件箱底部导航栏出现')
-            self.assertTrue(self.driver.get_element("id=>cn.cj.pe:id/message_list_bottom_email") != None, "登录失败！")
+            print('验证点：等待弹窗广告出现')
+            self.assertTrue(self.driver.get_element("id=>cn.cj.pe:id/btn") != None, "登录失败！")
 
             print('=>记录当前时间，')
             valueTime = str(round((time.time() - start), 2))
             print('[登录时延]: %r'  %valueTime)
+
+            print("=>点击弹窗广告按钮")
+            self.driver.click("id=>cn.cj.pe:id/btn")
+
+            print('验证点：等待收件箱底部导航栏出现')
+            self.assertTrue(self.driver.get_element("id=>cn.cj.pe:id/message_list_bottom_email") != None, "登录失败！")
+
+
             # 运行正确才记录数据
             # 这里添加判断，是否记录时间
             if isSave:

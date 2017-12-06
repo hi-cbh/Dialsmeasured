@@ -4,10 +4,10 @@
 import os,time,unittest
 from src.aserver.AppiumServer import AppiumServer2
 from src.base.baseAdb import BaseAdb
+from src.base.baseTime import BaseTime
 from src.mail.mailOperation import EmailOperation
 from src.psam.psam import Psam
-from src.testcase.v731.easycase.login import Login
-from src.testcase.v731.easycase.send import Send
+from src.testcase.v732.easycase.login import Login
 from src.readwriteconf.initData import InitData
 
 # sys.path.append(r"/Users/apple/git/pytest/")
@@ -32,16 +32,14 @@ class TestLogin(unittest.TestCase):
             # AppiumServer2().start_server()
             # time.sleep(10)
 
-            BaseAdb.adbIntallUiautmator()
-            self.driver = Psam()
+            # BaseAdb.adbIntallUiautmator()
+            self.driver = Psam("5.1")
         except BaseException as error:
             print("setUp启动出错！")
-            self.driver.quit()
-            self.fail("setUp启动出错！")
 
-        else:
-            EmailOperation(username+"@139.com", pwd).clearForlder(['INBOX'])
-            time.sleep(10)
+        # else:
+        #     EmailOperation(username+"@139.com", pwd).clearForlder(['INBOX'])
+        #     time.sleep(10)
 
 
 
@@ -57,8 +55,20 @@ class TestLogin(unittest.TestCase):
 
 
     def testCaseLogin(self):
+
+
         '''开始登录时延测试'''
-        Login(self.driver,username, pwd).loginAction()
+        login=Login(self.driver,username, pwd)
+        bl = login.loginAction()
+
+
+        # for i in range(2):
+        #     print('%s: 当前次数：%s' %( BaseTime.getCurrentTime(), i))
+        #     login=Login(self.driver,username, pwd)
+        #     bl = login.loginAction()
+        #
+        #     if bl == False:
+        #         break
 
 
 

@@ -5,8 +5,7 @@ import time
 import unittest
 from src.base.baseAdb import BaseAdb
 from src.base.baseFile import BaseFile
-from src.base.baseImage import BaseImage
-from src.readwriteconf.saveData import save
+
 class OpenDown(unittest.TestCase):
     
     def __init__(self,driver, path, filename):
@@ -16,43 +15,40 @@ class OpenDown(unittest.TestCase):
         
     def openAction(self):
         '''打开未读邮件时延'''
+        print('休眠10秒')
+        time.sleep(6)
+        # 下拉
+        print('下拉')
+        self.driver.swipeDown()
+        time.sleep(3)
         try:
-            print("加载本地邮件封邮件")
-            timeout = int(round(time.time() * 1000)) + 2*60 * 1000
-            # 找到邮件结束
-            while int(round(time.time() * 1000)) < timeout :
-
-                el = self.driver.element_wait(u"uiautomator=>暂无邮件",secs = 1)
-                if el != None:
-                    print("下拉")
-                    self.driver.swipeDown();
-                    time.sleep(1)
-                    self.driver.swipeDown();
-                else:
-                    print("列表有邮件，退出循环")
-                    break;
-
-                time.sleep(1)
-
-
             # 点击第一封
-            print('=>点击第一封邮件，判断是否存在【暂无邮件】字段')
-            self.assertTrue(self.driver.get_element(u"uiautomator=>暂无邮件") == None, "收件箱没有邮件")
+            print('=>点击第一封邮件')
             els = self.driver.get_sub_element(r"id=>android:id/list","class=>android.widget.LinearLayout")
             time.sleep(2)
+            
+            print('=>记录当前时间，并点击开始')
+            start = time.time()
             els[0].click()
-
 
             print('=>查找控件，确认进入邮件详情页')
             self.assertTrue(self.driver.element_wait(r"id=>cn.cj.pe:id/circular_progress_container") != None , "测试邮件不存在!")
+            self.driver.element_wait(r"class=>android.widget.GridView")
             self.driver.element_wait(r"class=>android.webkit.WebView")
-
+            
+            print('=>记录当前时间，控件已查找完成')
+            end = time.time()
+            valueTime = str(round((end - start), 2))
+            print(u'[打开未读邮件时延]: %r'  %valueTime)
 
         except BaseException as e:
-            BaseImage.screenshot(self.driver, "OpenEmailError")
-            time.sleep(5)
+            print(e)
+            print('打开未读邮件出错！！！')
+            return 0
 
-            self.fail('【打开未读邮件】出错')
+        else:
+            time.sleep(2)
+            return valueTime
         
         
         
@@ -68,32 +64,26 @@ class OpenDown(unittest.TestCase):
              
             # 点击全部下载
             print('=>点击全部下载')
-            self.assertTrue(self.driver.get_element(r"id=>cn.cj.pe:id/message_detail_attachment_download"),'没有下载按钮')
             self.driver.click(r"id=>cn.cj.pe:id/message_detail_attachment_download")
-
-
-            print('=>记录当前时')
             start = time.time()
-
+             
             # 等待文件出现
             print('=>等待文件出现')
-            self.assertTrue(BaseFile.waitforfile(self.path, self.filename, 300),'下载附件出错')
-
-            print('=>记录当前时间，时间差')
-            valueTime = str(round((time.time() - start), 2))
-            print('[登录时延]: %r'  %valueTime)
-            save.save("附件下载:%s" %valueTime)
-
+            BaseFile.waitforfile(self.path, self.filename, 120)
+             
+            end = time.time()
+             
+            valueTime = str(round((end - start), 2))
+            print('[下载附件时延]: %r'  %valueTime)
             print('=>返回收件箱')
             BaseAdb.adbBack()
             BaseAdb.adbBack()
             time.sleep(2)
-
+            return valueTime
         except BaseException:
-            BaseImage.screenshot(self.driver, "DownFileError")
-            time.sleep(5)
-
-            self.fail('【下载附件】出错')
+            print('下载附件出错了！！！')
+            BaseAdb.adbBack()
+            return 0
          
     # 设置收件箱列表的邮件为未读邮件
     def setFirstEmail(self):

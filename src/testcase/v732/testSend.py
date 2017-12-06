@@ -6,8 +6,8 @@ from src.aserver.AppiumServer import AppiumServer2
 from src.base.baseAdb import BaseAdb
 from src.mail.mailOperation import EmailOperation
 from src.psam.psam import Psam
-from src.testcase.v731.easycase.login import Login
-from src.testcase.v731.easycase.send import Send
+from src.testcase.v732.easycase.login import Login
+from src.testcase.v732.easycase.send import Send
 from src.readwriteconf.initData import InitData
 
 # sys.path.append(r"/Users/apple/git/pytest/")
@@ -19,12 +19,15 @@ pwd = d['pwd1']
 username2 = d['user2']
 pwd2 = d['pwd2']
 
+receiver = {'name':username, 'pwd':pwd}
+sender = {'name':username2, 'pwd':pwd2}
+
 filename = InitData().getFile()['filename']
 
 path = r'/mnt/sdcard/139PushEmail/download/%s@139.com/*%s.rar'  %(username, filename)
 
 
-class TestLogin(unittest.TestCase):
+class TestSend(unittest.TestCase):
 
     def setUp(self):
         try:
@@ -33,16 +36,16 @@ class TestLogin(unittest.TestCase):
             # time.sleep(10)
 
             BaseAdb.adbIntallUiautmator()
-            self.driver = Psam()
+            self.driver = Psam("6.0")
         except BaseException as error:
             print("setUp启动出错！")
-            self.driver.quit()
-            self.fail("setUp启动出错！")
 
         else:
             EmailOperation(username+"@139.com", pwd).clearForlder(['INBOX'])
             time.sleep(10)
 
+            login=Login(self.driver,username, pwd)
+            login.loginAction()
 
 
 
@@ -55,15 +58,22 @@ class TestLogin(unittest.TestCase):
         time.sleep(5)
         # AppiumServer2().stop_server()
 
+    def testCaseSend(self):
+        '''发送邮件测试'''
+        send = Send(self.driver,username+'@139.com')
+        send.sendAction()
 
-    def testCaseLogin(self):
-        '''开始登录时延测试'''
-        Login(self.driver,username, pwd).loginAction()
+    def testCaseFwdSend(self):
+        '''转发邮件测试'''
+        send = Send(self.driver,username+'@139.com')
+        send.sendFwd(receiver, sender)
 
 
 
 
 if __name__ == "__main__":
     suite = unittest.TestSuite()
+    suite.addTest(TestSend('testCaseSend'))
+    suite.addTest(TestSend('testCaseFwdSend'))
     runner = unittest.TextTestRunner(verbosity=2)
     runner.run(suite)
