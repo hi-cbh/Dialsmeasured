@@ -11,8 +11,9 @@ from src.base.baseTime import BaseTime
 from src.readwriteconf.initData import InitData
 from src.readwriteconf.saveData import save
 from src.reportlib.reportclass import ReportClass
-from testcase.HTMLTestRunner import HTMLTestRunner
 
+from src.testcase.HTMLTestRunner import HTMLTestRunner
+import random
 localPath = InitData().getsysPath()["savepath"]
 # 信息存储路径
 reportPath = localPath + "/report/"
@@ -41,7 +42,11 @@ class MyTest(unittest.TestCase):
     def testCase01(self):
         try:
             start = time.time()
-            self.assertTrue(True, "测试错误")
+            if int(random.random() * 10) > 5:
+                self.assertTrue(True, "测试错误")
+            else:
+                self.assertTrue(False, "测试错误")
+
             print("testCase01")
             time.sleep(1)
             print('=>记录当前时间，时间差')
@@ -57,8 +62,10 @@ class MyTest(unittest.TestCase):
 
     def testCase02(self):
         try:
-            # self.assertTrue(True, "测试错误")
-            self.assertTrue(False, "测试错误")
+            if int(random.random() * 10) > 5:
+                self.assertTrue(True, "测试错误")
+            else:
+                self.assertTrue(False, "测试错误")
             print("testCase02")
         except BaseException:
             self.fail("testCase02 错误")
@@ -93,8 +100,10 @@ class MyTest2(unittest.TestCase):
 
     def testCase04(self):
         try:
-            self.assertTrue(True, "测试错误")
-            # self.assertTrue(False, "测试错误")
+            if int(random.random() * 10) > 5:
+                self.assertTrue(True, "测试错误")
+            else:
+                self.assertTrue(False, "测试错误")
             print("testCase03")
 
         except BaseException:

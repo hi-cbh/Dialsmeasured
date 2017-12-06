@@ -402,7 +402,7 @@ class ReportClass(object):
                 #==============发送内容读取=========
 
 
-                print("预备发送 %s：" %allSendtxt)
+                # print("预备发送 %s：" %allSendtxt)
 
                 s = SendMail("13580491603","chinasoft123","13697485262")
                 # 发送假数据
