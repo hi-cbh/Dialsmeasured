@@ -8,7 +8,7 @@ from src.base.baseImage import BaseImage
 from src.readwriteconf.saveData import save
 
 class Login(unittest.TestCase):
-    
+    '''当前版本没有添加弹窗广告'''
     def __init__(self,driver, username, pwd):
         self.username = username
         self.pwd = pwd
@@ -51,20 +51,18 @@ class Login(unittest.TestCase):
             self.assertTrue(els != None, "没有进入登录 页面")
 
             print('=>输入用户名')
-            # els[0].send_keys(self.username) # appium 1.4
             els[0].set_value(self.username)
 
 
             print('=>输入密码')
-            # els[1].send_keys(self.pwd) # appium 1.4
             els[1].set_value(self.pwd)   # appium 1.6
 
             print('=>点击登录')
             loginbtn = self.driver.get_element("id=>cn.cj.pe:id/login")
 
             print('=>记录当前时间、点击登录')
-            start = time.time()
             loginbtn.click()
+            start = time.time()
 
 
             if firstLogin == True:

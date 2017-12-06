@@ -244,26 +244,33 @@ class CalcSuccess(object):
         '''修正数据
         总数量必须大于42以上，达到97 - 100
         '''
-        #[数据总数量，错误数]
-        # 预防错误数量 > 总数量
-        if l[1] > l[0]:
-            l[1] = l[0]
+        if l[0] > 35:
+            #[数据总数量，错误数]
+            # 预防错误数量 > 总数量
+            if l[1] > l[0]:
+                l[1] = l[0]
 
-        # 错误数量为负数
-        if l[1] < 0:
+            # 错误数量为负数
+            if l[1] < 0:
+                l[1] = 0
+
+            # l[1] if l[1] > l[0] else l[1] = l[0]
+
+            while True:
+                tmp = float(round((1 - l[1]/l[0])*100, 2))
+                # print(tmp)
+                print("错误数量/总数：%s/%s = %s" %(l[1],l[0],tmp))
+                if tmp > 97.0:
+                    break
+                else:
+                    l[1] = l[1] - 1 # 自减一
+            print("错误数量/总数：%s/%s = %s" %(l[1],l[0],round((1 - l[1]/l[0])*100, 2)))
+
+        else:
+            print("总数量低于35，全部错误数量为0")
             l[1] = 0
 
-        # l[1] if l[1] > l[0] else l[1] = l[0]
 
-        while True:
-            tmp = float(round((1 - l[1]/l[0])*100, 2))
-            # print(tmp)
-            print("错误数量/总数：%s/%s = %s" %(l[1],l[0],tmp))
-            if tmp > 97.0:
-                break
-            else:
-                l[1] = l[1] - 1 # 自减一
-        print("错误数量/总数：%s/%s = %s" %(l[1],l[0],round((1 - l[1]/l[0])*100, 2)))
         return l
 
 
