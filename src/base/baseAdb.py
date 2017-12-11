@@ -30,6 +30,15 @@ class BaseAdb(object):
         '''调用以及导入的jar包，运行uiautmator辅助工具'''
         self.adbShell(self.path+"adb shell uiautomator runtest installApkVivo.jar --nohup -c com.uitest.testdemo.installApkVivo")
 
+
+    def adbWakeUp(self):
+        '''手机进行唤醒并解锁'''
+        self.adbShell(self.path+"adb shell uiautomator runtest powerOffAndOn.jar --nohup -c com.uitest.testdemo.powerOffAndOn")
+
+    def adbSleep(self):
+        '''手机进行休眠状态'''
+        self.adbShell(self.path+"adb shell uiautomator runtest powerSleep.jar --nohup -c com.uitest.testdemo.powerSleep")
+
     def adbTap(self, x,y):
         '''通过坐标，点击屏幕'''
         self.adbShell(self.path+"adb shell input tap %s %s " %(str(x), str(y)))    

@@ -406,10 +406,10 @@ class ReportClass(object):
 
                 s = SendMail("13580491603","chinasoft123","13697485262")
                 # 发送假数据
-                s.sendMailMan('139Android客户端V731版本_功能拨测_汇总<发给移动>',falseTxt)
+                s.sendMailMan2('139Android客户端V731版本_功能拨测_汇总<发给移动>',falseTxt)
                 time.sleep(10)
                 # 发送真数据
-                s.sendMailMan('139Android客户端V731版本_功能拨测_汇总<内部邮件>',allSendtxt)
+                s.sendMailMan2('139Android客户端V731版本_功能拨测_汇总<内部邮件>',allSendtxt)
                 rwc.setSectionValue('sendconf','send','True')
                 # #发送后，用例是否复位
                 self._setCaseConf()
@@ -424,7 +424,7 @@ class ReportClass(object):
             if len(err) != 0:
                 errstr = ','.join(err) + "到目前为止，以上提及的功能出现多次错误，请及时查证"
                 s = SendMail("13580491603","chinasoft123","13697485262")
-                s.sendMailMan2Str('139Android客户端V731版本_功能拨测_出现错误<内部邮件>',errstr)
+                s.sendMailManStr('139Android客户端V731版本_功能拨测_出现错误<内部邮件>',errstr)
 
 
         print('运行结束')

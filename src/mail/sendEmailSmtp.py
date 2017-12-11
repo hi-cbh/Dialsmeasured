@@ -211,7 +211,41 @@ class SendMail():
         else:
             return True
 
+    def sendMailManStr(self, subject, message=""):
+        '''发送邮件，固定格式'''
+        smtp_server = 'smtp.139.com'
+        from_mail = self.username + '@139.com'
+        mail_pass = self.pwd
+        # to_mail = self.receive + '@139.com'
+        # areceiver = '13533348571@139.com,13790383896@139.com,18022340679@139.com'
+        areceiver = '13533348571@139.com'
 
+        body = []
+        body.append(message)
+        body=''.join(body)
+
+        # print("邮件正式发送内容： %s" %body)
+        print('邮件正式发送')
+
+        msg = MIMEText(body, 'html', 'utf-8')
+        # Header对中文进行转码
+        msg['From'] = self._formatAddr(u"拨测账号 <%s>" %from_mail)
+        # msg['To'] = self._formatAddr(u"接收者 <%s>" %to_mail)
+        msg['To'] = areceiver
+        msg['Subject'] = Header(subject, 'utf-8')
+
+        try:
+            s = smtplib.SMTP()
+            s.connect(smtp_server, "25")
+            s.login(from_mail, mail_pass)
+            s.sendmail(from_mail, areceiver.split(','), msg.as_string())
+            s.quit()
+            print("发送成功")
+        except smtplib.SMTPException as e:
+            print("Error: %s" % e)
+            return False
+        else:
+            return True
 if __name__ == "__main__":
 
     s = SendMail("13580491603","chinasoft123","13697485262")

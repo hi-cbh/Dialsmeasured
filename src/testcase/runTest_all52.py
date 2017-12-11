@@ -27,6 +27,7 @@ from src.testcase.v731.testLogin import TestLogin
 from src.testcase.v731.testDownFile import TestDownFile
 from src.otherApk.testSpeed import TestSpeed
 from src.reportlib.reportclass import ReportClass
+from src.base.baseAdb import BaseAdb
 
 '''
 优化测试结果：
@@ -37,6 +38,8 @@ from src.reportlib.reportclass import ReportClass
 
 
 if __name__ == "__main__":
+    BaseAdb.adbWakeUp()
+    time.sleep(5)
     # 获取当前网速
     ts = TestSpeed()
     ts.setUp()
@@ -72,6 +75,7 @@ if __name__ == "__main__":
     runner = unittest.TextTestRunner()
 
 
+
     # 生成html
     now = time.strftime("%Y-%m-%d %H_%M_%S")
     filename_now = time.strftime("%Y_%m_%d_%H_%M_%S")
@@ -81,4 +85,11 @@ if __name__ == "__main__":
     testResultReport = runner.run(suite)
     fp.close()
 
+
+
     ReportClass(testResultReport.failures,testtxt,speed,now).all()
+
+    # 休眠状态
+    BaseAdb.adbSleep()
+
+    time.sleep(10)
