@@ -38,7 +38,7 @@ from src.base.baseAdb import BaseAdb
 
 
 if __name__ == "__main__":
-    BaseAdb.adbWakeUp()
+    BaseAdb.adb_wake_up()
     time.sleep(5)
     # 获取当前网速
     ts = TestSpeed()
@@ -90,6 +90,6 @@ if __name__ == "__main__":
     ReportClass(testResultReport.failures,testtxt,speed,now).all()
 
     # 休眠状态
-    BaseAdb.adbSleep()
+    BaseAdb.adb_sleep()
 
     time.sleep(10)

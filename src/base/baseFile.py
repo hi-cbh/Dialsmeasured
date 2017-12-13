@@ -15,7 +15,7 @@ import time
 class BaseFile(object):
 
      
-    def adbFindFile(self, path, file):
+    def adb_find_file(self, path, file):
         '''查找文件时是否存在'''
         try:
             value = os.popen("adb shell ls "+path)
@@ -58,7 +58,7 @@ class BaseFile(object):
         try:
             while (int(round(time.time() * 1000) < timeout)):
 #                 print('wait.....')
-                if(self.adbFindFile(path, file) == True):
+                if(self.adb_find_file(path, file) == True):
 #                     print('find it')
                     return True;
                 time.sleep(0.1)
@@ -109,13 +109,13 @@ class BaseFile(object):
             path = "/mnt/sdcard/Android/data/com.cmcc.test/cache/t.txt"
             dirpath = "/mnt/sdcard/Android/data/com.cmcc.test/cache/"
             
-            if self.adbFindFile(path, "t.txt") != True:
+            if self.adb_find_file(path, "t.txt") != True:
                 print('文件存在')
                 self.adbMkdirDir( dirpath)
                 self.adbTouchFile(path, '')
                 time.sleep(1)
             
-            if self.adbFindFile(path, "t.txt") != True:
+            if self.adb_find_file(path, "t.txt") != True:
                 print('文件不存在')
                 return False
             

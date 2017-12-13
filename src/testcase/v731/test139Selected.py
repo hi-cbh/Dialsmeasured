@@ -13,7 +13,7 @@ from src.base.baseImage import BaseImage
 from src.readwriteconf.saveData import save
 # sys.path.append(r"/Users/apple/git/pytest/")
 
-d= InitData().getUsers()
+d= InitData().get_users()
 print(d)
 user = {"name": d['user2'], 'pwd': d['pwd2']}
 
@@ -27,7 +27,7 @@ class TestSelect(unittest.TestCase):
             # AppiumServer2().start_server()
             # time.sleep(10)
 
-            BaseAdb.adbIntallUiautmator()
+            BaseAdb.adb_intall_uiautmator()
             self.driver = Psam()
         except BaseException as error:
             print("setUp启动出错！")
@@ -49,7 +49,7 @@ class TestSelect(unittest.TestCase):
         try:
             # self.assertTrue(False, "测试错误")
             print("=>登录")
-            Login(self.driver,user['name'], user['pwd']).loginAction(isSave=False)
+            Login(self.driver,user['name'], user['pwd']).login_action(is_save=False)
 
             time.sleep(10)
             # print("首先通过http协议，访问链接是否更改，再运行")

@@ -13,7 +13,7 @@ from src.testcase.v731.easycase.openDown import OpenDown
 
 # sys.path.append(r"/Users/apple/git/pytest/")
 
-d = InitData().getUsers()
+d = InitData().get_users()
 
 username = d['user1']
 pwd = d['pwd1']
@@ -23,7 +23,7 @@ pwd2 = d['pwd2']
 receiver = {'name':username, 'pwd':pwd}
 sender = {'name':username2, 'pwd':pwd2}
 
-filename = InitData().getFile()['filename']
+filename = InitData().get_file()['filename']
 
 path = r'/mnt/sdcard/139PushEmail/download/%s@139.com/*%s.rar'  %(username, filename)
 
@@ -36,7 +36,7 @@ class TestDownFile(unittest.TestCase):
             # AppiumServer2().start_server()
             # time.sleep(10)
 
-            BaseAdb.adbIntallUiautmator()
+            BaseAdb.adb_intall_uiautmator()
             self.driver = Psam()
         except BaseException as error:
             print("setUp启动出错！")
@@ -44,10 +44,10 @@ class TestDownFile(unittest.TestCase):
             self.fail("setUp启动出错！")
 
         else:
-            EmailOperation(username+"@139.com", pwd).clearForlder(['INBOX'])
+            EmailOperation(username+"@139.com", pwd).clear_forlder(['INBOX'])
             time.sleep(10)
 
-            Login(self.driver,username, pwd).loginAction(isSave=False)
+            Login(self.driver,username, pwd).login_action(is_save=False)
 
 
 
@@ -64,14 +64,14 @@ class TestDownFile(unittest.TestCase):
         '''下载附件'''
         # 发送带附件邮件
         send = Send(self.driver,username+'@139.com')
-        send.sendAction()
+        send.send_action()
 
         # 打开附件
         od = OpenDown(self.driver, path, filename)
         # 打开附件
-        od.openAction()
+        od.open_action()
         # 下载附件
-        od.downAction()
+        od.down_action()
 
 
 

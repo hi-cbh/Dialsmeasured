@@ -14,7 +14,7 @@ class OpenDown(unittest.TestCase):
         self.path = path
         self.filename = filename
         
-    def openAction(self):
+    def open_action(self):
         '''打开未读邮件时延'''
         try:
             print("加载本地邮件封邮件")
@@ -25,12 +25,12 @@ class OpenDown(unittest.TestCase):
                 el = self.driver.element_wait(u"uiautomator=>暂无邮件",secs = 1)
                 if el != None:
                     print("下拉")
-                    self.driver.swipeDown();
+                    self.driver.swipe_down()
                     time.sleep(1)
-                    self.driver.swipeDown();
+                    self.driver.swipe_down()
                 else:
                     print("列表有邮件，退出循环")
-                    break;
+                    break
 
                 time.sleep(1)
 
@@ -56,12 +56,12 @@ class OpenDown(unittest.TestCase):
         
         
         
-    def downAction(self):
+    def down_action(self):
         '''下载文件时延'''
         try:
             # 清除
             print('=>清除下载的旧数据')
-            if BaseFile.adbFindFile(self.path, self.filename):
+            if BaseFile.adb_find_file(self.path, self.filename):
                 BaseFile.adbDeleteFile(self.path, self.filename)
                  
             time.sleep(3)
@@ -80,13 +80,13 @@ class OpenDown(unittest.TestCase):
             self.assertTrue(BaseFile.waitforfile(self.path, self.filename, 300),'下载附件出错')
 
             print('=>记录当前时间，时间差')
-            valueTime = str(round((time.time() - start), 2))
-            print('[登录时延]: %r'  %valueTime)
-            save.save("附件下载:%s" %valueTime)
+            value_time = str(round((time.time() - start), 2))
+            print('[登录时延]: %r'  %value_time)
+            save.save("附件下载:%s" %value_time)
 
             print('=>返回收件箱')
-            BaseAdb.adbBack()
-            BaseAdb.adbBack()
+            BaseAdb.adb_back()
+            BaseAdb.adb_back()
             time.sleep(2)
 
         except BaseException:
@@ -96,10 +96,10 @@ class OpenDown(unittest.TestCase):
             self.fail('【下载附件】出错')
          
     # 设置收件箱列表的邮件为未读邮件
-    def setFirstEmail(self):
+    def set_first_email(self):
         
         width = self.driver.get_window_size()['width']
-        
+        h = 0
         # 第一封邮件
         print('=>第一封邮件')
         if self.driver.get_element("id=>android:id/list") != None:

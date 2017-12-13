@@ -5,7 +5,6 @@ import os
 from src.base.baseTime import BaseTime
 
 base_dir = str(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
-# base_dir = base_dir.replace('\\', '/')
 PCpath = base_dir + "/pics/"
 local = "/var/appiumRunLog"+ "/pics/"
 
@@ -17,7 +16,7 @@ class BaseImage(object):
         '''截屏，保存在根目录下的pics文件夹下，已时间戳命名'''
         try:
             
-            filename = picName + "-"+ BaseTime.currentTime() + ".png" 
+            filename = picName + "-"+ BaseTime.current_time() + ".png"
             filepath = local + filename
             driver.screenshot(filepath)
             

@@ -8,8 +8,8 @@ from src.readwriteconf.initData import InitData
 from src.readwriteconf.saveData import save
 from src.readwriteconf.calcSucPer import CalcSuccess
 
-logPath = InitData().getsysPath()["savepath"]+"/logs/"
-logfileName= BaseTime.getDateHour() + '.log'
+logPath = InitData().get_sys_path()["savepath"] + "/logs/"
+logfileName= BaseTime.get_date_hour() + '.log'
 
 
 
@@ -154,10 +154,10 @@ if __name__ == '__main__':
 
     if errortimes != 0:
         # 这里设置添加错误次数
-        rwc.addSection( 'sendconf')
-        x = rwc.getSectionValue('sendconf','error')
+        rwc.add_section('sendconf')
+        x = rwc.get_section_value('sendconf', 'error')
         x = int(x) + 1
-        rwc.setSectionValue( 'sendconf','error',str(x))
+        rwc.set_section_value('sendconf', 'error', str(x))
 
     # print(result)
     # print(testtxt)
@@ -171,7 +171,7 @@ if __name__ == '__main__':
     print(testtxt)
 
     # 获取时间
-    demotime=save.getValue()
+    demotime=save.get_value()
     print("时延：%s" %demotime)
 
 
@@ -220,8 +220,8 @@ if __name__ == '__main__':
     # =============发送内容读取============
     allSendtxt = []
     # 汇总信息添加
-    allSendtxt.append("====="+BaseTime.getCurrentTime()+"  当天运行记录结果汇总=====")
-    for cline in cs.getSuccessercentage():
+    allSendtxt.append("=====" + BaseTime.get_current_time() + "  当天运行记录结果汇总=====")
+    for cline in cs.get_successercentage():
         allSendtxt.append(cline)
     # 详细结果
     allSendtxt.append("=====详细结果如下=====")
@@ -236,8 +236,8 @@ if __name__ == '__main__':
 
     print("预备发送 %s：" %allSendtxt)
 
-    rwc.addSection( 'sendconf')
-    changetime = rwc.getSectionValue( 'sendconf','changetime')
+    rwc.add_section('sendconf')
+    changetime = rwc.get_section_value('sendconf', 'changetime')
     changetime = int (changetime)
 
 
@@ -246,25 +246,25 @@ if __name__ == '__main__':
     # 当前小时 大于晚上8点(20-23)
     if datetime.datetime.now().hour >= changetime:
         # 是否发送
-        sendOrNot = rwc.getSectionValue('sendconf','send')
+        sendOrNot = rwc.get_section_value('sendconf', 'send')
         print('sendOrNot %s' %sendOrNot)
         if sendOrNot == 'False':
             print('到点发送邮件')
             s = SendMail("13580491603","chinasoft123","13697485262")
             s.sendMailMan2('拨测出现异常',allSendtxt)
-            rwc.setSectionValue('sendconf','send','True')
-            rwc.setSectionValue('sendconf','error','0')
+            rwc.set_section_value('sendconf', 'send', 'True')
+            rwc.set_section_value('sendconf', 'error', '0')
 
     # 1 - 20
     else:
         if datetime.datetime.now().hour in [1, 2]:
-            rwc.setSectionValue('sendconf','send','False')
+            rwc.set_section_value('sendconf', 'send', 'False')
 
-        error = rwc.getSectionValue('sendconf','error')
-        maxtimes = rwc.getSectionValue('sendconf','maxtimes')
+        error = rwc.get_section_value('sendconf', 'error')
+        maxtimes = rwc.get_section_value('sendconf', 'maxtimes')
 
         # 错误次数
         if int(error) >= int(maxtimes):
             s = SendMail("13580491603","chinasoft123","13697485262")
             s.sendMailMan2('拨测出现异常',allSendtxt)
-            rwc.setSectionValue('sendconf','error','0')
+            rwc.set_section_value('sendconf', 'error', '0')

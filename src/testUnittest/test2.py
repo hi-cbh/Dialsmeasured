@@ -4,8 +4,6 @@ p = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 print("path: %s" %p)
 sys.path.append(p+"/")
 
-
-# from src.otherApk.testSpeed import TestSpeed
 import time, datetime
 from src.base.baseTime import BaseTime
 from src.readwriteconf.initData import InitData
@@ -14,14 +12,14 @@ from src.reportlib.reportclass import ReportClass
 
 from src.testcase.HTMLTestRunner import HTMLTestRunner
 import random
-localPath = InitData().getsysPath()["savepath"]
+localPath = InitData().get_sys_path()["savepath"]
 # 信息存储路径
 reportPath = localPath + "/report/"
 logPath = localPath + "/logs/"
 iniPath = localPath + '/ini/'
 
 
-logfileName= BaseTime.getDateHour() + '.log'
+logfileName= BaseTime.get_date_hour() + '.log'
 
 
 
@@ -118,10 +116,6 @@ class MyTest2(unittest.TestCase):
 
 if __name__ == '__main__':
     speed = ''
-    # ts = TestSpeed()
-    # ts.setUp()
-    # speed = ts.testCase()
-    # ts.tearDown()
 
     print("speed: %s" %speed)
 

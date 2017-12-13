@@ -13,7 +13,7 @@ from src.base.baseImage import BaseImage
 
 # sys.path.append(r"/Users/apple/git/pytest/")
 
-d= InitData().getUsers()
+d= InitData().get_users()
 print(d)
 user = {"name": d['user2'], 'pwd': d['pwd2']}
 
@@ -26,9 +26,9 @@ class TestSpeed(unittest.TestCase):
             # time.sleep(10)
             # AppiumServer2().start_server()
             time.sleep(10)
-            BaseAdb.adbClear('org.zwanoo.android.speedtest')
+            BaseAdb.adb_clear('org.zwanoo.android.speedtest')
             time.sleep(5)
-            BaseAdb.adbIntallUiautmator()
+            BaseAdb.adb_intall_uiautmator()
             self.driver = Psam('6.0',"org.zwanoo.android.speedtest","com.ookla.speedtest.softfacade.MainActivity")
         except BaseException as error:
             print("setUp启动出错！")
@@ -49,7 +49,7 @@ class TestSpeed(unittest.TestCase):
         '''网络测速'''
 
         try:
-            network = BaseAdb.getNetworkType()
+            network = BaseAdb.get_network_type()
 
             self.driver.click("xpath=>//android.widget.TextView[contains(@text,'Begin Test')]")
             time.sleep(30)
@@ -70,8 +70,8 @@ class TestSpeed(unittest.TestCase):
 
 
         else:
-            BaseAdb.adbHome()
-            BaseAdb.adbClear('org.zwanoo.android.speedtest')
+            BaseAdb.adb_home()
+            BaseAdb.adb_clear('org.zwanoo.android.speedtest')
 
             return network +'状态，网速测试结果如下，上传 ' + load + ' , 下载 ' + down
 

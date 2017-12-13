@@ -27,7 +27,6 @@ def createFalseData(l=[]):
     if l[1] < 0:
         l[1] = 0
 
-    # l[1] if l[1] > l[0] else l[1] = l[0]
 
     while True:
         tmp = float(round((1 - l[1]/l[0])*100, 2))
@@ -40,15 +39,3 @@ def createFalseData(l=[]):
     # print("错误数量/总数：%s/%s = %s" %(l[1],l[0],round((1 - l[1]/l[0])*100, 2)))
     return l
 
-
-def modifyFileFalseCount():
-    '''修改false的数量'''
-    # 总量大于35 显示1个错误
-    # 如何总数小于35，全部改为true
-    # 每个用例只允许错误一次
-
-createFalseData(l)
-createFalseData(l1)
-createFalseData(l2)
-createFalseData(l3)
-createFalseData(l4)

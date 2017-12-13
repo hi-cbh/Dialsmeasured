@@ -5,7 +5,7 @@ import time
 
 class PublicUtil(object):
     
-    def loadEmail(self, driver):
+    def load_email(self, driver):
         time.sleep(5)
         '''加载本地100封邮件'''
         print("加载本地100封邮件")
@@ -17,17 +17,17 @@ class PublicUtil(object):
             el = driver.element_wait(u"uiautomator=>加载更多邮件",secs = 1)
             if el != None:
                 print("滑动")
-                driver.swipeUp()
+                driver.swipe_up()
                 print("点击")
                 # el.click() # 这里经常出错
                 driver.click(u"uiautomator=>加载更多邮件",secs = 1)
 
             print("滑动")    
-            driver.swipeUp()
+            driver.swipe_up()
             print("滑动")
-            driver.swipeUp()
+            driver.swipe_up()
             print("滑动")
-            driver.swipeUp()
+            driver.swipe_up()
                         
             print("1.5分钟后，开始判断")
             if int(round(time.time() * 1000)) < starttime :

@@ -26,7 +26,7 @@ class DataTest(object):
 
     # 每天晚上8点后，返回更改的时间戳
     def getTestData(self):
-        return BaseTime.getCurrentTime()
+        return BaseTime.get_current_time()
 
     def getCode(self):
 

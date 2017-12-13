@@ -12,14 +12,14 @@ from src.readwriteconf.initData import InitData
 
 # sys.path.append(r"/Users/apple/git/pytest/")
 
-d = InitData().getUsers()
+d = InitData().get_users()
 
 username = d['user1']
 pwd = d['pwd1']
 username2 = d['user2']
 pwd2 = d['pwd2']
 
-filename = InitData().getFile()['filename']
+filename = InitData().get_file()['filename']
 
 path = r'/mnt/sdcard/139PushEmail/download/%s@139.com/*%s.rar'  %(username, filename)
 
@@ -32,7 +32,7 @@ class TestLogin(unittest.TestCase):
             # AppiumServer2().start_server()
             # time.sleep(10)
 
-            BaseAdb.adbIntallUiautmator()
+            BaseAdb.adb_intall_uiautmator()
             self.driver = Psam()
         except BaseException as error:
             print("setUp启动出错！")
@@ -40,7 +40,7 @@ class TestLogin(unittest.TestCase):
             self.fail("setUp启动出错！")
 
         else:
-            EmailOperation(username+"@139.com", pwd).clearForlder(['INBOX'])
+            EmailOperation(username+"@139.com", pwd).clear_forlder(['INBOX'])
             time.sleep(10)
 
 
@@ -58,7 +58,7 @@ class TestLogin(unittest.TestCase):
 
     def testCaseLogin(self):
         '''开始登录时延测试'''
-        Login(self.driver,username, pwd).loginAction()
+        Login(self.driver,username, pwd).login_action()
 
 
 

@@ -16,11 +16,10 @@ class WebReceive(object):
         self.pwd = pwd
         self.receiver = receiver
     
-    def sendEmail(self):
+    def send_email(self):
         try:
             driver = Pyse("chrome")
             # driver.implicitly_wait() # 添加了隐式等待，去除time.sleep显示等待
-            # driver.max_window()
             driver.open("http://mail.10086.cn/")
             
             time.sleep(3)
@@ -64,19 +63,13 @@ class WebReceive(object):
 #             print('等待完成')
 #             driver.element_wait(r"xpath=>//*[@id='snedStatus']", 10)
             time.sleep(1)
-
+            state = True
         except BaseException as e:
             print('邮件发送失败')
-            
-            # driver.get_windows_img(r"D:\%s.jpg " %(start))
-            print(e)
+            state =  False
+        finally:
             driver.quit()
-            return False
-        else:
-            print("发送邮件成功")
-            driver.quit()
-            return True
-
+            return state
 
 
 class Receive(object):
@@ -87,23 +80,23 @@ class Receive(object):
         self.pwd = pwd
         self.receiver = receiver
     
-    def receiveAction(self):
+    def receive_action(self):
         w = self.driver.get_window_size()['width']
         '''接收邮件时延'''
         r = WebReceive(self.username,self.pwd,self.receiver)
         print('=>接收邮件时延')
-        start = r.sendEmail()
+        start = r.send_email()
         
         print('=>等待本域邮件出现')
-        isReceived = self.waitforEmail()
+        is_received = self.wait_for_email()
         end = time.time()
         
         
-        valueTime = str(round((end - start), 2))
-        print('[接收本域邮件时延]: %r'  %valueTime)
+        value_time = str(round((end - start), 2))
+        print('[接收本域邮件时延]: %r'  %value_time)
         
         # 如果出现未读邮件，进行删除第一封邮件
-        if isReceived:
+        if is_received:
             
             time.sleep(8)
             h = 400
@@ -120,10 +113,10 @@ class Receive(object):
             self.driver.click("id=>cn.cj.pe:id/item_view_back_four")    
             time.sleep(2)
         
-        return valueTime
+        return value_time
     
     
-    def waitforEmail(self, timeouts = 10):
+    def wait_for_email(self, timeouts = 10):
         '''等待邮件出现'''
         timeout = int(round(time.time() * 1000)) + timeouts * 1000
         try:
@@ -131,14 +124,14 @@ class Receive(object):
                 print('wait.....')
                 if self.driver.get_element("uiautomator=>testReceive",1) != None :
                     print('find it')
-                    return True;
+                    return True
                 else:
-                    self.driver.swipeDown()
+                    self.driver.swipe_down()
                 
                 time.sleep(0.1)
         except BaseException as msg:
             print(msg)
-            self.driver.swipeDown()
+            self.driver.swipe_down()
         
         else:
 #             print('time out')
@@ -151,7 +144,7 @@ if __name__ == '__main__':
     for i in range(1):
         t1 = time.time()
         r = WebReceive('13697485262', 'chinasoft123','13580491603@139.com')
-        start = r.sendEmail()
+        start = r.send_email()
         time.sleep(1)
         print(start)
         t2 = time.time()

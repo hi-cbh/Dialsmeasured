@@ -15,7 +15,7 @@ from src.readwriteconf.saveData import save
 
 # sys.path.append(r"/Users/apple/git/pytest/")
 
-d = InitData().getUsers()
+d = InitData().get_users()
 user1 = {"name": d['user1'], 'pwd': d['pwd1']} # 发送者
 user2 = {"name": d['user2'], 'pwd': d['pwd2']} # 接收者
 
@@ -34,7 +34,7 @@ class TestPush(unittest.TestCase):
             # AppiumServer2().start_server()
             # time.sleep(10)
 
-            BaseAdb.adbIntallUiautmator()
+            BaseAdb.adb_intall_uiautmator()
             self.driver = Psam()
         except BaseException as error:
             print("setUp启动出错！")
@@ -65,17 +65,17 @@ class TestPush(unittest.TestCase):
         try:
             # self.assertTrue(False,"测试")
             print("=>登录")
-            Login(self.driver,reveicer['name'], reveicer['pwd']).loginAction(isSave=False)
+            Login(self.driver,reveicer['name'], reveicer['pwd']).login_action(is_save=False)
 
             print('=>注销账号')
             self.logout()
 
             print("=>重新登录")
-            Login(self.driver,reveicer['name'], reveicer['pwd']).loginAction(isSave=False)
+            Login(self.driver,reveicer['name'], reveicer['pwd']).login_action(is_save=False)
 
 
             print("=>点击Home键")
-            BaseAdb.adbHome()
+            BaseAdb.adb_home()
             time.sleep(5)
 
             # print("=>Web端发送邮件")
@@ -109,7 +109,7 @@ class TestPush(unittest.TestCase):
             appActivity = "com.mail139.about.LaunchActivity"  # 程序的Activity
 
             time.sleep(2)
-            BaseAdb.adbStartApp(appPackage,appActivity)
+            BaseAdb.adb_start_app(appPackage, appActivity)
             time.sleep(5)
 
 
@@ -147,7 +147,7 @@ class TestPush(unittest.TestCase):
         '''找到需要的通知栏信息'''
         for i in range(6):
             print("检查通知栏信息")
-            if BaseAdb.dumpsysNotification("新邮件") == True :
+            if BaseAdb.dumpsys_notification("新邮件") == True :
                 print('找到了')
                 return True
             time.sleep(10)

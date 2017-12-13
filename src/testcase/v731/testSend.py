@@ -12,7 +12,7 @@ from src.readwriteconf.initData import InitData
 
 # sys.path.append(r"/Users/apple/git/pytest/")
 
-d = InitData().getUsers()
+d = InitData().get_users()
 
 username = d['user1']
 pwd = d['pwd1']
@@ -22,7 +22,7 @@ pwd2 = d['pwd2']
 receiver = {'name':username, 'pwd':pwd}
 sender = {'name':username2, 'pwd':pwd2}
 
-filename = InitData().getFile()['filename']
+filename = InitData().get_file()['filename']
 
 path = r'/mnt/sdcard/139PushEmail/download/%s@139.com/*%s.rar'  %(username, filename)
 
@@ -35,7 +35,7 @@ class TestSend(unittest.TestCase):
             # AppiumServer2().start_server()
             # time.sleep(10)
 
-            BaseAdb.adbIntallUiautmator()
+            BaseAdb.adb_intall_uiautmator()
             self.driver = Psam()
         except BaseException as error:
             print("setUp启动出错！")
@@ -44,10 +44,10 @@ class TestSend(unittest.TestCase):
 
 
         else:
-            EmailOperation(username+"@139.com", pwd).clearForlder(['INBOX'])
+            EmailOperation(username+"@139.com", pwd).clear_forlder(['INBOX'])
             time.sleep(10)
 
-            Login(self.driver,username, pwd).loginAction(isSave=False)
+            Login(self.driver,username, pwd).login_action(is_save=False)
 
 
 
@@ -62,11 +62,11 @@ class TestSend(unittest.TestCase):
 
     def testCaseSend(self):
         '''发送邮件测试'''
-        Send(self.driver,username+'@139.com').sendAction()
+        Send(self.driver,username+'@139.com').send_action()
 
     def testCaseFwdSend(self):
         '''转发邮件测试'''
-        Send(self.driver,username+'@139.com').sendFwd(receiver, sender)
+        Send(self.driver,username+'@139.com').send_fwd(receiver, sender)
 
 
 

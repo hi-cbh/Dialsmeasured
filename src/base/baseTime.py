@@ -6,22 +6,22 @@ import datetime
 from src.readwriteconf.rwconf import ReadWriteConfFile
 class BaseTime(object):
     
-    def currentTime(self):
+    def current_time(self):
         '''用于写入文件，或文件格式'''
         return time.strftime("%Y-%m-%d_%H-%M-%S", time.localtime()) 
      
-    def getCurrentTime(self):
+    def get_current_time(self):
         '''用于写入数据库'''    
         return time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) 
 
 
-    def getTimePro(self):
+    def get_time_pro(self):
         '''写入产品ID'''
         return time.strftime("%m%d", time.localtime())
 
-
-    def getDateHour(self):
+    def get_date_hour(self):
         '''获取固定的文件名'''
+        '''
         # 可能这里出错，导致Jenkins运行失败
         #
         # i = datetime.datetime.now()
@@ -34,8 +34,9 @@ class BaseTime(object):
         # print ("当前小时是 %s" %i.hour)
         # print ("当前分钟是 %s" %i.minute)
         # print ("当前秒是  %s" %i.second)
-        ReadWriteConfFile.addSection( 'sendconf')
-        changetime = ReadWriteConfFile.getSectionValue( 'sendconf','changetime',)
+        '''
+        ReadWriteConfFile.add_section('sendconf')
+        changetime = ReadWriteConfFile.get_section_value('sendconf', 'changetime', )
         changetime = int (changetime)
         i = datetime.datetime.now()
 
@@ -50,4 +51,4 @@ class BaseTime(object):
 BaseTime = BaseTime()
 
 if __name__ == "__main__":
-    print(BaseTime.getDateHour())
+    print(BaseTime.get_date_hour())

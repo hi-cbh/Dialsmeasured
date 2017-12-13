@@ -12,20 +12,19 @@ cf.read(file_path)
 
 class InitData():
 
-    def getUsers(self):
-
+    def get_users(self):
         return dict(cf.items("users"))
 
-    def getSql(self):
+    def get_sql(self):
         return dict(cf.items("mysqlconf"))
 
 
-    def getFile(self):
+    def get_file(self):
         # print(cf.items("userconf"))
         return dict(cf.items("userconf"))
 
 
-    def getsysPath(self):
+    def get_sys_path(self):
         return dict(cf.items("sysconf"))
 
 
@@ -59,5 +58,5 @@ class InitData():
 #
 #     print(dict(conf.items("userconf"))
 if __name__ == "__main__":
-    print(InitData().getFile())
-    print(InitData().getsysPath())
+    print(InitData().get_file())
+    print(InitData().get_sys_path())

@@ -2,8 +2,6 @@
 
 # 计算成功率
 class CalcSuccess(object):
-    # suclist = [] # 成功率统计
-    # speedlist = [] # 速度统计
 
 
     def __init__(self, caselist=[], logpath=""):
@@ -12,23 +10,19 @@ class CalcSuccess(object):
         print("org: %s" %self.caselist)
 
 
-    def _sortData(self):
+    def _sort_data(self):
         suclist = [] # 成功率统计
         # 数据筛选，成功率
         print("self.caselist : %s" %self.caselist)
-        for caseName in self.caselist:
-            suclist.append((caseName, [0, 0]))# 第一个为总数，第二个为错误次数
-            # self.caselist3.append((caseName,0))
+        for case_name in self.caselist:
+            suclist.append((case_name, [0, 0]))# 第一个为总数，第二个为错误次数
 
-        # print(self.suclist)
-        # print(self.caselist3)
 
         with open(self.path, 'r') as fn:
             txt = fn.readlines()
 
         # print(txt)
         suclist = dict(suclist)
-        # self.caselist3 = dict(self.caselist3)
 
         for line in txt:
             if "case" not in line:
@@ -42,11 +36,11 @@ class CalcSuccess(object):
 
         return suclist
 
-    def _sortSpeed(self):
+    def _sort_speed(self):
         speedlist = [] # 速度统计
         # 数据筛选，速度
-        for caseName in self.caselist:
-            speedlist.append((caseName, [0,0])) # 第一个值为速度和，第二个为个数
+        for case_name in self.caselist:
+            speedlist.append((case_name, [0,0])) # 第一个值为速度和，第二个为个数
 
         print(speedlist)
 
@@ -64,9 +58,6 @@ class CalcSuccess(object):
                 if case in line and "时延" in line:
                     # print("line: %s" %line)
                     sd = line[line.find("时延：")+3:line.find(",",line.find("时延："))]
-                    # print("s:%s" %str(sd))
-                    # print("type:%s" %type(sd))
-                    # print("float:%s" %round(float(sd)))
 
                     speedlist[case][0] = float(speedlist[case][0]) + float(sd)
                     speedlist[case][1] = speedlist[case][1] + 1
@@ -83,10 +74,10 @@ class CalcSuccess(object):
         return speedlist
 
 
-    def getSuccessercentage(self, casel={}):
+    def get_successercentage(self, casel={}):
         # 成功率
-        suclist = self._sortData()
-        speedlist = self._sortSpeed()
+        suclist = self._sort_data()
+        speedlist = self._sort_speed()
 
         # 如何出现连续错误，键错误次数减出
         print("处理前：%s" %suclist)
@@ -123,10 +114,10 @@ class CalcSuccess(object):
         return result
 
 
-    def getSuccessercentageNotType(self, casel={}):
+    def get_successercentage_not_type(self, casel={}):
         # 成功率没有样式
-        suclist = self._sortData()
-        speedlist = self._sortSpeed()
+        suclist = self._sort_data()
+        speedlist = self._sort_speed()
 
         # 如何出现连续错误，键错误次数减出
         print("处理前：%s" %suclist)
@@ -161,10 +152,10 @@ class CalcSuccess(object):
         print(result)
         return result
 
-    def getSuccessercentageFail(self, casel={}):
+    def get_successercentage_fail(self, casel={}):
         # 成功率(数据过滤)
-        suclist = self._sortData()
-        speedlist = self._sortSpeed()
+        suclist = self._sort_data()
+        speedlist = self._sort_speed()
 
         # 如何出现连续错误，键错误次数减出
         print("假的处理前：%s" %suclist)
@@ -181,7 +172,7 @@ class CalcSuccess(object):
             # 如何casel为空，修改bug
         # 强制修改所有结果，只要数量低于35，成功率为100%，大于35，每个用例只错1个
         for case ,value in suclist.items():
-            suclist[case] = self.createFalseData(suclist[case]) # 数据过滤
+            suclist[case] = self.create_false_data(suclist[case]) # 数据过滤
 
 
         print("假的处理中：%s" %suclist)
@@ -206,10 +197,10 @@ class CalcSuccess(object):
         return result
 
 
-    def getSuccessercentageFailNotType(self, casel={}):
+    def get_successercentage_fail_not_type(self, casel={}):
         # 成功率没有样式(数据过滤)
-        suclist = self._sortData()
-        speedlist = self._sortSpeed()
+        suclist = self._sort_data()
+        speedlist = self._sort_speed()
 
         # 如何出现连续错误，键错误次数减出
         print("假的处理前：%s" %suclist)
@@ -222,7 +213,7 @@ class CalcSuccess(object):
                     print("true")
                     suclist[case][1] =  suclist[case][1] - casel[case]
                 # 如何casel为空，修改bug
-                suclist[case] = self.createFalseData(suclist[case]) # 数据过滤
+                suclist[case] = self.create_false_data(suclist[case]) # 数据过滤
 
 
         print("假的处理中：%s" %suclist)
@@ -245,7 +236,7 @@ class CalcSuccess(object):
         print(result)
         return result
 
-    def createFalseData(self,l=[]):
+    def create_false_data(self, l=[]):
         '''修正数据
         总数量必须大于42以上，达到97 - 100
         '''
@@ -259,9 +250,8 @@ class CalcSuccess(object):
             if l[1] < 0:
                 l[1] = 0
 
-            # l[1] if l[1] > l[0] else l[1] = l[0]
 
-            while True:
+            while 1:
                 tmp = float(round((1 - l[1]/l[0])*100, 2))
                 # print(tmp)
                 print("错误数量/总数：%s/%s = %s" %(l[1],l[0],tmp))
@@ -285,6 +275,6 @@ class CalcSuccess(object):
 if __name__ == "__main__":
     caselist = ["用例1","用例2","用例3","用例4"]
     path1 = "/var/appiumRunLog/logs/org_2017126.log"
-    CalcSuccess(caselist, path1).getSuccessercentageFail()
+    CalcSuccess(caselist, path1).get_successercentage_fail()
 
 

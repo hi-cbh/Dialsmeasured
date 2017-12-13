@@ -11,7 +11,7 @@ from src.base.baseImage import BaseImage
 from src.readwriteconf.saveData import save
 # sys.path.append(r"/Users/apple/git/pytest/")
 
-d = InitData().getUsers()
+d = InitData().get_users()
 user = {"name": d['user2'], 'pwd': d['pwd2']}
 
 
@@ -24,7 +24,7 @@ class TestContant(unittest.TestCase):
             # AppiumServer2().start_server()
             # time.sleep(10)
 
-            BaseAdb.adbIntallUiautmator()
+            BaseAdb.adb_intall_uiautmator()
             self.driver = Psam()
         except BaseException as error:
             print("setUp启动出错！")
@@ -47,7 +47,7 @@ class TestContant(unittest.TestCase):
             # self.assertTrue(False, "测试错误")
 
             login=Login(self.driver,user['name'], user['pwd'])
-            login.loginAction(isSave=False)
+            login.login_action(is_save=False)
 
             time.sleep(5)
 
@@ -79,9 +79,9 @@ class TestContant(unittest.TestCase):
         '''找到需要的通知栏信息'''
         for i in range(5):
             print("下拉通讯录列表")
-            self.driver.swipeDown()
+            self.driver.swipe_down()
             print("检查通知栏信息")
-            if BaseAdb.dumpsysNotification("同步网络联系人完成"):
+            if BaseAdb.dumpsys_notification("同步网络联系人完成"):
                 return True
             time.sleep(1)
         else:

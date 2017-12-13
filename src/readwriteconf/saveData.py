@@ -4,7 +4,7 @@ from src.readwriteconf.initData import InitData
 
 class SaveData(object):
 
-    _path = InitData().getsysPath()["savepath"] +"/logs/tmp.log"
+    _path = InitData().get_sys_path()["savepath"] + "/logs/tmp.log"
 
 
     def save(self, msg=None):
@@ -16,7 +16,7 @@ class SaveData(object):
         with open(SaveData._path,'a+') as fn:
             fn.write(msg+'\n')
 
-    def getValue(self):
+    def get_value(self):
         '''主要不错数据格式：中文名(case固定):时延'''
         # 读取文件
         with open(SaveData._path, 'r') as fn:

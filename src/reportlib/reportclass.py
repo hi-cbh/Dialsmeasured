@@ -8,8 +8,8 @@ from src.readwriteconf.saveData import save
 from src.readwriteconf.calcSucPer import CalcSuccess
 from collections import Counter
 
-logPath = InitData().getsysPath()["savepath"]+"/logs/"
-logfileName= BaseTime.getDateHour() + '.log'
+logPath = InitData().get_sys_path()["savepath"] + "/logs/"
+logfileName= BaseTime.get_date_hour() + '.log'
 
 # 原始记录
 orgFilePath = logPath + 'org_'+logfileName
@@ -30,46 +30,46 @@ class ReportClass(object):
     # 每一轮的错误次数
     _errortimes= 0
     # 错误用例列表
-    _errorList = []
+    _errorlist = []
     # 统计用例结果字典
     _result = {}
     # 传入发送邮件结果列表
     _testcaselist = []
 
 
-    def __init__(self, failReport={},caseresult=[], speed="",nowtime=""):
+    def __init__(self, fail_report={}, caseresult=[], speed="", nowtime=""):
         '''获取报告的返回结果'''
-        self.failReport = failReport # 结果
+        self.fail_report = fail_report # 结果
         self.caseresult = dict(caseresult) # 测试用例
         self.speed = speed # 当前上传下载网速
         self.nowtime = nowtime
         self.caseorg = copy.deepcopy(self.caseresult) # 深度拷贝
 
 
-    def _getErrorCase(self):
+    def _get_error_case(self):
         '''筛选错误的结果'''
-        for case, reason in self.failReport:
+        for case, reason in self.fail_report:
             print("case：%s" % case)
-            ReportClass._errorList.append(str(case))
+            ReportClass._errorlist.append(str(case))
 
-    def _useCaseResults(self):
+    def _use_case_results(self):
         '''统计用例结果字典'''
         # 中文与英文对应字典
         for k, v in self.caseresult.items():
             ReportClass._testcaselist.append(k) # 用例名加入列表
             ReportClass._result[v] = "Success"  # 创建字典
 
-    def _sortFail(self):
+    def _sort_fail(self):
         '''标识错误用例，筛选错误次数'''
         for k, v in ReportClass._result.items():
-            for line in ReportClass._errorList:
+            for line in ReportClass._errorlist:
                 if line.find(k) != -1:
                     ReportClass._result[k] = 'Fail'
         print("_sortFail: %s" %ReportClass._result)
 
 
-        rwc.addSection('caseconf')
-        smax = int(rwc.getSectionValue("sendconf","maxtimes"))
+        rwc.add_section('caseconf')
+        smax = int(rwc.get_section_value("sendconf", "maxtimes"))
 
         # 将caseconf的值，大于maxtimes的值，拷贝到reportconf
         '''
@@ -78,27 +78,27 @@ class ReportClass(object):
         
         '''
         for k,v in ReportClass._result.items():
-            rwc.addSection('caseconf')# 切换conf
-            value = int(rwc.getSectionValue('caseconf',k))
+            rwc.add_section('caseconf')# 切换conf
+            value = int(rwc.get_section_value('caseconf', k))
             if v == "Success" and value >= smax :
-                rwc.addSection('reportconf')# 切换
-                tmp = int(rwc.getSectionValue("reportconf",k)) + value
-                rwc.setSectionValue( 'reportconf',k,str(tmp))
+                rwc.add_section('reportconf')# 切换
+                tmp = int(rwc.get_section_value("reportconf", k)) + value
+                rwc.set_section_value('reportconf', k, str(tmp))
 
         time.sleep(2)
         # 用于非连续错误用例清0
-        rwc.addSection('caseconf')
+        rwc.add_section('caseconf')
         for k,v in ReportClass._result.items():
-            if v == "Success" and int(rwc.getSectionValue('caseconf',k)) !=0 :
-                rwc.setSectionValue( 'caseconf',k,"0")
+            if v == "Success" and int(rwc.get_section_value('caseconf', k)) !=0 :
+                rwc.set_section_value('caseconf', k, "0")
 
         time.sleep(2)
         # 记录连续错误的用例
         for k,v in ReportClass._result.items():
             if v == "Fail":
-                x = rwc.getSectionValue('caseconf',k)
+                x = rwc.get_section_value('caseconf', k)
                 x = int(x) + 1
-                rwc.setSectionValue( 'caseconf',k,str(x))
+                rwc.set_section_value('caseconf', k, str(x))
 
 
 
@@ -110,10 +110,10 @@ class ReportClass(object):
                 if k1 == v2:
                     self.caseresult[k2] = ReportClass._result[k1]
 
-    def _saveDate(self):
+    def _save_date(self):
         '''保存每一轮的数据，分为带样式和无样式'''
         # 获取用例对应的时延
-        demotime=save.getValue()
+        demotime=save.get_value()
         print("时延：%s" %demotime)
 
         resulttxt = [] # 写入日志
@@ -160,12 +160,12 @@ class ReportClass(object):
             with open(htmlFilePath,'a+') as fs:
                 fs.write(line)
 
-    def _readCaseConf(self,max):
+    def _read_case_conf(self, max):
         '''读取caseconf用例连续错误次数记录最大值用例'''
         errl = []
-        rwc.addSection('caseconf')
+        rwc.add_section('caseconf')
         for k,v in ReportClass._result.items():
-            tmp = int(rwc.getSectionValue('caseconf',k))
+            tmp = int(rwc.get_section_value('caseconf', k))
             if tmp >= max and tmp % max == 0: # 最大值的倍数才加入列表
                 errl.append(k)
 
@@ -185,16 +185,16 @@ class ReportClass(object):
 
         return tmpl
 
-    def _getReportConf(self):
+    def _get_report_conf(self):
         '''返回：{用例：连续错误次数}，读取reportconf'''
         # print("self.caseorg: %s" %self.caseorg)
         errl = {}
-        rwc.addSection('sendconf')
-        smax = int(rwc.getSectionValue("sendconf","maxtimes"))
+        rwc.add_section('sendconf')
+        smax = int(rwc.get_section_value("sendconf", "maxtimes"))
 
-        rwc.addSection('reportconf')
+        rwc.add_section('reportconf')
         for k,v in self.caseorg.items():
-            tmpvalue = int(rwc.getSectionValue('reportconf',v))
+            tmpvalue = int(rwc.get_section_value('reportconf', v))
             if tmpvalue>=smax:
                 errl[k] = tmpvalue
 
@@ -203,16 +203,16 @@ class ReportClass(object):
         return errl
 
 
-    def _getCaseConf(self):
+    def _get_case_conf(self):
         '''返回：{用例：连续错误次数}，读取caseconf'''
         # print("self.caseorg: %s" %self.caseorg)
         errl = {}
-        rwc.addSection('sendconf')
-        smax = int(rwc.getSectionValue("sendconf","maxtimes"))
+        rwc.add_section('sendconf')
+        smax = int(rwc.get_section_value("sendconf", "maxtimes"))
 
-        rwc.addSection('caseconf')
+        rwc.add_section('caseconf')
         for k,v in self.caseorg.items():
-            tmpvalue = int(rwc.getSectionValue('caseconf',v))
+            tmpvalue = int(rwc.get_section_value('caseconf', v))
             if tmpvalue>=smax:
                 errl[k] = tmpvalue
 
@@ -220,23 +220,23 @@ class ReportClass(object):
 
         return errl
 
-    def _getAddConf(self):
+    def _get_add_conf(self):
         '''读取caseconf与reportconf两个的和，两个字典相加'''
-        return dict(Counter(self._getCaseConf())+Counter(self._getReportConf()))
+        return dict(Counter(self._get_case_conf()) + Counter(self._get_report_conf()))
 
 
-    def _setCaseConf(self):
+    def _set_case_conf(self):
         '''各个用例复位'''
-        rwc.addSection('caseconf')
+        rwc.add_section('caseconf')
         for k,v in ReportClass._result.items():
-            rwc.setSectionValue('caseconf',k,"0")
+            rwc.set_section_value('caseconf', k, "0")
 
-        rwc.addSection('reportconf')
+        rwc.add_section('reportconf')
         for k,v in ReportClass._result.items():
-            rwc.setSectionValue('reportconf',k,"0")
+            rwc.set_section_value('reportconf', k, "0")
 
 
-    def saveTrueAndFailLog(self):
+    def save_true_fail_log(self):
         '''存储每天的记录，包括统计，并做数据处理（连续出现错误，不纳入计算）'''
         # 清空数据
         with open(thtmlFilePath,'w') as fq:
@@ -250,26 +250,26 @@ class ReportClass(object):
             fq.write("")
 
         # 中文用例名：连续错误次数
-        caselt = self._getAddConf()
+        caselt = self._get_add_conf()
         print("连续错误次数：%s" %caselt)
         time.sleep(5)
         # 计算成功率
         cs = CalcSuccess(ReportClass._testcaselist,orgFilePath)
 
-        writeTime = "====="+BaseTime.getCurrentTime()+"  当天运行记录结果汇总===== \n"
-        writeLine = "\n注意：若出现连续出错的功能时，该错误次数不纳入计算范围 \n=====详细结果如下====="
+        write_time = "====="+BaseTime.get_current_time() + "  当天运行记录结果汇总===== \n"
+        write_line = "\n注意：若出现连续出错的功能时，该错误次数不纳入计算范围 \n=====详细结果如下====="
 
         # 真实数据
         # 写入成功率
         print("写入html文件")
         with open(thtmlFilePath,'a+') as fq, open(htmlFilePath,'r') as fp:
             # 写入创建时间
-            fq.write(writeTime)
+            fq.write(write_time)
             # 写入成功率及时延
-            for cline in cs.getSuccessercentage(caselt):
+            for cline in cs.get_successercentage(caselt):
                 fq.write(cline)
             # 说明
-            fq.write(writeLine)
+            fq.write(write_line)
 
             # 读取详细文件，拷贝到其他文件
             for line in fp:
@@ -280,11 +280,11 @@ class ReportClass(object):
         # 写入成功率
         print("写入org文件")
         with open(tsaveFilePath,'a+') as fq, open(orgFilePath,'r') as fp:
-            fq.write(writeTime)
+            fq.write(write_time)
             # 写入成功率及时延<无样式>
-            for cline in cs.getSuccessercentageNotType(caselt):
+            for cline in cs.get_successercentage_not_type(caselt):
                 fq.write(cline)
-            fq.write(writeLine)
+            fq.write(write_line)
 
             # 读取详细文件，拷贝到其他文件
             for line in fp:
@@ -294,13 +294,13 @@ class ReportClass(object):
         # 写入成功率--> 假数据(需要修改成功率)
         print("写入成功率--> 假数据(需要修改成功率)")
         with open(fhtmlFilePath,'a+') as fq, open(htmlFilePath,'r') as fp:
-            fq.write(writeTime)
-            for cline in cs.getSuccessercentageFail(caselt):
+            fq.write(write_time)
+            for cline in cs.get_successercentage_fail(caselt):
                 fq.write(cline)
-            fq.write(writeLine)
+            fq.write(write_line)
 
             # 错误数量：{caseName:[总数，错误数量]}
-            failcnt = cs._sortData()
+            failcnt = cs._sort_data()
             # 获取一个字典，第一个总数量
             cnt = sorted(failcnt.items())[0][1][0]
 
@@ -321,8 +321,8 @@ class ReportClass(object):
             else:
                 # 读取详细文件，拷贝到其他文件
                 for line in fp:
-                    for caseName, value in failcnt.items():
-                        if caseName in line and line.find("Fail") != -1 and value[1] >=2 :
+                    for case_name, value in failcnt.items():
+                        if case_name in line and line.find("Fail") != -1 and value[1] >=2 :
                             line = line.replace("Fail", "Success")
                             line = line.replace("red","green")
                             value[1] = value[1] - 1
@@ -330,13 +330,13 @@ class ReportClass(object):
 
         print("写入成功率--> 假数据(需要修改成功率)")
         with open(fsaveFilePath,'a+') as fq, open(orgFilePath,'r') as fp:
-            fq.write(writeTime)
-            for cline in cs.getSuccessercentageFailNotType(caselt):
+            fq.write(write_time)
+            for cline in cs.get_successercentage_fail_not_type(caselt):
                 fq.write(cline)
-            fq.write(writeLine)
+            fq.write(write_line)
 
             # 错误数量：{caseName:[总数，错误数量]}
-            failcnt = cs._sortData()
+            failcnt = cs._sort_data()
             # 获取一个字典，第一个总数量
             cnt = sorted(failcnt.items())[0][1][0]
             print("总数量：%s" %cnt)
@@ -354,8 +354,8 @@ class ReportClass(object):
             else:
                 # 读取详细文件，拷贝到其他文件
                 for line in fp:
-                    for caseName, value in failcnt.items():
-                        if caseName in line and line.find("Fail") != -1 and value[1] >=2 :
+                    for case_name, value in failcnt.items():
+                        if case_name in line and line.find("Fail") != -1 and value[1] >=2 :
                             line = line.replace("Fail", "Success")
                             value[1] = value[1] - 1
                     fq.write(line)
@@ -370,8 +370,8 @@ class ReportClass(object):
         :return:
         '''
 
-        rwc.addSection( 'sendconf')
-        changetime = rwc.getSectionValue('sendconf','changetime')
+        rwc.add_section('sendconf')
+        changetime = rwc.get_section_value('sendconf', 'changetime')
         changetime = int (changetime)
 
 
@@ -382,21 +382,21 @@ class ReportClass(object):
         # if datetime.datetime.now().hour in  [14,15]:
 
             # 是否发送
-            sendOrNot = rwc.getSectionValue('sendconf','send')
-            print('sendOrNot %s' %sendOrNot)
-            if sendOrNot == 'False':
+            send_or_not = rwc.get_section_value('sendconf', 'send')
+            print('sendOrNot %s' %send_or_not)
+            if send_or_not == 'False':
                 print('到点发送邮件')
 
                 # 读取
-                self.saveTrueAndFailLog()
+                self.save_true_fail_log()
 
                 time.sleep(5)
                 with open(logPath + 'true_'+logfileName,'r') as fq:
-                    allSendtxt = fq.readlines()
+                    all_sendtxt = fq.readlines()
 
                 time.sleep(5)
                 with open(logPath + 'false_'+logfileName,'r') as fq:
-                    falseTxt = fq.readlines()
+                    false_txt = fq.readlines()
 
 
                 #==============发送内容读取=========
@@ -406,25 +406,25 @@ class ReportClass(object):
 
                 s = SendMail("13580491603","chinasoft123","13697485262")
                 # 发送假数据
-                s.sendMailMan('139Android客户端V731版本_功能拨测_汇总<发给移动>',falseTxt)
+                s.send_mail('139Android客户端V731版本_功能拨测_汇总<发给移动>', false_txt,is_test=False)
                 time.sleep(10)
                 # 发送真数据
-                s.sendMailMan('139Android客户端V731版本_功能拨测_汇总<内部邮件>',allSendtxt)
-                rwc.setSectionValue('sendconf','send','True')
+                s.send_mail('139Android客户端V731版本_功能拨测_汇总<内部邮件>', all_sendtxt,is_test=False)
+                rwc.set_section_value('sendconf', 'send', 'True')
                 # #发送后，用例是否复位
-                self._setCaseConf()
+                self._set_case_conf()
 
         else:
-            if rwc.getSectionValue("sendconf","send") == "True":
-                rwc.setSectionValue('sendconf','send','False')
+            if rwc.get_section_value("sendconf", "send") == "True":
+                rwc.set_section_value('sendconf', 'send', 'False')
 
-            maxtimes = rwc.getSectionValue('sendconf','maxtimes')
-            err = self._readCaseConf(int(maxtimes))
+            maxtimes = rwc.get_section_value('sendconf', 'maxtimes')
+            err = self._read_case_conf(int(maxtimes))
             # 错误次数
             if len(err) != 0:
                 errstr = ','.join(err) + "到目前为止，以上提及的功能出现多次错误，请及时查证"
                 s = SendMail("13580491603","chinasoft123","13697485262")
-                s.sendMailMan2Str('139Android客户端V731版本_功能拨测_出现错误<内部邮件>',errstr)
+                s.send_mail_str('139Android客户端V731版本_功能拨测_出现错误<内部邮件>',errstr,is_test=False)
 
 
         print('运行结束')
@@ -433,9 +433,9 @@ class ReportClass(object):
 
 
     def all(self):
-        self._getErrorCase()
-        self._useCaseResults()
-        self._sortFail()
+        self._get_error_case()
+        self._use_case_results()
+        self._sort_fail()
         self._mergeict()
-        self._saveDate()
+        self._save_date()
         self.send()

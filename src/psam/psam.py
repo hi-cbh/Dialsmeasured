@@ -1,5 +1,3 @@
-# coding=utf-8
-
 import time
 from appium import webdriver
 from selenium.webdriver.common.by import By
@@ -9,13 +7,13 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 class Psam(object):
     
-    def __init__(self,version="6.0",appPackage='cn.cj.pe',appActivity='com.mail139.about.LaunchActivity' ):
+    def __init__(self, version="6.0", app_pkg='cn.cj.pe', app_activity='com.mail139.about.LaunchActivity'):
         desired_caps = {}
         desired_caps['platformName'] = 'Android'
         desired_caps['platformVersion'] = version
         desired_caps['deviceName'] = 'android'
-        desired_caps['appPackage'] = appPackage
-        desired_caps['appActivity'] = appActivity
+        desired_caps['app_pkg'] = app_pkg
+        desired_caps['app_activity'] = app_activity
         desired_caps['newCommandTimeout'] = 7200
         desired_caps["unicodeKeyboard"] = "True"
         desired_caps["resetKeyboard"] = "True"
@@ -35,8 +33,7 @@ class Psam(object):
 
         by = css.split("=>")[0]
         value = css.split("=>")[1]
-#         print('[%s] finding it！' %value)
-#         print("等待秒数：%d" %secs )
+
         
         el = None
         try:
@@ -245,35 +242,35 @@ class Psam(object):
 
     def reset(self):
         '''
-                    重置 app
+        重置 app
         '''
         self.driver.reset()
  
 
-    def swipeUp(self):
+    def swipe_up(self):
         '''向上滑动'''
         width = self.driver.get_window_size()['width']
         height = self.driver.get_window_size()['height']        
         self.driver.swipe(width / 5, height * 4 / 5, width / 5, height / 5,
-                500);
-        time.sleep(1);
+                500)
+        time.sleep(1)
 
  
-    def swipeDown(self):
+    def swipe_down(self):
         '''向下滑动'''
         width = self.driver.get_window_size()['width']
         height = self.driver.get_window_size()['height']        
         self.driver.swipe(width / 5, height / 5, width / 5, height * 4 / 5,
-                500);
-        time.sleep(2);
+                500)
+        time.sleep(2)
 
-    def swipeRight(self):
+    def swipe_right(self):
         '''向右滑动'''
         width = self.driver.get_window_size()['width']
         height = self.driver.get_window_size()['height']
         self.driver.swipe(width - 50, height / 2, 50, height /2 ,
-                          500);
-        time.sleep(1);
+                          500)
+        time.sleep(1)
 
     def get_window_size(self):
         width = self.driver.get_window_size()['width']
@@ -305,19 +302,13 @@ class Psam(object):
 
     def uiautomator(self,uia_string):
         return self.driver.find_element_by_android_uiautomator(uia_string)
-        # self.driver.find_element_by_android_uiautomator('new UiSelector().description("%s")' %uia_string)
-
-#     def scrollTo(self):
-#         self.driver.scroll(origin_el, destination_el)
-
 
     def page_source(self):
         return self.driver.page_source
 
 
 if __name__ == '__main__':
-#     devices = {'appPackage': 'cn.cj.pe', 'appActivity': 'com.mail139.about.LaunchActivity'}
-    
+
     driver = Psam()
-    driver.testCase()
+
             

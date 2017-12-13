@@ -14,20 +14,19 @@ class Login(unittest.TestCase):
         self.pwd = pwd
         self.driver = driver
         
-    def loginAction(self, firstLogin=False, isSave=True):
-        # firstLogin 首次安装后，登录为true
+    def login_action(self, first_fogin=False, is_save=True):
+        # first_fogin 首次安装后，登录为true
         try:
             '''最基础的登录'''
             self.driver.reset()
 
             time.sleep(4)
-            if firstLogin == True:
+            if first_fogin == True:
                 self.driver.click(u"uiautomator=>允许")
                 time.sleep(4)
 
-            self.driver.swipeRight()
-            self.driver.swipeRight()
-            # self.driver.swipeRight()
+            self.driver.swipe_right()
+            self.driver.swipe_right()
             # self.driver.swipeRight()
             print("点击坐标")
             # BaseAdb.adbTap(700, 2300)  # vivo 1603  w * 0.5, h * 0.899
@@ -35,9 +34,8 @@ class Login(unittest.TestCase):
             w = self.driver.get_window_size()['width']
             h = self.driver.get_window_size()['height']
 
-            BaseAdb.adbTap(w/2, int(h * 0.899))
+            BaseAdb.adb_tap(w / 2, int(h * 0.899))
             # BaseAdb.adbTap(500, 1700) #其他手机需要调试
-            # self.driver.click(u"name=>立即体验")
             time.sleep(4)
 
             print('=>选择139邮箱')
@@ -65,20 +63,29 @@ class Login(unittest.TestCase):
             start = time.time()
 
 
-            if firstLogin == True:
+            if first_fogin == True:
                 self.driver.click(u"uiautomator=>允许")
                 time.sleep(1)
+
+
+            '''
+            print('验证点：等待弹窗广告出现')
+            self.assertTrue(self.driver.get_element("id=>cn.cj.pe:id/btn") != None, "登录失败！")
+
+            self.driver.click("id=>cn.cj.pe:id/btn")
+            '''
+
 
             print('验证点：等待收件箱底部导航栏出现')
             self.assertTrue(self.driver.get_element("id=>cn.cj.pe:id/message_list_bottom_email") != None, "登录失败！")
 
             print('=>记录当前时间，')
-            valueTime = str(round((time.time() - start), 2))
-            print('[登录时延]: %r'  %valueTime)
+            value_time = str(round((time.time() - start), 2))
+            print('[登录时延]: %r'  %value_time)
             # 运行正确才记录数据
             # 这里添加判断，是否记录时间
-            if isSave:
-                save.save("账号登录:%s" %valueTime)
+            if is_save:
+                save.save("账号登录:%s" %value_time)
 
         except BaseException as error:
             BaseImage.screenshot(self.driver, "LoginError")
@@ -91,17 +98,17 @@ class Login(unittest.TestCase):
         #     self. 添加OK写入操作
 
         # 用于记录时延的登录操作
-    def loginActionTime(self):
+    def login_action_time(self):
         
-        logintime = self.loginAction()   
+        logintime = self.login_action()
         
         # 下拉
         time.sleep(4)
-        self.driver.swipeDown()
+        self.driver.swipe_down()
         time.sleep(4)
         
         # 邮件设置
-        self.setEmailOption(False, True)
+        self.set_email_option(False, True)
     
         time.sleep(2)
         
@@ -109,21 +116,21 @@ class Login(unittest.TestCase):
         return logintime
          
         # 用于记录CPU、内存峰值
-    def loginActionPeakValue(self):    
+    def login_action_peak_value(self):
                 
-        self.loginAction()   
+        self.login_action()
         
         # 邮件设置
-        self.setEmailOption(True, False)
+        self.set_email_option(True, False)
     
         time.sleep(2)
         
-    def loginActionLoginFlow(self):    
+    def login_action_login_flow(self):
         '''用于首次登录流量'''        
-        self.loginAction()  
+        self.login_action()
         
     
-    def setEmailOption(self, isNotice, isSetting):
+    def set_email_option(self, is_notice, is_set):
         '''邮件设置'''
         # 点击我的
         print('=>点击我的')
@@ -136,23 +143,23 @@ class Login(unittest.TestCase):
         
         
         
-        if isNotice:
+        if is_notice:
             print('==>通知设置')
-            self.setEmailNotice()
+            self.set_email_notice()
         
         
-        if isSetting:
+        if is_set:
             print('==>下载图片设置')
-            self.setEmailSetting()          
+            self.set_email_set()
         
         print('=>返回设置页面')
-        BaseAdb.adbBack()
+        BaseAdb.adb_back()
 #         time.sleep(2)
         print('=>返回收件箱')
         self.driver.click("id=>cn.cj.pe:id/message_list_bottom_email")
         
         #设置邮件提示设置
-    def setEmailNotice(self):
+    def set_email_notice(self):
         # time.sleep(1) appium 1.4
         # self.driver.click(u"name=>邮件提示设置")
         # time.sleep(1)
@@ -167,11 +174,11 @@ class Login(unittest.TestCase):
         #         time.sleep(1)
         self.driver.click(u"uiautomator=>显示邮件通知")
         #         time.sleep(1)
-        BaseAdb.adbBack()  
+        BaseAdb.adb_back()
         
         
         # 开启收邮件设置：自动下载邮件图片
-    def setEmailSetting(self):
+    def set_email_set(self):
 #         time.sleep(1) appium 1.4
 #         self.driver.click(u"name=>收取邮件设置")
 # #         time.sleep(1)

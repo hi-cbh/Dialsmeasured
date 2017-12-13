@@ -17,7 +17,7 @@ class Send(unittest.TestCase):
         self.username = username
         self.driver = driver
         
-    def sendActionPeakValue(self, firstLogin=False):
+    def send_action_peak_value(self, first_login=False):
         '''记录CPU、MEM'''
         width = self.driver.get_window_size()['width']
         try:
@@ -55,7 +55,7 @@ class Send(unittest.TestCase):
             # 点击发送按钮
             print('=>点击发送按钮，开始计时')
             el = self.driver.get_element("id=>cn.cj.pe:id/txt_send")
-            BaseAdb.adbBroadcast()
+            BaseAdb.adb_broadcast()
             el.click()
 
             print('等待文件更新')
@@ -65,7 +65,7 @@ class Send(unittest.TestCase):
             bl2 = self.driver.element_wait('uiautomator=>testReceive')
 
             if (bl2==None) or (bl == False) :
-                self.driver.swipeDown()
+                self.driver.swipe_down()
             
             time.sleep(8)
             
@@ -98,7 +98,7 @@ class Send(unittest.TestCase):
             time.sleep(2)
             return data
 
-    def sendAction(self, isSave=True):
+    def send_action(self, is_save=True):
         '''正常的发送邮件'''
         try:
             # self.assertTrue(False,"测试")
@@ -146,13 +146,13 @@ class Send(unittest.TestCase):
             self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",300) != None, "发送邮件失败！")
 
             print('=>记录当前时间，时间差')
-            valueTime = str(round((time.time() - start), 2))
-            print('[登录时延]: %r'  %valueTime)
-            if isSave:
-                save.save("发送邮件带附件:%s" %valueTime)
+            value_time = str(round((time.time() - start), 2))
+            print('[登录时延]: %r'  %value_time)
+            if is_save:
+                save.save("发送邮件带附件:%s" %value_time)
 
             print('返回收件箱')
-            BaseAdb.adbBack()
+            BaseAdb.adb_back()
             time.sleep(2)
 
         except BaseException as error:
@@ -163,12 +163,12 @@ class Send(unittest.TestCase):
             #添加截图
 
 
-    def sendFwd(self, reveicer, sender ):
+    def send_fwd(self, reveicer, sender):
         try:
             # self.assertTrue(False,"测试")
             print("=>第三方发送邮件")
             s = SendMail(sender['name'], sender['pwd'], reveicer['name'])
-            self.assertTrue(s.sendMail('sendsmtpEmail','测试邮件...'),"邮件发送失败")
+            self.assertTrue(s.send_mail('sendsmtpEmail','测试邮件...',is_test=True),"邮件发送失败")
             time.sleep(10)
 
             print("加载本地邮件封邮件")
@@ -179,9 +179,9 @@ class Send(unittest.TestCase):
                 el = self.driver.element_wait(u"uiautomator=>暂无邮件",secs = 1)
                 if el != None:
                     print("下拉")
-                    self.driver.swipeDown()
+                    self.driver.swipe_down()
                     time.sleep(1)
-                    self.driver.swipeDown()
+                    self.driver.swipe_down()
                 else:
                     print("列表有邮件，退出循环")
                     break
@@ -232,7 +232,7 @@ class Send(unittest.TestCase):
 
 
             print('返回收件箱')
-            BaseAdb.adbBack()
+            BaseAdb.adb_back()
             time.sleep(2)
 
             print("等待邮件出现，等待FW邮件出现，这里需要优化，或等待1分钟")
@@ -240,9 +240,9 @@ class Send(unittest.TestCase):
             # 找到邮件结束
             while int(round(time.time() * 1000)) < timeout :
 
-                self.driver.swipeDown()
+                self.driver.swipe_down()
                 time.sleep(5)
-                self.driver.swipeDown()
+                self.driver.swipe_down()
                 time.sleep(5)
 
             # 点击第一封
@@ -266,5 +266,5 @@ class Send(unittest.TestCase):
 
 
         else:
-            BaseAdb.adbBack()
+            BaseAdb.adb_back()
             time.sleep(2)
