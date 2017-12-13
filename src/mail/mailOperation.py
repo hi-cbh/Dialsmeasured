@@ -156,7 +156,7 @@ class EmailOperation(object):
             self.logout() 
             return is_true
                 
-    def moveForlder(self, l=[]):
+    def move_forlder(self, l=[]):
         '''移动邮件
         sample:
             moveForlder(['100', 'INBOX'])

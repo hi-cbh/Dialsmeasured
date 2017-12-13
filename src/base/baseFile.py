@@ -34,7 +34,7 @@ class BaseFile(object):
 
             
  
-    def adbDeleteFile(self, path, file):
+    def adb_del_file(self, path, file):
         '''删除文件'''
         try:
             os.popen("adb shell rm "+path)
@@ -43,7 +43,7 @@ class BaseFile(object):
             print('msg: %r' %msg)    
         
   
-    def adbTouchFile(self, path, file):
+    def adb_touch_file(self, path, file):
         '''创建文件'''
         try:
             os.popen("adb shell touch "+path + file)
@@ -52,7 +52,7 @@ class BaseFile(object):
             print('msg: %r' %msg)      
         
           
-    def waitforfile(self, path, file, timeout = 10):
+    def wait_for_file(self, path, file, timeout = 10):
         '''等待文件出现'''
         timeout = int(round(time.time() * 1000)) + timeout * 1000
         try:
@@ -60,7 +60,7 @@ class BaseFile(object):
 #                 print('wait.....')
                 if(self.adb_find_file(path, file) == True):
 #                     print('find it')
-                    return True;
+                    return True
                 time.sleep(0.1)
         except BaseException as msg:
             print(msg)
@@ -70,7 +70,7 @@ class BaseFile(object):
             return False 
      
 
-    def adbMkdirDir(self, path):
+    def adb_mkdir(self, path):
         '''创建文件夹'''
         try:
             os.popen("adb shell mkdir -p " + path)
@@ -78,7 +78,7 @@ class BaseFile(object):
         except BaseException as msg:
             print('msg: %r' %msg)      
        
-    def adbLsFileSize(self, path):
+    def adb_ls_file_size(self, path):
         '''创建文件夹'''
         try:
             value = os.popen("adb shell ls -l " + path)
@@ -101,7 +101,7 @@ class BaseFile(object):
             print('msg: %r' %msg)
             return None
          
-    def waitForFileModify(self, timeoutMillis):
+    def wait_for_file_modify(self, timeout_ms):
         '''等待文件更新,单位为：秒'''
         try:
 #             path = "/mnt/sdcard/0/0./t.txt"
@@ -111,8 +111,8 @@ class BaseFile(object):
             
             if self.adb_find_file(path, "t.txt") != True:
                 print('文件存在')
-                self.adbMkdirDir( dirpath)
-                self.adbTouchFile(path, '')
+                self.adb_mkdir(dirpath)
+                self.adb_touch_file(path, '')
                 time.sleep(1)
             
             if self.adb_find_file(path, "t.txt") != True:
@@ -120,15 +120,15 @@ class BaseFile(object):
                 return False
             
             
-            orgsize = self.adbLsFileSize(path)
+            orgsize = self.adb_ls_file_size(path)
             
-            timeout = int(round(time.time() * 1000)) + timeoutMillis * 1000
+            timeout = int(round(time.time() * 1000)) + timeout_ms * 1000
             
             while (int(round(time.time() * 1000) < timeout)):
 #                 print('wait.....')
-                if(operator.ne(self.adbLsFileSize(path),orgsize)):
+                if(operator.ne(self.adb_ls_file_size(path), orgsize)):
                     print('文件更新了.....')
-                    return True;
+                    return True
                 time.sleep(0.1)
             else:
                 print('time out')
@@ -137,7 +137,7 @@ class BaseFile(object):
             print('msg: %r' %msg)
             return False
  
-    def adbTailFile(self):
+    def adb_tail_file(self):
         '''使用 adb shell tail -n 1 查找固定目录下的文件，倒数第一行'''
         path = "/mnt/sdcard/Android/data/com.cmcc.test/cache/t.txt"
         try:
@@ -155,10 +155,10 @@ class BaseFile(object):
             return None
     
 
-    def getTime(self):
+    def get_time(self):
         try:
             '''获取时间值'''
-            content = self.adbTailFile()
+            content = self.adb_tail_file()
             time = 0
             
             if len(content) < 60 or (not content.find('\#') == -1) :
@@ -167,10 +167,10 @@ class BaseFile(object):
             l = content.split('#')[1]
 #             print("times：%s" %l)
     
-            valueTime = str(round((float(l)/1000.0), 3))
-            print('时间差: %r'  %valueTime)
+            value_time = str(round((float(l)/1000.0), 3))
+            print('时间差: %r'  %value_time)
             
-            return valueTime
+            return value_time
         
         except BaseException:
             return time

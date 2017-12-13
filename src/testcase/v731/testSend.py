@@ -2,7 +2,6 @@
 # encoding:utf-8
 
 import os,time,unittest
-from src.aserver.AppiumServer import AppiumServer2
 from src.base.baseAdb import BaseAdb
 from src.mail.mailOperation import EmailOperation
 from src.psam.psam import Psam
@@ -10,7 +9,6 @@ from src.testcase.v731.easycase.login import Login
 from src.testcase.v731.easycase.send import Send
 from src.readwriteconf.initData import InitData
 
-# sys.path.append(r"/Users/apple/git/pytest/")
 
 d = InitData().get_users()
 
@@ -31,10 +29,6 @@ class TestSend(unittest.TestCase):
 
     def setUp(self):
         try:
-            # time.sleep(10)
-            # AppiumServer2().start_server()
-            # time.sleep(10)
-
             BaseAdb.adb_intall_uiautmator()
             self.driver = Psam()
         except BaseException as error:
@@ -58,7 +52,6 @@ class TestSend(unittest.TestCase):
         print("运行结束")
 
         time.sleep(5)
-        # AppiumServer2().stop_server()
 
     def testCaseSend(self):
         '''发送邮件测试'''

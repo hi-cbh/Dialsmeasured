@@ -34,8 +34,8 @@ class Element(object):
         width = driver.get_window_size()['width']
         height = driver.get_window_size()['height']        
         driver.swipe(width / 5, height * 4 / 5, width / 5, height / 5,
-                500);
-        time.sleep(2);
+                500)
+        time.sleep(2)
 
  
     def swipe_down(self, driver):
@@ -43,8 +43,8 @@ class Element(object):
         width = driver.get_window_size()['width']
         height = driver.get_window_size()['height']        
         driver.swipe(width / 5, height / 5, width / 5, height * 4 / 5,
-                500);
-        time.sleep(2);
+                500)
+        time.sleep(2)
     
     
     

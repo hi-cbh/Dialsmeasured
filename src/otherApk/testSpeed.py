@@ -23,8 +23,6 @@ class TestSpeed(unittest.TestCase):
 
     def setUp(self):
         try:
-            # time.sleep(10)
-            # AppiumServer2().start_server()
             time.sleep(10)
             BaseAdb.adb_clear('org.zwanoo.android.speedtest')
             time.sleep(5)

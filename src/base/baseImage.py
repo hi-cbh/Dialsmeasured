@@ -12,11 +12,11 @@ print(PCpath)
 
 class BaseImage(object):
     
-    def screenshot(self, driver, picName):
+    def screenshot(self, driver, pic_name):
         '''截屏，保存在根目录下的pics文件夹下，已时间戳命名'''
         try:
             
-            filename = picName + "-"+ BaseTime.current_time() + ".png"
+            filename = pic_name + "-" + BaseTime.current_time() + ".png"
             filepath = local + filename
             driver.screenshot(filepath)
             

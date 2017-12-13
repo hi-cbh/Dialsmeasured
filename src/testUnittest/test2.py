@@ -48,9 +48,9 @@ class MyTest(unittest.TestCase):
             print("testCase01")
             time.sleep(1)
             print('=>记录当前时间，时间差')
-            valueTime = str(round((time.time() - start), 2))
-            print('[登录时延]: %r'  %valueTime)
-            save.save("用例1:%s" %valueTime)
+            value_time = str(round((time.time() - start), 2))
+            print('[登录时延]: %r'  %value_time)
+            save.save("用例1:%s" %value_time)
         except BaseException:
             self.fail("用例1 错误")
 
@@ -91,9 +91,9 @@ class MyTest2(unittest.TestCase):
         start = time.time()
         time.sleep(1)
         print('=>记录当前时间，时间差')
-        valueTime = str(round((time.time() - start), 2))
-        print('[登录时延]: %r'  %valueTime)
-        save.save("用例3:%s" %valueTime)
+        value_time = str(round((time.time() - start), 2))
+        print('[登录时延]: %r'  %value_time)
+        save.save("用例3:%s" %value_time)
 
 
     def testCase04(self):

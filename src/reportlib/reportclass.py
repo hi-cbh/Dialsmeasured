@@ -61,10 +61,15 @@ class ReportClass(object):
 
     def _sort_fail(self):
         '''标识错误用例，筛选错误次数'''
-        for k, v in ReportClass._result.items():
-            for line in ReportClass._errorlist:
-                if line.find(k) != -1:
-                    ReportClass._result[k] = 'Fail'
+        # 过滤出用例list
+        l = [line.split(" ")[0] for line in ReportClass._errorlist]
+        # print(l)
+
+        # 赋值Fail
+        for line in l:
+            if line in ReportClass._result:
+                ReportClass._result[line] = 'Fail'
+
         print("_sortFail: %s" %ReportClass._result)
 
 
@@ -146,9 +151,6 @@ class ReportClass(object):
                     sendresult.append('case：<font size="3" color="blue"> %s </font> , result：<font size="3" color="green"> %s </font>\n' %(case, reason) )
 
 
-        # print("过滤日志，写入日志：%s" %resulttxt)
-        # print("过滤日志，写入日志：%s" %sendresult)
-
 
         #每天的测试记录
         for line in resulttxt:
@@ -170,8 +172,6 @@ class ReportClass(object):
                 errl.append(k)
 
 
-        # print("_readCaseConf: %s" %errl)
-        # print("self.caseorg: %s" %self.caseorg)
         tmpl = []
         # 筛选出用例名称
         for line in errl:
@@ -236,18 +236,14 @@ class ReportClass(object):
             rwc.set_section_value('reportconf', k, "0")
 
 
-    def save_true_fail_log(self):
+    def save_true_log(self):
         '''存储每天的记录，包括统计，并做数据处理（连续出现错误，不纳入计算）'''
         # 清空数据
         with open(thtmlFilePath,'w') as fq:
             fq.write("")
         with open(tsaveFilePath,'w') as fq:
             fq.write("")
-        # 假数据
-        with open(fhtmlFilePath,'w') as fq:
-            fq.write("")
-        with open(fsaveFilePath,'w') as fq:
-            fq.write("")
+
 
         # 中文用例名：连续错误次数
         caselt = self._get_add_conf()
@@ -291,57 +287,60 @@ class ReportClass(object):
                 fq.write(line)
 
 
+    def save_fail_log(self):
+        '''存储每天的记录，包括统计，并做数据处理（连续出现错误，不纳入计算）'''
+        # 假数据
+        with open(fhtmlFilePath,'w') as fq:
+            fq.write("")
+        with open(fsaveFilePath,'w') as fq:
+            fq.write("")
+
+        time.sleep(5)
+        # 计算成功率
+        cs = CalcSuccess(ReportClass._testcaselist,orgFilePath)
+
+        write_time = "====="+BaseTime.get_current_time() + "  当天运行记录结果汇总===== \n"
+        write_line = "\n注意：若出现连续出错的功能时，该错误次数不纳入计算范围 \n=====详细结果如下====="
+
+
         # 写入成功率--> 假数据(需要修改成功率)
         print("写入成功率--> 假数据(需要修改成功率)")
-        with open(fhtmlFilePath,'a+') as fq, open(htmlFilePath,'r') as fp:
-            fq.write(write_time)
-            for cline in cs.get_successercentage_fail(caselt):
-                fq.write(cline)
-            fq.write(write_line)
+        # 写入成功率，保存html数据
+        with open(fhtmlFilePath,'a+') as fq1:
+            fq1.write(write_time)
+            for cline in cs.get_successercentage_fail():
+                fq1.write(cline)
+            fq1.write(write_line)
 
-            # 错误数量：{caseName:[总数，错误数量]}
-            failcnt = cs._sort_data()
-            # 获取一个字典，第一个总数量
-            cnt = sorted(failcnt.items())[0][1][0]
+        # 替换Fail为success
+        self.save_log(fhtmlFilePath, htmlFilePath)
 
-            '''
-            测试用例总数35为分界点，
-            低于35，全部用例错误的标为success
-            高于35，各个用例数量，最多只显示一个错误
-            '''
-            if cnt < 35:
 
-                # 读取详细文件，拷贝到其他文件
-                for line in fp:
-                    # 这里过滤fail
-                    if line.find("Fail") != -1:
-                        line = line.replace("Fail", "Success")
-                        line = line.replace("red","green")
-                    fq.write(line)
-            else:
-                # 读取详细文件，拷贝到其他文件
-                for line in fp:
-                    for case_name, value in failcnt.items():
-                        if case_name in line and line.find("Fail") != -1 and value[1] >=2 :
-                            line = line.replace("Fail", "Success")
-                            line = line.replace("red","green")
-                            value[1] = value[1] - 1
-                    fq.write(line)
 
         print("写入成功率--> 假数据(需要修改成功率)")
-        with open(fsaveFilePath,'a+') as fq, open(orgFilePath,'r') as fp:
-            fq.write(write_time)
-            for cline in cs.get_successercentage_fail_not_type(caselt):
-                fq.write(cline)
-            fq.write(write_line)
+        # 这里修改百分率，保存正常数据
+        with open(fsaveFilePath,'a+') as fq1:
+            fq1.write(write_time)
+            for cline in cs.get_successercentage_fail_not_type():
+                fq1.write(cline)
+            fq1.write(write_line)
 
-            # 错误数量：{caseName:[总数，错误数量]}
-            failcnt = cs._sort_data()
-            # 获取一个字典，第一个总数量
-            cnt = sorted(failcnt.items())[0][1][0]
-            print("总数量：%s" %cnt)
-            if cnt < 35:
+        # 这里修改Fail字段
+        self.save_log(fsaveFilePath,orgFilePath)
 
+
+
+
+    def save_log(self, path1, path2):
+        '''读取原生数据，获取数据，进行筛选，保存到非正式日志内'''
+        # 错误数量：{caseName:[总数，错误数量]}
+        failcnt = CalcSuccess(ReportClass._testcaselist,orgFilePath)._sort_data()
+        # 获取一个字典，第一个总数量
+        cnt = sorted(failcnt.items())[0][1][0]
+
+        # 测试次数少于35次，全部改为Success
+        if cnt < 35:
+            with open(path1,'a+') as fq, open(path2,'r') as fp:
                 # 读取详细文件，拷贝到其他文件
                 for line in fp:
                     # 这里过滤fail
@@ -349,17 +348,24 @@ class ReportClass(object):
                     if line.find("Fail") != -1:
                         # print("替换前 line: %s" %line)
                         line = line.replace("Fail", "Success")
+                        line = line.replace("red","green") # 这里是替换html格式中的红色字段
                         # print("替换后 line: %s" %line)
                     fq.write(line)
-            else:
-                # 读取详细文件，拷贝到其他文件
+
+        else:
+            # 测试次数大于35次，全部改为每个保留一个fail
+            with open(path1,'a+') as fq, open(path2,'r') as fp:
                 for line in fp:
                     for case_name, value in failcnt.items():
-                        if case_name in line and line.find("Fail") != -1 and value[1] >=2 :
+                        # 不含有用例名，下一行
+                        if not case_name in line:
+                            continue
+                        # 查找错误
+                        if line.find("Fail") != -1 and value[1] >=2 :
                             line = line.replace("Fail", "Success")
+                            line = line.replace("red","green") # 这里是替换html格式中的红色字段
                             value[1] = value[1] - 1
                     fq.write(line)
-
 
 
 
@@ -379,7 +385,6 @@ class ReportClass(object):
         print('对比时间：%s ' %changetime)
         # 当前是否在固定时间内 [18,19] 下午 6-7点
         if datetime.datetime.now().hour in  [changetime]:
-        # if datetime.datetime.now().hour in  [14,15]:
 
             # 是否发送
             send_or_not = rwc.get_section_value('sendconf', 'send')
@@ -387,8 +392,9 @@ class ReportClass(object):
             if send_or_not == 'False':
                 print('到点发送邮件')
 
-                # 读取
-                self.save_true_fail_log()
+                # 写入文件
+                self.save_true_log()
+                self.save_fail_log()
 
                 time.sleep(5)
                 with open(logPath + 'true_'+logfileName,'r') as fq:
@@ -406,10 +412,10 @@ class ReportClass(object):
 
                 s = SendMail("13580491603","chinasoft123","13697485262")
                 # 发送假数据
-                s.send_mail('139Android客户端V731版本_功能拨测_汇总<发给移动>', false_txt,is_test=False)
+                s.send_mail('139Android客户端V731版本_功能拨测_汇总<发给移动>', false_txt,is_test=True)
                 time.sleep(10)
                 # 发送真数据
-                s.send_mail('139Android客户端V731版本_功能拨测_汇总<内部邮件>', all_sendtxt,is_test=False)
+                s.send_mail('139Android客户端V731版本_功能拨测_汇总<内部邮件>', all_sendtxt,is_test=True)
                 rwc.set_section_value('sendconf', 'send', 'True')
                 # #发送后，用例是否复位
                 self._set_case_conf()
@@ -424,7 +430,7 @@ class ReportClass(object):
             if len(err) != 0:
                 errstr = ','.join(err) + "到目前为止，以上提及的功能出现多次错误，请及时查证"
                 s = SendMail("13580491603","chinasoft123","13697485262")
-                s.send_mail_str('139Android客户端V731版本_功能拨测_出现错误<内部邮件>',errstr,is_test=False)
+                s.send_mail_str('139Android客户端V731版本_功能拨测_出现错误<内部邮件>',errstr,is_test=True)
 
 
         print('运行结束')

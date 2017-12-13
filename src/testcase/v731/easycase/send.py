@@ -8,8 +8,6 @@ from src.base.baseFile import BaseFile
 from src.mail.sendEmailSmtp import SendMail
 from src.base.baseImage import BaseImage
 from src.readwriteconf.saveData import save
-# from src.otherApk.gt.gtutil import GTTest
-
 
 class Send(unittest.TestCase):
     
@@ -49,9 +47,7 @@ class Send(unittest.TestCase):
             self.driver.click(r"id=>cn.cj.pe:id/check_button")
          
             time.sleep(5)
-            # gt = GTTest("cn.cj.pe")
-            # gt.startGT()
-         
+
             # 点击发送按钮
             print('=>点击发送按钮，开始计时')
             el = self.driver.get_element("id=>cn.cj.pe:id/txt_send")
@@ -59,7 +55,7 @@ class Send(unittest.TestCase):
             el.click()
 
             print('等待文件更新')
-            bl = BaseFile.waitForFileModify(30)
+            bl = BaseFile.wait_for_file_modify(30)
             time.sleep(3)
             print('查找页面是否出现新邮件')
             bl2 = self.driver.element_wait('uiautomator=>testReceive')
@@ -168,7 +164,7 @@ class Send(unittest.TestCase):
             # self.assertTrue(False,"测试")
             print("=>第三方发送邮件")
             s = SendMail(sender['name'], sender['pwd'], reveicer['name'])
-            self.assertTrue(s.send_mail('sendsmtpEmail','测试邮件...',is_test=True),"邮件发送失败")
+            self.assertTrue(s.send_mail_test('sendsmtpEmail','测试邮件...'),"邮件发送失败")
             time.sleep(10)
 
             print("加载本地邮件封邮件")
@@ -226,9 +222,9 @@ class Send(unittest.TestCase):
             self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",120) != None, "发送邮件失败！")
 
             print('=>记录当前时间，时间差')
-            valueTime = str(round((time.time() - start), 2))
-            print('[转发邮件带附件]: %r'  %valueTime)
-            save.save("转发邮件带附件:%s" %valueTime)
+            value_time = str(round((time.time() - start), 2))
+            print('[转发邮件带附件]: %r'  %value_time)
+            save.save("转发邮件带附件:%s" %value_time)
 
 
             print('返回收件箱')

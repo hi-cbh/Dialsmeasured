@@ -2,14 +2,12 @@
 # encoding:utf-8
 
 import os,time,unittest,sys
-from src.aserver.AppiumServer import AppiumServer2
 from src.base.baseAdb import BaseAdb
 from src.psam.psam import Psam
 from src.testcase.v731.easycase.login import Login
 from src.readwriteconf.initData import InitData
 from src.base.baseImage import BaseImage
 from src.readwriteconf.saveData import save
-# sys.path.append(r"/Users/apple/git/pytest/")
 
 d = InitData().get_users()
 user = {"name": d['user2'], 'pwd': d['pwd2']}
@@ -20,13 +18,10 @@ class TestContant(unittest.TestCase):
 
     def setUp(self):
         try:
-            # time.sleep(10)
-            # AppiumServer2().start_server()
-            # time.sleep(10)
 
             BaseAdb.adb_intall_uiautmator()
             self.driver = Psam()
-        except BaseException as error:
+        except BaseException:
             print("setUp启动出错！")
             self.driver.quit()
             self.fail("setUp启动出错！")
@@ -38,8 +33,6 @@ class TestContant(unittest.TestCase):
         print("运行结束")
 
         time.sleep(5)
-        # AppiumServer2().stop_server()
-
 
     def testCaseCheckAddressList(self):
         '''测试通讯录是否同步成功'''
@@ -59,12 +52,12 @@ class TestContant(unittest.TestCase):
             start = time.time()
 
             print("验证点：是否获取通知栏信息")
-            self.assertTrue(self.waitforNotification(),"通讯录同步失败！！")
+            self.assertTrue(self.waitfor_notification(), "通讯录同步失败！！")
 
             print('=>记录当前时间，时间差')
-            valueTime = str(round((time.time() - start), 2))
-            print('[联系人同步]: %r'  %valueTime)
-            save.save("联系人同步:%s" %valueTime)
+            value_time = str(round((time.time() - start), 2))
+            print('[联系人同步]: %r'  %value_time)
+            save.save("联系人同步:%s" %value_time)
 
         except BaseException :
             BaseImage.screenshot(self.driver, "CheckAddressListError")
@@ -75,7 +68,7 @@ class TestContant(unittest.TestCase):
 
 
 
-    def waitforNotification(self):
+    def waitfor_notification(self):
         '''找到需要的通知栏信息'''
         for i in range(5):
             print("下拉通讯录列表")

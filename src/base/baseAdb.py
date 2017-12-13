@@ -4,8 +4,6 @@
 import os
 import time
 import subprocess
-import traceback
-import tempfile
 
 PATH = lambda p: os.path.abspath(
     os.path.join(os.path.dirname(__file__), p)
@@ -134,9 +132,9 @@ class BaseAdb(object):
 #             print('False')
             return False
     
-    def adb_gt_add_pkg(self, pkgName):
+    def adb_gt_add_pkg(self, pkg_name):
         '''使gt可以采集该应用的性能信息；pkgName是包名；verName是版本号（可选参数）'''
-        results = os.popen("adb shell am broadcast -a com.tencent.wstt.gt.baseCommand.startTest --es pkgName %s" %pkgName)
+        results = os.popen("adb shell am broadcast -a com.tencent.wstt.gt.baseCommand.startTest --es pkg_name %s" % pkg_name)
         for line in results.readlines():                          #依次读取每行  
             line = line.strip()                             #去掉每行头尾空白  
             if not len(line):       #判断是否是空行或注释行  
@@ -241,7 +239,7 @@ class BaseAdb(object):
         time.sleep(2)
 
 
-    def dumpsys_notification(self, containText):
+    def dumpsys_notification(self, contain_text):
         '''获取通知信息'''
         results = os.popen("adb shell dumpsys notification | grep tickerText")
         for line in results.readlines():                          #依次读取每行
@@ -249,7 +247,7 @@ class BaseAdb(object):
             print(line)
             if not len(line):       #判断是否是空行或注释行
                 continue
-            if containText in line:
+            if contain_text in line:
                 print('true')
                 return True
         else:

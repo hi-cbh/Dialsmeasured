@@ -30,13 +30,9 @@ class TestPush(unittest.TestCase):
     '''
     def setUp(self):
         try:
-            # time.sleep(10)
-            # AppiumServer2().start_server()
-            # time.sleep(10)
-
             BaseAdb.adb_intall_uiautmator()
             self.driver = Psam()
-        except BaseException as error:
+        except BaseException :
             print("setUp启动出错！")
             self.driver.quit()
             self.fail("setUp启动出错！")
@@ -51,15 +47,14 @@ class TestPush(unittest.TestCase):
         print("运行结束")
 
         time.sleep(5)
-        # AppiumServer2().stop_server()
 
     def testCasePush(self):
         '''推送测试测试'''
-        self.Push(user1, user2)
+        self.push_action(user1, user2)
 
 
 
-    def Push(self, sender, reveicer):
+    def push_action(self, sender, reveicer):
         '''推送测试测试方法'''
 
         try:
@@ -78,38 +73,34 @@ class TestPush(unittest.TestCase):
             BaseAdb.adb_home()
             time.sleep(5)
 
-            # print("=>Web端发送邮件")
-            # self.assertTrue(self.receive(),"邮件发送失败")
             print("=>第三方发送邮件")
             s = SendMail(sender['name'], sender['pwd'], reveicer['name'])
-            self.assertTrue(s.sendMail('sendsmtpEmail','测试邮件...'),"邮件发送失败")
+            self.assertTrue(s.send_mail_test('sendsmtpEmail','测试邮件...'),"邮件发送失败")
             start = time.time()
             # time.sleep(10)
 
             print("验证点：等待推送信息")
-            self.assertTrue(self.waitforNotification(),"接收推送失败")
+            self.assertTrue(self.wait_for_notification(), "接收推送失败")
 
             print('=>记录当前时间，时间差')
-            valueTime = str(round((time.time() - start), 2))
-            print('[接收推送]: %r'  %valueTime)
-            save.save("接收推送:%s" %valueTime)
+            value_time = str(round((time.time() - start), 2))
+            print('[接收推送]: %r'  %value_time)
+            save.save("接收推送:%s" %value_time)
 
 
 
-        except BaseException as error:
-
-
+        except BaseException:
             BaseImage.screenshot(self.driver, "PushError")
             time.sleep(5)
 
             self.fail("【接收邮件推送】出错！")
 
         else:
-            appPackage = "cn.cj.pe"  # 程序的package
-            appActivity = "com.mail139.about.LaunchActivity"  # 程序的Activity
+            app_package = "cn.cj.pe"  # 程序的package
+            app_activity = "com.mail139.about.LaunchActivity"  # 程序的Activity
 
             time.sleep(2)
-            BaseAdb.adb_start_app(appPackage, appActivity)
+            BaseAdb.adb_start_app(app_package, app_activity)
             time.sleep(5)
 
 
@@ -138,12 +129,7 @@ class TestPush(unittest.TestCase):
         time.sleep(10)
 
 
-    # def receive(self):
-    #     '''接收邮件'''
-    #     r = WebReceive(sender['name'], sender['pwd'], receiver['name'] +'@139.com')
-    #     return r.sendEmail()
-
-    def waitforNotification(self):
+    def wait_for_notification(self):
         '''找到需要的通知栏信息'''
         for i in range(6):
             print("检查通知栏信息")

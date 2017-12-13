@@ -21,7 +21,6 @@ class CalcSuccess(object):
         with open(self.path, 'r') as fn:
             txt = fn.readlines()
 
-        # print(txt)
         suclist = dict(suclist)
 
         for line in txt:
@@ -73,7 +72,6 @@ class CalcSuccess(object):
 
         return speedlist
 
-
     def get_successercentage(self, casel={}):
         # 成功率
         suclist = self._sort_data()
@@ -89,8 +87,6 @@ class CalcSuccess(object):
                 if case in casel:
                     print("true")
                     suclist[case][1] =  suclist[case][1] - casel[case]
-                # elif case in casel and (self.suclist[case][1] < casel[case]): # 连续错误次数 大于正常错误次数
-                #     self.suclist[case][1] =  0
 
         print("处理中：%s" %suclist)
 
@@ -99,7 +95,6 @@ class CalcSuccess(object):
                 suclist[case][0] = "100%"
             else:
                 suclist[case][0] = str(round((1 - value[1]/value[0])*100, 2)) + "%"
-
 
         print("处理后：%s" %suclist)
         result = []
@@ -112,7 +107,6 @@ class CalcSuccess(object):
         print(result)
 
         return result
-
 
     def get_successercentage_not_type(self, casel={}):
         # 成功率没有样式
@@ -129,8 +123,6 @@ class CalcSuccess(object):
                 if case in casel:
                     print("true")
                     suclist[case][1] =  suclist[case][1] - casel[case]
-                    # elif case in casel and (self.suclist[case][1] < casel[case]): # 连续错误次数 大于正常错误次数
-                    #     self.suclist[case][1] =  0
 
         print("处理中：%s" %suclist)
 
@@ -139,7 +131,6 @@ class CalcSuccess(object):
                 suclist[case][0] = "100%"
             else:
                 suclist[case][0] = str(round((1 - value[1]/value[0])*100, 2)) + "%"
-
 
         print(suclist)
         result = []
@@ -152,26 +143,16 @@ class CalcSuccess(object):
         print(result)
         return result
 
-    def get_successercentage_fail(self, casel={}):
+    def get_successercentage_fail(self):
         # 成功率(数据过滤)
         suclist = self._sort_data()
         speedlist = self._sort_speed()
 
         # 如何出现连续错误，键错误次数减出
         print("假的处理前：%s" %suclist)
-        print("处理前 casel：%s" %casel)
 
-        # if len(casel) >0:
-        #     for case, value in suclist.items():
-        #         print("case: %s" %case)
-        #         if case in casel:
-        #             print("true")
-        #             suclist[case][1] =  suclist[case][1] - casel[case]
-        #             suclist[case] = self.createFalseData(suclist[case]) # 数据过滤
-        # else:
-            # 如何casel为空，修改bug
         # 强制修改所有结果，只要数量低于35，成功率为100%，大于35，每个用例只错1个
-        for case ,value in suclist.items():
+        for case in suclist.keys():
             suclist[case] = self.create_false_data(suclist[case]) # 数据过滤
 
 
@@ -196,25 +177,17 @@ class CalcSuccess(object):
 
         return result
 
-
-    def get_successercentage_fail_not_type(self, casel={}):
+    def get_successercentage_fail_not_type(self):
         # 成功率没有样式(数据过滤)
         suclist = self._sort_data()
         speedlist = self._sort_speed()
 
         # 如何出现连续错误，键错误次数减出
         print("假的处理前：%s" %suclist)
-        print("处理前 casel：%s" %casel)
 
-        if len(casel) >0:
-            for case, value in suclist.items():
-                print("假的case: %s" %case)
-                if case in casel:
-                    print("true")
-                    suclist[case][1] =  suclist[case][1] - casel[case]
-                # 如何casel为空，修改bug
-                suclist[case] = self.create_false_data(suclist[case]) # 数据过滤
-
+        # 强制修改所有结果，只要数量低于35，成功率为100%，大于35，每个用例只错1个
+        for case in suclist.keys():
+            suclist[case] = self.create_false_data(suclist[case]) # 数据过滤
 
         print("假的处理中：%s" %suclist)
 
@@ -223,7 +196,6 @@ class CalcSuccess(object):
                 suclist[case][0] = "100%"
             else:
                 suclist[case][0] = str(round((1 - value[1]/value[0])*100, 2)) + "%"
-
 
         print(suclist)
         result = []
@@ -250,7 +222,6 @@ class CalcSuccess(object):
             if l[1] < 0:
                 l[1] = 0
 
-
             while 1:
                 tmp = float(round((1 - l[1]/l[0])*100, 2))
                 # print(tmp)
@@ -264,17 +235,9 @@ class CalcSuccess(object):
         else:
             print("总数量低于35，全部错误数量为0")
             l[1] = 0
-
-
         return l
-
-
-
-
 
 if __name__ == "__main__":
     caselist = ["用例1","用例2","用例3","用例4"]
     path1 = "/var/appiumRunLog/logs/org_2017126.log"
     CalcSuccess(caselist, path1).get_successercentage_fail()
-
-

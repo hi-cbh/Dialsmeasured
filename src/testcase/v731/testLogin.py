@@ -28,10 +28,6 @@ class TestLogin(unittest.TestCase):
 
     def setUp(self):
         try:
-            # time.sleep(10)
-            # AppiumServer2().start_server()
-            # time.sleep(10)
-
             BaseAdb.adb_intall_uiautmator()
             self.driver = Psam()
         except BaseException as error:
