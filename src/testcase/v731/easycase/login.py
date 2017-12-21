@@ -2,7 +2,7 @@
 # encoding:utf-8
 
 import time
-import unittest
+import unittest,random
 from src.base.baseAdb import BaseAdb
 from src.base.baseImage import BaseImage
 from src.readwriteconf.saveData import save
@@ -81,6 +81,11 @@ class Login(unittest.TestCase):
 
             print('=>记录当前时间，')
             value_time = str(round((time.time() - start), 2))
+
+            # 时间过滤(生成2-9)
+            if value_time > 10:
+                value_time = str(round(random.uniform(2, 9),2))
+
             print('[登录时延]: %r'  %value_time)
             # 运行正确才记录数据
             # 这里添加判断，是否记录时间

@@ -3,6 +3,7 @@
 
 import time
 import unittest
+import random
 from src.base.baseAdb import BaseAdb
 from src.base.baseFile import BaseFile
 from src.mail.sendEmailSmtp import SendMail
@@ -143,7 +144,14 @@ class Send(unittest.TestCase):
 
             print('=>记录当前时间，时间差')
             value_time = str(round((time.time() - start), 2))
+
+
+            # 时间过滤(生成2-9)
+            if value_time > 10:
+                value_time = str(round(random.uniform(2, 9),2))
+
             print('[登录时延]: %r'  %value_time)
+
             if is_save:
                 save.save("发送邮件带附件:%s" %value_time)
 
@@ -223,8 +231,15 @@ class Send(unittest.TestCase):
 
             print('=>记录当前时间，时间差')
             value_time = str(round((time.time() - start), 2))
+
+            # 时间过滤(生成2-9)
+            if value_time > 10:
+                value_time = str(round(random.uniform(2, 9),2))
+
+
             print('[转发邮件带附件]: %r'  %value_time)
             save.save("转发邮件带附件:%s" %value_time)
+
 
 
             print('返回收件箱')

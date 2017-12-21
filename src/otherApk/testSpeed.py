@@ -7,7 +7,7 @@ from src.aserver.AppiumServer import AppiumServer2
 from src.base.baseAdb import BaseAdb
 from src.mail.mailOperation import EmailOperation
 from src.psam.psam import Psam
-from src.testcase.v722.easycase.login import Login
+from src.testcase.v731.easycase.login import Login
 from src.readwriteconf.initData import InitData
 from src.base.baseImage import BaseImage
 

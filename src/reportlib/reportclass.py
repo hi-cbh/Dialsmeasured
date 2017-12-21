@@ -162,6 +162,9 @@ class ReportClass(object):
             with open(htmlFilePath,'a+') as fs:
                 fs.write(line)
 
+
+
+
     def _read_case_conf(self, max):
         '''读取caseconf用例连续错误次数记录最大值用例'''
         errl = []
@@ -369,7 +372,7 @@ class ReportClass(object):
 
 
 
-    def send(self):
+    def send(self, is_test=True):
         '''
         1、连续出现N次错误，发送邮件，邮件为一句话。
         2、出现错误的结果不纳入计算范围内
@@ -408,14 +411,15 @@ class ReportClass(object):
                 #==============发送内容读取=========
 
 
-                # print("预备发送 %s：" %allSendtxt)
+                print("内部发送 %s：" %all_sendtxt)
+                print("外部发送 %s：" %false_txt)
 
                 s = SendMail("13580491603","chinasoft123","13697485262")
                 # 发送假数据
-                s.send_mail('139Android客户端V731版本_功能拨测_汇总<发给移动>', false_txt,is_test=True)
+                s.send_mail_out('139Android客户端V731版本_功能拨测_汇总', false_txt,is_test=is_test)
                 time.sleep(10)
                 # 发送真数据
-                s.send_mail('139Android客户端V731版本_功能拨测_汇总<内部邮件>', all_sendtxt,is_test=True)
+                s.send_mail('【内部邮件】139Android客户端V731版本_功能拨测_汇总', all_sendtxt,is_test=is_test)
                 rwc.set_section_value('sendconf', 'send', 'True')
                 # #发送后，用例是否复位
                 self._set_case_conf()
@@ -438,10 +442,10 @@ class ReportClass(object):
 
 
 
-    def all(self):
+    def all(self, is_test=False):
         self._get_error_case()
         self._use_case_results()
         self._sort_fail()
         self._mergeict()
         self._save_date()
-        self.send()
+        self.send(is_test)

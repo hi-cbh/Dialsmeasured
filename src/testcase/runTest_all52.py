@@ -46,7 +46,6 @@ if __name__ == "__main__":
     speed = ts.testCase()
     ts.tearDown()
 
-    # speed='调试中'
     # print("speed: %s" %speed)
     time.sleep(10)
 
