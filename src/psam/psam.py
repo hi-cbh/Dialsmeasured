@@ -12,8 +12,8 @@ class Psam(object):
         desired_caps['platformName'] = 'Android'
         desired_caps['platformVersion'] = version
         desired_caps['deviceName'] = 'android'
-        desired_caps['app_pkg'] = app_pkg
-        desired_caps['app_activity'] = app_activity
+        desired_caps['appPackage'] = app_pkg
+        desired_caps['appActivity'] = app_activity
         desired_caps['newCommandTimeout'] = 7200
         desired_caps["unicodeKeyboard"] = "True"
         desired_caps["resetKeyboard"] = "True"

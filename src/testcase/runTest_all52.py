@@ -1,14 +1,14 @@
 # urs/bin/python
 # encoding:utf-8
 
-import unittest,os,sys
-import time, datetime
+import unittest,os,sys,time
 
 
 # 添加环境路径，脚本
 p = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 print("path: %s" %p)
 sys.path.append(p+"/")
+# sys.path.append("/Users/apple/autoTest/workspace/DialsMeasured/")
 
 
 localPath = "/var/appiumRunLog"
