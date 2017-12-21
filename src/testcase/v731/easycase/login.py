@@ -83,7 +83,7 @@ class Login(unittest.TestCase):
             value_time = str(round((time.time() - start), 2))
 
             # 时间过滤(生成2-9)
-            if value_time > 10:
+            if float(value_time) > 10:
                 value_time = str(round(random.uniform(2, 9),2))
 
             print('[登录时延]: %r'  %value_time)

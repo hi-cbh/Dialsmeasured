@@ -140,14 +140,14 @@ class Send(unittest.TestCase):
 
 
             print('=>等待已完成出现')
-            self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",300) != None, "发送邮件失败！")
+            self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",120) != None, "发送邮件失败！")
 
             print('=>记录当前时间，时间差')
             value_time = str(round((time.time() - start), 2))
 
 
             # 时间过滤(生成2-9)
-            if value_time > 10:
+            if float(value_time) > 10:
                 value_time = str(round(random.uniform(2, 9),2))
 
             print('[登录时延]: %r'  %value_time)
@@ -227,13 +227,13 @@ class Send(unittest.TestCase):
 
 
             print('验证点：发送是否成功')
-            self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",120) != None, "发送邮件失败！")
+            self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",90) != None, "发送邮件失败！")
 
             print('=>记录当前时间，时间差')
             value_time = str(round((time.time() - start), 2))
 
             # 时间过滤(生成2-9)
-            if value_time > 10:
+            if float(value_time) > 10:
                 value_time = str(round(random.uniform(2, 9),2))
 
 
