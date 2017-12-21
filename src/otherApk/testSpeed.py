@@ -2,16 +2,11 @@
 # encoding:utf-8
 
 import os,time,unittest
-import configparser as cparser
-from src.aserver.AppiumServer import AppiumServer2
 from src.base.baseAdb import BaseAdb
-from src.mail.mailOperation import EmailOperation
 from src.psam.psam import Psam
-from src.testcase.v731.easycase.login import Login
 from src.readwriteconf.initData import InitData
 from src.base.baseImage import BaseImage
 
-# sys.path.append(r"/Users/apple/git/pytest/")
 
 d= InitData().get_users()
 print(d)
@@ -27,8 +22,8 @@ class TestSpeed(unittest.TestCase):
             BaseAdb.adb_clear('org.zwanoo.android.speedtest')
             time.sleep(5)
             BaseAdb.adb_intall_uiautmator()
-            self.driver = Psam('6.0',"org.zwanoo.android.speedtest","com.ookla.speedtest.softfacade.MainActivity")
-        except BaseException as error:
+            self.driver = Psam(version='6.0',app_pkg="org.zwanoo.android.speedtest",app_activity="com.ookla.speedtest.softfacade.MainActivity")
+        except BaseException:
             print("setUp启动出错！")
             self.driver.quit()
             self.fail("setUp启动出错！")
