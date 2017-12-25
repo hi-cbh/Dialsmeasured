@@ -309,6 +309,6 @@ class Psam(object):
 
 if __name__ == '__main__':
 
-    driver = Psam()
+    driver = Psam(version="5.0")
 
             
