@@ -54,6 +54,7 @@ class BaseTime(object):
 
         name = str(i.year) +str(i.month) + str(d)
         print(name)
+        return name
 
 BaseTime = BaseTime()
 

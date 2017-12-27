@@ -1,27 +1,27 @@
-# import unittest,os,sys
-# # 添加环境路径，脚本
-# p = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-# print("path: %s" %p)
-# sys.path.append(p+"/")
-#
-# import time, datetime
-# from src.base.baseTime import BaseTime
-# from src.readwriteconf.initData import InitData
-# from src.readwriteconf.saveData import save
-# from src.reportlib.reportclass import ReportClass
-#
-# from src.testcase.HTMLTestRunner import HTMLTestRunner
-# import random
-# localPath = InitData().get_sys_path()["savepath"]
-# # 信息存储路径
-# reportPath = localPath + "/report/"
-# logPath = localPath + "/logs/"
-# iniPath = localPath + '/ini/'
-#
-#
-# logfileName= BaseTime.get_date_hour() + '.log'
-#
-#
+import unittest,os,sys
+# 添加环境路径，脚本
+p = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+print("path: %s" %p)
+sys.path.append(p+"/")
+
+import time, datetime
+from src.base.baseTime import BaseTime
+from src.readwriteconf.initData import InitData
+from src.readwriteconf.saveData import save
+from src.reportlib.reportclass import ReportClass
+
+from src.testcase.HTMLTestRunner import HTMLTestRunner
+import random
+localPath = InitData().get_sys_path()["savepath"]
+# 信息存储路径
+reportPath = localPath + "/report/"
+logPath = localPath + "/logs/"
+iniPath = localPath + '/ini/'
+
+
+logfileName= BaseTime.get_date_hour() + '.log'
+
+
 #
 #
 # class MyTest(unittest.TestCase):
@@ -145,11 +145,3 @@
 #
 #
 #     ReportClass(testResultReport.failures,testtxt,speed,now).all(is_test=True)
-#
-
-import random
-
-
-value =round(random.uniform(2, 9),2)
-
-print(value)
