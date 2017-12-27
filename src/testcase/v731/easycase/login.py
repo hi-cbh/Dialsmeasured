@@ -99,8 +99,60 @@ class Login(unittest.TestCase):
             self.fail("【手动输入账号/密码-登录】出现错误")
             # 添加截图
 
-        # else:
-        #     self. 添加OK写入操作
+
+
+    def one_btn_Login(self, is_save=True):
+        '''一键登录'''
+        try:
+            '''最基础的登录'''
+            self.driver.reset()
+
+            time.sleep(4)
+
+            self.driver.swipe_right()
+            self.driver.swipe_right()
+            # self.driver.swipeRight()
+            print("点击坐标")
+            # BaseAdb.adbTap(700, 2300)  # vivo 1603  w * 0.5, h * 0.899
+            #
+            w = self.driver.get_window_size()['width']
+            h = self.driver.get_window_size()['height']
+
+            BaseAdb.adb_tap(w / 2, int(h * 0.899))
+            # BaseAdb.adbTap(500, 1700) #其他手机需要调试
+            time.sleep(4)
+
+            print("验证点：是否进入登录界面")
+            self.assertTrue(self.driver.get_element(u"uiautomator=>快速登录") != None, "页面不存在快捷登录按钮")
+
+
+            print('=>点击快捷登录')
+            self.driver.click(u"uiautomator=>快速登录")
+            start = time.time()
+
+            print('验证点：等待收件箱底部导航栏出现')
+            self.assertTrue(self.driver.get_element("id=>cn.cj.pe:id/message_list_bottom_email") != None, "登录失败！")
+
+            print('=>记录当前时间，')
+            value_time = str(round((time.time() - start), 2))
+
+            # 时间过滤(生成2-9)
+            if float(value_time) > 10:
+                value_time = str(round(random.uniform(2, 9),2))
+
+            print('[登录时延]: %r'  %value_time)
+            # 运行正确才记录数据
+            # 这里添加判断，是否记录时间
+            if is_save:
+                save.save("一键登录:%s" %value_time)
+
+        except BaseException as error:
+            BaseImage.screenshot(self.driver, "oneBtnLoginError")
+            # 超时，数据超时
+            time.sleep(5)
+            self.fail("【一键登录出错登录】出现错误")
+            # 添加截图
+
 
         # 用于记录时延的登录操作
     def login_action_time(self):

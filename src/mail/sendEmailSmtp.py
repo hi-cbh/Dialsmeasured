@@ -5,6 +5,14 @@ from email.mime.text import MIMEText
 from email.header import Header
 from email.utils import parseaddr, formataddr  
 # 格式化邮件地址
+
+#单个测试邮件
+tester = "13533348571@139.com"
+# 多个联系人
+mamEmail='13533348571@139.com,18022340679@139.com,13790383896@139.com'
+# 发给其他人的
+mamEmailOther='13533348571@139.com,18022340679@139.com,13790383896@139.com'
+
 class SendMail():
     '''单个接收者'''
     def __init__(self, username, pwd, receive):
@@ -52,9 +60,9 @@ class SendMail():
         from_mail = self.username + '@139.com'
         mail_pass = self.pwd
         if is_test:
-            areceiver = '13533348571@139.com'
+            areceiver = tester
         else:
-            areceiver = '13533348571@139.com,13501538531@139.com,wujun11121@163.com'
+            areceiver = mamEmail
 
         body = []
         for txt in message:
@@ -97,7 +105,7 @@ class SendMail():
         if is_test:
             areceiver = '13533348571@139.com'
         else:
-            areceiver = '13533348571@139.com,13501538531@139.com,wujun11121@163.com'
+            areceiver = mamEmailOther
 
         body = []
         for txt in message:
@@ -139,9 +147,9 @@ class SendMail():
         from_mail = self.username + '@139.com'
         mail_pass = self.pwd
         if is_test:
-            areceiver = '13533348571@139.com'
+            areceiver = tester
         else:
-            areceiver = '13533348571@139.com,13501538531@139.com,wujun11121@163.com'
+            areceiver = mamEmail
 
 
         body = []
