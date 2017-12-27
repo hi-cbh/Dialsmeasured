@@ -36,17 +36,24 @@ class BaseTime(object):
         # print ("当前秒是  %s" %i.second)
         '''
         ReadWriteConfFile.add_section('sendconf')
-        changetime = ReadWriteConfFile.get_section_value('sendconf', 'changetime', )
+        changetime = ReadWriteConfFile.get_section_value('sendconf', 'changetime' )
         changetime = int (changetime)
+
         i = datetime.datetime.now()
 
+        # 添加是否为发送状态
+        ReadWriteConfFile.add_section('sendconf')
+        send_status = ReadWriteConfFile.get_section_value('sendconf', 'send' )
+
         d = i.day
-        if i.hour >= changetime:
-            d = d+1
+        if changetime >= i.hour >= 0 and send_status == "False":
+            d = d
+        else:
+            d = d + 1
+
 
         name = str(i.year) +str(i.month) + str(d)
         print(name)
-        return name
 
 BaseTime = BaseTime()
 
