@@ -425,7 +425,8 @@ class ReportClass(object):
                 self._set_case_conf()
 
         else:
-            if rwc.get_section_value("sendconf", "send") == "True":
+            # 恢复邮件状态
+            if rwc.get_section_value("sendconf", "send") == "True" and changetime >= datetime.datetime.now().hour >= 0:
                 rwc.set_section_value('sendconf', 'send', 'False')
 
             maxtimes = rwc.get_section_value('sendconf', 'maxtimes')
