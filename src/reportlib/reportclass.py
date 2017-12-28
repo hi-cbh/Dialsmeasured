@@ -435,7 +435,7 @@ class ReportClass(object):
             if len(err) != 0:
                 errstr = ','.join(err) + "到目前为止，以上提及的功能出现多次错误，请及时查证"
                 s = SendMail("13580491603","chinasoft123","13697485262")
-                s.send_mail_str('139Android客户端V731版本_功能拨测_出现错误<内部邮件>',errstr,is_test=True)
+                s.send_mail_str('139Android客户端V731版本_功能拨测_出现错误<内部邮件>',errstr,is_test=is_test)
 
 
         print('运行结束')
