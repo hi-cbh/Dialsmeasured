@@ -1,0 +1,517 @@
+
+=====2017-12-27 18_09_37=====
+CMCC状态，网速测试结果如下，上传 5.98 Mbps , 下载 2.64 Mbps
+case：一键登录 , 时延：8.22, result：Success 
+case：接收推送 , 时延：10.24, result：Success 
+case：收件箱列表中精选 , 时延：1.93, result：Success 
+case：发送邮件带附件 , 时延：4.47, result：Success 
+case：联系人同步 , 时延：2.56, result：Success 
+case：附件下载 , 时延：1.89, result：Success 
+case：转发邮件带附件 , 时延：5.22, result：Success 
+case：账号登录 , 时延：3.02, result：Success 
+
+=====2017-12-27 18_29_44=====
+CMCC状态，网速测试结果如下，上传 6.38 Mbps , 下载 7.45 Mbps
+case：一键登录 , 时延：8.06, result：Success 
+case：联系人同步 , 时延：2.49, result：Success 
+case：转发邮件带附件 , 时延：3.04, result：Success 
+case：账号登录 , 时延：2.91, result：Success 
+case：接收推送 , 时延：10.25, result：Success 
+case：收件箱列表中精选 , 时延：1.9, result：Success 
+case：发送邮件带附件 , 时延：3.93, result：Success 
+case：附件下载 , 时延：2.32, result：Success 
+
+=====2017-12-27 18_49_34=====
+CMCC状态，网速测试结果如下，上传 5.91 Mbps , 下载 5.10 Mbps
+case：联系人同步 , 时延：2.54, result：Success 
+case：收件箱列表中精选 , 时延：5.01, result：Success 
+case：一键登录 , 时延：8.09, result：Success 
+case：附件下载 , 时延：0.99, result：Success 
+case：接收推送 , 时延：10.23, result：Success 
+case：账号登录 , 时延：2.98, result：Success 
+case：发送邮件带附件 , 时延：2.73, result：Success 
+case：转发邮件带附件 , 时延：3.03, result：Success 
+
+=====2017-12-27 19_09_50=====
+CMCC状态，网速测试结果如下，上传 0.84 Mbps , 下载 3.88 Mbps
+case：联系人同步 , 时延：2.54, result：Success 
+case：收件箱列表中精选 , 时延：1.87, result：Success 
+case：账号登录 , 时延：2.81, result：Success 
+case：接收推送 , 时延：10.25, result：Success 
+case：一键登录 , result：Fail 
+case：附件下载 , 时延：1.33, result：Success 
+case：转发邮件带附件 , 时延：2.91, result：Success 
+case：发送邮件带附件 , 时延：3.42, result：Success 
+
+=====2017-12-27 19_31_45=====
+CMCC状态，网速测试结果如下，上传 9.49 Mbps , 下载 8.99 Mbps
+case：转发邮件带附件 , 时延：3.04, result：Success 
+case：账号登录 , 时延：2.91, result：Success 
+case：一键登录 , 时延：7.91, result：Success 
+case：接收推送 , 时延：10.23, result：Success 
+case：附件下载 , 时延：2.09, result：Success 
+case：发送邮件带附件 , 时延：2.79, result：Success 
+case：联系人同步 , 时延：2.55, result：Success 
+case：收件箱列表中精选 , 时延：19.06, result：Success 
+
+=====2017-12-27 19_49_52=====
+CMCC状态，网速测试结果如下，上传 1.27 Mbps , 下载 2.75 Mbps
+case：一键登录 , 时延：8.21, result：Success 
+case：接收推送 , 时延：10.26, result：Success 
+case：联系人同步 , 时延：2.52, result：Success 
+case：收件箱列表中精选 , 时延：2.97, result：Success 
+case：发送邮件带附件 , 时延：3.83, result：Success 
+case：附件下载 , 时延：3.5, result：Success 
+case：账号登录 , 时延：3.15, result：Success 
+case：转发邮件带附件 , 时延：3.11, result：Success 
+
+=====2017-12-27 20_29_42=====
+CMCC状态，网速测试结果如下，上传 2.35 Mbps , 下载 6.21 Mbps
+case：附件下载 , 时延：2.07, result：Success 
+case：收件箱列表中精选 , 时延：2.91, result：Success 
+case：转发邮件带附件 , 时延：3.88, result：Success 
+case：一键登录 , result：Fail 
+case：发送邮件带附件 , 时延：2.92, result：Success 
+case：联系人同步 , 时延：2.48, result：Success 
+case：接收推送 , 时延：10.24, result：Success 
+case：账号登录 , 时延：3.04, result：Success 
+
+=====2017-12-27 20_49_43=====
+CMCC状态，网速测试结果如下，上传 2.18 Mbps , 下载 2.66 Mbps
+case：接收推送 , 时延：10.25, result：Success 
+case：转发邮件带附件 , 时延：3.17, result：Success 
+case：一键登录 , result：Fail 
+case：收件箱列表中精选 , 时延：6.07, result：Success 
+case：账号登录 , 时延：3.01, result：Success 
+case：联系人同步 , 时延：2.49, result：Success 
+case：附件下载 , 时延：1.66, result：Success 
+case：发送邮件带附件 , 时延：2.26, result：Success 
+
+=====2017-12-27 21_09_35=====
+CMCC状态，网速测试结果如下，上传 9.29 Mbps , 下载 9.72 Mbps
+case：转发邮件带附件 , 时延：3.67, result：Success 
+case：联系人同步 , 时延：2.55, result：Success 
+case：附件下载 , 时延：1.32, result：Success 
+case：接收推送 , 时延：10.26, result：Success 
+case：账号登录 , 时延：3.04, result：Success 
+case：发送邮件带附件 , 时延：2.79, result：Success 
+case：收件箱列表中精选 , 时延：2.95, result：Success 
+case：一键登录 , 时延：8.06, result：Success 
+
+=====2017-12-27 21_29_41=====
+CMCC状态，网速测试结果如下，上传 2.37 Mbps , 下载 5.56 Mbps
+case：转发邮件带附件 , 时延：3.04, result：Success 
+case：发送邮件带附件 , 时延：3.86, result：Success 
+case：一键登录 , result：Fail 
+case：接收推送 , 时延：10.24, result：Success 
+case：账号登录 , 时延：2.87, result：Success 
+case：附件下载 , 时延：1.54, result：Success 
+case：收件箱列表中精选 , 时延：8.38, result：Success 
+case：联系人同步 , 时延：2.52, result：Success 
+
+=====2017-12-27 21_49_35=====
+CMCC状态，网速测试结果如下，上传 6.14 Mbps , 下载 6.53 Mbps
+case：收件箱列表中精选 , 时延：5.04, result：Success 
+case：发送邮件带附件 , 时延：2.69, result：Success 
+case：附件下载 , 时延：1.86, result：Success 
+case：账号登录 , 时延：2.75, result：Success 
+case：接收推送 , 时延：10.24, result：Success 
+case：一键登录 , 时延：3.58, result：Success 
+case：联系人同步 , 时延：2.53, result：Success 
+case：转发邮件带附件 , 时延：3.0, result：Success 
+
+=====2017-12-27 22_29_36=====
+CMCC状态，网速测试结果如下，上传 4.62 Mbps , 下载 9.19 Mbps
+case：一键登录 , 时延：8.14, result：Success 
+case：转发邮件带附件 , 时延：2.87, result：Success 
+case：联系人同步 , 时延：2.5, result：Success 
+case：账号登录 , 时延：3.24, result：Success 
+case：发送邮件带附件 , 时延：2.68, result：Success 
+case：附件下载 , 时延：1.72, result：Success 
+case：收件箱列表中精选 , 时延：1.85, result：Success 
+case：接收推送 , 时延：10.26, result：Success 
+
+=====2017-12-27 22_49_37=====
+CMCC状态，网速测试结果如下，上传 4.87 Mbps , 下载 1.86 Mbps
+case：附件下载 , 时延：1.54, result：Success 
+case：接收推送 , 时延：10.25, result：Success 
+case：一键登录 , result：Fail 
+case：收件箱列表中精选 , 时延：1.97, result：Success 
+case：发送邮件带附件 , 时延：3.57, result：Success 
+case：转发邮件带附件 , 时延：3.37, result：Success 
+case：联系人同步 , 时延：2.45, result：Success 
+case：账号登录 , 时延：2.78, result：Success 
+
+=====2017-12-27 23_09_35=====
+CMCC状态，网速测试结果如下，上传 9.21 Mbps , 下载 9.61 Mbps
+case：账号登录 , 时延：2.95, result：Success 
+case：联系人同步 , 时延：2.61, result：Success 
+case：转发邮件带附件 , 时延：3.07, result：Success 
+case：发送邮件带附件 , 时延：2.73, result：Success 
+case：接收推送 , 时延：10.25, result：Success 
+case：收件箱列表中精选 , 时延：2.94, result：Success 
+case：一键登录 , 时延：8.18, result：Success 
+case：附件下载 , 时延：1.72, result：Success 
+
+=====2017-12-27 23_29_36=====
+CMCC状态，网速测试结果如下，上传 6.40 Mbps , 下载 5.72 Mbps
+case：附件下载 , 时延：1.13, result：Success 
+case：转发邮件带附件 , 时延：2.7, result：Success 
+case：一键登录 , 时延：5.94, result：Success 
+case：收件箱列表中精选 , 时延：1.8, result：Success 
+case：接收推送 , 时延：10.26, result：Success 
+case：联系人同步 , 时延：2.54, result：Success 
+case：账号登录 , result：Fail 
+case：发送邮件带附件 , 时延：4.45, result：Success 
+
+=====2017-12-27 23_49_35=====
+CMCC状态，网速测试结果如下，上传 9.47 Mbps , 下载 9.66 Mbps
+case：接收推送 , 时延：10.29, result：Success 
+case：一键登录 , 时延：3.39, result：Success 
+case：收件箱列表中精选 , 时延：1.84, result：Success 
+case：联系人同步 , 时延：2.53, result：Success 
+case：转发邮件带附件 , 时延：3.93, result：Success 
+case：附件下载 , result：Success 
+case：账号登录 , 时延：2.85, result：Success 
+case：发送邮件带附件 , 时延：3.8, result：Success 
+
+=====2017-12-28 01_09_35=====
+CMCC状态，网速测试结果如下，上传 6.28 Mbps , 下载 7.36 Mbps
+case：转发邮件带附件 , 时延：3.26, result：Success 
+case：账号登录 , 时延：2.88, result：Success 
+case：收件箱列表中精选 , 时延：1.88, result：Success 
+case：附件下载 , 时延：1.1, result：Success 
+case：接收推送 , 时延：10.27, result：Success 
+case：一键登录 , result：Fail 
+case：联系人同步 , 时延：2.51, result：Success 
+case：发送邮件带附件 , 时延：3.31, result：Success 
+
+=====2017-12-28 01_29_35=====
+CMCC状态，网速测试结果如下，上传 5.50 Mbps , 下载 8.83 Mbps
+case：联系人同步 , 时延：2.53, result：Success 
+case：收件箱列表中精选 , 时延：1.82, result：Success 
+case：转发邮件带附件 , 时延：3.26, result：Success 
+case：附件下载 , 时延：1.17, result：Success 
+case：发送邮件带附件 , 时延：2.89, result：Success 
+case：接收推送 , 时延：10.27, result：Success 
+case：账号登录 , 时延：2.96, result：Success 
+case：一键登录 , 时延：3.45, result：Success 
+
+=====2017-12-28 01_49_35=====
+CMCC状态，网速测试结果如下，上传 6.50 Mbps , 下载 2.44 Mbps
+case：一键登录 , 时延：9.24, result：Success 
+case：附件下载 , 时延：0.95, result：Success 
+case：收件箱列表中精选 , result：Fail 
+case：账号登录 , 时延：2.93, result：Success 
+case：接收推送 , 时延：10.25, result：Success 
+case：转发邮件带附件 , 时延：4.75, result：Success 
+case：联系人同步 , 时延：2.55, result：Success 
+case：发送邮件带附件 , 时延：4.27, result：Success 
+
+=====2017-12-28 02_09_35=====
+CMCC状态，网速测试结果如下，上传 6.89 Mbps , 下载 7.50 Mbps
+case：收件箱列表中精选 , 时延：1.79, result：Success 
+case：附件下载 , 时延：0.94, result：Success 
+case：接收推送 , 时延：10.22, result：Success 
+case：转发邮件带附件 , 时延：3.15, result：Success 
+case：联系人同步 , 时延：2.58, result：Success 
+case：一键登录 , 时延：8.11, result：Success 
+case：发送邮件带附件 , 时延：3.34, result：Success 
+case：账号登录 , 时延：2.77, result：Success 
+
+=====2017-12-28 02_29_35=====
+CMCC状态，网速测试结果如下，上传 9.54 Mbps , 下载 9.71 Mbps
+case：转发邮件带附件 , 时延：3.13, result：Success 
+case：收件箱列表中精选 , 时延：1.87, result：Success 
+case：附件下载 , 时延：1.69, result：Success 
+case：账号登录 , 时延：2.98, result：Success 
+case：发送邮件带附件 , 时延：3.62, result：Success 
+case：一键登录 , 时延：8.61, result：Success 
+case：联系人同步 , 时延：2.57, result：Success 
+case：接收推送 , 时延：10.26, result：Success 
+
+=====2017-12-28 02_49_35=====
+CMCC状态，网速测试结果如下，上传 9.66 Mbps , 下载 9.68 Mbps
+case：接收推送 , 时延：10.28, result：Success 
+case：联系人同步 , 时延：2.51, result：Success 
+case：收件箱列表中精选 , 时延：1.86, result：Success 
+case：转发邮件带附件 , 时延：2.92, result：Success 
+case：账号登录 , 时延：2.94, result：Success 
+case：发送邮件带附件 , 时延：2.69, result：Success 
+case：一键登录 , 时延：8.22, result：Success 
+case：附件下载 , 时延：1.14, result：Success 
+
+=====2017-12-28 03_09_35=====
+CMCC状态，网速测试结果如下，上传 5.34 Mbps , 下载 6.48 Mbps
+case：转发邮件带附件 , 时延：3.06, result：Success 
+case：发送邮件带附件 , 时延：3.59, result：Success 
+case：联系人同步 , 时延：2.53, result：Success 
+case：接收推送 , 时延：10.29, result：Success 
+case：附件下载 , 时延：1.53, result：Success 
+case：一键登录 , 时延：8.0, result：Success 
+case：收件箱列表中精选 , 时延：1.87, result：Success 
+case：账号登录 , 时延：2.84, result：Success 
+
+=====2017-12-28 03_29_35=====
+CMCC状态，网速测试结果如下，上传 9.18 Mbps , 下载 9.77 Mbps
+case：附件下载 , 时延：1.38, result：Success 
+case：一键登录 , 时延：6.15, result：Success 
+case：账号登录 , 时延：2.69, result：Success 
+case：转发邮件带附件 , 时延：3.43, result：Success 
+case：收件箱列表中精选 , 时延：1.93, result：Success 
+case：发送邮件带附件 , 时延：3.02, result：Success 
+case：联系人同步 , 时延：2.57, result：Success 
+case：接收推送 , 时延：10.24, result：Success 
+
+=====2017-12-28 03_49_36=====
+CMCC状态，网速测试结果如下，上传 4.71 Mbps , 下载 9.71 Mbps
+case：转发邮件带附件 , 时延：2.91, result：Success 
+case：收件箱列表中精选 , 时延：1.84, result：Success 
+case：发送邮件带附件 , 时延：2.69, result：Success 
+case：联系人同步 , 时延：2.57, result：Success 
+case：附件下载 , 时延：1.31, result：Success 
+case：接收推送 , 时延：10.23, result：Success 
+case：账号登录 , 时延：2.97, result：Success 
+case：一键登录 , 时延：5.49, result：Success 
+
+=====2017-12-28 04_09_35=====
+CMCC状态，网速测试结果如下，上传 9.48 Mbps , 下载 9.78 Mbps
+case：发送邮件带附件 , 时延：3.01, result：Success 
+case：附件下载 , 时延：1.91, result：Success 
+case：一键登录 , 时延：8.04, result：Success 
+case：联系人同步 , 时延：2.53, result：Success 
+case：收件箱列表中精选 , 时延：1.83, result：Success 
+case：转发邮件带附件 , 时延：3.69, result：Success 
+case：账号登录 , 时延：3.36, result：Success 
+case：接收推送 , 时延：10.28, result：Success 
+
+=====2017-12-28 04_29_35=====
+CMCC状态，网速测试结果如下，上传 9.52 Mbps , 下载 9.66 Mbps
+case：接收推送 , 时延：10.25, result：Success 
+case：收件箱列表中精选 , 时延：1.82, result：Success 
+case：一键登录 , 时延：8.31, result：Success 
+case：联系人同步 , 时延：2.49, result：Success 
+case：附件下载 , 时延：1.55, result：Success 
+case：发送邮件带附件 , 时延：3.11, result：Success 
+case：账号登录 , 时延：2.71, result：Success 
+case：转发邮件带附件 , 时延：3.36, result：Success 
+
+=====2017-12-28 04_49_35=====
+CMCC状态，网速测试结果如下，上传 9.61 Mbps , 下载 10.01 Mbps
+case：发送邮件带附件 , 时延：3.09, result：Success 
+case：接收推送 , 时延：10.27, result：Success 
+case：联系人同步 , 时延：2.49, result：Success 
+case：附件下载 , 时延：1.7, result：Success 
+case：转发邮件带附件 , 时延：2.85, result：Success 
+case：账号登录 , 时延：2.8, result：Success 
+case：一键登录 , 时延：8.12, result：Success 
+case：收件箱列表中精选 , 时延：1.76, result：Success 
+
+=====2017-12-28 05_09_40=====
+CMCC状态，网速测试结果如下，上传 4.13 Mbps , 下载 3.04 Mbps
+case：发送邮件带附件 , 时延：4.39, result：Success 
+case：附件下载 , 时延：1.54, result：Success 
+case：联系人同步 , 时延：2.53, result：Success 
+case：收件箱列表中精选 , 时延：1.94, result：Success 
+case：转发邮件带附件 , 时延：2.96, result：Success 
+case：接收推送 , 时延：10.26, result：Success 
+case：账号登录 , 时延：2.96, result：Success 
+case：一键登录 , 时延：8.15, result：Success 
+
+=====2017-12-28 05_29_35=====
+CMCC状态，网速测试结果如下，上传 9.54 Mbps , 下载 9.71 Mbps
+case：转发邮件带附件 , 时延：3.3, result：Success 
+case：联系人同步 , 时延：2.52, result：Success 
+case：附件下载 , 时延：0.77, result：Success 
+case：发送邮件带附件 , 时延：3.37, result：Success 
+case：一键登录 , 时延：7.95, result：Success 
+case：收件箱列表中精选 , 时延：1.81, result：Success 
+case：接收推送 , 时延：10.27, result：Success 
+case：账号登录 , 时延：2.82, result：Success 
+
+=====2017-12-28 05_49_35=====
+CMCC状态，网速测试结果如下，上传 9.81 Mbps , 下载 10.03 Mbps
+case：账号登录 , 时延：2.79, result：Success 
+case：附件下载 , 时延：1.34, result：Success 
+case：收件箱列表中精选 , 时延：1.79, result：Success 
+case：接收推送 , 时延：10.27, result：Success 
+case：一键登录 , 时延：8.03, result：Success 
+case：联系人同步 , result：Fail 
+case：转发邮件带附件 , 时延：4.76, result：Success 
+case：发送邮件带附件 , 时延：4.13, result：Fail 
+
+=====2017-12-28 06_09_58=====
+CMCC状态，网速测试结果如下，上传 2.45 Mbps , 下载 0.39 Mbps
+case：发送邮件带附件 , 时延：3.59, result：Success 
+case：收件箱列表中精选 , 时延：1.77, result：Success 
+case：账号登录 , 时延：3.2, result：Success 
+case：接收推送 , 时延：10.25, result：Success 
+case：一键登录 , 时延：5.77, result：Success 
+case：转发邮件带附件 , 时延：2.93, result：Success 
+case：附件下载 , 时延：1.69, result：Success 
+case：联系人同步 , 时延：2.55, result：Success 
+
+=====2017-12-28 06_29_43=====
+CMCC状态，网速测试结果如下，上传 9.59 Mbps , 下载 9.96 Mbps
+case：转发邮件带附件 , 时延：2.92, result：Success 
+case：附件下载 , 时延：1.91, result：Success 
+case：收件箱列表中精选 , 时延：1.87, result：Success 
+case：发送邮件带附件 , 时延：4.08, result：Success 
+case：联系人同步 , 时延：2.47, result：Success 
+case：账号登录 , 时延：2.12, result：Success 
+case：接收推送 , 时延：10.25, result：Success 
+case：一键登录 , 时延：8.22, result：Success 
+
+=====2017-12-28 06_49_45=====
+CMCC状态，网速测试结果如下，上传 7.01 Mbps , 下载 9.86 Mbps
+case：一键登录 , 时延：7.97, result：Success 
+case：账号登录 , 时延：2.78, result：Success 
+case：收件箱列表中精选 , 时延：1.91, result：Success 
+case：附件下载 , 时延：1.1, result：Success 
+case：发送邮件带附件 , 时延：3.47, result：Success 
+case：转发邮件带附件 , 时延：3.47, result：Success 
+case：接收推送 , 时延：10.29, result：Success 
+case：联系人同步 , 时延：2.53, result：Success 
+
+=====2017-12-28 07_09_55=====
+CMCC状态，网速测试结果如下，上传 4.76 Mbps , 下载 5.22 Mbps
+case：转发邮件带附件 , 时延：3.04, result：Success 
+case：账号登录 , 时延：2.86, result：Success 
+case：接收推送 , 时延：10.27, result：Success 
+case：一键登录 , 时延：7.8, result：Success 
+case：附件下载 , 时延：1.33, result：Success 
+case：发送邮件带附件 , 时延：3.7, result：Success 
+case：联系人同步 , 时延：2.5, result：Success 
+case：收件箱列表中精选 , 时延：1.84, result：Success 
+
+=====2017-12-28 07_29_35=====
+CMCC状态，网速测试结果如下，上传 9.74 Mbps , 下载 6.77 Mbps
+case：转发邮件带附件 , 时延：2.86, result：Success 
+case：联系人同步 , 时延：2.5, result：Success 
+case：一键登录 , 时延：8.32, result：Success 
+case：附件下载 , 时延：1.88, result：Success 
+case：发送邮件带附件 , 时延：2.61, result：Success 
+case：接收推送 , 时延：10.26, result：Success 
+case：账号登录 , 时延：2.67, result：Success 
+case：收件箱列表中精选 , 时延：1.85, result：Success 
+
+=====2017-12-28 07_49_36=====
+CMCC状态，网速测试结果如下，上传 9.44 Mbps , 下载 9.78 Mbps
+case：一键登录 , 时延：8.23, result：Success 
+case：转发邮件带附件 , 时延：4.16, result：Success 
+case：收件箱列表中精选 , 时延：1.88, result：Success 
+case：联系人同步 , 时延：2.48, result：Success 
+case：账号登录 , 时延：2.89, result：Success 
+case：发送邮件带附件 , 时延：2.69, result：Success 
+case：附件下载 , 时延：1.68, result：Success 
+case：接收推送 , 时延：10.26, result：Success 
+
+=====2017-12-28 08_09_43=====
+CMCC状态，网速测试结果如下，上传 0.59 Mbps , 下载 3.58 Mbps
+case：附件下载 , 时延：1.76, result：Success 
+case：接收推送 , 时延：10.26, result：Success 
+case：收件箱列表中精选 , 时延：1.81, result：Success 
+case：联系人同步 , 时延：2.57, result：Success 
+case：一键登录 , 时延：7.95, result：Success 
+case：转发邮件带附件 , 时延：3.24, result：Success 
+case：账号登录 , 时延：2.81, result：Success 
+case：发送邮件带附件 , 时延：3.09, result：Success 
+
+=====2017-12-28 08_29_36=====
+CMCC状态，网速测试结果如下，上传 9.33 Mbps , 下载 9.77 Mbps
+case：收件箱列表中精选 , 时延：3.92, result：Success 
+case：发送邮件带附件 , 时延：2.93, result：Success 
+case：账号登录 , 时延：2.89, result：Success 
+case：接收推送 , 时延：10.24, result：Success 
+case：转发邮件带附件 , 时延：3.12, result：Success 
+case：附件下载 , 时延：1.36, result：Success 
+case：一键登录 , 时延：8.25, result：Success 
+case：联系人同步 , 时延：2.49, result：Success 
+
+=====2017-12-28 08_49_42=====
+CMCC状态，网速测试结果如下，上传 0.89 Mbps , 下载 4.78 Mbps
+case：收件箱列表中精选 , 时延：1.8, result：Success 
+case：一键登录 , 时延：7.89, result：Success 
+case：接收推送 , 时延：10.24, result：Success 
+case：附件下载 , 时延：1.34, result：Success 
+case：转发邮件带附件 , 时延：3.49, result：Success 
+case：联系人同步 , 时延：2.53, result：Success 
+case：发送邮件带附件 , 时延：3.91, result：Success 
+case：账号登录 , 时延：2.98, result：Success 
+
+=====2017-12-28 09_09_39=====
+CMCC状态，网速测试结果如下，上传 5.34 Mbps , 下载 6.65 Mbps
+case：收件箱列表中精选 , 时延：19.82, result：Success 
+case：一键登录 , 时延：8.26, result：Success 
+case：附件下载 , 时延：1.75, result：Success 
+case：接收推送 , 时延：10.28, result：Success 
+case：发送邮件带附件 , 时延：4.61, result：Success 
+case：联系人同步 , 时延：2.51, result：Success 
+case：账号登录 , 时延：3.12, result：Success 
+case：转发邮件带附件 , 时延：3.12, result：Success 
+
+=====2017-12-28 09_29_36=====
+CMCC状态，网速测试结果如下，上传 9.28 Mbps , 下载 9.73 Mbps
+case：附件下载 , 时延：1.51, result：Success 
+case：一键登录 , 时延：7.95, result：Success 
+case：转发邮件带附件 , 时延：3.76, result：Success 
+case：账号登录 , 时延：2.64, result：Success 
+case：接收推送 , 时延：10.27, result：Success 
+case：发送邮件带附件 , 时延：2.91, result：Success 
+case：联系人同步 , 时延：2.55, result：Success 
+case：收件箱列表中精选 , result：Fail 
+
+=====2017-12-28 09_49_48=====
+CMCC状态，网速测试结果如下，上传 1.75 Mbps , 下载 6.11 Mbps
+case：接收推送 , 时延：10.26, result：Success 
+case：一键登录 , 时延：8.05, result：Success 
+case：收件箱列表中精选 , result：Fail 
+case：附件下载 , 时延：3.68, result：Success 
+case：账号登录 , 时延：2.76, result：Success 
+case：联系人同步 , 时延：2.52, result：Success 
+case：发送邮件带附件 , 时延：4.39, result：Success 
+case：转发邮件带附件 , 时延：3.91, result：Success 
+
+=====2017-12-28 10_11_44=====
+CMCC状态，网速测试结果如下，上传 5.90 Mbps , 下载 9.19 Mbps
+case：收件箱列表中精选 , result：Fail 
+case：转发邮件带附件 , 时延：2.95, result：Success 
+case：接收推送 , 时延：10.25, result：Success 
+case：账号登录 , 时延：3.13, result：Success 
+case：一键登录 , 时延：8.39, result：Success 
+case：发送邮件带附件 , 时延：4.97, result：Success 
+case：联系人同步 , 时延：2.52, result：Success 
+case：附件下载 , 时延：1.86, result：Success 
+
+=====2017-12-28 10_29_53=====
+CMCC状态，网速测试结果如下，上传 3.63 Mbps , 下载 2.36 Mbps
+case：发送邮件带附件 , 时延：3.72, result：Success 
+case：附件下载 , 时延：2.1, result：Success 
+case：收件箱列表中精选 , result：Fail 
+case：接收推送 , 时延：10.25, result：Success 
+case：联系人同步 , 时延：2.55, result：Success 
+case：一键登录 , 时延：8.24, result：Success 
+case：转发邮件带附件 , 时延：3.84, result：Success 
+case：账号登录 , 时延：4.25, result：Success 
+
+=====2017-12-28 10_49_55=====
+CMCC状态，网速测试结果如下，上传 8.34 Mbps , 下载 9.66 Mbps
+case：接收推送 , 时延：10.24, result：Success 
+case：附件下载 , 时延：2.22, result：Success 
+case：联系人同步 , 时延：2.52, result：Success 
+case：转发邮件带附件 , 时延：5.15, result：Success 
+case：一键登录 , 时延：8.94, result：Success 
+case：收件箱列表中精选 , result：Fail 
+case：发送邮件带附件 , 时延：2.89, result：Success 
+case：账号登录 , 时延：3.16, result：Success 
+
+=====2017-12-28 11_09_40=====
+CMCC状态，网速测试结果如下，上传 6.07 Mbps , 下载 6.74 Mbps
+case：发送邮件带附件 , 时延：3.49, result：Success 
+case：收件箱列表中精选 , result：Fail 
+case：转发邮件带附件 , 时延：3.29, result：Success 
+case：联系人同步 , 时延：2.52, result：Success 
+case：账号登录 , 时延：2.98, result：Success 
+case：一键登录 , 时延：8.23, result：Success 
+case：附件下载 , 时延：1.52, result：Success 
+case：接收推送 , 时延：10.23, result：Success 

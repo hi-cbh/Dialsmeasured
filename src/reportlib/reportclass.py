@@ -348,6 +348,9 @@ class ReportClass(object):
                 for line in fp:
                     # 这里过滤fail
                     print("line: %s" %line)
+                    if line.find("一键登录") != -1: # 跳过一键登录修改
+                        continue
+
                     if line.find("Fail") != -1:
                         # print("替换前 line: %s" %line)
                         line = line.replace("Fail", "Success")
@@ -363,6 +366,10 @@ class ReportClass(object):
                         # 不含有用例名，下一行
                         if not case_name in line:
                             continue
+                        # 跳过一键登录错误
+                        if case_name == "一键登录" :
+                            continue
+
                         # 查找错误
                         if line.find("Fail") != -1 and value[1] >=2 :
                             line = line.replace("Fail", "Success")

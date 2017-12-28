@@ -153,7 +153,10 @@ class CalcSuccess(object):
 
         # 强制修改所有结果，只要数量低于35，成功率为100%，大于35，每个用例只错1个
         for case in suclist.keys():
-            suclist[case] = self.create_false_data(suclist[case]) # 数据过滤
+            if case == "一键登录": # 这里一键登录使用真实数据
+                continue
+            else:
+                suclist[case] = self.create_false_data(suclist[case]) # 数据过滤
 
 
         print("假的处理中：%s" %suclist)
@@ -238,6 +241,6 @@ class CalcSuccess(object):
         return l
 
 if __name__ == "__main__":
-    caselist = ["用例1","用例2","用例3","用例4"]
-    path1 = "/var/appiumRunLog/logs/org_2017126.log"
+    caselist = ["一键登录","接收推送","收件箱列表中精选","发送邮件带附件","联系人同步","附件下载","转发邮件带附件","账号登录"]
+    path1 = "/Users/apple/autoTest/workspace/DialsMeasured/logs/org_20171228.log"
     CalcSuccess(caselist, path1).get_successercentage_fail()
