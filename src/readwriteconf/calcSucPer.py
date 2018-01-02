@@ -35,6 +35,22 @@ class CalcSuccess(object):
 
         return suclist
 
+
+    def get_run_time(self):
+        '''获取最大运行次数'''
+        suclist = self._sort_data()
+        l = []
+        for casetimes, value in suclist.items():
+            l.append(value[0])
+            print(casetimes)
+
+        print("-----")
+        print(max(l))
+
+        return max(l)
+
+
+
     def _sort_speed(self):
         speedlist = [] # 速度统计
         # 数据筛选，速度

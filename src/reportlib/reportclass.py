@@ -256,6 +256,7 @@ class ReportClass(object):
         cs = CalcSuccess(ReportClass._testcaselist,orgFilePath)
 
         write_time = "====="+BaseTime.get_current_time() + "  当天运行记录结果汇总===== \n"
+        write_run_time = "\n昨天18时 - 今天18时，总共运行测试为：" + str(cs.get_run_time())
         write_line = "\n注意：若出现连续出错的功能时，该错误次数不纳入计算范围 \n=====详细结果如下====="
 
         # 真实数据
@@ -268,6 +269,7 @@ class ReportClass(object):
             for cline in cs.get_successercentage(caselt):
                 fq.write(cline)
             # 说明
+            fq.write(write_run_time)
             fq.write(write_line)
 
             # 读取详细文件，拷贝到其他文件
@@ -283,6 +285,7 @@ class ReportClass(object):
             # 写入成功率及时延<无样式>
             for cline in cs.get_successercentage_not_type(caselt):
                 fq.write(cline)
+            fq.write(write_run_time)
             fq.write(write_line)
 
             # 读取详细文件，拷贝到其他文件
@@ -303,6 +306,7 @@ class ReportClass(object):
         cs = CalcSuccess(ReportClass._testcaselist,orgFilePath)
 
         write_time = "====="+BaseTime.get_current_time() + "  当天运行记录结果汇总===== \n"
+        write_run_time = "\n昨天18时 - 今天18时，总共运行测试为：" + str(cs.get_run_time())
         write_line = "\n注意：若出现连续出错的功能时，该错误次数不纳入计算范围 \n=====详细结果如下====="
 
 
@@ -313,6 +317,7 @@ class ReportClass(object):
             fq1.write(write_time)
             for cline in cs.get_successercentage_fail():
                 fq1.write(cline)
+            fq1.write(write_run_time)
             fq1.write(write_line)
 
         # 替换Fail为success
@@ -326,6 +331,7 @@ class ReportClass(object):
             fq1.write(write_time)
             for cline in cs.get_successercentage_fail_not_type():
                 fq1.write(cline)
+            fq1.write(write_run_time)
             fq1.write(write_line)
 
         # 这里修改Fail字段
