@@ -115,7 +115,7 @@ class MyTest2(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    for tmv in range(3):
+    for tmv in range(1):
 
         speed = ''
 

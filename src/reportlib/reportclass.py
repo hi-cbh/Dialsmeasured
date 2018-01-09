@@ -255,8 +255,16 @@ class ReportClass(object):
         # 计算成功率
         cs = CalcSuccess(ReportClass._testcaselist,orgFilePath)
 
-        write_time = "====="+BaseTime.get_current_time() + "  当天运行记录结果汇总===== \n"
-        write_run_time = "昨日18时至今天18时，总共运行次数为：" + str(cs.get_run_time()) + " 次。"
+        write_time = "===== "+BaseTime.get_current_time() + " 当天运行记录结果汇总===== \n"
+
+        rwc.add_section('sendconf')
+        morning = rwc.get_section_value('sendconf', 'morning')
+        morning = int (morning)
+        if morning != datetime.datetime.now().hour:
+            write_run_time = "昨日18时至今天18时，总共运行次数为：" + str(cs.get_run_time()) + " 次。"
+        else:
+            write_run_time = "昨日18时至今天"+ str(morning) +"时，总共运行次数为：" + str(cs.get_run_time()) + " 次。"
+
         write_line = "\n注意：若出现连续出错的功能时，该错误次数不纳入计算范围，"+ write_run_time +"\n=====详细结果如下====="
 
         # 真实数据
@@ -304,7 +312,14 @@ class ReportClass(object):
         cs = CalcSuccess(ReportClass._testcaselist,orgFilePath)
 
         write_time = "====="+BaseTime.get_current_time() + "  当天运行记录结果汇总===== \n"
-        write_run_time = "昨日18时至今天18时，总共运行次数为：" + str(cs.get_run_time()) + " 次。"
+
+        rwc.add_section('sendconf')
+        morning = rwc.get_section_value('sendconf', 'morning')
+        morning = int (morning)
+        if morning != datetime.datetime.now().hour:
+            write_run_time = "昨日18时至今天18时，总共运行次数为：" + str(cs.get_run_time()) + " 次。"
+        else:
+            write_run_time = "昨日18时至今天"+ str(morning) +"时，总共运行次数为：" + str(cs.get_run_time()) + " 次。"
         write_line = "\n注意：若出现连续出错的功能时，该错误次数不纳入计算范围，"+write_run_time+"\n=====详细结果如下====="
 
 
@@ -391,12 +406,15 @@ class ReportClass(object):
         rwc.add_section('sendconf')
         changetime = rwc.get_section_value('sendconf', 'changetime')
         changetime = int (changetime)
+        # 上班前发送汇总
+        morning = rwc.get_section_value('sendconf', 'morning')
+        morning = int (morning)
 
 
         print('当前时间：%s ' %datetime.datetime.now().hour)
         print('对比时间：%s ' %changetime)
         # 当前是否在固定时间内 [18,19] 下午 6-7点
-        if datetime.datetime.now().hour in  [changetime]:
+        if datetime.datetime.now().hour in  [morning, changetime]:
 
             # 是否发送
             send_or_not = rwc.get_section_value('sendconf', 'send')
@@ -424,18 +442,29 @@ class ReportClass(object):
                 print("外部发送 %s：" %false_txt)
 
                 s = SendMail("13580491603","chinasoft123","13697485262")
-                # 发送假数据
-                s.send_mail_out('139Android客户端V731版本_功能拨测_汇总', false_txt,is_test=is_test)
-                time.sleep(10)
-                # 发送真数据
-                s.send_mail('【内部邮件】139Android客户端V731版本_功能拨测_汇总', all_sendtxt,is_test=is_test)
+
+                if morning != datetime.datetime.now().hour:
+
+                    # 发送假数据
+                    s.send_mail_out('139Android客户端V731版本_功能拨测_24小时汇总', false_txt,is_test=is_test)
+                    time.sleep(10)
+                    # 发送真数据
+                    s.send_mail('【内部邮件】139Android客户端V731版本_功能拨测_24小时汇总', all_sendtxt,is_test=is_test)
+                else:
+                    # 发送假数据
+                    s.send_mail_out('139Android客户端V731版本_功能拨测_晚上部分汇总', false_txt,is_test=is_test)
+                    time.sleep(10)
+                    # 发送真数据
+                    s.send_mail('【内部邮件】139Android客户端V731版本_功能拨测_晚上部分汇总', all_sendtxt,is_test=is_test)
+
                 rwc.set_section_value('sendconf', 'send', 'True')
                 # #发送后，用例是否复位
-                self._set_case_conf()
+                if morning != datetime.datetime.now().hour:
+                    self._set_case_conf()
 
         else:
             # 恢复邮件状态
-            if rwc.get_section_value("sendconf", "send") == "True" and changetime >= datetime.datetime.now().hour >= 0:
+            if rwc.get_section_value("sendconf", "send") == "True" and morning != datetime.datetime.now().hour and changetime >= datetime.datetime.now().hour >= 0:
                 rwc.set_section_value('sendconf', 'send', 'False')
 
             maxtimes = rwc.get_section_value('sendconf', 'maxtimes')
