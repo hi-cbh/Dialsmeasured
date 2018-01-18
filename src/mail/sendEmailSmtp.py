@@ -149,7 +149,7 @@ class SendMail():
         if is_test:
             areceiver = tester
         else:
-            areceiver = mamEmail
+            areceiver = mamEmailOther
 
 
         body = []
