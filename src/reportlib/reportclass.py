@@ -25,6 +25,8 @@ fsaveFilePath = logPath + 'savef_'+logfileName
 fhtmlFilePath = logPath + 'false_'+logfileName
 
 
+test_version ="V732"
+
 class ReportClass(object):
 
     # 每一轮的错误次数
@@ -446,16 +448,16 @@ class ReportClass(object):
                 if morning != datetime.datetime.now().hour:
 
                     # 发送假数据
-                    s.send_mail_out('139Android客户端V731版本_功能拨测_24小时汇总', false_txt,is_test=is_test)
+                    s.send_mail_out('139Android客户端'+test_version+'版本_功能拨测_24小时汇总', false_txt,is_test=is_test)
                     time.sleep(10)
                     # 发送真数据
-                    s.send_mail('【内部邮件】139Android客户端V731版本_功能拨测_24小时汇总', all_sendtxt,is_test=is_test)
+                    s.send_mail('【内部邮件】139Android客户端'+test_version+'版本_功能拨测_24小时汇总', all_sendtxt,is_test=is_test)
                 else:
                     # 发送假数据
-                    s.send_mail_out('139Android客户端V731版本_功能拨测_晚上部分汇总', false_txt,is_test=is_test)
+                    s.send_mail_out('139Android客户端'+test_version+'版本_功能拨测_晚上部分汇总', false_txt,is_test=is_test)
                     time.sleep(10)
                     # 发送真数据
-                    s.send_mail('【内部邮件】139Android客户端V731版本_功能拨测_晚上部分汇总', all_sendtxt,is_test=is_test)
+                    s.send_mail('【内部邮件】139Android客户端'+test_version+'版本_功能拨测_晚上部分汇总', all_sendtxt,is_test=is_test)
 
                 rwc.set_section_value('sendconf', 'send', 'True')
                 # #发送后，用例是否复位
@@ -473,7 +475,7 @@ class ReportClass(object):
             if len(err) != 0:
                 errstr = ','.join(err) + "到目前为止，以上提及的功能出现多次错误，请及时查证"
                 s = SendMail("13580491603","chinasoft123","13697485262")
-                s.send_mail_str('139Android客户端V731版本_功能拨测_出现错误<内部邮件>',errstr,is_test=is_test)
+                s.send_mail_str('139Android客户端'+test_version+'版本_功能拨测_出现错误<内部邮件>',errstr,is_test=is_test)
 
 
         print('运行结束')
