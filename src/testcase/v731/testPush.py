@@ -120,8 +120,8 @@ class TestPush(unittest.TestCase):
         self.driver.click(r"id=>cn.cj.pe:id/account_name")
         time.sleep(2)
 
-        print('=>点击 注销账号')
-        self.driver.click(u"uiautomator=>注销账号")
+        print('=>点击 退出账号')
+        self.driver.click(u"uiautomator=>退出账号")
         time.sleep(2)
 
         print('=>点击 确定')
