@@ -44,35 +44,49 @@ class TestSpeed(unittest.TestCase):
         try:
             network = BaseAdb.get_network_type()
 
-            print("重启测试工具")
-            if self.driver.get_display("xpath=>//android.widget.TextView[contains(@text,'Begin Test')]") == False:
+
+            for i in range(1,5):
+                print("重置app")
                 self.driver.reset()
                 time.sleep(10)
 
-            self.driver.click("xpath=>//android.widget.TextView[contains(@text,'Begin Test')]")
-            time.sleep(30)
+                print("重启测试工具")
+                if self.driver.get_display("xpath=>//android.widget.TextView[contains(@text,'Begin Test')]") == False:
+                    continue
 
-            load = self.driver.get_element('id=>org.zwanoo.android.speedtest:id/downloadSpeed',10).get_attribute('text')
-            down = self.driver.get_element('id=>org.zwanoo.android.speedtest:id/uploadSpeed',10).get_attribute('text')
+                self.driver.click("xpath=>//android.widget.TextView[contains(@text,'Begin Test')]")
+                time.sleep(30)
 
 
-            print('上传: %s ' %load)
-            print('下载: %s ' %down)
+                if self.driver.get_display("id=>org.zwanoo.android.speedtest:id/downloadSpeed") == False:
+                    continue
 
-            time.sleep(3)
+
+                load = self.driver.get_element('id=>org.zwanoo.android.speedtest:id/downloadSpeed',10).get_attribute('text')
+
+
+                if self.driver.get_display("id=>org.zwanoo.android.speedtest:id/downloadSpeed") == False:
+                    continue
+
+                down = self.driver.get_element('id=>org.zwanoo.android.speedtest:id/uploadSpeed',10).get_attribute('text')
+
+
+                print('上传: %s ' %load)
+                print('下载: %s ' %down)
+
+                time.sleep(3)
+                return network +'状态，网速测试结果如下，上传 ' + load + ' , 下载 ' + down
 
         except BaseException as error:
             BaseImage.screenshot(self.driver, "testSeep")
             time.sleep(5)
-            BaseAdb.adb_home()
-            BaseAdb.adb_clear('org.zwanoo.android.speedtest')
             self.fail("【网络测速】出错！")
-
-        else:
+        finally:
             BaseAdb.adb_home()
             BaseAdb.adb_clear('org.zwanoo.android.speedtest')
 
-            return network +'状态，网速测试结果如下，上传 ' + load + ' , 下载 ' + down
+
+
 
 
 if __name__ == "__main__":
