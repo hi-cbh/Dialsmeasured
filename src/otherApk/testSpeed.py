@@ -52,8 +52,8 @@ class TestSpeed(unittest.TestCase):
             self.driver.click("xpath=>//android.widget.TextView[contains(@text,'Begin Test')]")
             time.sleep(30)
 
-            load = self.driver.get_element('id=>org.zwanoo.android.speedtest:id/downloadSpeed').get_attribute('text')
-            down = self.driver.get_element('id=>org.zwanoo.android.speedtest:id/uploadSpeed').get_attribute('text')
+            load = self.driver.get_element('id=>org.zwanoo.android.speedtest:id/downloadSpeed',10).get_attribute('text')
+            down = self.driver.get_element('id=>org.zwanoo.android.speedtest:id/uploadSpeed',10).get_attribute('text')
 
 
             print('上传: %s ' %load)
@@ -64,8 +64,9 @@ class TestSpeed(unittest.TestCase):
         except BaseException as error:
             BaseImage.screenshot(self.driver, "testSeep")
             time.sleep(5)
+            BaseAdb.adb_home()
+            BaseAdb.adb_clear('org.zwanoo.android.speedtest')
             self.fail("【网络测速】出错！")
-
 
         else:
             BaseAdb.adb_home()
