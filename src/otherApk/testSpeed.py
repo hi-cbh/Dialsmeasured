@@ -44,6 +44,11 @@ class TestSpeed(unittest.TestCase):
         try:
             network = BaseAdb.get_network_type()
 
+            print("重启测试工具")
+            if self.driver.get_display("xpath=>//android.widget.TextView[contains(@text,'Begin Test')]") == False:
+                self.driver.reset()
+                time.sleep(10)
+
             self.driver.click("xpath=>//android.widget.TextView[contains(@text,'Begin Test')]")
             time.sleep(30)
 
