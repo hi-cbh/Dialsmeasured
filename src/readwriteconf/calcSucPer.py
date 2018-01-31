@@ -159,13 +159,23 @@ class CalcSuccess(object):
         print(result)
         return result
 
-    def get_successercentage_fail(self):
+    def get_successercentage_fail(self, casel=[]):
         # 成功率(数据过滤)
         suclist = self._sort_data()
         speedlist = self._sort_speed()
 
         # 如何出现连续错误，键错误次数减出
         print("假的处理前：%s" %suclist)
+
+
+        # 减少连续错误次数
+        if len(casel) >0:
+            for case, value in suclist.items():
+                print("case: %s" %case)
+                if case in casel:
+                    print("true")
+                    suclist[case][1] =  suclist[case][1] - casel[case]
+
 
         # 强制修改所有结果，只要数量低于35，成功率为100%，大于35，每个用例只错1个
         for case in suclist.keys():
@@ -196,13 +206,23 @@ class CalcSuccess(object):
 
         return result
 
-    def get_successercentage_fail_not_type(self):
+    def get_successercentage_fail_not_type(self, casel=[]):
         # 成功率没有样式(数据过滤)
         suclist = self._sort_data()
         speedlist = self._sort_speed()
 
         # 如何出现连续错误，键错误次数减出
         print("假的处理前：%s" %suclist)
+
+
+        # 减少连续错误次数
+        if len(casel) >0:
+            for case, value in suclist.items():
+                print("case: %s" %case)
+                if case in casel:
+                    print("true")
+                    suclist[case][1] =  suclist[case][1] - casel[case]
+
 
         # 强制修改所有结果，只要数量低于35，成功率为100%，大于35，每个用例只错1个
         for case in suclist.keys():
@@ -256,7 +276,7 @@ class CalcSuccess(object):
             l[1] = 0
         return l
 
-if __name__ == "__main__":
-    caselist = ["一键登录","接收推送","收件箱列表中精选","发送邮件带附件","联系人同步","附件下载","转发邮件带附件","账号登录"]
-    path1 = "/Users/apple/autoTest/workspace/DialsMeasured/logs/org_20171228.log"
-    CalcSuccess(caselist, path1).get_successercentage_fail()
+# if __name__ == "__main__":
+    # caselist = ["一键登录","接收推送","收件箱列表中精选","发送邮件带附件","联系人同步","附件下载","转发邮件带附件","账号登录"]
+    # path1 = "/Users/apple/autoTest/workspace/DialsMeasured/logs/org_20171228.log"
+    # CalcSuccess(caselist, path1).get_successercentage_fail()

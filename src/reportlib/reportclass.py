@@ -309,6 +309,10 @@ class ReportClass(object):
         with open(fsaveFilePath,'w') as fq:
             fq.write("")
 
+        # 中文用例名：连续错误次数
+        caselt = self._get_add_conf()
+        print("连续错误次数：%s" %caselt)
+
         time.sleep(5)
         # 计算成功率
         cs = CalcSuccess(ReportClass._testcaselist,orgFilePath)
@@ -330,7 +334,7 @@ class ReportClass(object):
         # 写入成功率，保存html数据
         with open(fhtmlFilePath,'a+') as fq1:
             fq1.write(write_time)
-            for cline in cs.get_successercentage_fail():
+            for cline in cs.get_successercentage_fail(caselt):
                 fq1.write(cline)
             fq1.write(write_line)
 
@@ -343,7 +347,7 @@ class ReportClass(object):
         # 这里修改百分率，保存正常数据
         with open(fsaveFilePath,'a+') as fq1:
             fq1.write(write_time)
-            for cline in cs.get_successercentage_fail_not_type():
+            for cline in cs.get_successercentage_fail_not_type(caselt):
                 fq1.write(cline)
             fq1.write(write_line)
 
@@ -475,7 +479,7 @@ class ReportClass(object):
             if len(err) != 0:
                 errstr = ','.join(err) + "到目前为止，以上提及的功能出现多次错误，请及时查证"
                 s = SendMail("13580491603","chinasoft123","13697485262")
-                s.send_mail_str('139Android客户端'+test_version+'版本_功能拨测_出现错误<内部邮件>',errstr,is_test=is_test)
+                s.send_mail_str('139Android客户端'+test_version+'版本_功能拨测_出现错误',errstr,is_test=is_test)
 
 
         print('运行结束')
