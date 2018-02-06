@@ -1,10 +1,7 @@
 
-caselist = {"case1":[12,3],"case2":[24,3],"case3":[24,3]}
+def add(a = 1, b = 2):
+    return a + b
 
-l = []
-for casetimes, value in caselist.items():
-    l.append(value[0])
-    print(casetimes)
 
-print("-----")
-print(max(l))
+print(add()) # 默认值
+print(add(a=1,b=1)) # 外部参数

@@ -29,8 +29,8 @@ class TestSend(unittest.TestCase):
 
     def setUp(self):
         try:
-            BaseAdb.adb_intall_uiautmator()
-            self.driver = Psam()
+            # BaseAdb.adb_intall_uiautmator()
+            self.driver = Psam(version="5.1")
         except BaseException as error:
             print("setUp启动出错！")
             self.driver.quit()

@@ -39,6 +39,10 @@ class BaseTime(object):
         changetime = ReadWriteConfFile.get_section_value('sendconf', 'changetime' )
         changetime = int (changetime)
 
+        ReadWriteConfFile.add_section('sendconf')
+        morning = ReadWriteConfFile.get_section_value('sendconf', 'morning' )
+        morning = int (morning)
+
         i = datetime.datetime.now()
 
         # 添加是否为发送状态
@@ -46,8 +50,9 @@ class BaseTime(object):
         send_status = ReadWriteConfFile.get_section_value('sendconf', 'send' )
 
         d = i.day
-        if changetime >= i.hour >= 0 and send_status == "False":
-            d = d
+
+        if (changetime >= i.hour >= 1 and send_status == "False") or i.hour == morning:
+            pass
         else:
             d = d + 1
 
