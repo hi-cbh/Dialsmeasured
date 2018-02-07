@@ -16,7 +16,7 @@ from src.readwriteconf.saveData import save
 # sys.path.append(r"/Users/apple/git/pytest/")
 
 d = InitData().get_users()
-user1 = {"name": d['user1'], 'pwd': d['pwd1']} # 发送者
+user1 = {"name": d['user3'], 'pwd': d['pwd3']} # 发送者
 user2 = {"name": d['user2'], 'pwd': d['pwd2']} # 接收者
 
 '''

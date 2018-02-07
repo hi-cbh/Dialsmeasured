@@ -12,8 +12,8 @@ from src.readwriteconf.initData import InitData
 
 d = InitData().get_users()
 
-username = d['user1']
-pwd = d['pwd1']
+username = d['user3']
+pwd = d['pwd3']
 username2 = d['user2']
 pwd2 = d['pwd2']
 

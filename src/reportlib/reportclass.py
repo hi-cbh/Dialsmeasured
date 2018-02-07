@@ -447,7 +447,7 @@ class ReportClass(object):
                 print("内部发送 %s：" %all_sendtxt)
                 print("外部发送 %s：" %false_txt)
 
-                s = SendMail("13580491603","chinasoft123","13697485262")
+                s = SendMail("13697485262","chinasoft123","13697485262")
 
                 if morning != datetime.datetime.now().hour:
 
@@ -478,7 +478,7 @@ class ReportClass(object):
             # 错误次数
             if len(err) != 0:
                 errstr = ','.join(err) + "到目前为止，以上提及的功能出现多次错误，请及时查证"
-                s = SendMail("13580491603","chinasoft123","13697485262")
+                s = SendMail("13697485262","chinasoft123","13697485262")
                 s.send_mail_str('139Android客户端'+test_version+'版本_功能拨测_出现错误',errstr,is_test=is_test)
 
 

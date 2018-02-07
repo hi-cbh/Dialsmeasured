@@ -183,7 +183,7 @@ class SendMail():
 
 if __name__ == "__main__":
 
-    s = SendMail("13580491603","chinasoft123","13697485262")
+    s = SendMail("13697485262","chinasoft123","13697485262")
     # s.sendMail('testEmail','Python 邮件发送测试...')
 
     line = ["testemail"]
