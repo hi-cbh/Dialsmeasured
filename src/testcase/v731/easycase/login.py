@@ -20,22 +20,22 @@ class Login(unittest.TestCase):
             '''最基础的登录'''
             self.driver.reset()
 
-            # time.sleep(4)
-            # if first_fogin == True:
-            #     self.driver.click(u"uiautomator=>允许")
-            #     time.sleep(4)
+            time.sleep(4)
+            if first_fogin == True:
+                self.driver.click(u"uiautomator=>允许")
+                time.sleep(4)
+
+            self.driver.swipe_right()
+            self.driver.swipe_right()
+            # self.driver.swipeRight()
+            print("点击坐标")
+            # BaseAdb.adbTap(700, 2300)  # vivo 1603  w * 0.5, h * 0.899
             #
-            # self.driver.swipe_right()
-            # self.driver.swipe_right()
-            # # self.driver.swipeRight()
-            # print("点击坐标")
-            # # BaseAdb.adbTap(700, 2300)  # vivo 1603  w * 0.5, h * 0.899
-            # #
-            # w = self.driver.get_window_size()['width']
-            # h = self.driver.get_window_size()['height']
-            #
-            # BaseAdb.adb_tap(w / 2, int(h * 0.899))
-            # # BaseAdb.adbTap(500, 1700) #其他手机需要调试
+            w = self.driver.get_window_size()['width']
+            h = self.driver.get_window_size()['height']
+
+            BaseAdb.adb_tap(w / 2, int(h * 0.899))
+            # BaseAdb.adbTap(500, 1700) #其他手机需要调试
             time.sleep(4)
 
             print('=>选择139邮箱')
