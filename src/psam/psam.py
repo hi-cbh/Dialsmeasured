@@ -14,7 +14,7 @@ class Psam(object):
         desired_caps['deviceName'] = 'android'
         desired_caps['appPackage'] = app_pkg
         desired_caps['appActivity'] = app_activity
-        desired_caps['newCommandTimeout'] = 7200
+        desired_caps['newCommandTimeout'] = 300 # 确定下一命令时间，太长容易卡死
         desired_caps["unicodeKeyboard"] = "True"
         desired_caps["resetKeyboard"] = "True"
 
