@@ -32,7 +32,7 @@ class TestContant(unittest.TestCase):
         self.driver.quit()
         print("运行结束")
 
-        time.sleep(5)
+        time.sleep(10)
 
     def testCaseCheckAddressList(self):
         '''测试通讯录是否同步成功'''

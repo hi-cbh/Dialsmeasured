@@ -30,17 +30,14 @@ class TestLogin(unittest.TestCase):
         try:
             # BaseAdb.adb_intall_uiautmator()
             self.driver = Psam(version= "5.1")
-        except BaseException as error:
-            print("setUp启动出错！")
-            self.driver.quit()
-            self.fail("setUp启动出错！")
-
-        else:
+            time.sleep(3)
             EmailOperation(username+"@139.com", pwd).clear_forlder(['INBOX'])
             time.sleep(10)
 
-
-
+        except BaseException as error:
+            print("setUp启动出错！")
+            self.driver.quit()
+            self.fail("setUp启动出错！或第三方操作邮寄错误")
 
 
     #释放实例,释放资源
@@ -48,7 +45,7 @@ class TestLogin(unittest.TestCase):
         self.driver.quit()
         print("运行结束")
 
-        time.sleep(5)
+        time.sleep(10)
         # AppiumServer2().stop_server()
 
 

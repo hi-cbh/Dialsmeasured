@@ -32,13 +32,13 @@ class TestPush(unittest.TestCase):
         try:
             # BaseAdb.adb_intall_uiautmator()
             self.driver = Psam(version="5.1")
+            EmailOperation(user2['name']+"@139.com", user2['pwd']).seen()
+            time.sleep(10)
+
         except BaseException :
             print("setUp启动出错！")
             self.driver.quit()
-            self.fail("setUp启动出错！")
-        else:
-            EmailOperation(user2['name']+"@139.com", user2['pwd']).seen()
-            time.sleep(10)
+            self.fail("setUp启动出错！或邮件操作错误")
 
 
     #释放实例,释放资源
@@ -46,7 +46,7 @@ class TestPush(unittest.TestCase):
         self.driver.quit()
         print("运行结束")
 
-        time.sleep(5)
+        time.sleep(10)
 
     def testCasePush(self):
         '''推送测试测试'''
@@ -87,15 +87,6 @@ class TestPush(unittest.TestCase):
             print('[接收推送]: %r'  %value_time)
             save.save("接收推送:%s" %value_time)
 
-
-
-        except BaseException:
-            BaseImage.screenshot(self.driver, "PushError")
-            time.sleep(5)
-
-            self.fail("【接收邮件推送】出错！")
-
-        else:
             app_package = "cn.cj.pe"  # 程序的package
             app_activity = "com.mail139.about.LaunchActivity"  # 程序的Activity
 
@@ -103,6 +94,11 @@ class TestPush(unittest.TestCase):
             BaseAdb.adb_start_app(app_package, app_activity)
             time.sleep(5)
 
+        except BaseException:
+            BaseImage.screenshot(self.driver, "PushError")
+            time.sleep(5)
+
+            self.fail("【接收邮件推送】出错！")
 
 
 

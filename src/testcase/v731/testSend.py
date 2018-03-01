@@ -31,19 +31,16 @@ class TestSend(unittest.TestCase):
         try:
             # BaseAdb.adb_intall_uiautmator()
             self.driver = Psam(version="5.1")
-        except BaseException as error:
-            print("setUp启动出错！")
-            self.driver.quit()
-            self.fail("setUp启动出错！")
 
-
-        else:
             EmailOperation(username+"@139.com", pwd).clear_forlder(['INBOX'])
             time.sleep(10)
 
             Login(self.driver,username, pwd).login_action(is_save=False)
 
-
+        except BaseException as error:
+            print("setUp启动出错！")
+            self.driver.quit()
+            self.fail("setUp启动出错！或邮件操作错误")
 
 
     #释放实例,释放资源
@@ -51,7 +48,7 @@ class TestSend(unittest.TestCase):
         self.driver.quit()
         print("运行结束")
 
-        time.sleep(5)
+        time.sleep(10)
 
     def testCaseSend(self):
         '''发送邮件测试'''

@@ -32,16 +32,17 @@ class TestDownFile(unittest.TestCase):
         try:
             # BaseAdb.adb_intall_uiautmator()
             self.driver = Psam(version="5.1")
+
+            EmailOperation(username+"@139.com", pwd).clear_forlder(['INBOX'])
+            time.sleep(10)
+
+            Login(self.driver,username, pwd).login_action(is_save=False)
+
         except BaseException :
             print("setUp启动出错！")
             self.driver.quit()
             self.fail("setUp启动出错！")
 
-        else:
-            EmailOperation(username+"@139.com", pwd).clear_forlder(['INBOX'])
-            time.sleep(10)
-
-            Login(self.driver,username, pwd).login_action(is_save=False)
 
 
 
@@ -51,7 +52,7 @@ class TestDownFile(unittest.TestCase):
         self.driver.quit()
         print("运行结束")
 
-        time.sleep(5)
+        time.sleep(10)
         # AppiumServer2().stop_server()
 
     def testDownFile(self):

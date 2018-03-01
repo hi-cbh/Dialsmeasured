@@ -35,7 +35,7 @@ class TestSelect(unittest.TestCase):
         self.driver.quit()
         print("运行结束")
 
-        time.sleep(5)
+        time.sleep(10)
 
     def testCaseSelected(self):
         '''测试139精选'''
