@@ -32,7 +32,7 @@ class TestLogin(unittest.TestCase):
             self.driver = Psam(version= "5.1")
             time.sleep(3)
             EmailOperation(username+"@139.com", pwd).clear_forlder(['INBOX'])
-            time.sleep(10)
+            time.sleep(6)
 
         except BaseException as error:
             print("setUp启动出错！")
@@ -45,7 +45,7 @@ class TestLogin(unittest.TestCase):
         self.driver.quit()
         print("运行结束")
 
-        time.sleep(10)
+        time.sleep(5)
         # AppiumServer2().stop_server()
 
 

@@ -36,7 +36,7 @@ class Login(unittest.TestCase):
 
             BaseAdb.adb_tap(w / 2, int(h * 0.899))
             # BaseAdb.adbTap(500, 1700) #其他手机需要调试
-            time.sleep(4)
+            time.sleep(2)
 
             print('=>选择139邮箱')
             self.driver.click(r"xpath=>//android.widget.ImageView[@index='0']")
@@ -120,7 +120,7 @@ class Login(unittest.TestCase):
 
             BaseAdb.adb_tap(w / 2, int(h * 0.899))
             # BaseAdb.adbTap(500, 1700) #其他手机需要调试
-            time.sleep(4)
+            time.sleep(2)
 
             print("验证点：是否进入登录界面")
             self.assertTrue(self.driver.get_element(u"uiautomator=>快速登录") != None, "页面不存在快捷登录按钮")

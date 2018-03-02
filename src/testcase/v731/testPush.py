@@ -46,7 +46,7 @@ class TestPush(unittest.TestCase):
         self.driver.quit()
         print("运行结束")
 
-        time.sleep(10)
+        time.sleep(5)
 
     def testCasePush(self):
         '''推送测试测试'''

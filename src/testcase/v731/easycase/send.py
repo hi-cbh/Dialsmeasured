@@ -176,7 +176,7 @@ class Send(unittest.TestCase):
             time.sleep(10)
 
             print("加载本地邮件封邮件")
-            timeout = int(round(time.time() * 1000)) + 2*60 * 1000
+            timeout = int(round(time.time() * 1000)) + 1*60 * 1000
             # 找到邮件结束
             while int(round(time.time() * 1000)) < timeout :
 

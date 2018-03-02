@@ -35,7 +35,7 @@ class TestSelect(unittest.TestCase):
         self.driver.quit()
         print("运行结束")
 
-        time.sleep(10)
+        time.sleep(5)
 
     def testCaseSelected(self):
         '''测试139精选'''
@@ -44,7 +44,7 @@ class TestSelect(unittest.TestCase):
             print("=>登录")
             Login(self.driver,user['name'], user['pwd']).login_action(is_save=False)
 
-            time.sleep(10)
+            time.sleep(5)
 
             print("验证页面是否存在139精选")
             self.assertTrue(self.driver.get_element(u'uiautomator=>139精选'),'收件箱列表没有139精选')

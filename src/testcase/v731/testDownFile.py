@@ -52,7 +52,7 @@ class TestDownFile(unittest.TestCase):
         self.driver.quit()
         print("运行结束")
 
-        time.sleep(10)
+        time.sleep(5)
         # AppiumServer2().stop_server()
 
     def testDownFile(self):
