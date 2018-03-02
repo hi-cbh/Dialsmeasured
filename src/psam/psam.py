@@ -19,7 +19,7 @@ class Psam(object):
         desired_caps["unicodeKeyboard"] = "True"
         desired_caps["resetKeyboard"] = "True"
 
-        self.driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_caps)
+        self.driver = webdriver.Remote('http://localhost:4725/wd/hub', desired_caps)
 #         self.driver.implicitly_wait(10)
 
     def element_wait(self, css, secs = 10):
