@@ -68,16 +68,19 @@ class Login(unittest.TestCase):
                 time.sleep(1)
 
 
-            '''
+
             print('验证点：等待弹窗广告出现')
-            self.assertTrue(self.driver.get_element("id=>cn.cj.pe:id/btn") != None, "登录失败！")
+            if self.driver.get_element("id=>cn.cj.pe:id/iv") != None:
 
-            self.driver.click("id=>cn.cj.pe:id/btn")
-            '''
+                self.driver.click("id=>cn.cj.pe:id/btn")
 
 
-            print('验证点：等待收件箱底部导航栏出现')
-            self.assertTrue(self.driver.get_element("id=>cn.cj.pe:id/message_list_bottom_email") != None, "登录失败！")
+            #
+            # print('验证点：等待收件箱底部导航栏出现')
+            # self.assertTrue(self.driver.get_element("id=>cn.cj.pe:id/message_list_bottom_email") != None, "登录失败！")
+            #
+
+
 
             print('=>记录当前时间，')
             value_time = str(round((time.time() - start), 2))
@@ -129,6 +132,12 @@ class Login(unittest.TestCase):
             print('=>点击快捷登录')
             self.driver.click(u"uiautomator=>快速登录")
             start = time.time()
+
+            print('验证点：等待弹窗广告出现')
+            if self.driver.get_element("id=>cn.cj.pe:id/iv",15) != None:
+
+                self.driver.click("id=>cn.cj.pe:id/btn")
+
 
             print('验证点：等待收件箱底部导航栏出现')
             self.assertTrue(self.driver.get_element("id=>cn.cj.pe:id/message_list_bottom_email") != None, "登录失败！")
