@@ -63,6 +63,7 @@ class Psam(object):
     def get_element(self,css, secs=30):
         
         self.element_wait(css, secs)
+
         '''
         Judge element positioning way, and returns the element.
         '''

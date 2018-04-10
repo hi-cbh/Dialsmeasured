@@ -46,6 +46,7 @@ class TestSelect(unittest.TestCase):
 
             time.sleep(5)
 
+
             print("验证页面是否存在139精选")
             self.assertTrue(self.driver.get_element(u'uiautomator=>139精选'),'收件箱列表没有139精选')
 
