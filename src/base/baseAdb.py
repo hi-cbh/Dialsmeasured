@@ -62,7 +62,9 @@ class BaseAdb(object):
         '''通过命令行，启动应用'''
         self.adb_shell(self.path + 'adb shell am start -n %s/%s' % (pag, activity))
     
-
+    def adb_broadcast_sms(self, name):
+        '''通过命令，发送广播，传递错误用例'''
+        self.adb_shell(self.path + 'adb shell am broadcast -a smsbroadcast --es name %s' %name)
             
     def adb_get_wifi_on(self):
         '''获取当前的wifi状态，开启返回True'''
@@ -102,6 +104,7 @@ class BaseAdb(object):
             
     def adb_shell(self, cmd):
         try:
+            print(cmd)
             os.popen(cmd)
             # self.testsubprocess(cmd)
         except BaseException:

@@ -2,6 +2,7 @@ from src.mail.sendEmailSmtp import  SendMail
 import time, datetime
 import copy
 from src.base.baseTime import BaseTime
+from src.base.baseAdb import BaseAdb
 from src.readwriteconf.rwconf import ReadWriteConfFile as rwc
 from src.readwriteconf.initData import InitData
 from src.readwriteconf.saveData import save
@@ -169,13 +170,14 @@ class ReportClass(object):
 
     def _read_case_conf(self, max):
         '''读取caseconf用例连续错误次数记录最大值用例'''
-        errl = []
-        rwc.add_section('caseconf')
-        for k,v in ReportClass._result.items():
-            tmp = int(rwc.get_section_value('caseconf', k))
-            if tmp >= max and tmp % max == 0: # 最大值的倍数才加入列表
-                errl.append(k)
 
+        # rwc.add_section('caseconf')
+        # for k,v in ReportClass._result.items():
+        #     tmp = int(rwc.get_section_value('caseconf', k))
+        #     if tmp >= max and tmp % max == 0: # 最大值的倍数才加入列表
+        #         errl.append(k)
+
+        errl = self._read_case_error(max)
 
         tmpl = []
         # 筛选出用例名称
@@ -189,6 +191,37 @@ class ReportClass(object):
         # print("_readCaseConf2: %s" %tmpl)
 
         return tmpl
+
+    def _read_case_error(self, max):
+        '''读取caseconf用例连续错误次数记录最大值用例(返回casename)'''
+        '''这个与上一个可以合并，但改动变大，不保证是否影响其他case'''
+        errl = []
+        rwc.add_section('caseconf')
+        for k,v in ReportClass._result.items():
+            tmp = int(rwc.get_section_value('caseconf', k))
+            if tmp >= max and tmp % max == 0: # 最大值的倍数才加入列表
+                errl.append(k)
+        print(errl)
+        return errl
+
+
+    def _get_sms_case(self,max):
+        '''发送用例name'''
+        errl = self._read_case_error(max)
+        sms_contect = []
+
+        print(errl)
+        rwc.add_section('sendsms')
+        for v in errl:
+            sms_contect.append(rwc.get_section_value('sendsms',v))
+
+        print("---")
+        print(sms_contect)
+        print("".join(sms_contect))
+        print("---")
+        return "".join(sms_contect)
+
+
 
     def _get_report_conf(self):
         '''返回：{用例：连续错误次数}，读取reportconf'''
@@ -475,15 +508,21 @@ class ReportClass(object):
 
             maxtimes = rwc.get_section_value('sendconf', 'maxtimes')
             err = self._read_case_conf(int(maxtimes))
+
             # 错误次数
             if len(err) != 0:
-                errstr = ','.join(err) + "到目前为止，以上提及的功能出现多次错误，请及时查证"
-                s = SendMail("13697485262","chinasoft123","13697485262")
-                s.send_mail_str('139Android客户端'+test_version+'版本_功能拨测疑是出现故障，请及时查证',errstr,is_test=is_test)
+                # 发送广播，传递参数
+                error_case = self._get_sms_case(int(maxtimes))
+                BaseAdb.adb_broadcast_sms(error_case)
+                #
+                #
+                # errstr = ','.join(err) + "到目前为止，以上提及的功能出现多次错误，请及时查证"
+                # s = SendMail("13697485262","chinasoft123","13697485262")
+                # s.send_mail_str('139Android客户端'+test_version+'版本_功能拨测疑是出现故障，请及时查证',errstr,is_test=is_test)
 
 
         print('运行结束')
-        time.sleep(15)
+        time.sleep(10)
 
 
 
@@ -493,4 +532,9 @@ class ReportClass(object):
         self._sort_fail()
         self._mergeict()
         self._save_date()
-        self.send(is_test)
+        self.send(is_test) # 这里判断是否发给移动
+
+
+#
+# if __name__ == "__main__":
+#     ReportClass()._get_sms_case(5)

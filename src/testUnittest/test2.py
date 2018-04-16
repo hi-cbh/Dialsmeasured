@@ -40,7 +40,8 @@ class MyTest(unittest.TestCase):
     def testCase01(self):
         try:
             start = time.time()
-            if int(random.random() * 10) > 5:
+            # if int(random.random() * 10) > 5:
+            if False:
                 self.assertTrue(True, "测试错误")
             else:
                 self.assertTrue(False, "测试错误")
@@ -60,7 +61,8 @@ class MyTest(unittest.TestCase):
 
     def testCase02(self):
         try:
-            if int(random.random() * 10) > 5:
+            # if int(random.random() * 10) > 5:
+            if False:
                 self.assertTrue(True, "测试错误")
             else:
                 self.assertTrue(False, "测试错误")
@@ -98,7 +100,8 @@ class MyTest2(unittest.TestCase):
 
     def testCase04(self):
         try:
-            if int(random.random() * 10) > 5:
+            # if int(random.random() * 10) > 5:
+            if False:
                 self.assertTrue(True, "测试错误")
             else:
                 self.assertTrue(False, "测试错误")
@@ -109,9 +112,6 @@ class MyTest2(unittest.TestCase):
         else:
             print("testCase04 return")
             return 0
-
-
-
 
 
 if __name__ == '__main__':
@@ -144,6 +144,5 @@ if __name__ == '__main__':
         fp.close()
 
         time.sleep(2)
-
 
         ReportClass(testResultReport.failures,testtxt,speed,now).all(is_test=True)
