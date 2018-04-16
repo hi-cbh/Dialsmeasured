@@ -180,7 +180,7 @@ class Send(unittest.TestCase):
             # 找到邮件结束
             while int(round(time.time() * 1000)) < timeout :
 
-                el = self.driver.element_wait(u"uiautomator=>暂无邮件",secs = 1)
+                el = self.driver.element_wait(u"uiautomator=>暂无邮件",secs = 2)
                 if el != None:
                     print("下拉")
                     self.driver.swipe_down()

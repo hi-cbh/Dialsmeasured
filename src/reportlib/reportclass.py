@@ -514,11 +514,11 @@ class ReportClass(object):
                 # 发送广播，传递参数
                 error_case = self._get_sms_case(int(maxtimes))
                 BaseAdb.adb_broadcast_sms(error_case)
-                #
-                #
-                # errstr = ','.join(err) + "到目前为止，以上提及的功能出现多次错误，请及时查证"
-                # s = SendMail("13697485262","chinasoft123","13697485262")
-                # s.send_mail_str('139Android客户端'+test_version+'版本_功能拨测疑是出现故障，请及时查证',errstr,is_test=is_test)
+
+
+                errstr = ','.join(err) + "到目前为止，以上提及的功能出现多次错误，请及时查证"
+                s = SendMail("13697485262","chinasoft123","13697485262")
+                s.send_mail_str('139Android客户端'+test_version+'版本_功能拨测疑是出现故障，请及时查证',errstr,is_test=is_test)
 
 
         print('运行结束')
