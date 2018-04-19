@@ -76,8 +76,9 @@ class TestPush(unittest.TestCase):
             print("=>第三方发送邮件")
             s = SendMail(sender['name'], sender['pwd'], reveicer['name'])
             self.assertTrue(s.send_mail_test('sendsmtpEmail','测试邮件...'),"邮件发送失败")
-            start = time.time()
             # time.sleep(10)
+            start = time.time()
+
 
             print("验证点：等待推送信息")
             self.assertTrue(self.wait_for_notification(), "接收推送失败")

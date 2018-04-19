@@ -79,7 +79,7 @@ class TestSelect(unittest.TestCase):
             save.save("收件箱列表中精选:%s" %value_time)
 
         except BaseException as error:
-            BaseImage.screenshot(self.driver, "CheckAddressListError")
+            BaseImage.screenshot(self.driver, "Case139SelectedError")
             time.sleep(5)
 
             self.fail("【139精选】出错！")
