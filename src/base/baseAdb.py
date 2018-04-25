@@ -64,7 +64,11 @@ class BaseAdb(object):
     
     def adb_broadcast_sms(self, name):
         '''通过命令，发送广播，传递错误用例'''
-        self.adb_shell(self.path + 'adb shell am broadcast -a smsbroadcast --es name %s' %name)
+        self.adb_start_app("com.hy.sms.androidtestsms",".MainActivity")
+        time.sleep(5)
+        self.adb_home()
+        time.sleep(5)
+        self.adb_shell(self.path + 'adb shell am broadcast -a hy.smsbroadcast --es name %s' %name)
             
     def adb_get_wifi_on(self):
         '''获取当前的wifi状态，开启返回True'''
@@ -263,4 +267,4 @@ BaseAdb = BaseAdb()
 
 
 if __name__ == '__main__':
-    BaseAdb.dumpsys_notification(u"同步网络联系人完成")
+    BaseAdb.adb_broadcast_sms("abc")
