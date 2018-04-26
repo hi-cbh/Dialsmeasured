@@ -8,6 +8,7 @@ from src.base.baseAdb import BaseAdb
 from src.base.baseFile import BaseFile
 from src.mail.sendEmailSmtp import SendMail
 from src.base.baseImage import BaseImage
+from src.base.baseLog import LogAction
 from src.readwriteconf.saveData import save
 
 class Send(unittest.TestCase):
@@ -162,6 +163,7 @@ class Send(unittest.TestCase):
         except BaseException as error:
             BaseImage.screenshot(self.driver, "SendError")
             time.sleep(5)
+            LogAction.save(func = "send_action", status="Fail", explain="SendError")
             self.fail('【带附件邮件发送】出错')
             #添加截图
 
@@ -276,6 +278,7 @@ class Send(unittest.TestCase):
         except BaseException as error:
             BaseImage.screenshot(self.driver, "fwSendError")
             time.sleep(5)
+            LogAction.save(func = "send_fwd", status="Fail", explain="fwSendError")
             self.fail("【转发邮件（带附件）】出错")
 
 

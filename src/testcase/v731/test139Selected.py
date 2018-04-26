@@ -11,6 +11,7 @@ from src.testcase.v731.easycase.login import Login
 from src.readwriteconf.initData import InitData
 from src.base.baseImage import BaseImage
 from src.readwriteconf.saveData import save
+from src.base.baseLog import LogAction
 # sys.path.append(r"/Users/apple/git/pytest/")
 
 d= InitData().get_users()
@@ -27,6 +28,7 @@ class TestSelect(unittest.TestCase):
             self.driver = Psam(version="5.1")
         except BaseException as error:
             print("setUp启动出错！")
+            LogAction.save(func = "TestSelect", status="Fail", explain="setUp error")
             self.fail("setUp启动出错！")
 
 
@@ -81,7 +83,7 @@ class TestSelect(unittest.TestCase):
         except BaseException as error:
             BaseImage.screenshot(self.driver, "Case139SelectedError")
             time.sleep(5)
-
+            LogAction.save(func = "testCaseSelected", status="Fail", explain="Case139SelectedError")
             self.fail("【139精选】出错！")
 
 

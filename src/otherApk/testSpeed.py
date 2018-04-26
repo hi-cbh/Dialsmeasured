@@ -6,7 +6,7 @@ from src.base.baseAdb import BaseAdb
 from src.psam.psam import Psam
 from src.readwriteconf.initData import InitData
 from src.base.baseImage import BaseImage
-
+from src.base.baseLog import LogAction
 
 d= InitData().get_users()
 print(d)
@@ -26,6 +26,7 @@ class TestSpeed(unittest.TestCase):
         except BaseException:
             print("setUp启动出错！")
             self.driver.quit()
+            LogAction.save(func = "TestSpeed", status="Fail", explain="setUp error")
             self.fail("setUp启动出错！")
 
 
@@ -80,6 +81,7 @@ class TestSpeed(unittest.TestCase):
         except BaseException as error:
             BaseImage.screenshot(self.driver, "testSeep")
             time.sleep(5)
+            LogAction.save(func = "TestSpeed", status="Fail", explain="testSeep error")
             self.fail("【网络测速】出错！")
         finally:
             BaseAdb.adb_home()

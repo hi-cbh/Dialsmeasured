@@ -49,7 +49,7 @@ class MyTest(unittest.TestCase):
             print('[登录时延]: %r'  %value_time)
             # save.save("用例1:%s" %value_time)
         except BaseException:
-            LogAction.save(func = "testCase01", status="Fail", explain="用例1测试错误")
+            LogAction.save(func = "testCase01", status="Fail", explain="case 1 run error")
             self.fail("用例1 错误")
 
 
@@ -66,7 +66,7 @@ class MyTest(unittest.TestCase):
                 self.assertTrue(False, "测试错误")
             print("testCase02")
         except BaseException:
-            LogAction.save(func = "testCase02", status="Fail", explain="用例2测试错误")
+            LogAction.save(func = "testCase02", status="Fail", explain="case 2 run error")
             self.fail("testCase02 错误")
 
         else:
@@ -96,7 +96,7 @@ class MyTest2(unittest.TestCase):
         value_time = str(round((time.time() - start), 2))
         print('[登录时延]: %r'  %value_time)
         # save.save("用例3:%s" %value_time)
-
+        LogAction.save(func = "testCase03", status="OK")
 
     def testCase04(self):
         try:
@@ -107,7 +107,7 @@ class MyTest2(unittest.TestCase):
             print("testCase03")
 
         except BaseException:
-            LogAction.save(func = "testCase04", status="Fail", explain="用例4测试错误")
+            LogAction.save(func = "testCase04", status="Fail", explain="case 4 run error")
             self.fail("MyTest2 testCase04 错误")
         else:
             print("testCase04 return")
@@ -116,25 +116,24 @@ class MyTest2(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    for tmv in range(10):
 
-        speed = ''
+    speed = ''
 
-        print("speed: %s" %speed)
+    print("speed: %s" %speed)
 
-        # 添加测试的用例
-        testtxt=[]
-        testtxt.append(("用例1","testCase01"))
-        testtxt.append(("用例2","testCase02"))
-        testtxt.append(("用例3","testCase03"))
-        testtxt.append(("用例4","testCase04"))
+    # 添加测试的用例
+    testtxt=[]
+    testtxt.append(("用例1","testCase01"))
+    testtxt.append(("用例2","testCase02"))
+    testtxt.append(("用例3","testCase03"))
+    testtxt.append(("用例4","testCase04"))
 
-        suite = unittest.TestSuite()
-        suite.addTest(MyTest('testCase01'))
-        suite.addTest(MyTest('testCase02'))
-        suite.addTest(MyTest2('testCase03'))
-        suite.addTest(MyTest2('testCase04'))
+    suite = unittest.TestSuite()
+    suite.addTest(MyTest('testCase01'))
+    suite.addTest(MyTest('testCase02'))
+    suite.addTest(MyTest2('testCase03'))
+    suite.addTest(MyTest2('testCase04'))
 
-        # 生成html
-        runner = unittest.TextTestRunner()
-        runner.run(suite)
+    # 生成html
+    runner = unittest.TextTestRunner()
+    runner.run(suite)

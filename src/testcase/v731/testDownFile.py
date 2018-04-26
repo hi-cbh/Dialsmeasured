@@ -2,7 +2,7 @@
 # encoding:utf-8
 
 import time,unittest
-from src.base.baseAdb import BaseAdb
+from src.base.baseLog import LogAction
 from src.mail.mailOperation import EmailOperation
 from src.psam.psam import Psam
 from src.testcase.v731.easycase.login import Login
@@ -41,6 +41,7 @@ class TestDownFile(unittest.TestCase):
         except BaseException :
             print("setUp启动出错！")
             self.driver.quit()
+            LogAction.save(func = "TestDownFile", status="Fail", explain="setUp Error")
             self.fail("setUp启动出错！")
 
 

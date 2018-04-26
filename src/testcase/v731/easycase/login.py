@@ -5,6 +5,7 @@ import time
 import unittest,random
 from src.base.baseAdb import BaseAdb
 from src.base.baseImage import BaseImage
+from src.base.baseLog import LogAction
 from src.readwriteconf.saveData import save
 
 class Login(unittest.TestCase):
@@ -99,6 +100,7 @@ class Login(unittest.TestCase):
             BaseImage.screenshot(self.driver, "LoginError")
             # 超时，数据超时
             time.sleep(5)
+            LogAction.save(func = "testCaseLogin", status="Fail", explain="LoginError")
             self.fail("【手动输入账号/密码-登录】出现错误")
             # 添加截图
 
@@ -160,6 +162,7 @@ class Login(unittest.TestCase):
             BaseImage.screenshot(self.driver, "oneBtnLoginError")
             # 超时，数据超时
             time.sleep(5)
+            LogAction.save(func = "testCaseOnBtnLogin", status="Fail", explain="oneBtnLoginError")
             self.fail("【一键登录出错登录】出现错误")
             # 添加截图
 

@@ -8,6 +8,7 @@ from src.testcase.v731.easycase.login import Login
 from src.readwriteconf.initData import InitData
 from src.base.baseImage import BaseImage
 from src.readwriteconf.saveData import save
+from src.base.baseLog import LogAction
 
 d = InitData().get_users()
 user = {"name": d['user2'], 'pwd': d['pwd2']}
@@ -24,6 +25,7 @@ class TestContant(unittest.TestCase):
         except BaseException:
             print("setUp启动出错！")
             self.driver.quit()
+            LogAction.save(func = "TestContant", status="Fail", explain="setUp Error")
             self.fail("setUp启动出错！")
 
 
@@ -62,7 +64,7 @@ class TestContant(unittest.TestCase):
         except BaseException :
             BaseImage.screenshot(self.driver, "CheckAddressListError")
             time.sleep(5)
-
+            LogAction.save(func = "testCaseCheckAddressList", status="Fail", explain="CheckAddressListError")
             self.fail("【联系人同步】出错")
 
 

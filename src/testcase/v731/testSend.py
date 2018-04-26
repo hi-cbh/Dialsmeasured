@@ -8,7 +8,7 @@ from src.psam.psam import Psam
 from src.testcase.v731.easycase.login import Login
 from src.testcase.v731.easycase.send import Send
 from src.readwriteconf.initData import InitData
-
+from src.base.baseLog import LogAction
 
 d = InitData().get_users()
 
@@ -40,6 +40,7 @@ class TestSend(unittest.TestCase):
         except BaseException as error:
             print("setUp启动出错！")
             self.driver.quit()
+            LogAction.save(func = "TestSend", status="Fail", explain="setUp error")
             self.fail("setUp启动出错！或邮件操作错误")
 
 

@@ -6,6 +6,7 @@ import unittest,random
 from src.base.baseAdb import BaseAdb
 from src.base.baseFile import BaseFile
 from src.base.baseImage import BaseImage
+from src.base.baseLog import LogAction
 from src.readwriteconf.saveData import save
 class OpenDown(unittest.TestCase):
     
@@ -51,7 +52,7 @@ class OpenDown(unittest.TestCase):
         except BaseException as e:
             BaseImage.screenshot(self.driver, "OpenEmailError")
             time.sleep(5)
-
+            LogAction.save(func = "testDownFile", status="Fail", explain="OpenEmailError")
             self.fail('【打开未读邮件】出错')
         
         
@@ -97,7 +98,7 @@ class OpenDown(unittest.TestCase):
         except BaseException:
             BaseImage.screenshot(self.driver, "DownFileError")
             time.sleep(5)
-
+            LogAction.save(func = "testDownFile", status="Fail", explain="DownFileError")
             self.fail('【下载附件】出错')
          
     # 设置收件箱列表的邮件为未读邮件

@@ -11,6 +11,7 @@ from src.testcase.v731.easycase.receive import WebReceive
 from src.mail.sendEmailSmtp import SendMail
 from src.readwriteconf.initData import InitData
 from src.base.baseImage import BaseImage
+from src.base.baseLog import LogAction
 from src.readwriteconf.saveData import save
 
 # sys.path.append(r"/Users/apple/git/pytest/")
@@ -38,6 +39,7 @@ class TestPush(unittest.TestCase):
         except BaseException :
             print("setUp启动出错！")
             self.driver.quit()
+            LogAction.save(func = "TestPush", status="Fail", explain="setUp error")
             self.fail("setUp启动出错！或邮件操作错误")
 
 
@@ -98,7 +100,7 @@ class TestPush(unittest.TestCase):
         except BaseException:
             BaseImage.screenshot(self.driver, "PushError")
             time.sleep(5)
-
+            LogAction.save(func = "testCasePush", status="Fail", explain="PushError")
             self.fail("【接收邮件推送】出错！")
 
 

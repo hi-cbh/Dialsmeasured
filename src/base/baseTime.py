@@ -5,7 +5,11 @@ import time
 import datetime
 from src.readwriteconf.rwconf import ReadWriteConfFile
 class BaseTime(object):
-    
+
+    def current_data_file(self):
+        '''用于日志上报的文件时分'''
+        return time.strftime("%Y%m%d%H%M", time.localtime())
+
     def current_time(self):
         '''用于写入文件，或文件格式'''
         return time.strftime("%Y-%m-%d_%H-%M-%S", time.localtime()) 
@@ -64,4 +68,4 @@ class BaseTime(object):
 BaseTime = BaseTime()
 
 if __name__ == "__main__":
-    print(BaseTime.get_date_hour())
+    print(BaseTime.current_data_file())
