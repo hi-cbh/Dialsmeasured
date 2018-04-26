@@ -79,7 +79,7 @@ class TestSelect(unittest.TestCase):
 
             print('[139精选出现时间]: %r'  %value_time)
             save.save("收件箱列表中精选:%s" %value_time)
-
+            LogAction.save(func = "testCaseSelected", status="success", explain="value_time:%s" %value_time)
         except BaseException as error:
             BaseImage.screenshot(self.driver, "Case139SelectedError")
             time.sleep(5)

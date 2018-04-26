@@ -87,6 +87,7 @@ class TestPush(unittest.TestCase):
 
             print('=>记录当前时间，时间差')
             value_time = str(round((time.time() - start), 2))
+            LogAction.save(func = "testCasePush", status="success", explain="value_time:%s" %value_time)
             print('[接收推送]: %r'  %value_time)
             save.save("接收推送:%s" %value_time)
 

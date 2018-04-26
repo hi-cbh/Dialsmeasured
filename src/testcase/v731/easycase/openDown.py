@@ -82,7 +82,7 @@ class OpenDown(unittest.TestCase):
 
             print('=>记录当前时间，时间差')
             value_time = str(round((time.time() - start), 2))
-
+            LogAction.save(func = "testDownFile", status="success", explain="value_time:%s" %value_time)
             # 时间过滤(生成2-9)
             if float(value_time) > 10:
                 value_time = str(round(random.uniform(2, 9),2))

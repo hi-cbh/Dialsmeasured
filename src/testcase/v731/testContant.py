@@ -60,7 +60,7 @@ class TestContant(unittest.TestCase):
             value_time = str(round((time.time() - start), 2))
             print('[联系人同步]: %r'  %value_time)
             save.save("联系人同步:%s" %value_time)
-
+            LogAction.save(func = "testCaseCheckAddressList", status="success", explain="value_time:%s" %value_time)
         except BaseException :
             BaseImage.screenshot(self.driver, "CheckAddressListError")
             time.sleep(5)
