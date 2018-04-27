@@ -19,6 +19,8 @@ class Login(unittest.TestCase):
         # first_fogin 首次安装后，登录为true
         try:
             '''最基础的登录'''
+            LogAction.print(isReset=True)
+            LogAction.print("=>重置APP")
             self.driver.reset()
 
             time.sleep(4)
@@ -26,40 +28,42 @@ class Login(unittest.TestCase):
                 self.driver.click(u"uiautomator=>允许")
                 time.sleep(4)
 
+            LogAction.print("=>右滑")
             self.driver.swipe_right()
+            LogAction.print("=>右滑")
             self.driver.swipe_right()
             # self.driver.swipeRight()
             print("点击坐标")
             # BaseAdb.adbTap(700, 2300)  # vivo 1603  w * 0.5, h * 0.899
-            #
+
             w = self.driver.get_window_size()['width']
             h = self.driver.get_window_size()['height']
-
+            LogAction.print("=>点击坐标体验")
             BaseAdb.adb_tap(w / 2, int(h * 0.899))
             # BaseAdb.adbTap(500, 1700) #其他手机需要调试
             time.sleep(2)
 
-            print('=>选择139邮箱')
+            LogAction.print('=>选择139邮箱')
             self.driver.click(r"xpath=>//android.widget.ImageView[@index='0']")
 
 
             # 输入
             els = self.driver.get_elements("id=>cn.cj.pe:id/input")
 
-            print("验证点：是否进入登录界面")
+            LogAction.print("验证点：是否进入登录界面")
             self.assertTrue(els != None, "没有进入登录 页面")
 
-            print('=>输入用户名')
+            LogAction.print('=>输入用户名' + self.username)
             els[0].set_value(self.username)
 
 
-            print('=>输入密码')
+            LogAction.print('=>输入密码')
             els[1].set_value(self.pwd)   # appium 1.6
 
-            print('=>点击登录')
+            LogAction.print('=>点击登录')
             loginbtn = self.driver.get_element("id=>cn.cj.pe:id/login")
 
-            print('=>记录当前时间、点击登录')
+            LogAction.print('=>记录当前时间、点击登录')
             loginbtn.click()
             start = time.time()
 
@@ -70,7 +74,7 @@ class Login(unittest.TestCase):
 
 
 
-            print('验证点：等待弹窗广告出现')
+            LogAction.print('验证点：等待弹窗广告出现')
             if self.driver.get_element("id=>cn.cj.pe:id/iv", 30) != None:
 
                 self.driver.click("id=>cn.cj.pe:id/btn")
@@ -83,7 +87,7 @@ class Login(unittest.TestCase):
 
 
 
-            print('=>记录当前时间，')
+            LogAction.print('=>记录当前时间，')
             value_time = str(round((time.time() - start), 2))
             LogAction.save(func = "testCaseLogin", status="success", explain="value_time:%s" %value_time)
             # 时间过滤(生成2-9)
@@ -100,7 +104,7 @@ class Login(unittest.TestCase):
             BaseImage.screenshot(self.driver, "LoginError")
             # 超时，数据超时
             time.sleep(5)
-            LogAction.save(func = "testCaseLogin", status="Fail", explain="LoginError")
+            LogAction.save(func = "testCaseLogin", status="Fail", explain=LogAction.print())
             self.fail("【手动输入账号/密码-登录】出现错误")
             # 添加截图
 
@@ -110,11 +114,15 @@ class Login(unittest.TestCase):
         '''一键登录'''
         try:
             '''最基础的登录'''
+            LogAction.print(isReset=True)
+            LogAction.print("=>重置APP")
             self.driver.reset()
 
             time.sleep(4)
 
+            LogAction.print("=>右滑")
             self.driver.swipe_right()
+            LogAction.print("=>右滑")
             self.driver.swipe_right()
             # self.driver.swipeRight()
             print("点击坐标")
@@ -123,26 +131,28 @@ class Login(unittest.TestCase):
             w = self.driver.get_window_size()['width']
             h = self.driver.get_window_size()['height']
 
+            LogAction.print("=>点击立即体验")
             BaseAdb.adb_tap(w / 2, int(h * 0.899))
+
             # BaseAdb.adbTap(500, 1700) #其他手机需要调试
             time.sleep(2)
 
-            print("验证点：是否进入登录界面")
+            LogAction.print("=>验证点：是否进入登录界面")
             self.assertTrue(self.driver.get_element(u"uiautomator=>快速登录") != None, "页面不存在快捷登录按钮")
 
 
-            print('=>点击快捷登录')
+            LogAction.print('=>点击快捷登录')
             self.driver.click(u"uiautomator=>快速登录")
             start = time.time()
 
 
-            print('验证点：等待弹窗广告出现')
+            LogAction.print('=>验证点：等待弹窗广告出现')
             if self.driver.get_element("id=>cn.cj.pe:id/iv",30) != None:
 
                 self.driver.click("id=>cn.cj.pe:id/btn")
 
 
-            print('验证点：等待收件箱底部导航栏出现')
+            LogAction.print('=>验证点：等待收件箱底部导航栏出现')
             self.assertTrue(self.driver.get_element("id=>cn.cj.pe:id/message_list_bottom_email") != None, "登录失败！")
 
             print('=>记录当前时间，')
@@ -162,7 +172,7 @@ class Login(unittest.TestCase):
             BaseImage.screenshot(self.driver, "oneBtnLoginError")
             # 超时，数据超时
             time.sleep(5)
-            LogAction.save(func = "testCaseOnBtnLogin", status="Fail", explain="oneBtnLoginError")
+            LogAction.save(func = "testCaseOnBtnLogin", status="Fail", explain=LogAction.print())
             self.fail("【一键登录出错登录】出现错误")
             # 添加截图
 

@@ -61,28 +61,31 @@ class TestPush(unittest.TestCase):
 
         try:
             # self.assertTrue(False,"测试")
-            print("=>登录")
+            LogAction.print(isReset=True)
+            LogAction.print("=>登录")
             Login(self.driver,reveicer['name'], reveicer['pwd']).login_action(is_save=False)
 
-            print('=>注销账号')
+            LogAction.print('=>注销账号')
             self.logout()
 
-            print("=>重新登录")
+            LogAction.print("=>重新登录")
             Login(self.driver,reveicer['name'], reveicer['pwd']).login_action(is_save=False)
 
 
-            print("=>点击Home键")
+            LogAction.print("=>点击Home键")
             BaseAdb.adb_home()
             time.sleep(5)
 
-            print("=>第三方发送邮件")
+            LogAction.print("=>第三方发送邮件")
             s = SendMail(sender['name'], sender['pwd'], reveicer['name'])
+
+            LogAction.print("=>验证邮件发送失败")
             self.assertTrue(s.send_mail_test('sendsmtpEmail','测试邮件...'),"邮件发送失败")
             # time.sleep(10)
             start = time.time()
 
 
-            print("验证点：等待推送信息")
+            LogAction.print("验证点：等待推送信息")
             self.assertTrue(self.wait_for_notification(), "接收推送失败")
 
             print('=>记录当前时间，时间差')
@@ -101,7 +104,7 @@ class TestPush(unittest.TestCase):
         except BaseException:
             BaseImage.screenshot(self.driver, "PushError")
             time.sleep(5)
-            LogAction.save(func = "testCasePush", status="Fail", explain="PushError")
+            LogAction.save(func = "testCasePush", status="Fail", explain=LogAction.print())
             self.fail("【接收邮件推送】出错！")
 
 

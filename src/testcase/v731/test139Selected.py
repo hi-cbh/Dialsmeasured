@@ -43,20 +43,21 @@ class TestSelect(unittest.TestCase):
         '''测试139精选'''
 
         try:
-            print("=>登录")
+            LogAction.print(isReset=True)
+            LogAction.print("=>账号登录")
             Login(self.driver,user['name'], user['pwd']).login_action(is_save=False)
 
             time.sleep(15)
 
-
-            print("验证页面是否存在139精选")
+            LogAction.print("验证页面是否存在139精选")
             self.assertTrue(self.driver.get_element(u'uiautomator=>139精选'),'收件箱列表没有139精选')
 
-            print('点击 139精选')
+            LogAction.print('点击139精选')
             self.driver.click(u'uiautomator=>139精选')
             start = time.time()
 
-            print("等待30秒")
+
+            LogAction.print("等待30秒")
             # 等待两分钟
             timeout = int(round(time.time() * 1000)) + 30 * 1000
             try:
@@ -71,7 +72,7 @@ class TestSelect(unittest.TestCase):
                 print(msg)
 
 
-            print('验证点：页面是否显示正常')
+            LogAction.print('=>验证点：页面是否显示正常')
             self.assertTrue(self.driver.page_source().__contains__(u"阅读全文"),"页面显示不正常")
 
             print('=>记录当前时间，时间差')
@@ -83,7 +84,7 @@ class TestSelect(unittest.TestCase):
         except BaseException as error:
             BaseImage.screenshot(self.driver, "Case139SelectedError")
             time.sleep(5)
-            LogAction.save(func = "testCaseSelected", status="Fail", explain="Case139SelectedError")
+            LogAction.save(func = "testCaseSelected", status="Fail", explain=LogAction.print())
             self.fail("【139精选】出错！")
 
 

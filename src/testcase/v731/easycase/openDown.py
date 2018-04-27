@@ -18,7 +18,8 @@ class OpenDown(unittest.TestCase):
     def open_action(self):
         '''打开未读邮件时延'''
         try:
-            print("加载本地邮件封邮件")
+            LogAction.print(isReset=True)
+            LogAction.print("加载本地邮件封邮件")
             timeout = int(round(time.time() * 1000)) + 1*60 * 1000
             # 找到邮件结束
             while int(round(time.time() * 1000)) < timeout :
@@ -37,14 +38,14 @@ class OpenDown(unittest.TestCase):
 
 
             # 点击第一封
-            print('=>点击第一封邮件，判断是否存在【暂无邮件】字段')
+            LogAction.print('=>点击第一封邮件，判断是否存在【暂无邮件】字段')
             self.assertTrue(self.driver.get_element(u"uiautomator=>暂无邮件") == None, "收件箱没有邮件")
             els = self.driver.get_sub_element(r"id=>android:id/list","class=>android.widget.LinearLayout")
             time.sleep(2)
             els[0].click()
 
 
-            print('=>查找控件，确认进入邮件详情页')
+            LogAction.print('=>查找控件，确认进入邮件详情页')
             self.assertTrue(self.driver.element_wait(r"id=>cn.cj.pe:id/circular_progress_container") != None , "测试邮件不存在!")
             self.driver.element_wait(r"class=>android.webkit.WebView")
 
@@ -52,7 +53,7 @@ class OpenDown(unittest.TestCase):
         except BaseException as e:
             BaseImage.screenshot(self.driver, "OpenEmailError")
             time.sleep(5)
-            LogAction.save(func = "testDownFile", status="Fail", explain="OpenEmailError")
+            LogAction.save(func = "testDownFile", status="Fail", explain=LogAction.print())
             self.fail('【打开未读邮件】出错')
         
         
@@ -61,14 +62,14 @@ class OpenDown(unittest.TestCase):
         '''下载文件时延'''
         try:
             # 清除
-            print('=>清除下载的旧数据')
+            LogAction.print('=>清除下载的旧数据')
             if BaseFile.adb_find_file(self.path, self.filename):
                 BaseFile.adb_del_file(self.path, self.filename)
                  
             time.sleep(5)
              
             # 点击全部下载
-            print('=>点击全部下载')
+            LogAction.print('=>点击全部下载')
             self.assertTrue(self.driver.get_element(r"id=>cn.cj.pe:id/message_detail_attachment_download"),'没有下载按钮')
             self.driver.click(r"id=>cn.cj.pe:id/message_detail_attachment_download")
 
@@ -77,7 +78,7 @@ class OpenDown(unittest.TestCase):
             start = time.time()
 
             # 等待文件出现
-            print('=>等待文件出现')
+            LogAction.print('=>等待文件出现')
             self.assertTrue(BaseFile.wait_for_file(self.path, self.filename, 30), '下载附件出错')
 
             print('=>记录当前时间，时间差')
@@ -90,7 +91,7 @@ class OpenDown(unittest.TestCase):
             print('[登录时延]: %r'  %value_time)
             save.save("附件下载:%s" %value_time)
 
-            print('=>返回收件箱')
+            LogAction.print('=>返回收件箱')
             BaseAdb.adb_back()
             BaseAdb.adb_back()
             time.sleep(2)
@@ -98,7 +99,7 @@ class OpenDown(unittest.TestCase):
         except BaseException:
             BaseImage.screenshot(self.driver, "DownFileError")
             time.sleep(5)
-            LogAction.save(func = "testDownFile", status="Fail", explain="DownFileError")
+            LogAction.save(func = "testDownFile", status="Fail", explain=LogAction.print())
             self.fail('【下载附件】出错')
          
     # 设置收件箱列表的邮件为未读邮件
