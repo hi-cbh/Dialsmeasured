@@ -46,7 +46,7 @@ class TestSelect(unittest.TestCase):
             print("=>登录")
             Login(self.driver,user['name'], user['pwd']).login_action(is_save=False)
 
-            time.sleep(5)
+            time.sleep(15)
 
 
             print("验证页面是否存在139精选")

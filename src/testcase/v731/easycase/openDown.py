@@ -65,7 +65,7 @@ class OpenDown(unittest.TestCase):
             if BaseFile.adb_find_file(self.path, self.filename):
                 BaseFile.adb_del_file(self.path, self.filename)
                  
-            time.sleep(3)
+            time.sleep(5)
              
             # 点击全部下载
             print('=>点击全部下载')

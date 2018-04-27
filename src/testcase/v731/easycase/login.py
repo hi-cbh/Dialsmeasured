@@ -71,7 +71,7 @@ class Login(unittest.TestCase):
 
 
             print('验证点：等待弹窗广告出现')
-            if self.driver.get_element("id=>cn.cj.pe:id/iv", 20) != None:
+            if self.driver.get_element("id=>cn.cj.pe:id/iv", 30) != None:
 
                 self.driver.click("id=>cn.cj.pe:id/btn")
 
@@ -137,7 +137,7 @@ class Login(unittest.TestCase):
 
 
             print('验证点：等待弹窗广告出现')
-            if self.driver.get_element("id=>cn.cj.pe:id/iv",15) != None:
+            if self.driver.get_element("id=>cn.cj.pe:id/iv",30) != None:
 
                 self.driver.click("id=>cn.cj.pe:id/btn")
 
