@@ -47,25 +47,27 @@ class TestSpeed(unittest.TestCase):
 
 
             for i in range(1,5):
-                print("重置app")
+                LogAction.print(isReset=True)
+                LogAction.print("=>重置app")
                 self.driver.reset()
                 time.sleep(10)
 
-                print("重启测试工具")
+                LogAction.print("【验证点：是否存在Begin Test按钮 - 如果不存在，网络环境差】")
                 if self.driver.get_display("xpath=>//android.widget.TextView[contains(@text,'Begin Test')]") == False:
                     continue
 
+                LogAction.print("=>点击测试")
                 self.driver.click("xpath=>//android.widget.TextView[contains(@text,'Begin Test')]")
                 time.sleep(30)
 
-
+                LogAction.print("【验证点：是否存在上传速度值】")
                 if self.driver.get_display("id=>org.zwanoo.android.speedtest:id/downloadSpeed") == False:
                     continue
 
 
                 load = self.driver.get_element('id=>org.zwanoo.android.speedtest:id/downloadSpeed',10).get_attribute('text')
 
-
+                LogAction.print("【验证点：是否存在下载速度值】")
                 if self.driver.get_display("id=>org.zwanoo.android.speedtest:id/downloadSpeed") == False:
                     continue
 
@@ -81,7 +83,7 @@ class TestSpeed(unittest.TestCase):
         except BaseException as error:
             BaseImage.screenshot(self.driver, "testSeep")
             time.sleep(5)
-            LogAction.save(func = "TestSpeed", status="Fail", explain="testSeep error")
+            LogAction.save(func = "TestSpeed", status="Fail", explain=LogAction.print())
             self.fail("【网络测速】出错！")
         finally:
             BaseAdb.adb_home()
