@@ -20,7 +20,7 @@ class Login(unittest.TestCase):
         try:
             '''最基础的登录'''
             LogAction.print(isReset=True)
-            LogAction.print("=>重置APP")
+            LogAction.print("=>清除APP缓存")
             self.driver.reset()
 
             time.sleep(4)
@@ -50,7 +50,7 @@ class Login(unittest.TestCase):
             # 输入
             els = self.driver.get_elements("id=>cn.cj.pe:id/input")
 
-            LogAction.print("验证点：是否进入登录界面")
+            LogAction.print("【验证点：是否进入登录界面】")
             self.assertTrue(els != None, "没有进入登录 页面")
 
             LogAction.print('=>输入用户名' + self.username)
@@ -74,7 +74,7 @@ class Login(unittest.TestCase):
 
 
 
-            LogAction.print('验证点：等待弹窗广告出现')
+            LogAction.print('【验证点：等待弹窗广告出现】')
             if self.driver.get_element("id=>cn.cj.pe:id/iv", 30) != None:
 
                 self.driver.click("id=>cn.cj.pe:id/btn")
@@ -115,7 +115,7 @@ class Login(unittest.TestCase):
         try:
             '''最基础的登录'''
             LogAction.print(isReset=True)
-            LogAction.print("=>重置APP")
+            LogAction.print("=>清除APP缓存")
             self.driver.reset()
 
             time.sleep(4)
@@ -137,7 +137,7 @@ class Login(unittest.TestCase):
             # BaseAdb.adbTap(500, 1700) #其他手机需要调试
             time.sleep(2)
 
-            LogAction.print("=>验证点：是否进入登录界面")
+            LogAction.print("【验证点：是否进入登录界面】")
             self.assertTrue(self.driver.get_element(u"uiautomator=>快速登录") != None, "页面不存在快捷登录按钮")
 
 
@@ -146,13 +146,13 @@ class Login(unittest.TestCase):
             start = time.time()
 
 
-            LogAction.print('=>验证点：等待弹窗广告出现')
+            LogAction.print('【验证点：等待弹窗广告出现】')
             if self.driver.get_element("id=>cn.cj.pe:id/iv",30) != None:
 
                 self.driver.click("id=>cn.cj.pe:id/btn")
 
 
-            LogAction.print('=>验证点：等待收件箱底部导航栏出现')
+            LogAction.print('【验证点：等待收件箱底部导航栏出现】')
             self.assertTrue(self.driver.get_element("id=>cn.cj.pe:id/message_list_bottom_email") != None, "登录失败！")
 
             print('=>记录当前时间，')

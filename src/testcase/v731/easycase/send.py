@@ -102,7 +102,7 @@ class Send(unittest.TestCase):
             # self.assertTrue(False,"测试")
             # 点击写邮件按钮
             LogAction.print(isReset=True)
-            LogAction.print("=>验证：页面没有找到写信按钮")
+            LogAction.print("【验证点：页面没有找到写信按钮】")
             self.assertTrue(self.driver.get_element(r"id=>cn.cj.pe:id/actionbar_right_view") != None, "页面没有找到写信按钮")
             LogAction.print('=>点击写邮件按钮')
             self.driver.click(r"id=>cn.cj.pe:id/actionbar_right_view")
@@ -142,7 +142,7 @@ class Send(unittest.TestCase):
             start = time.time()
 
 
-            LogAction.print('=>等待已完成出现')
+            LogAction.print('【验证点：是否发送成功】')
             self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",150) != None, "发送邮件失败！")
 
             print('=>记录当前时间，时间差')
@@ -177,11 +177,11 @@ class Send(unittest.TestCase):
             LogAction.print("=>第三方发送邮件")
             s = SendMail(sender['name'], sender['pwd'], reveicer['name'])
 
-            LogAction.print("=>验证发送邮件是否是失败")
+            LogAction.print("【验证点：发送邮件是否是失败】")
             self.assertTrue(s.send_mail_test('sendsmtpEmail','测试邮件...'),"邮件发送失败")
             time.sleep(10)
 
-            LogAction.print("=>加载本地邮件封邮件")
+            LogAction.print("=>加载邮件")
             timeout = int(round(time.time() * 1000)) + 1*60 * 1000
             # 找到邮件结束
             while int(round(time.time() * 1000)) < timeout :
@@ -200,10 +200,12 @@ class Send(unittest.TestCase):
 
 
             # 点击第一封
-            LogAction.print('=>点击第一封邮件，判断是否存在【暂无邮件】字段')
+            LogAction.print('【验证点：否存在"暂无邮件"字段】')
             self.assertTrue(self.driver.get_element(u"uiautomator=>暂无邮件") == None, "收件箱没有邮件")
             els = self.driver.get_sub_element(r"id=>android:id/list","class=>android.widget.LinearLayout")
             time.sleep(2)
+
+            LogAction.print('=>点击第一封邮件')
             els[0].click()
 
             LogAction.print('=>查找控件，确认进入邮件详情页')
@@ -232,7 +234,7 @@ class Send(unittest.TestCase):
             start = time.time()
 
 
-            LogAction.print('=>验证点：发送是否成功')
+            LogAction.print('【验证点：发送是否成功】')
             self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",120) != None, "发送邮件失败！")
 
             print('=>记录当前时间，时间差')

@@ -19,7 +19,7 @@ class OpenDown(unittest.TestCase):
         '''打开未读邮件时延'''
         try:
             LogAction.print(isReset=True)
-            LogAction.print("加载本地邮件封邮件")
+            LogAction.print("=>加载本地邮件")
             timeout = int(round(time.time() * 1000)) + 1*60 * 1000
             # 找到邮件结束
             while int(round(time.time() * 1000)) < timeout :
@@ -38,14 +38,16 @@ class OpenDown(unittest.TestCase):
 
 
             # 点击第一封
-            LogAction.print('=>点击第一封邮件，判断是否存在【暂无邮件】字段')
+            LogAction.print('【验证点：判断是否存在"暂无邮件"字段】')
             self.assertTrue(self.driver.get_element(u"uiautomator=>暂无邮件") == None, "收件箱没有邮件")
             els = self.driver.get_sub_element(r"id=>android:id/list","class=>android.widget.LinearLayout")
             time.sleep(2)
+
+            LogAction.print('=>点击第一封邮件')
             els[0].click()
 
 
-            LogAction.print('=>查找控件，确认进入邮件详情页')
+            LogAction.print('【验证点：查找控件，确认进入邮件详情页】')
             self.assertTrue(self.driver.element_wait(r"id=>cn.cj.pe:id/circular_progress_container") != None , "测试邮件不存在!")
             self.driver.element_wait(r"class=>android.webkit.WebView")
 
@@ -69,8 +71,9 @@ class OpenDown(unittest.TestCase):
             time.sleep(5)
              
             # 点击全部下载
-            LogAction.print('=>点击全部下载')
+            LogAction.print('【验证点：附件按钮是否存在】')
             self.assertTrue(self.driver.get_element(r"id=>cn.cj.pe:id/message_detail_attachment_download"),'没有下载按钮')
+            LogAction.print('=>点击全部下载')
             self.driver.click(r"id=>cn.cj.pe:id/message_detail_attachment_download")
 
 
@@ -78,7 +81,7 @@ class OpenDown(unittest.TestCase):
             start = time.time()
 
             # 等待文件出现
-            LogAction.print('=>等待文件出现')
+            LogAction.print('【验证点：等待文件下载完成】')
             self.assertTrue(BaseFile.wait_for_file(self.path, self.filename, 30), '下载附件出错')
 
             print('=>记录当前时间，时间差')

@@ -79,13 +79,13 @@ class TestPush(unittest.TestCase):
             LogAction.print("=>第三方发送邮件")
             s = SendMail(sender['name'], sender['pwd'], reveicer['name'])
 
-            LogAction.print("=>验证邮件发送失败")
+            LogAction.print("【验证点：第三方邮件是否发送失败】")
             self.assertTrue(s.send_mail_test('sendsmtpEmail','测试邮件...'),"邮件发送失败")
             # time.sleep(10)
             start = time.time()
 
 
-            LogAction.print("验证点：等待推送信息")
+            LogAction.print("【验证点：等待推送信息】")
             self.assertTrue(self.wait_for_notification(), "接收推送失败")
 
             print('=>记录当前时间，时间差')
@@ -112,22 +112,22 @@ class TestPush(unittest.TestCase):
     def logout(self):
         '''注销账户'''
         time.sleep(2)
-        print('=>点击 我的')
+        LogAction.print('=>点击 我的')
         self.driver.click(u"uiautomator=>我的")
         time.sleep(2)
-        print('=>点击 设置')
+        LogAction.print('=>点击 设置')
         self.driver.click(u"uiautomator=>设置")
         time.sleep(2)
 
-        print('=>点击 账号')
+        LogAction.print('=>点击 账号')
         self.driver.click(r"id=>cn.cj.pe:id/account_name")
         time.sleep(2)
 
-        print('=>点击 退出账号')
+        LogAction.print('=>点击 退出账号')
         self.driver.click(u"uiautomator=>退出账号")
         time.sleep(2)
 
-        print('=>点击 确定')
+        LogAction.print('=>点击 确定')
         self.driver.click(u"uiautomator=>确定")
         time.sleep(10)
 

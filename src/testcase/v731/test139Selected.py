@@ -49,7 +49,7 @@ class TestSelect(unittest.TestCase):
 
             time.sleep(5)
 
-            LogAction.print("=>加载本地邮件封邮件")
+            LogAction.print("=>加载本地邮件")
             timeout = int(round(time.time() * 1000)) + 20 * 1000
             # 找到邮件结束
             while int(round(time.time() * 1000)) < timeout :
@@ -59,7 +59,7 @@ class TestSelect(unittest.TestCase):
                 self.driver.swipe_down()
 
 
-            LogAction.print("=>验证页面是否存在139精选")
+            LogAction.print("【验证点：页面是否存在139精选】")
             self.assertTrue(self.driver.get_element(u'uiautomator=>139精选'),'收件箱列表没有139精选')
 
             LogAction.print('=>点击139精选')
@@ -82,7 +82,7 @@ class TestSelect(unittest.TestCase):
                 print(msg)
 
 
-            LogAction.print('=>验证点：页面是否显示正常')
+            LogAction.print('【验证点：页面是否显示正常】')
             self.assertTrue(self.driver.page_source().__contains__(u"阅读全文"),"页面显示不正常")
 
             print('=>记录当前时间，时间差')

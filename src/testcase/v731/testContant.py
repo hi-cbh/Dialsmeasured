@@ -48,14 +48,14 @@ class TestContant(unittest.TestCase):
             time.sleep(5)
             LogAction.print(isReset=True)
 
-            LogAction.print("验证点：页面是否存在联系人字段")
+            LogAction.print("【验证点：页面是否存在联系人字段】")
             self.assertTrue(self.driver.get_element(u"uiautomator=>联系人") !=None, "页面找不到联系人字段")
 
             LogAction.print("=>点击联系人")
             self.driver.click(u"uiautomator=>联系人")
             start = time.time()
 
-            LogAction.print("=>验证点：是否获取通知栏信息")
+            LogAction.print("【验证点：是否获取通知栏信息】")
             self.assertTrue(self.waitfor_notification(), "通讯录同步失败！！")
 
             print('=>记录当前时间，时间差')

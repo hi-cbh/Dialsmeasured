@@ -4,7 +4,7 @@
 import pyzmail
 import time
 from imapclient import IMAPClient
-
+from src.base.baseLog import LogAction
 
 class EmailOperation(object):
     
@@ -152,6 +152,7 @@ class EmailOperation(object):
         except BaseException as error:
             print(error)
             print("删除邮件可能出现错误")
+            LogAction.save(func = "EmailOperation", status="Fail", explain="clear_forlder error")
         finally:
             self.logout() 
             return is_true
