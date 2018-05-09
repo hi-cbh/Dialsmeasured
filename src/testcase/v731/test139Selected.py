@@ -28,7 +28,7 @@ class TestSelect(unittest.TestCase):
             self.driver = Psam(version="5.1")
         except BaseException as error:
             print("setUp启动出错！")
-            LogAction.save(func = "TestSelect", status="Fail", explain="setUp启动出错")
+            LogAction.save(func = "TestSelect", status="Fail", explain="Psam 启动出错")
             self.fail("setUp启动出错！")
 
 

@@ -30,16 +30,20 @@ class TestPush(unittest.TestCase):
     错误后重跑，使用两个账号
     '''
     def setUp(self):
+        stat =""
         try:
             # BaseAdb.adb_intall_uiautmator()
+            stat="Psam 初始化出错"
             self.driver = Psam(version="5.1")
+            time.sleep(5)
+            stat="第三方标记邮箱列表出错"
             EmailOperation(user2['name']+"@139.com", user2['pwd']).seen()
             time.sleep(10)
 
-        except BaseException :
+        except BaseException as error :
             print("setUp启动出错！")
             self.driver.quit()
-            LogAction.save(func = "TestPush", status="Fail", explain="setUp启动出错！或第三方操作邮件错误")
+            LogAction.save(func = "TestPush", status="Fail", explain=stat)
             self.fail("setUp启动出错！或邮件操作错误")
 
 

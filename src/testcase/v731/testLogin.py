@@ -27,17 +27,20 @@ path = r'/mnt/sdcard/139PushEmail/download/%s@139.com/*%s.rar'  %(username, file
 class TestLogin(unittest.TestCase):
 
     def setUp(self):
+        stat = ""
         try:
             # BaseAdb.adb_intall_uiautmator()
+            stat = "Psam启动出错"
             self.driver = Psam(version= "5.1")
             time.sleep(3)
+            stat = "第三方处理邮件出错！"
             EmailOperation(username+"@139.com", pwd).clear_forlder(['INBOX'])
             time.sleep(6)
 
         except BaseException as error:
             print("setUp启动出错！")
             self.driver.quit()
-            LogAction.save(func = "TestLogin", status="Fail", explain="setUp启动出错！或第三方操作邮件错误")
+            LogAction.save(func = "TestLogin", status="Fail", explain=stat)
             self.fail("setUp启动出错！或第三方操作邮件错误")
 
 
