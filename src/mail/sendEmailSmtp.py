@@ -10,8 +10,8 @@ from email.utils import parseaddr, formataddr
 #单个测试邮件
 tester = "13533348571@139.com"
 # 多个联系人
-# mamEmail='13533348571@139.com,18022340679@139.com,13790383896@139.com'
-mamEmail=''
+mamEmail='13533348571@139.com,18022340679@139.com,13790383896@139.com'
+# mamEmail=''
 # 发给其他人的
 mamEmailOther='13533348571@139.com,18022340679@139.com,13790383896@139.com,13802883234@139.com,wenyaoneng@139.com,18933905900@139.com,13610128827@139.com,13580491687@163.com'
 
@@ -30,7 +30,7 @@ class SendMail():
 
 
     def send_mail_test(self, subject, body):
-        '''发送辅助的邮件'''
+        '''发送辅助的邮件，使用第三方发送给客户端，验证转发邮件的用例'''
         smtp_server = 'smtp.139.com'
         from_mail = self.username + '@139.com'
         mail_pass = self.pwd
