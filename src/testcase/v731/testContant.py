@@ -25,7 +25,7 @@ class TestContant(unittest.TestCase):
         except BaseException:
             print("setUp启动出错！")
             self.driver.quit()
-            LogAction.save(func = "TestContant", status="Fail", explain="setUp Error")
+            LogAction.save(func = "TestContant", status="Fail", explain="setUp启动出错")
             self.fail("setUp启动出错！")
 
 
@@ -40,13 +40,12 @@ class TestContant(unittest.TestCase):
         '''测试通讯录是否同步成功'''
         try:
             # self.assertTrue(False, "测试错误")
-
+            LogAction.print(isReset=True)
 
             login=Login(self.driver,user['name'], user['pwd'])
             login.login_action(is_save=False)
 
             time.sleep(5)
-            LogAction.print(isReset=True)
 
             LogAction.print("【验证点：页面是否存在联系人字段】")
             self.assertTrue(self.driver.get_element(u"uiautomator=>联系人") !=None, "页面找不到联系人字段")

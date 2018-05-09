@@ -26,7 +26,7 @@ class TestSpeed(unittest.TestCase):
         except BaseException:
             print("setUp启动出错！")
             self.driver.quit()
-            LogAction.save(func = "TestSpeed", status="Fail", explain="setUp error")
+            LogAction.save(func = "TestSpeed", status="Fail", explain="setUp启动出错")
             self.fail("setUp启动出错！")
 
 

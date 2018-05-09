@@ -1,9 +1,10 @@
 #!/usr/bin/python  
 # -*- coding: utf-8 -*-  
-import smtplib  
+import smtplib,time
 from email.mime.text import MIMEText  
 from email.header import Header
-from email.utils import parseaddr, formataddr  
+from email.utils import parseaddr, formataddr
+
 # 格式化邮件地址
 
 #单个测试邮件
@@ -11,7 +12,7 @@ tester = "13533348571@139.com"
 # 多个联系人
 mamEmail='13533348571@139.com,18022340679@139.com,13790383896@139.com'
 # 发给其他人的
-mamEmailOther='13533348571@139.com,18022340679@139.com,13790383896@139.com,13802883234@139.com,wenyaoneng@139.com,18922249403@139.com,13610128827@139.com,13580491687@163.com'
+mamEmailOther='13533348571@139.com,18022340679@139.com,13790383896@139.com,13802883234@139.com,wenyaoneng@139.com,18933905900@139.com,13610128827@139.com,13580491687@163.com'
 
 class SendMail():
     '''单个接收者'''
@@ -61,6 +62,49 @@ class SendMail():
         mail_pass = self.pwd
         if is_test:
             areceiver = tester
+        else:
+            areceiver = mamEmail
+
+        body = []
+        for txt in message:
+            if len(txt) > 2 :
+                # txt = txt[:-1] # 含有换行符才需要
+                txt = "<p>"+ txt +"</p>"
+                body.append(txt)
+                # print(txt)
+
+
+        body=''.join(body)
+
+        # print("邮件正式发送内容： %s" %body)
+        print('邮件正式发送')
+
+        msg = MIMEText(body, 'html', 'utf-8')
+        # Header对中文进行转码
+        msg['From'] = self._format_addr(u"拨测账号 <%s>" % from_mail)
+        msg['To'] = areceiver
+        msg['Subject'] = Header(subject, 'utf-8')
+
+        try:
+            s = smtplib.SMTP()
+            s.connect(smtp_server, "25")
+            s.login(from_mail, mail_pass)
+            s.sendmail(from_mail, areceiver.split(','), msg.as_string())
+            s.quit()
+            print("发送成功")
+        except smtplib.SMTPException as e:
+            print("Error: %s" % e)
+            return False
+        else:
+            return True
+
+    def send_mail_test(self, subject, message=[], is_test=False):
+        '''发送邮件，固定格式'''
+        smtp_server = 'smtp.139.com'
+        from_mail = self.username + '@139.com'
+        mail_pass = self.pwd
+        if is_test:
+            areceiver = self.receive + '@139.com'
         else:
             areceiver = mamEmail
 
@@ -183,8 +227,13 @@ class SendMail():
 
 if __name__ == "__main__":
 
-    s = SendMail("13697485262","chinasoft123","13697485262")
-    # s.sendMail('testEmail','Python 邮件发送测试...')
+    s = SendMail("13533218540","hy12345678","13570535616")
 
-    line = ["testemail"]
-    s.send_mail('测试,是否收到邮件', line, is_test=True)
+    for i in range(30):
+
+
+        # s.sendMail('testEmail','Python 邮件发送测试...')
+
+        line = ["testemail"]
+        s.send_mail_test('测试,是否收到邮件', line, is_test=True)
+        time.sleep(5)

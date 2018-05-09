@@ -40,7 +40,7 @@ class TestSend(unittest.TestCase):
         except BaseException as error:
             print("setUp启动出错！")
             self.driver.quit()
-            LogAction.save(func = "TestSend", status="Fail", explain="setUp error")
+            LogAction.save(func = "TestSend", status="Fail", explain="setUp启动出错，或登录出错，或第三方操作邮件错误")
             self.fail("setUp启动出错！或邮件操作错误")
 
 

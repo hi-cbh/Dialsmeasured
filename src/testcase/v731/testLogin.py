@@ -37,8 +37,8 @@ class TestLogin(unittest.TestCase):
         except BaseException as error:
             print("setUp启动出错！")
             self.driver.quit()
-            LogAction.save(func = "TestLogin", status="Fail", explain="setUp error")
-            self.fail("setUp启动出错！或第三方操作邮寄错误")
+            LogAction.save(func = "TestLogin", status="Fail", explain="setUp启动出错！或第三方操作邮件错误")
+            self.fail("setUp启动出错！或第三方操作邮件错误")
 
 
     #释放实例,释放资源
