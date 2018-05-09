@@ -99,7 +99,7 @@ class SendMail():
         else:
             return True
 
-    def send_mail_test(self, subject, message=[], is_test=False):
+    def send_mail_test2(self, subject, message=[], is_test=False):
         '''发送邮件，固定格式'''
         smtp_server = 'smtp.139.com'
         from_mail = self.username + '@139.com'
@@ -236,5 +236,5 @@ if __name__ == "__main__":
         # s.sendMail('testEmail','Python 邮件发送测试...')
 
         line = ["testemail"]
-        s.send_mail_test('测试,是否收到邮件', line, is_test=True)
+        s.send_mail_test2('测试,是否收到邮件', line, is_test=True)
         time.sleep(5)
