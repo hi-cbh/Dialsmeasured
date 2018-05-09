@@ -33,7 +33,7 @@ class TestSend(unittest.TestCase):
             # BaseAdb.adb_intall_uiautmator()
             stat="Psam初始化出错"
             self.driver = Psam(version="5.1")
-            stat="第三方清理邮件列表出错"
+            stat="IMAPClient连接139服务器超时"
             EmailOperation(username+"@139.com", pwd).clear_forlder(['INBOX'])
             time.sleep(10)
             stat="账号登录错误"

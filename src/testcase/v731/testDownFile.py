@@ -36,7 +36,7 @@ class TestDownFile(unittest.TestCase):
             self.driver = Psam(version="5.1")
             time.sleep(5)
 
-            stat="第三方清理收件箱列表出错"
+            stat="IMAPClient连接139服务器超时"
             EmailOperation(username+"@139.com", pwd).clear_forlder(['INBOX'])
             time.sleep(10)
 

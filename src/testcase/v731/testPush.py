@@ -36,7 +36,7 @@ class TestPush(unittest.TestCase):
             stat="Psam 初始化出错"
             self.driver = Psam(version="5.1")
             time.sleep(5)
-            stat="第三方标记邮箱列表出错"
+            stat="IMAPClient连接139服务器超时"
             EmailOperation(user2['name']+"@139.com", user2['pwd']).seen()
             time.sleep(10)
 

@@ -33,7 +33,7 @@ class TestLogin(unittest.TestCase):
             stat = "Psam启动出错"
             self.driver = Psam(version= "5.1")
             time.sleep(3)
-            stat = "第三方处理邮件出错！"
+            stat = "IMAPClient连接139服务器超时！"
             EmailOperation(username+"@139.com", pwd).clear_forlder(['INBOX'])
             time.sleep(6)
 
