@@ -66,7 +66,7 @@ class TestSend(unittest.TestCase):
 
 if __name__ == "__main__":
     suite = unittest.TestSuite()
-    suite.addTest(TestSend('testCaseSend'))
+    # suite.addTest(TestSend('testCaseSend'))
     suite.addTest(TestSend('testCaseFwdSend'))
     runner = unittest.TextTestRunner(verbosity=2)
     runner.run(suite)
