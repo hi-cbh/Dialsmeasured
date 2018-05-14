@@ -26,7 +26,7 @@ fsaveFilePath = logPath + 'savef_'+logfileName
 fhtmlFilePath = logPath + 'false_'+logfileName
 
 
-test_version ="V744"
+test_version ="V745"
 
 class ReportClass(object):
 
