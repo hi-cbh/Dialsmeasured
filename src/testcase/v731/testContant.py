@@ -1,7 +1,7 @@
 # urs/bin/python
 # encoding:utf-8
 
-import os,time,unittest,sys
+import time,unittest
 from src.base.baseAdb import BaseAdb
 from src.psam.psam import Psam
 from src.testcase.v731.easycase.login import Login
@@ -19,7 +19,6 @@ class TestContant(unittest.TestCase):
 
     def setUp(self):
         try:
-
             # BaseAdb.adb_intall_uiautmator()
             self.driver = Psam(version="5.1")
         except BaseException:
@@ -33,7 +32,6 @@ class TestContant(unittest.TestCase):
     def tearDown(self):
         self.driver.quit()
         print("运行结束")
-
         time.sleep(5)
 
     def testCaseCheckAddressList(self):

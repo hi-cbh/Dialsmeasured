@@ -2,12 +2,10 @@
 # encoding:utf-8
 
 import os,time,unittest
-from src.aserver.AppiumServer import AppiumServer2
 from src.base.baseAdb import BaseAdb
 from src.mail.mailOperation import EmailOperation
 from src.psam.psam import Psam
 from src.testcase.v731.easycase.login import Login
-from src.testcase.v731.easycase.receive import WebReceive
 from src.mail.sendEmailSmtp import SendMail
 from src.readwriteconf.initData import InitData
 from src.base.baseImage import BaseImage
@@ -42,7 +40,7 @@ class TestPush(unittest.TestCase):
             print("setUp启动出错！")
             self.driver.quit()
             LogAction.save(func = "TestPush", status="Fail", explain=stat)
-            self.fail("setUp启动出错！或邮件操作错误")
+            self.fail("setUp启动出错！")
 
 
     #释放实例,释放资源
@@ -62,7 +60,6 @@ class TestPush(unittest.TestCase):
         '''推送测试测试方法'''
 
         try:
-            # self.assertTrue(False,"测试")
             LogAction.print(isReset=True)
 
 

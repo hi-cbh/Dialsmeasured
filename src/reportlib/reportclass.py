@@ -171,12 +171,6 @@ class ReportClass(object):
     def _read_case_conf(self, max):
         '''读取caseconf用例连续错误次数记录最大值用例'''
 
-        # rwc.add_section('caseconf')
-        # for k,v in ReportClass._result.items():
-        #     tmp = int(rwc.get_section_value('caseconf', k))
-        #     if tmp >= max and tmp % max == 0: # 最大值的倍数才加入列表
-        #         errl.append(k)
-
         errl = self._read_case_error(max)
 
         tmpl = []
@@ -486,15 +480,10 @@ class ReportClass(object):
 
                     # 发送假数据
                     s.send_mail_out('139Android客户端'+test_version+'版本_功能拨测_24小时汇总', false_txt,is_test=is_test)
-                    # time.sleep(10)
-                    # 发送真数据
-                    # s.send_mail('【内部邮件】139Android客户端'+test_version+'版本_功能拨测_24小时汇总', all_sendtxt,is_test=is_test)
+
                 else:
                     # 发送假数据
                     s.send_mail_out('139Android客户端'+test_version+'版本_功能拨测_晚上部分汇总', false_txt,is_test=is_test)
-                    # time.sleep(10)
-                    # 发送真数据
-                    # s.send_mail('【内部邮件】139Android客户端'+test_version+'版本_功能拨测_晚上部分汇总', all_sendtxt,is_test=is_test)
 
                 rwc.set_section_value('sendconf', 'send', 'True')
                 # #发送后，用例是否复位
@@ -524,8 +513,6 @@ class ReportClass(object):
         print('运行结束')
         time.sleep(10)
 
-
-
     def all(self, is_test=False):
         self._get_error_case()
         self._use_case_results()
@@ -533,8 +520,3 @@ class ReportClass(object):
         self._mergeict()
         self._save_date()
         self.send(is_test) # 这里判断是否发给移动
-
-
-#
-# if __name__ == "__main__":
-#     ReportClass()._get_sms_case(5)

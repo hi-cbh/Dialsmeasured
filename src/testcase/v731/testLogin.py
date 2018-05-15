@@ -36,16 +36,16 @@ class TestLogin(unittest.TestCase):
 
             '''
             登录模块去掉第三方调用模块，减少错误连接
+            stat = "IMAPClient连接139服务器超时！"
+            EmailOperation(username+"@139.com", pwd).clear_forlder(['INBOX'])
+            time.sleep(6)
             '''
-            # stat = "IMAPClient连接139服务器超时！"
-            # EmailOperation(username+"@139.com", pwd).clear_forlder(['INBOX'])
-            # time.sleep(6)
 
         except BaseException as error:
             print("setUp启动出错！")
             self.driver.quit()
             LogAction.save(func = "TestLogin", status="Fail", explain=stat)
-            self.fail("setUp启动出错！或第三方操作邮件错误")
+            self.fail("setUp启动出错！")
 
 
     #释放实例,释放资源

@@ -55,9 +55,10 @@ class BaseTime(object):
 
         d = i.day
 
-        if (changetime >= i.hour >= 1 and send_status == "False") or i.hour == morning:
-            pass
-        else:
+        is_true = (changetime >= i.hour >= 1 and send_status == "False") or i.hour == morning
+        print(is_true)
+
+        if not is_true:
             d = d + 1
 
 

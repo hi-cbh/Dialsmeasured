@@ -128,6 +128,3 @@ class OpenDown(unittest.TestCase):
             self.driver.swipe(20, h, width - 20, h, 500) 
             
         time.sleep(2)   
-            
-            
-        

@@ -21,16 +21,6 @@ class Login(unittest.TestCase):
 
             LogAction.print(isReset=True)
 
-            # '''
-            # 把第三方连接139服务器，加入case中，增加错误敏感度
-            # '''
-            # stat = "IMAPClient连接139服务器超时！，有可能是网络问题或服务器故障了"
-            # LogAction.print(stat)
-            # EmailOperation(self.username+"@139.com", self.pwd).clear_forlder(['INBOX'])
-            # time.sleep(10)
-
-
-
             '''最基础的登录'''
             LogAction.print("=>清除APP缓存")
             self.driver.reset()
@@ -92,12 +82,11 @@ class Login(unittest.TestCase):
                 self.driver.click("id=>cn.cj.pe:id/btn")
 
 
-            #
-            # print('验证点：等待收件箱底部导航栏出现')
-            # self.assertTrue(self.driver.get_element("id=>cn.cj.pe:id/message_list_bottom_email") != None, "登录失败！")
-            #
-
-
+            '''
+            # 这里被广告弹窗替代
+            print('验证点：等待收件箱底部导航栏出现')
+            self.assertTrue(self.driver.get_element("id=>cn.cj.pe:id/message_list_bottom_email") != None, "登录失败！")
+            '''
 
             LogAction.print('=>记录当前时间，')
             value_time = str(round((time.time() - start), 2))
@@ -136,7 +125,6 @@ class Login(unittest.TestCase):
             self.driver.swipe_right()
             LogAction.print("=>右滑")
             self.driver.swipe_right()
-            # self.driver.swipeRight()
             print("点击坐标")
             # BaseAdb.adbTap(700, 2300)  # vivo 1603  w * 0.5, h * 0.899
             #

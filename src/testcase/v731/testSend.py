@@ -43,7 +43,7 @@ class TestSend(unittest.TestCase):
             print("setUp启动出错！")
             self.driver.quit()
             LogAction.save(func = "TestSend", status="Fail", explain=stat)
-            self.fail("setUp启动出错！或邮件操作错误")
+            self.fail("setUp启动出错！")
 
 
     #释放实例,释放资源
@@ -59,7 +59,7 @@ class TestSend(unittest.TestCase):
 
     def testCaseFwdSend(self):
         '''转发邮件测试'''
-        Send(self.driver,username+'@139.com').send_fwd(receiver, sender)
+        Send(self.driver,username+'@139.com').send_fwd()
 
 
 
