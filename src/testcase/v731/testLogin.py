@@ -33,9 +33,13 @@ class TestLogin(unittest.TestCase):
             stat = "Psam启动出错"
             self.driver = Psam(version= "5.1")
             time.sleep(3)
-            stat = "IMAPClient连接139服务器超时！"
-            EmailOperation(username+"@139.com", pwd).clear_forlder(['INBOX'])
-            time.sleep(6)
+
+            '''
+            登录模块去掉第三方调用模块，减少错误连接
+            '''
+            # stat = "IMAPClient连接139服务器超时！"
+            # EmailOperation(username+"@139.com", pwd).clear_forlder(['INBOX'])
+            # time.sleep(6)
 
         except BaseException as error:
             print("setUp启动出错！")

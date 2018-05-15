@@ -39,7 +39,7 @@ class TestSend(unittest.TestCase):
             stat="账号登录错误"
             Login(self.driver,username, pwd).login_action(is_save=False)
 
-        except BaseException as error:
+        except BaseException :
             print("setUp启动出错！")
             self.driver.quit()
             LogAction.save(func = "TestSend", status="Fail", explain=stat)

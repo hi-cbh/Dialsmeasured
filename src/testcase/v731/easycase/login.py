@@ -7,7 +7,7 @@ from src.base.baseAdb import BaseAdb
 from src.base.baseImage import BaseImage
 from src.base.baseLog import LogAction
 from src.readwriteconf.saveData import save
-
+from src.mail.mailOperation import EmailOperation
 class Login(unittest.TestCase):
     '''当前版本没有添加弹窗广告'''
     def __init__(self,driver, username, pwd):
@@ -18,8 +18,20 @@ class Login(unittest.TestCase):
     def login_action(self, first_fogin=False, is_save=True):
         # first_fogin 首次安装后，登录为true
         try:
-            '''最基础的登录'''
+
             LogAction.print(isReset=True)
+
+            # '''
+            # 把第三方连接139服务器，加入case中，增加错误敏感度
+            # '''
+            # stat = "IMAPClient连接139服务器超时！，有可能是网络问题或服务器故障了"
+            # LogAction.print(stat)
+            # EmailOperation(self.username+"@139.com", self.pwd).clear_forlder(['INBOX'])
+            # time.sleep(10)
+
+
+
+            '''最基础的登录'''
             LogAction.print("=>清除APP缓存")
             self.driver.reset()
 

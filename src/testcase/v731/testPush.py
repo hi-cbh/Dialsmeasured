@@ -36,9 +36,7 @@ class TestPush(unittest.TestCase):
             stat="Psam 初始化出错"
             self.driver = Psam(version="5.1")
             time.sleep(5)
-            stat="IMAPClient连接139服务器超时"
-            EmailOperation(user2['name']+"@139.com", user2['pwd']).seen()
-            time.sleep(10)
+
 
         except BaseException as error :
             print("setUp启动出错！")
@@ -66,6 +64,16 @@ class TestPush(unittest.TestCase):
         try:
             # self.assertTrue(False,"测试")
             LogAction.print(isReset=True)
+
+
+            '''将IMAPClient纳入判断范围'''
+            stat="IMAPClient连接139服务器超时"
+            LogAction.print(stat)
+            EmailOperation(user2['name']+"@139.com", user2['pwd']).seen()
+            time.sleep(10)
+
+
+
             LogAction.print("=>登录")
             Login(self.driver,reveicer['name'], reveicer['pwd']).login_action(is_save=False)
 

@@ -50,7 +50,7 @@ class TestSelect(unittest.TestCase):
             time.sleep(5)
 
             LogAction.print("=>加载本地邮件")
-            timeout = int(round(time.time() * 1000)) + 20 * 1000
+            timeout = int(round(time.time() * 1000)) + 30 * 1000
             # 找到邮件结束
             while int(round(time.time() * 1000)) < timeout :
                 print("下拉")
