@@ -36,7 +36,7 @@ class TestPush(unittest.TestCase):
             time.sleep(5)
 
 
-        except BaseException as error :
+        except BaseException:
             print("setUp启动出错！")
             self.driver.quit()
             LogAction.save(func = "TestPush", status="Fail", explain=stat)
@@ -62,14 +62,11 @@ class TestPush(unittest.TestCase):
         try:
             LogAction.print(isReset=True)
 
-
             '''将IMAPClient纳入判断范围'''
             stat="IMAPClient连接139服务器超时"
             LogAction.print(stat)
             EmailOperation(user2['name']+"@139.com", user2['pwd']).seen()
             time.sleep(10)
-
-
 
             LogAction.print("=>登录")
             Login(self.driver,reveicer['name'], reveicer['pwd']).login_action(is_save=False)
@@ -79,7 +76,6 @@ class TestPush(unittest.TestCase):
 
             LogAction.print("=>重新登录")
             Login(self.driver,reveicer['name'], reveicer['pwd']).login_action(is_save=False)
-
 
             LogAction.print("=>点击Home键")
             BaseAdb.adb_home()
@@ -92,7 +88,6 @@ class TestPush(unittest.TestCase):
             self.assertTrue(s.send_mail_test('sendsmtpEmail','测试邮件...'),"邮件发送失败")
             # time.sleep(10)
             start = time.time()
-
 
             LogAction.print("【验证点：等待推送信息】")
             self.assertTrue(self.wait_for_notification(), "接收推送失败")

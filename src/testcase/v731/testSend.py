@@ -30,17 +30,9 @@ class TestSend(unittest.TestCase):
     def setUp(self):
         stat = ""
         try:
-            # BaseAdb.adb_intall_uiautmator()
             stat="Psam初始化出错"
             self.driver = Psam(version="5.1")
-            stat="IMAPClient连接139服务器超时"
-            EmailOperation(username+"@139.com", pwd).clear_forlder(['INBOX'])
-            time.sleep(10)
-            stat="账号登录错误"
-            Login(self.driver,username, pwd).login_action(is_save=False)
-
         except BaseException :
-            print("setUp启动出错！")
             self.driver.quit()
             LogAction.save(func = "TestSend", status="Fail", explain=stat)
             self.fail("setUp启动出错！")
@@ -50,18 +42,26 @@ class TestSend(unittest.TestCase):
     def tearDown(self):
         self.driver.quit()
         print("运行结束")
-
         time.sleep(5)
 
     def testCaseSend(self):
         '''发送邮件测试'''
+
+        Login(self.driver,username, pwd).login_action(is_save=False)
         Send(self.driver,username+'@139.com').send_action()
 
     def testCaseFwdSend(self):
         '''转发邮件测试'''
-        Send(self.driver,username+'@139.com').send_fwd()
+        stat="IMAPClient连接139服务器超时"
+        try:
 
+            EmailOperation(username+"@139.com", pwd).clear_forlder(['INBOX'])
 
+            Login(self.driver,username, pwd).login_action(is_save=False)
+            Send(self.driver,username+'@139.com').send_fwd()
+        except BaseException :
+            LogAction.save(func = "testCaseFwdSend", status="Fail", explain=stat)
+            self.fail("EmailOperation clear_forlder error！")
 
 
 if __name__ == "__main__":
