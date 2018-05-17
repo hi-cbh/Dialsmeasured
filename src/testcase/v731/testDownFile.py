@@ -36,9 +36,10 @@ class TestDownFile(unittest.TestCase):
             self.driver = Psam(version="5.1")
             time.sleep(5)
 
-            stat="IMAPClient连接139服务器超时"
-            EmailOperation(username+"@139.com", pwd).clear_forlder(['INBOX'])
-            time.sleep(10)
+            '''去除清理'''
+            # stat="IMAPClient连接139服务器超时"
+            # EmailOperation(username+"@139.com", pwd).clear_forlder(['INBOX'])
+            # time.sleep(10)
 
             stat = "账号登录出错"
             Login(self.driver,username, pwd).login_action(is_save=False)
