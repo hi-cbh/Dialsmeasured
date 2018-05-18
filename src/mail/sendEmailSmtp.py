@@ -223,18 +223,56 @@ class SendMail():
         else:
             return True
 
+    def send_mail_str_163(self, subject, message="", is_test=False):
+        '''发送邮件，固定格式'''
+        smtp_server = 'smtp.163.com'
+        from_mail = self.username + '@163.com'
+        mail_pass = self.pwd
+
+        if is_test:
+            areceiver = 'hi_cbh@qq.com'
+        else:
+            areceiver = "hi_cbh@qq.com,wujun11121@163.com"
+
+
+        body = []
+        body.append(message)
+        body=''.join(body)
+
+        # print("邮件正式发送内容： %s" %body)
+        print('邮件正式发送')
+
+        msg = MIMEText(body, 'html', 'utf-8')
+        # Header对中文进行转码
+        msg['From'] = self._format_addr(u"拨测账号 <%s>" % from_mail)
+        msg['To'] = areceiver
+        msg['Subject'] = Header(subject, 'utf-8')
+
+        try:
+            s = smtplib.SMTP()
+            s.connect(smtp_server, "25")
+            s.login(from_mail, mail_pass)
+            s.sendmail(from_mail, areceiver.split(','), msg.as_string())
+            s.quit()
+            print("发送成功")
+        except smtplib.SMTPException as e:
+            print("Error: %s" % e)
+            return False
+        else:
+            return True
+
 
 
 
 if __name__ == "__main__":
 
-    s = SendMail("13533218540","hy12345678","13570535616")
+    s = SendMail("13580491603","chinasoft123","13570535616")
 
-    for i in range(30):
+    for i in range(1):
 
 
         # s.sendMail('testEmail','Python 邮件发送测试...')
 
         line = ["testemail"]
-        s.send_mail_test2('测试,是否收到邮件', line, is_test=True)
+        s.send_mail_str_163("testEmail"," 邮件发送测试",is_test=False)
         time.sleep(5)

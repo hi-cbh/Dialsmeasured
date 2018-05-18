@@ -509,6 +509,8 @@ class ReportClass(object):
                 s = SendMail("13697485262","chinasoft123","13697485262")
                 s.send_mail_str('139Android客户端'+test_version+'版本_功能拨测疑是出现故障，请及时查证',errstr,is_test=is_test)
 
+                s = SendMail("13580491603","chinasoft123","")
+                s.send_mail_str_163('[预测]139Android客户端'+test_version+'版本_功能拨测疑是出现故障，请及时查证',errstr,is_test=is_test)
 
         print('运行结束')
         time.sleep(10)
