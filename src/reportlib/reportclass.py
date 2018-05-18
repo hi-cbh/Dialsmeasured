@@ -480,10 +480,12 @@ class ReportClass(object):
 
                     # 发送假数据
                     s.send_mail_out('139Android客户端'+test_version+'版本_功能拨测_24小时汇总', false_txt,is_test=is_test)
+                    s.send_mail_out_163('139Android客户端'+test_version+'版本_功能拨测_24小时汇总', false_txt,is_test=True)
 
                 else:
                     # 发送假数据
                     s.send_mail_out('139Android客户端'+test_version+'版本_功能拨测_晚上部分汇总', false_txt,is_test=is_test)
+                    s.send_mail_out_163('139Android客户端'+test_version+'版本_功能拨测_晚上部分汇总', false_txt,is_test=True)
 
                 rwc.set_section_value('sendconf', 'send', 'True')
                 # #发送后，用例是否复位
