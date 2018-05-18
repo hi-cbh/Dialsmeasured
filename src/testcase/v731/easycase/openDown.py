@@ -82,7 +82,7 @@ class OpenDown(unittest.TestCase):
 
             # 等待文件出现
             LogAction.print('【验证点：等待文件下载完成】')
-            self.assertTrue(BaseFile.wait_for_file(self.path, self.filename, 30), '下载附件出错')
+            self.assertTrue(BaseFile.wait_for_file(self.path, self.filename, 15), '下载附件出错')
 
             print('=>记录当前时间，时间差')
             value_time = str(round((time.time() - start), 2))
