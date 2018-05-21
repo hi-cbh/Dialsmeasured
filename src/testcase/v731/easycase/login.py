@@ -50,7 +50,7 @@ class Login(unittest.TestCase):
 
 
             # 输入
-            els = self.driver.get_elements("id=>cn.cj.pe:id/input")
+            els = self.driver.get_elements("id=>cn.cj.pe:id/input",5)
 
             LogAction.print("【验证点：是否进入登录界面】")
             self.assertTrue(els != None, "没有进入登录 页面")
@@ -63,7 +63,7 @@ class Login(unittest.TestCase):
             els[1].set_value(self.pwd)   # appium 1.6
 
             LogAction.print('=>点击登录')
-            loginbtn = self.driver.get_element("id=>cn.cj.pe:id/login")
+            loginbtn = self.driver.get_element("id=>cn.cj.pe:id/login",5)
 
             LogAction.print('=>记录当前时间、点击登录')
             loginbtn.click()
@@ -77,7 +77,7 @@ class Login(unittest.TestCase):
 
 
             LogAction.print('【验证点：等待弹窗广告出现】')
-            if self.driver.get_element("id=>cn.cj.pe:id/iv", 10) != None:
+            if self.driver.get_element("id=>cn.cj.pe:id/iv", 5) != None:
 
                 self.driver.click("id=>cn.cj.pe:id/btn")
 
@@ -101,7 +101,7 @@ class Login(unittest.TestCase):
             if is_save:
                 save.save("账号登录:%s" %value_time)
 
-        except BaseException as error:
+        except BaseException:
             BaseImage.screenshot(self.driver, "LoginError")
             # 超时，数据超时
             time.sleep(5)
@@ -138,7 +138,7 @@ class Login(unittest.TestCase):
             time.sleep(2)
 
             LogAction.print("【验证点：是否进入登录界面】")
-            self.assertTrue(self.driver.get_element(u"uiautomator=>快速登录") != None, "页面不存在快捷登录按钮")
+            self.assertTrue(self.driver.get_element(u"uiautomator=>快速登录",10) != None, "页面不存在快捷登录按钮")
 
 
             LogAction.print('=>点击快捷登录')
@@ -147,13 +147,12 @@ class Login(unittest.TestCase):
 
             # time.sleep(30)
             LogAction.print('【验证点：等待弹窗广告出现】')
-            if self.driver.get_element("id=>cn.cj.pe:id/iv",10) != None:
+            if self.driver.get_element("id=>cn.cj.pe:id/iv",5) != None:
 
                 self.driver.click("id=>cn.cj.pe:id/btn")
 
-
             LogAction.print('【验证点：等待收件箱底部导航栏出现】')
-            self.assertTrue(self.driver.get_element("id=>cn.cj.pe:id/message_list_bottom_email") != None, "登录失败！")
+            self.assertTrue(self.driver.get_element("id=>cn.cj.pe:id/message_list_bottom_email",5) != None, "登录失败！")
 
             print('=>记录当前时间，')
             value_time = str(round((time.time() - start), 2))
@@ -168,106 +167,9 @@ class Login(unittest.TestCase):
             if is_save:
                 save.save("一键登录:%s" %value_time)
 
-        except BaseException as error:
+        except BaseException:
             BaseImage.screenshot(self.driver, "oneBtnLoginError")
             # 超时，数据超时
             time.sleep(5)
             LogAction.save(func = "testCaseOnBtnLogin", status="Fail", explain=LogAction.print())
             self.fail("【一键登录出错登录】出现错误")
-            # 添加截图
-
-
-        # 用于记录时延的登录操作
-    def login_action_time(self):
-        
-        logintime = self.login_action()
-        
-        # 下拉
-        time.sleep(4)
-        self.driver.swipe_down()
-        time.sleep(4)
-        
-        # 邮件设置
-        self.set_email_option(False, True)
-    
-        time.sleep(2)
-        
-        
-        return logintime
-         
-        # 用于记录CPU、内存峰值
-    def login_action_peak_value(self):
-                
-        self.login_action()
-        
-        # 邮件设置
-        self.set_email_option(True, False)
-    
-        time.sleep(2)
-        
-    def login_action_login_flow(self):
-        '''用于首次登录流量'''        
-        self.login_action()
-        
-    
-    def set_email_option(self, is_notice, is_set):
-        '''邮件设置'''
-        # 点击我的
-        print('=>点击我的')
-        self.driver.click("id=>cn.cj.pe:id/message_list_bottom_mine")
-        
-        # 点击设置
-        print('=>点击设置')
-        # self.driver.click(u"name=>设置") # appium 1.4
-        self.driver.click(u"uiautomator=>设置") # appium 1.6
-        
-        
-        
-        if is_notice:
-            print('==>通知设置')
-            self.set_email_notice()
-        
-        
-        if is_set:
-            print('==>下载图片设置')
-            self.set_email_set()
-        
-        print('=>返回设置页面')
-        BaseAdb.adb_back()
-#         time.sleep(2)
-        print('=>返回收件箱')
-        self.driver.click("id=>cn.cj.pe:id/message_list_bottom_email")
-        
-        #设置邮件提示设置
-    def set_email_notice(self):
-        # time.sleep(1) appium 1.4
-        # self.driver.click(u"name=>邮件提示设置")
-        # time.sleep(1)
-        # self.driver.click(u"name=>显示邮件发送页")
-        # time.sleep(1)
-        # self.driver.click(u"name=>显示邮件通知")
-#         time.sleep(1)
-        time.sleep(1)
-        self.driver.click(u"uiautomator=>邮件提示设置")
-        #         time.sleep(1)
-        self.driver.click(u"uiautomator=>显示邮件发送页")
-        #         time.sleep(1)
-        self.driver.click(u"uiautomator=>显示邮件通知")
-        #         time.sleep(1)
-        BaseAdb.adb_back()
-        
-        
-        # 开启收邮件设置：自动下载邮件图片
-    def set_email_set(self):
-#         time.sleep(1) appium 1.4
-#         self.driver.click(u"name=>收取邮件设置")
-# #         time.sleep(1)
-#         self.driver.click(u"name=>数据网络下自动下载邮件图片")
-# #         time.sleep(1)
-        time.sleep(1)
-        self.driver.click(u"uiautomator=>收取邮件设置")
-#         time.sleep(1)
-        self.driver.click(u"uiautomator=>数据网络下自动下载邮件图片")
-#         time.sleep(1)
-        self.driver.click(r"name=>cn.cj.pe:id/hjl_headicon")
-        time.sleep(2)     

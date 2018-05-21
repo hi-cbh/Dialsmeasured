@@ -79,7 +79,7 @@ class TestPush(unittest.TestCase):
 
             LogAction.print("=>点击Home键")
             BaseAdb.adb_home()
-            time.sleep(5)
+            time.sleep(2)
 
             LogAction.print("=>第三方发送邮件")
             s = SendMail(sender['name'], sender['pwd'], reveicer['name'])
@@ -133,17 +133,17 @@ class TestPush(unittest.TestCase):
 
         LogAction.print('=>点击 确定')
         self.driver.click(u"uiautomator=>确定")
-        time.sleep(10)
+        time.sleep(5)
 
 
     def wait_for_notification(self):
         '''找到需要的通知栏信息'''
-        for i in range(15):
+        for i in range(6):
             print("检查通知栏信息")
             if BaseAdb.dumpsys_notification("新邮件") == True :
                 print('找到了')
                 return True
-            time.sleep(10)
+            time.sleep(8)
         print('找不到了')
         return False
 

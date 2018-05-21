@@ -43,10 +43,8 @@ class TestContant(unittest.TestCase):
             login=Login(self.driver,user['name'], user['pwd'])
             login.login_action(is_save=False)
 
-            time.sleep(5)
-
             LogAction.print("【验证点：页面是否存在联系人字段】")
-            self.assertTrue(self.driver.get_element(u"uiautomator=>联系人") !=None, "页面找不到联系人字段")
+            self.assertTrue(self.driver.get_element(u"uiautomator=>联系人",10) !=None, "页面找不到联系人字段")
 
             LogAction.print("=>点击联系人")
             self.driver.click(u"uiautomator=>联系人")

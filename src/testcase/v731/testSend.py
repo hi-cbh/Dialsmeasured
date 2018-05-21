@@ -51,12 +51,11 @@ class TestSend(unittest.TestCase):
         Send(self.driver,username+'@139.com').send_action()
 
     def testCaseFwdSend(self):
-        '''转发邮件测试'''
+        '''转发邮件测试-云端转发'''
         stat="IMAPClient连接139服务器超时"
         try:
 
             EmailOperation(username+"@139.com", pwd).clear_forlder(['INBOX'])
-
             Login(self.driver,username, pwd).login_action(is_save=False)
             Send(self.driver,username+'@139.com').send_fwd()
         except BaseException :
@@ -64,9 +63,36 @@ class TestSend(unittest.TestCase):
             self.fail("EmailOperation clear_forlder error！")
 
 
+    def testCaseReply(self):
+        '''回复邮件'''
+        stat="IMAPClient连接139服务器超时"
+        try:
+
+            EmailOperation(username+"@139.com", pwd).clear_forlder(['INBOX'])
+            Login(self.driver,username, pwd).login_action(is_save=False)
+            Send(self.driver,username+'@139.com').reply(receiver,sender)
+        except BaseException :
+            LogAction.save(func = "testCaseReply", status="Fail", explain=stat)
+            self.fail("EmailOperation clear_forlder error！")
+
+    def testCaseForward(self):
+        '''转发带附件'''
+        stat="IMAPClient连接139服务器超时"
+        try:
+
+            EmailOperation(username+"@139.com", pwd).clear_forlder(['INBOX'])
+            Login(self.driver,username, pwd).login_action(is_save=False)
+            Send(self.driver,username+'@139.com').forward(receiver,sender)
+        except BaseException :
+            LogAction.save(func = "testCaseForward", status="Fail", explain=stat)
+            self.fail("EmailOperation clear_forlder error！")
+
+
 if __name__ == "__main__":
     suite = unittest.TestSuite()
-    # suite.addTest(TestSend('testCaseSend'))
+    suite.addTest(TestSend('testCaseSend'))
     suite.addTest(TestSend('testCaseFwdSend'))
+    suite.addTest(TestSend('testCaseReply'))
+    suite.addTest(TestSend('testCaseForward'))
     runner = unittest.TextTestRunner(verbosity=2)
     runner.run(suite)

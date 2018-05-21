@@ -25,7 +25,10 @@ from src.testcase.v731.testPush import TestPush
 from src.testcase.HTMLTestRunner import HTMLTestRunner
 from src.testcase.v731.testLogin import TestLogin
 from src.testcase.v731.testDownFile import TestDownFile
-from src.otherApk.testSpeed import TestSpeed
+from src.testcase.v731.testCalendar import TestCalendar
+from src.testcase.v731.testDiscover import TestDiscover
+from src.testcase.v731.testPerson import TestPersion
+from src.testcase.v731.testSkyDrive import TestSkyDrive
 from src.reportlib.reportclass import ReportClass
 from src.base.baseAdb import BaseAdb
 
@@ -41,13 +44,13 @@ if __name__ == "__main__":
     BaseAdb.adb_wake_up()
     time.sleep(5)
     # 获取当前网速
-    ts = TestSpeed()
-    ts.setUp()
-    speed = ts.testCase()
-    ts.tearDown()
+    # ts = TestSpeed()
+    # ts.setUp()
+    # speed = ts.testCase()
+    # ts.tearDown()
 
     # print("speed: %s" %speed)
-    time.sleep(10)
+    speed=""
 
     print('需要运行的脚本')
     testtxt = []
@@ -55,7 +58,13 @@ if __name__ == "__main__":
     testtxt.append(('账号登录',"testCaseLogin"))
     testtxt.append(('一键登录',"testCaseOnBtnLogin"))
     testtxt.append(('发送邮件带附件',"testCaseSend"))
-    testtxt.append(('转发邮件带附件',"testCaseFwdSend"))
+    testtxt.append(('云端转发',"testCaseFwdSend"))
+    testtxt.append(('回复邮件',"testCaseReply"))
+    testtxt.append(('SMTP转发',"testCaseForward"))
+    testtxt.append(('日历',"testCaseCalendar"))
+    testtxt.append(('发现主页',"testCaseDiscover"))
+    testtxt.append(('个人资料',"testCasePersionMessages"))
+    testtxt.append(('彩云网盘',"testCaseSkyDrive"))
     testtxt.append(('附件下载',"testDownFile"))
     testtxt.append(('联系人同步',"testCaseCheckAddressList"))
     testtxt.append(('收件箱列表中精选',"testCaseSelected"))
@@ -63,11 +72,16 @@ if __name__ == "__main__":
 
 
     suite = unittest.TestSuite()
-    # suite.addTest(InitData("testCase"))
     suite.addTest(TestLogin('testCaseOnBtnLogin'))
     suite.addTest(TestLogin('testCaseLogin'))
     suite.addTest(TestSend('testCaseSend'))
     suite.addTest(TestSend('testCaseFwdSend'))
+    suite.addTest(TestSend('testCaseForward'))
+    suite.addTest(TestSend('testCaseReply'))
+    suite.addTest(TestCalendar('testCaseCalendar'))
+    suite.addTest(TestDiscover('testCaseDiscover'))
+    suite.addTest(TestPersion('testCasePersionMessages'))
+    suite.addTest(TestSkyDrive('testCaseSkyDrive'))
     suite.addTest(TestDownFile('testDownFile'))
     suite.addTest(TestContant('testCaseCheckAddressList'))
     suite.addTest(TestSelect('testCaseSelected'))

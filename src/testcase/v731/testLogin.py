@@ -32,16 +32,8 @@ class TestLogin(unittest.TestCase):
             # BaseAdb.adb_intall_uiautmator()
             stat = "Psam启动出错"
             self.driver = Psam(version= "5.1")
-            time.sleep(3)
 
-            '''
-            登录模块去掉第三方调用模块，减少错误连接
-            stat = "IMAPClient连接139服务器超时！"
-            EmailOperation(username+"@139.com", pwd).clear_forlder(['INBOX'])
-            time.sleep(6)
-            '''
-
-        except BaseException as error:
+        except BaseException:
             print("setUp启动出错！")
             self.driver.quit()
             LogAction.save(func = "TestLogin", status="Fail", explain=stat)

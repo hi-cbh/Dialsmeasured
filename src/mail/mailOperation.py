@@ -10,14 +10,39 @@ class EmailOperation(object):
     
     def __init__(self, user_name, pwd):
         print("使用imapclient，操作邮件...")
-        self.server = IMAPClient('imap.139.com', use_uid=True, ssl=False)
+        self.server = self._get_server()
         self.username = user_name
         self.password = pwd
-        
-    
+
+    def _server(self):
+        '''连接服务器'''
+        try:
+            print("连接服务器")
+            _server = IMAPClient('imap.139.com', use_uid=True, ssl=False)
+            return _server
+        except Exception:
+            print("连接服务器失败")
+            return None
+
+    def _get_server(self):
+        for i in range(3):
+            _s = self._server()
+            if _s != None:
+                return _s
+        else:
+            print("连接N次服务器，仍然失败")
+            return None
+
+
+
+
     def logout(self):
-        self.server.logout()
-        
+        try:
+            self.server.logout()
+
+        except BaseException:
+            print("退出发生错误")
+
     # 删除邮件
     def _del(self, messages):
 #         print('del message')
@@ -152,7 +177,7 @@ class EmailOperation(object):
         except BaseException as error:
             print(error)
             print("删除邮件可能出现错误")
-            LogAction.save(func = "EmailOperation", status="Fail", explain="clear_forlder error")
+            LogAction.save(func = "EmailOperation", status="Fail", explain="清空邮箱某个文件夹，发生错误")
         finally:
             self.logout() 
             return is_true
@@ -241,20 +266,27 @@ class EmailOperation(object):
 
     def seen(self):
         '''将收件箱邮件，标记已读'''
-        self.server.login(self.username, self.password)
-        self._into("INBOX")
-        # 搜索 未读邮件
-        typ = self.server.search([u'UNSEEN'])
-        # 把邮件改为已读
-        for num in typ:
-            print(num)
-            self.server.set_flags(num,  [u'Seen'])
+        try:
+
+            self.server.login(self.username, self.password)
+            self._into("INBOX")
+            # 搜索 未读邮件
+            typ = self.server.search([u'UNSEEN'])
+            # 把邮件改为已读
+            for num in typ:
+                print(num)
+                self.server.set_flags(num,  [u'Seen'])
+
+        except BaseException:
+            LogAction.save(func = "EmailOperation", status="Fail", explain="将收件箱邮件，标记已读，发生错误")
+            print("操作失败")
 
 
 if __name__ == '__main__':
-    eo = EmailOperation("13697485262@139.com","chinasoft123")
+    eo = EmailOperation("13697485262@139.com","chinasoft13")
 #     eo.moveForlder(['INBOX','100' ]) 
 #     eo.moveForlder(['100', 'INBOX']) 
 #     eo.clearForlder(['已发送','已删除'])
 #     eo.checkInbox()
-    eo.seen()
+#     eo.seen()
+    eo.clear_forlder(['100', 'INBOX'])

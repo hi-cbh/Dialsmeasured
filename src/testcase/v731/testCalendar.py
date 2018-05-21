@@ -15,8 +15,8 @@ user = {"name": d['user3'], 'pwd': d['pwd3']}
 
 
 
-class TestPersion(unittest.TestCase):
-    '''个人资料'''
+class TestCalendar(unittest.TestCase):
+    '''日历是否能打开'''
     def setUp(self):
         try:
             # BaseAdb.adb_intall_uiautmator()
@@ -24,7 +24,7 @@ class TestPersion(unittest.TestCase):
         except BaseException:
             print("setUp启动出错！")
             self.driver.quit()
-            LogAction.save(func = "TestPersion", status="Fail", explain="Psam 启动出错")
+            LogAction.save(func = "TestCalendar", status="Fail", explain="Psam 启动出错")
             self.fail("setUp启动出错！")
 
 
@@ -34,9 +34,10 @@ class TestPersion(unittest.TestCase):
         print("运行结束")
         time.sleep(5)
 
-    def testCasePersionMessages(self):
-        '''个人资料信息检测'''
+    def testCaseCalendar(self):
+        '''日历'''
         try:
+            # self.assertTrue(False, "测试错误")
             LogAction.print(isReset=True)
 
             login=Login(self.driver,user['name'], user['pwd'])
@@ -48,43 +49,28 @@ class TestPersion(unittest.TestCase):
             LogAction.print("=>我的")
             self.driver.click(u"uiautomator=>我的")
 
-            LogAction.print("=>个人资料")
-            self.driver.click(u"uiautomator=>个人资料")
+            LogAction.print("=>日历")
+            self.driver.click(u"uiautomator=>日历")
 
 
             start = time.time()
-            LogAction.print("【验证点：是否获页面头像字段】")
-            self.assertTrue(self.wait_for_message(), "个人资料同步失败！！")
+            LogAction.print("【验证点：获页面创建日程提醒字段】")
+            self.assertTrue(self.driver.element_wait("uiautomator=>创建日程提醒",10)!=None, "彩云网盘同步失败！！")
 
             print('=>记录当前时间，时间差')
             value_time = str(round((time.time() - start), 2))
-            print('[个人资料]: %r'  %value_time)
-            save.save("个人资料:%s" %value_time)
-            LogAction.save(func = "testCasePersionMessages", status="success", explain="value_time:%s" %value_time)
+            print('[日历]: %r'  %value_time)
+            save.save("日历:%s" %value_time)
+            LogAction.save(func = "testCaseCalendar", status="success", explain="value_time:%s" %value_time)
         except BaseException :
-            BaseImage.screenshot(self.driver, "testCasePersionMessages")
+            BaseImage.screenshot(self.driver, "testCaseCalendar")
             time.sleep(5)
-            LogAction.save(func = "testCasePersionMessages", status="Fail", explain=LogAction.print())
-            self.fail("【个人资料】出错")
-
-
-    def wait_for_message(self):
-        '''找到需要的通知栏信息'''
-
-        if self.driver.element_wait(u"uiautomator=>头像",10) == None:
-            BaseAdb.adb_back()
-
-
-        if self.driver.element_wait(u"uiautomator=>头像",2) == None:
-            print('找不到了')
-            return False
-        else:
-            return True
-
+            LogAction.save(func = "testCaseCalendar", status="Fail", explain=LogAction.print())
+            self.fail("【日历】出错")
 
 
 if __name__ == "__main__":
     suite = unittest.TestSuite()
-    suite.addTest(TestPersion('testCasePersionMessages'))
+    suite.addTest(TestCalendar('testCaseCalendar'))
     runner = unittest.TextTestRunner(verbosity=2)
     runner.run(suite)

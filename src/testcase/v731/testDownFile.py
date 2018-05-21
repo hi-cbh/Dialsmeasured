@@ -34,7 +34,6 @@ class TestDownFile(unittest.TestCase):
             # BaseAdb.adb_intall_uiautmator()
             stat="Pasm初始化出错"
             self.driver = Psam(version="5.1")
-            time.sleep(5)
 
             '''去除清理'''
             # stat="IMAPClient连接139服务器超时"

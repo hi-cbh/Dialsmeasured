@@ -20,11 +20,11 @@ class OpenDown(unittest.TestCase):
         try:
             LogAction.print(isReset=True)
             LogAction.print("=>加载本地邮件")
-            timeout = int(round(time.time() * 1000)) + 1*60 * 1000
+            timeout = int(round(time.time() * 1000)) + 1*20 * 1000
             # 找到邮件结束
             while int(round(time.time() * 1000)) < timeout :
 
-                el = self.driver.element_wait(u"uiautomator=>暂无邮件",secs = 1)
+                el = self.driver.element_wait(u"uiautomator=>暂无邮件",secs = 2)
                 if el != None:
                     print("下拉")
                     self.driver.swipe_down()
@@ -39,7 +39,7 @@ class OpenDown(unittest.TestCase):
 
             # 点击第一封
             LogAction.print('【验证点：判断是否存在"暂无邮件"字段】')
-            self.assertTrue(self.driver.get_element(u"uiautomator=>暂无邮件") == None, "收件箱没有邮件")
+            self.assertTrue(self.driver.get_element(u"uiautomator=>暂无邮件",5) == None, "收件箱没有邮件")
             els = self.driver.get_sub_element(r"id=>android:id/list","class=>android.widget.LinearLayout")
             time.sleep(2)
 
@@ -48,11 +48,9 @@ class OpenDown(unittest.TestCase):
 
 
             LogAction.print('【验证点：查找控件，确认进入邮件详情页】')
-            self.assertTrue(self.driver.element_wait(r"id=>cn.cj.pe:id/circular_progress_container") != None , "测试邮件不存在!")
-            self.driver.element_wait(r"class=>android.webkit.WebView")
-
-
-        except BaseException as e:
+            self.assertTrue(self.driver.element_wait(r"id=>cn.cj.pe:id/circular_progress_container",10) != None , "测试邮件不存在!")
+            # self.driver.element_wait(r"class=>android.webkit.WebView")
+        except BaseException :
             BaseImage.screenshot(self.driver, "OpenEmailError")
             time.sleep(5)
             LogAction.save(func = "testDownFile", status="Fail", explain=LogAction.print())
@@ -68,11 +66,11 @@ class OpenDown(unittest.TestCase):
             if BaseFile.adb_find_file(self.path, self.filename):
                 BaseFile.adb_del_file(self.path, self.filename)
                  
-            time.sleep(5)
+            time.sleep(3)
              
             # 点击全部下载
             LogAction.print('【验证点：附件按钮是否存在】')
-            self.assertTrue(self.driver.get_element(r"id=>cn.cj.pe:id/message_detail_attachment_download"),'没有下载按钮')
+            self.assertTrue(self.driver.get_element(r"id=>cn.cj.pe:id/message_detail_attachment_download",10),'没有下载按钮')
             LogAction.print('=>点击全部下载')
             self.driver.click(r"id=>cn.cj.pe:id/message_detail_attachment_download")
 
@@ -97,34 +95,9 @@ class OpenDown(unittest.TestCase):
             LogAction.print('=>返回收件箱')
             BaseAdb.adb_back()
             BaseAdb.adb_back()
-            time.sleep(2)
 
         except BaseException:
             BaseImage.screenshot(self.driver, "DownFileError")
             time.sleep(5)
             LogAction.save(func = "testDownFile", status="Fail", explain=LogAction.print())
             self.fail('【下载附件】出错')
-         
-    # 设置收件箱列表的邮件为未读邮件
-    def set_first_email(self):
-        
-        width = self.driver.get_window_size()['width']
-        h = 0
-        # 第一封邮件
-        print('=>第一封邮件')
-        if self.driver.get_element("id=>android:id/list") != None:
-            els = self.driver.get_sub_element("id=>android:id/list", "class=>android.widget.LinearLayout") 
-            h = els[0].location['y']
-            
-        time.sleep(2)
-        print('=>右滑')
-        self.driver.swipe(width - 20, h, 20, h, 500)
-        time.sleep(2)
-        
-        print('=>设置未读')
-        if self.driver.get_element(u"uiautomator=>未读") != None:
-            self.driver.click(u"uiautomator=>未读")
-        else:
-            self.driver.swipe(20, h, width - 20, h, 500) 
-            
-        time.sleep(2)   

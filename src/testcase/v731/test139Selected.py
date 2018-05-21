@@ -47,20 +47,21 @@ class TestSelect(unittest.TestCase):
             LogAction.print("=>账号登录")
             Login(self.driver,user['name'], user['pwd']).login_action(is_save=False)
 
-            time.sleep(5)
-
             LogAction.print("=>加载本地邮件")
             timeout = int(round(time.time() * 1000)) + 30 * 1000
             # 找到邮件结束
             while int(round(time.time() * 1000)) < timeout :
-                print("下拉")
-                self.driver.swipe_down()
-                time.sleep(1)
-                self.driver.swipe_down()
+                if self.driver.element_wait(u'uiautomator=>139精选',2) == None:
+                    print("下拉")
+                    self.driver.swipe_down()
+                    time.sleep(1)
+                    self.driver.swipe_down()
+                else:
+                    break
 
 
             LogAction.print("【验证点：页面是否存在139精选】")
-            self.assertTrue(self.driver.get_element(u'uiautomator=>139精选'),'收件箱列表没有139精选')
+            self.assertTrue(self.driver.get_element(u'uiautomator=>139精选',10),'收件箱列表没有139精选')
 
             LogAction.print('=>点击139精选')
             self.driver.click(u'uiautomator=>139精选')
