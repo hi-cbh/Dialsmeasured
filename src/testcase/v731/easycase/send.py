@@ -82,7 +82,7 @@ class Send(unittest.TestCase):
             BaseAdb.adb_back()
             time.sleep(2)
 
-        except BaseException as error:
+        except BaseException:
             BaseImage.screenshot(self.driver, "SendError")
             time.sleep(5)
             LogAction.save(func = "send_action", status="Fail", explain=LogAction.print())

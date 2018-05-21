@@ -36,6 +36,9 @@ class TestSend(unittest.TestCase):
             self.driver.quit()
             LogAction.save(func = "TestSend", status="Fail", explain=stat)
             self.fail("setUp启动出错！")
+        else:
+            EmailOperation(username+"@139.com", pwd).clear_forlder(['INBOX'])
+            Login(self.driver,username, pwd).login_action(is_save=False)
 
 
     #释放实例,释放资源
@@ -47,45 +50,45 @@ class TestSend(unittest.TestCase):
     def testCaseSend(self):
         '''发送邮件'''
 
-        Login(self.driver,username, pwd).login_action(is_save=False)
+        # Login(self.driver,username, pwd).login_action(is_save=False)
         Send(self.driver,username+'@139.com').send_action()
 
     def testCaseFwdSend(self):
         '''云端转发'''
-        stat="IMAPClient连接139服务器超时"
-        try:
+        # stat="IMAPClient连接139服务器超时"
+        # try:
 
-            EmailOperation(username+"@139.com", pwd).clear_forlder(['INBOX'])
-            Login(self.driver,username, pwd).login_action(is_save=False)
-            Send(self.driver,username+'@139.com').send_fwd()
-        except BaseException :
-            LogAction.save(func = "testCaseFwdSend", status="Fail", explain=stat)
-            self.fail("EmailOperation clear_forlder error！")
+        # EmailOperation(username+"@139.com", pwd).clear_forlder(['INBOX'])
+        # Login(self.driver,username, pwd).login_action(is_save=False)
+        Send(self.driver,username+'@139.com').send_fwd()
+        # except BaseException :
+        #     LogAction.save(func = "testCaseFwdSend", status="Fail", explain=stat)
+        #     self.fail("EmailOperation clear_forlder error！")
 
 
     def testCaseReply(self):
         '''回复邮件'''
-        stat="IMAPClient连接139服务器超时"
-        try:
+        # stat="IMAPClient连接139服务器超时"
+        # try:
 
-            EmailOperation(username+"@139.com", pwd).clear_forlder(['INBOX'])
-            Login(self.driver,username, pwd).login_action(is_save=False)
-            Send(self.driver,username+'@139.com').reply(receiver,sender)
-        except BaseException :
-            LogAction.save(func = "testCaseReply", status="Fail", explain=stat)
-            self.fail("EmailOperation clear_forlder error！")
+        # EmailOperation(username+"@139.com", pwd).clear_forlder(['INBOX'])
+        # Login(self.driver,username, pwd).login_action(is_save=False)
+        Send(self.driver,username+'@139.com').reply(receiver,sender)
+        # except BaseException :
+        #     LogAction.save(func = "testCaseReply", status="Fail", explain=stat)
+        #     self.fail("EmailOperation clear_forlder error！")
 
     def testCaseForward(self):
         '''SMTP转发附件'''
-        stat="IMAPClient连接139服务器超时"
-        try:
+        # stat="IMAPClient连接139服务器超时"
+        # try:
 
-            EmailOperation(username+"@139.com", pwd).clear_forlder(['INBOX'])
-            Login(self.driver,username, pwd).login_action(is_save=False)
-            Send(self.driver,username+'@139.com').forward(receiver,sender)
-        except BaseException :
-            LogAction.save(func = "testCaseForward", status="Fail", explain=stat)
-            self.fail("EmailOperation clear_forlder error！")
+            # EmailOperation(username+"@139.com", pwd).clear_forlder(['INBOX'])
+            # Login(self.driver,username, pwd).login_action(is_save=False)
+        Send(self.driver,username+'@139.com').forward(receiver,sender)
+        # except BaseException :
+        #     LogAction.save(func = "testCaseForward", status="Fail", explain=stat)
+        #     self.fail("EmailOperation clear_forlder error！")
 
 
 if __name__ == "__main__":
