@@ -136,7 +136,7 @@ class TestPush(unittest.TestCase):
 
     def wait_for_notification(self):
         '''找到需要的通知栏信息'''
-        for i in range(6):
+        for i in range(10):
             print("检查通知栏信息")
             if BaseAdb.dumpsys_notification("新邮件") == True :
                 print('找到了')
