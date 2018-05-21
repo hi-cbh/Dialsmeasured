@@ -27,7 +27,7 @@ path = r'/mnt/sdcard/139PushEmail/download/%s@139.com/*%s.rar'  %(username, file
 
 
 class TestDownFile(unittest.TestCase):
-
+    '''下载附件是否成功'''
     def setUp(self):
         stat=""
         try:

@@ -40,7 +40,7 @@ class TestDiscover(unittest.TestCase):
         time.sleep(5)
 
     def testCaseDiscover(self):
-        '''发现主要是否显示正常'''
+        '''发现主页'''
 
         try:
             LogAction.print(isReset=True)

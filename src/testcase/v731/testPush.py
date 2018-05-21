@@ -24,9 +24,7 @@ user2 = {"name": d['user2'], 'pwd': d['pwd2']} # 接收者
 '''
 
 class TestPush(unittest.TestCase):
-    '''
-    错误后重跑，使用两个账号
-    '''
+    '''推送测试'''
     def setUp(self):
         stat =""
         try:
@@ -51,7 +49,7 @@ class TestPush(unittest.TestCase):
         time.sleep(5)
 
     def testCasePush(self):
-        '''推送测试测试'''
+        '''推送'''
         self.push_action(user1, user2)
 
 

@@ -25,7 +25,7 @@ path = r'/mnt/sdcard/139PushEmail/download/%s@139.com/*%s.rar'  %(username, file
 
 
 class TestLogin(unittest.TestCase):
-
+    '''登录是否成功'''
     def setUp(self):
         stat = ""
         try:
@@ -50,7 +50,7 @@ class TestLogin(unittest.TestCase):
 
 
     def testCaseLogin(self):
-        '''开始登录时延测试'''
+        '''账号登录'''
         Login(self.driver,username, pwd).login_action()
 
 

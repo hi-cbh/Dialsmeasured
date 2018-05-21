@@ -16,7 +16,7 @@ user = {"name": d['user3'], 'pwd': d['pwd3']}
 
 
 class TestSkyDrive(unittest.TestCase):
-    '''彩云网盘'''
+    '''彩云网盘是否正常打开'''
     def setUp(self):
         try:
             # BaseAdb.adb_intall_uiautmator()
@@ -35,7 +35,7 @@ class TestSkyDrive(unittest.TestCase):
         time.sleep(5)
 
     def testCaseSkyDrive(self):
-        '''彩云网盘检测'''
+        '''彩云网盘'''
         try:
             # self.assertTrue(False, "测试错误")
             LogAction.print(isReset=True)

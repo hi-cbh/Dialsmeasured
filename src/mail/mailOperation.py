@@ -22,6 +22,7 @@ class EmailOperation(object):
             return _server
         except Exception:
             print("连接服务器失败")
+
             return None
 
     def _get_server(self):
@@ -31,10 +32,8 @@ class EmailOperation(object):
                 return _s
         else:
             print("连接N次服务器，仍然失败")
+            LogAction.save(func = "EmailOperation", status="Fail", explain="连接N次服务器，仍然失败")
             return None
-
-
-
 
     def logout(self):
         try:

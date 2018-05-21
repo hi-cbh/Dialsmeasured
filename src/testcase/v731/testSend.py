@@ -26,7 +26,7 @@ path = r'/mnt/sdcard/139PushEmail/download/%s@139.com/*%s.rar'  %(username, file
 
 
 class TestSend(unittest.TestCase):
-
+    '''邮件发送或转发是否成功'''
     def setUp(self):
         stat = ""
         try:
@@ -45,13 +45,13 @@ class TestSend(unittest.TestCase):
         time.sleep(5)
 
     def testCaseSend(self):
-        '''发送邮件测试'''
+        '''发送邮件'''
 
         Login(self.driver,username, pwd).login_action(is_save=False)
         Send(self.driver,username+'@139.com').send_action()
 
     def testCaseFwdSend(self):
-        '''转发邮件测试-云端转发'''
+        '''云端转发'''
         stat="IMAPClient连接139服务器超时"
         try:
 
@@ -76,7 +76,7 @@ class TestSend(unittest.TestCase):
             self.fail("EmailOperation clear_forlder error！")
 
     def testCaseForward(self):
-        '''转发带附件'''
+        '''SMTP转发附件'''
         stat="IMAPClient连接139服务器超时"
         try:
 

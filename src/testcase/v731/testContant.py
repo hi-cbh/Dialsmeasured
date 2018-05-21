@@ -16,7 +16,7 @@ user = {"name": d['user2'], 'pwd': d['pwd2']}
 
 
 class TestContant(unittest.TestCase):
-
+    '''联系人同步是否成功'''
     def setUp(self):
         try:
             # BaseAdb.adb_intall_uiautmator()
@@ -35,7 +35,7 @@ class TestContant(unittest.TestCase):
         time.sleep(5)
 
     def testCaseCheckAddressList(self):
-        '''测试通讯录是否同步成功'''
+        '''联系人同步'''
         try:
             # self.assertTrue(False, "测试错误")
             LogAction.print(isReset=True)

@@ -16,7 +16,7 @@ user = {"name": d['user3'], 'pwd': d['pwd3']}
 
 
 class TestPersion(unittest.TestCase):
-    '''个人资料'''
+    '''个人资料是否显示正常'''
     def setUp(self):
         try:
             # BaseAdb.adb_intall_uiautmator()
@@ -35,7 +35,7 @@ class TestPersion(unittest.TestCase):
         time.sleep(5)
 
     def testCasePersionMessages(self):
-        '''个人资料信息检测'''
+        '''个人资料'''
         try:
             LogAction.print(isReset=True)
 

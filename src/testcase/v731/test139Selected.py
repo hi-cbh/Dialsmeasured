@@ -21,7 +21,7 @@ user = {"name": d['user2'], 'pwd': d['pwd2']}
 print(user)
 
 class TestSelect(unittest.TestCase):
-
+    '''139精选是否显示正常'''
     def setUp(self):
         try:
             # BaseAdb.adb_intall_uiautmator()
@@ -40,7 +40,7 @@ class TestSelect(unittest.TestCase):
         time.sleep(5)
 
     def testCaseSelected(self):
-        '''测试139精选'''
+        '''收件箱列表139精选'''
 
         try:
             LogAction.print(isReset=True)
