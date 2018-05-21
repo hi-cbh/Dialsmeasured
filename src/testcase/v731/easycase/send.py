@@ -153,7 +153,7 @@ class Send(unittest.TestCase):
             BaseAdb.adb_back()
 
             print("等待邮件出现，等待FW邮件出现")
-            timeout = int(round(time.time() * 1000)) + 1*20 * 1000
+            timeout = int(round(time.time() * 1000)) + 1*40 * 1000
             # 找到邮件结束
             while int(round(time.time() * 1000)) < timeout :
                 if self.driver.element_wait(u"uiautomator=>Fwd: dialsMeasured",2) == None:
@@ -182,7 +182,7 @@ class Send(unittest.TestCase):
             self.assertTrue(s.send_mail_test('sendsmtpEmail','测试邮件...'),"邮件发送失败")
             time.sleep(10)
             LogAction.print("=>加载邮件")
-            timeout = int(round(time.time() * 1000)) + 1*20 * 1000
+            timeout = int(round(time.time() * 1000)) + 1*40 * 1000
             # 找到邮件结束
             while int(round(time.time() * 1000)) < timeout :
 
@@ -284,7 +284,7 @@ class Send(unittest.TestCase):
             time.sleep(10)
 
             LogAction.print("=>加载邮件")
-            timeout = int(round(time.time() * 1000)) + 1*20 * 1000
+            timeout = int(round(time.time() * 1000)) + 1*40 * 1000
             # 找到邮件结束
             while int(round(time.time() * 1000)) < timeout :
 
