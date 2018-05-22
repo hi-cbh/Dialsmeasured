@@ -1,23 +1,23 @@
 # urs/bin/python
 # encoding:utf-8
 
-import os,time,unittest
-import configparser as cparser
-from src.aserver.AppiumServer import AppiumServer2
-from src.base.baseAdb import BaseAdb
-from src.mail.mailOperation import EmailOperation
+import random,time,unittest
 from src.psam.psam import Psam
 from src.testcase.v731.easycase.login import Login
 from src.readwriteconf.initData import InitData
 from src.base.baseImage import BaseImage
 from src.readwriteconf.saveData import save
 from src.base.baseLog import LogAction
-# sys.path.append(r"/Users/apple/git/pytest/")
 
 d= InitData().get_users()
 print(d)
-user = {"name": d['user3'], 'pwd': d['pwd3']}
 
+
+# 主账号
+if random.randint(1, 10)%2 == 0:
+    user = {"name": d['user3'], 'pwd': d['pwd3']}
+else:
+    user = {"name": d['user4'], 'pwd': d['pwd4']}
 print(user)
 
 class TestDiscover(unittest.TestCase):

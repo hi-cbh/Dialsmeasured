@@ -1,8 +1,7 @@
 # urs/bin/python
 # encoding:utf-8
 
-import os,time,unittest
-from src.base.baseAdb import BaseAdb
+import time,unittest,random
 from src.mail.mailOperation import EmailOperation
 from src.psam.psam import Psam
 from src.testcase.v731.easycase.login import Login
@@ -12,8 +11,14 @@ from src.base.baseLog import LogAction
 
 d = InitData().get_users()
 
-username = d['user3']
-pwd = d['pwd3']
+# 主账号
+if random.randint(1, 10)%2 == 0:
+    username = d['user3']
+    pwd = d['pwd3']
+else:
+    username = d['user4']
+    pwd = d['pwd4']
+
 username2 = d['user2']
 pwd2 = d['pwd2']
 
@@ -50,46 +55,20 @@ class TestSend(unittest.TestCase):
     def testCaseSend(self):
         '''发送邮件'''
 
-        # Login(self.driver,username, pwd).login_action(is_save=False)
         Send(self.driver,username+'@139.com').send_action()
 
     def testCaseFwdSend(self):
         '''云端转发'''
-        # stat="IMAPClient连接139服务器超时"
-        # try:
-
-        # EmailOperation(username+"@139.com", pwd).clear_forlder(['INBOX'])
-        # Login(self.driver,username, pwd).login_action(is_save=False)
         Send(self.driver,username+'@139.com').send_fwd()
-        # except BaseException :
-        #     LogAction.save(func = "testCaseFwdSend", status="Fail", explain=stat)
-        #     self.fail("EmailOperation clear_forlder error！")
 
 
     def testCaseReply(self):
         '''回复邮件'''
-        # stat="IMAPClient连接139服务器超时"
-        # try:
-
-        # EmailOperation(username+"@139.com", pwd).clear_forlder(['INBOX'])
-        # Login(self.driver,username, pwd).login_action(is_save=False)
         Send(self.driver,username+'@139.com').reply(receiver,sender)
-        # except BaseException :
-        #     LogAction.save(func = "testCaseReply", status="Fail", explain=stat)
-        #     self.fail("EmailOperation clear_forlder error！")
 
     def testCaseForward(self):
         '''SMTP转发附件'''
-        # stat="IMAPClient连接139服务器超时"
-        # try:
-
-            # EmailOperation(username+"@139.com", pwd).clear_forlder(['INBOX'])
-            # Login(self.driver,username, pwd).login_action(is_save=False)
         Send(self.driver,username+'@139.com').forward(receiver,sender)
-        # except BaseException :
-        #     LogAction.save(func = "testCaseForward", status="Fail", explain=stat)
-        #     self.fail("EmailOperation clear_forlder error！")
-
 
 if __name__ == "__main__":
     suite = unittest.TestSuite()

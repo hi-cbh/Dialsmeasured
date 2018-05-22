@@ -1,9 +1,8 @@
 # urs/bin/python
 # encoding:utf-8
 
-import time,unittest
+import time,unittest,random
 from src.base.baseLog import LogAction
-from src.mail.mailOperation import EmailOperation
 from src.psam.psam import Psam
 from src.testcase.v731.easycase.login import Login
 from src.testcase.v731.easycase.send import Send
@@ -13,8 +12,14 @@ from src.testcase.v731.easycase.openDown import OpenDown
 
 d = InitData().get_users()
 
-username = d['user3']
-pwd = d['pwd3']
+# 主账号
+if random.randint(1, 10)%2 == 0:
+    username = d['user3']
+    pwd = d['pwd3']
+else:
+    username = d['user4']
+    pwd = d['pwd4']
+
 username2 = d['user2']
 pwd2 = d['pwd2']
 
@@ -35,11 +40,6 @@ class TestDownFile(unittest.TestCase):
             stat="Pasm初始化出错"
             self.driver = Psam(version="5.1")
 
-            '''去除清理'''
-            # stat="IMAPClient连接139服务器超时"
-            # EmailOperation(username+"@139.com", pwd).clear_forlder(['INBOX'])
-            # time.sleep(10)
-
             stat = "账号登录出错"
             Login(self.driver,username, pwd).login_action(is_save=False)
 
@@ -59,7 +59,6 @@ class TestDownFile(unittest.TestCase):
         print("运行结束")
 
         time.sleep(5)
-        # AppiumServer2().stop_server()
 
     def testDownFile(self):
         '''下载附件'''
@@ -73,9 +72,6 @@ class TestDownFile(unittest.TestCase):
         od.open_action()
         # 下载附件
         od.down_action()
-
-
-
 
 
 if __name__ == "__main__":

@@ -1,24 +1,17 @@
 # urs/bin/python
 # encoding:utf-8
 
-import os,time,unittest
-import configparser as cparser
-from src.aserver.AppiumServer import AppiumServer2
-from src.base.baseAdb import BaseAdb
-from src.mail.mailOperation import EmailOperation
+import time,unittest
 from src.psam.psam import Psam
 from src.testcase.v731.easycase.login import Login
 from src.readwriteconf.initData import InitData
 from src.base.baseImage import BaseImage
 from src.readwriteconf.saveData import save
 from src.base.baseLog import LogAction
-# sys.path.append(r"/Users/apple/git/pytest/")
 
 d= InitData().get_users()
-print(d)
-user = {"name": d['user2'], 'pwd': d['pwd2']}
 
-print(user)
+user = {"name": d['user2'], 'pwd': d['pwd2']}
 
 class TestSelect(unittest.TestCase):
     '''139精选是否显示正常'''
@@ -26,7 +19,7 @@ class TestSelect(unittest.TestCase):
         try:
             # BaseAdb.adb_intall_uiautmator()
             self.driver = Psam(version="5.1")
-        except BaseException as error:
+        except BaseException:
             print("setUp启动出错！")
             LogAction.save(func = "TestSelect", status="Fail", explain="Psam 启动出错")
             self.fail("setUp启动出错！")

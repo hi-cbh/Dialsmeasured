@@ -1,9 +1,8 @@
 # urs/bin/python
 # encoding:utf-8
 
-import os,time,unittest
+import random,time,unittest
 from src.base.baseAdb import BaseAdb
-from src.mail.mailOperation import EmailOperation
 from src.psam.psam import Psam
 from src.testcase.v731.easycase.login import Login
 from src.mail.sendEmailSmtp import SendMail
@@ -12,11 +11,17 @@ from src.base.baseImage import BaseImage
 from src.base.baseLog import LogAction
 from src.readwriteconf.saveData import save
 
-# sys.path.append(r"/Users/apple/git/pytest/")
 
 d = InitData().get_users()
-user1 = {"name": d['user3'], 'pwd': d['pwd3']} # 发送者
-user2 = {"name": d['user2'], 'pwd': d['pwd2']} # 接收者
+
+
+# 主账号，接收者
+if random.randint(1, 10)%2 == 0:
+    reveicer = {"name": d['user3'], 'pwd': d['pwd3']}
+else:
+    reveicer = {"name": d['user4'], 'pwd': d['pwd4']}
+
+sender = {"name": d['user2'], 'pwd': d['pwd2']} # 接收者，改为发送者
 
 '''
 用户没有做到参数化
@@ -50,21 +55,11 @@ class TestPush(unittest.TestCase):
 
     def testCasePush(self):
         '''推送'''
-        self.push_action(user1, user2)
-
-
-
-    def push_action(self, sender, reveicer):
-        '''推送测试测试方法'''
 
         try:
             LogAction.print(isReset=True)
 
             '''将IMAPClient纳入判断范围'''
-            stat="IMAPClient连接139服务器超时"
-            LogAction.print(stat)
-            EmailOperation(user2['name']+"@139.com", user2['pwd']).seen()
-            time.sleep(10)
 
             LogAction.print("=>登录")
             Login(self.driver,reveicer['name'], reveicer['pwd']).login_action(is_save=False)
@@ -84,7 +79,7 @@ class TestPush(unittest.TestCase):
 
             LogAction.print("【验证点：第三方邮件是否发送失败】")
             self.assertTrue(s.send_mail_test('sendsmtpEmail','测试邮件...'),"邮件发送失败")
-            # time.sleep(10)
+            time.sleep(10)
             start = time.time()
 
             LogAction.print("【验证点：等待推送信息】")
@@ -141,7 +136,7 @@ class TestPush(unittest.TestCase):
             if BaseAdb.dumpsys_notification("新邮件") == True :
                 print('找到了')
                 return True
-            time.sleep(8)
+            time.sleep(9)
         print('找不到了')
         return False
 

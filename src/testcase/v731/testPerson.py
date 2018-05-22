@@ -1,7 +1,7 @@
 # urs/bin/python
 # encoding:utf-8
 
-import time,unittest
+import time,unittest,random
 from src.base.baseAdb import BaseAdb
 from src.psam.psam import Psam
 from src.testcase.v731.easycase.login import Login
@@ -11,7 +11,12 @@ from src.readwriteconf.saveData import save
 from src.base.baseLog import LogAction
 
 d = InitData().get_users()
-user = {"name": d['user3'], 'pwd': d['pwd3']}
+
+# 主账号
+if random.randint(1, 10)%2 == 0:
+    user = {"name": d['user3'], 'pwd': d['pwd3']}
+else:
+    user = {"name": d['user4'], 'pwd': d['pwd4']}
 
 
 
