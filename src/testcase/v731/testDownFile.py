@@ -1,6 +1,6 @@
 # urs/bin/python
 # encoding:utf-8
-
+import datetime
 import time,unittest,random
 from src.base.baseLog import LogAction
 from src.psam.psam import Psam
@@ -13,7 +13,7 @@ from src.testcase.v731.easycase.openDown import OpenDown
 d = InitData().get_users()
 
 # 主账号
-if random.randint(1, 10)%2 == 0:
+if datetime.datetime.now().hour%2 == 0:
     username = d['user3']
     pwd = d['pwd3']
 else:

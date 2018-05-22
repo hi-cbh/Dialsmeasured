@@ -1,6 +1,6 @@
 # urs/bin/python
 # encoding:utf-8
-
+import datetime
 import random,time,unittest
 from src.psam.psam import Psam
 from src.testcase.v731.easycase.login import Login
@@ -10,7 +10,7 @@ from src.base.baseLog import LogAction
 d = InitData().get_users()
 
 # 主账号
-if random.randint(1, 10)%2 == 0:
+if datetime.datetime.now().hour%2 == 0:
     username = d['user3']
     pwd = d['pwd3']
 else:

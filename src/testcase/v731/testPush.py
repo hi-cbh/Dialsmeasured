@@ -1,6 +1,6 @@
 # urs/bin/python
 # encoding:utf-8
-
+import datetime
 import random,time,unittest
 from src.base.baseAdb import BaseAdb
 from src.psam.psam import Psam
@@ -16,7 +16,7 @@ d = InitData().get_users()
 
 
 # 主账号，接收者
-if random.randint(1, 10)%2 == 0:
+if datetime.datetime.now().hour%2 == 0:
     reveicer = {"name": d['user3'], 'pwd': d['pwd3']}
 else:
     reveicer = {"name": d['user4'], 'pwd': d['pwd4']}

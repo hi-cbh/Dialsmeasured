@@ -1,4 +1,4 @@
-
+import datetime
 
 from readwriteconf.initData import InitData
 
@@ -14,4 +14,4 @@ else:
 
 for i in range(10):
 
-    print(random.randint(1, 10)%2)
+    print((datetime.datetime.now().hour)%2)
