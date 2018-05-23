@@ -3,11 +3,13 @@
 
 import time
 import unittest,random
+
+import datetime
+
 from src.base.baseAdb import BaseAdb
 from src.base.baseImage import BaseImage
 from src.base.baseLog import LogAction
 from src.readwriteconf.saveData import save
-from src.mail.mailOperation import EmailOperation
 class Login(unittest.TestCase):
     '''当前版本没有添加弹窗广告'''
     def __init__(self,driver, username, pwd):
@@ -16,7 +18,6 @@ class Login(unittest.TestCase):
         self.driver = driver
         
     def login_action(self, first_fogin=False, is_save=True):
-        # first_fogin 首次安装后，登录为true
         try:
 
             LogAction.print(isReset=True)
@@ -34,7 +35,6 @@ class Login(unittest.TestCase):
             self.driver.swipe_right()
             LogAction.print("=>右滑")
             self.driver.swipe_right()
-            # self.driver.swipeRight()
             print("点击坐标")
             # BaseAdb.adbTap(700, 2300)  # vivo 1603  w * 0.5, h * 0.899
 
@@ -106,7 +106,6 @@ class Login(unittest.TestCase):
             time.sleep(5)
             LogAction.save(func = "testCaseLogin", status="Fail", explain=LogAction.print())
             self.fail("【手动输入账号/密码-登录】出现错误")
-            # 添加截图
 
 
 
@@ -150,8 +149,11 @@ class Login(unittest.TestCase):
 
                 self.driver.click("id=>cn.cj.pe:id/btn")
 
-            LogAction.print('【验证点：等待收件箱底部导航栏出现】')
-            # self.assertTrue(self.driver.get_element("id=>cn.cj.pe:id/message_list_bottom_email",15) != None, "登录失败！")
+
+            if 20 >= datetime.datetime.now().hour >= 7:
+                '''7点-20点做验证判断'''
+                LogAction.print('【验证点：等待收件箱底部导航栏出现】')
+                self.assertTrue(self.driver.get_element("id=>cn.cj.pe:id/message_list_bottom_email",15) != None, "登录失败！")
 
             print('=>记录当前时间，')
             value_time = str(round((time.time() - start), 2))
