@@ -59,8 +59,14 @@ class TestSelect(unittest.TestCase):
             # 等待
             time.sleep(5)
 
-            LogAction.print('=>点击139精选')
-            self.driver.click(u'uiautomator=>139精选')
+
+            # 经常出现误报
+            for i in range(3):
+                if self.driver.get_element(u'uiautomator=>139精选',3) != None:
+                    LogAction.print('=>点击139精选')
+                    self.driver.click(u'uiautomator=>139精选')
+
+
             start = time.time()
 
 
