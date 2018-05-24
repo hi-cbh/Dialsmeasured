@@ -150,7 +150,7 @@ class Login(unittest.TestCase):
                 self.driver.click("id=>cn.cj.pe:id/btn")
 
 
-            if 20 >= datetime.datetime.now().hour >= 7:
+            if 22 >= datetime.datetime.now().hour >= 7:
                 '''7点-20点做验证判断'''
                 LogAction.print('【验证点：等待收件箱底部导航栏出现】')
                 self.assertTrue(self.driver.get_element("id=>cn.cj.pe:id/message_list_bottom_email",15) != None, "登录失败！")
