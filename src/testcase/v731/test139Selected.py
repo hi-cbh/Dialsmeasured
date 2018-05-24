@@ -53,19 +53,19 @@ class TestSelect(unittest.TestCase):
                     break
 
 
-            LogAction.print("【验证点：页面是否存在139精选】")
-            self.assertTrue(self.driver.get_element(u'uiautomator=>139精选',10),'收件箱列表没有139精选')
+            # LogAction.print("【验证点：页面是否存在139精选】")
+            # self.assertTrue(self.driver.get_element(u'uiautomator=>139精选',10),'收件箱列表没有139精选')
 
             # 等待
             time.sleep(5)
 
-
-            # 经常出现误报
-            for i in range(3):
-                if self.driver.get_element(u'uiautomator=>139精选',3) != None:
-                    LogAction.print('=>点击139精选')
-                    self.driver.click(u'uiautomator=>139精选')
-
+            #
+            # # 经常出现误报
+            # for i in range(3):
+            #     if self.driver.get_element(u'uiautomator=>139精选',3) != None:
+            #         LogAction.print('=>点击139精选')
+            #         self.driver.click(u'uiautomator=>139精选')
+            #
 
             start = time.time()
 
