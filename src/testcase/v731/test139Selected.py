@@ -84,9 +84,9 @@ class TestSelect(unittest.TestCase):
             except BaseException as msg:
                 print(msg)
 
-
-            LogAction.print('【验证点：页面是否显示正常】')
-            self.assertTrue(self.driver.page_source().__contains__(u"阅读全文"),"页面显示不正常")
+            #
+            # LogAction.print('【验证点：页面是否显示正常】')
+            # self.assertTrue(self.driver.page_source().__contains__(u"阅读全文"),"页面显示不正常")
 
             print('=>记录当前时间，时间差')
             value_time = str(round((time.time() - start), 2))
