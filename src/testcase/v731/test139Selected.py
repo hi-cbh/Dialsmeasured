@@ -8,6 +8,8 @@ from src.readwriteconf.initData import InitData
 from src.base.baseImage import BaseImage
 from src.readwriteconf.saveData import save
 from src.base.baseLog import LogAction
+from src.base.baseAdb import BaseAdb
+from src.mail.mailOperation import EmailOperation
 
 d= InitData().get_users()
 
@@ -18,6 +20,7 @@ class TestSelect(unittest.TestCase):
     def setUp(self):
         try:
             # BaseAdb.adb_intall_uiautmator()
+            # self.driver = Psam()
             self.driver = Psam(version="5.1")
         except BaseException:
             print("setUp启动出错！")
@@ -36,6 +39,10 @@ class TestSelect(unittest.TestCase):
         '''收件箱列表139精选'''
 
         try:
+            EmailOperation(user['name']+"@139.com", user['pwd']).clear_forlder([u'已删除', u'已发送'])
+            EmailOperation(user['name']+"@139.com", user['pwd']).check_inbox()
+            EmailOperation(user['name']+"@139.com", user['pwd']).seen()
+
             LogAction.print(isReset=True)
             LogAction.print("=>账号登录")
             Login(self.driver,user['name'], user['pwd']).login_action(is_save=False)
@@ -53,19 +60,19 @@ class TestSelect(unittest.TestCase):
                     break
 
 
-            # LogAction.print("【验证点：页面是否存在139精选】")
-            # self.assertTrue(self.driver.get_element(u'uiautomator=>139精选',10),'收件箱列表没有139精选')
+            LogAction.print("【验证点：页面是否存在139精选】")
+            self.assertTrue(self.driver.get_element(u'uiautomator=>139精选',10),'收件箱列表没有139精选')
 
             # 等待
             time.sleep(5)
 
-            #
-            # # 经常出现误报
-            # for i in range(3):
-            #     if self.driver.get_element(u'uiautomator=>139精选',3) != None:
-            #         LogAction.print('=>点击139精选')
-            #         self.driver.click(u'uiautomator=>139精选')
-            #
+
+            # 经常出现误报
+            for i in range(3):
+                if self.driver.get_element(u'uiautomator=>139精选',3) != None:
+                    LogAction.print('=>点击139精选')
+                    self.driver.click(u'uiautomator=>139精选')
+
 
             start = time.time()
 
@@ -84,9 +91,9 @@ class TestSelect(unittest.TestCase):
             except BaseException as msg:
                 print(msg)
 
-            #
-            # LogAction.print('【验证点：页面是否显示正常】')
-            # self.assertTrue(self.driver.page_source().__contains__(u"阅读全文"),"页面显示不正常")
+
+            LogAction.print('【验证点：页面是否显示正常】')
+            self.assertTrue(self.driver.page_source().__contains__(u"阅读全文"),"页面显示不正常")
 
             print('=>记录当前时间，时间差')
             value_time = str(round((time.time() - start), 2))

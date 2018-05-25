@@ -231,7 +231,8 @@ class EmailOperation(object):
             return  is_true
     
     def check_inbox(self):
-        '''确保收件箱有100封邮件'''
+        _cnt = 5
+        '''确保收件箱有5封邮件'''
         try:
             is_true = True
             self.server.login(self.username, self.password) 
@@ -243,16 +244,16 @@ class EmailOperation(object):
             if all == 0:
                 return False
             # 判断
-            if all == 100:
+            if all == _cnt:
                 print("100封邮件")
                 return is_true
-            elif all < 100:
+            elif all < _cnt:
                 print('邮件数量少于100封')
                 return False
             else:
-                print('需要删除邮件数量为：%d' %(all - 100))
+                print('需要删除邮件数量为：%d' %(all - _cnt))
 #                 print(uids[100:])
-                self._del(uids[100:])
+                self._del(uids[_cnt:])
                 return is_true
         except BaseException as error:
             print(error)
