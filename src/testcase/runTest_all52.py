@@ -104,7 +104,8 @@ if __name__ == "__main__":
 
     ReportClass(testResultReport.failures,testtxt,speed,now).all()
 
+    time.sleep(5)
     # 休眠状态
-    # BaseAdb.adb_sleep()
+    BaseAdb.adb_sleep()
 
     time.sleep(5)

@@ -267,4 +267,4 @@ BaseAdb = BaseAdb()
 
 
 if __name__ == '__main__':
-    BaseAdb.adb_broadcast_sms("abc")
+    BaseAdb.adb_sleep()
