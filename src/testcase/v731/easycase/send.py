@@ -63,7 +63,7 @@ class Send(unittest.TestCase):
 
 
             LogAction.print('【验证点：是否发送成功】')
-            self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",20) != None, "发送邮件失败！")
+            self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",40) != None, "发送邮件失败！")
 
             print('=>记录当前时间，时间差')
             value_time = str(round((time.time() - start), 2))
@@ -136,7 +136,7 @@ class Send(unittest.TestCase):
             start = time.time()
 
             LogAction.print('【验证点：发送是否成功】')
-            self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",20) != None, "发送邮件失败！")
+            self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",40) != None, "发送邮件失败！")
 
             print('=>记录当前时间，时间差')
             value_time = str(round((time.time() - start), 2))
@@ -236,7 +236,7 @@ class Send(unittest.TestCase):
             start = time.time()
 
             LogAction.print('【验证点：发送是否成功】')
-            self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",20) != None, "发送邮件失败！")
+            self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",40) != None, "发送邮件失败！")
 
             print('=>记录当前时间，时间差')
             value_time = str(round((time.time() - start), 2))
