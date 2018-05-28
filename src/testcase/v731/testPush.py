@@ -42,7 +42,7 @@ class TestPush(unittest.TestCase):
         except BaseException:
             print("setUp启动出错！")
             self.driver.quit()
-            LogAction.save(func = "TestPush", status="Fail", explain=stat)
+            LogAction.save(func = "TestPush", status="fail", explain=stat)
             self.fail("setUp启动出错！")
 
 
@@ -101,7 +101,7 @@ class TestPush(unittest.TestCase):
         except BaseException:
             BaseImage.screenshot(self.driver, "PushError")
             time.sleep(5)
-            LogAction.save(func = "testCasePush", status="Fail", explain=LogAction.print())
+            LogAction.save(func = "testCasePush", status="fail", explain=LogAction.print())
             self.fail("【接收邮件推送】出错！")
 
 

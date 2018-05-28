@@ -30,7 +30,7 @@ class TestContant(unittest.TestCase):
         except BaseException:
             print("setUp启动出错！")
             self.driver.quit()
-            LogAction.save(func = "TestContant", status="Fail", explain="Psam 启动出错")
+            LogAction.save(func = "TestContant", status="fail", explain="Psam 启动出错")
             self.fail("setUp启动出错！")
 
 
@@ -66,7 +66,7 @@ class TestContant(unittest.TestCase):
         except BaseException :
             BaseImage.screenshot(self.driver, "CheckAddressListError")
             time.sleep(5)
-            LogAction.save(func = "testCaseCheckAddressList", status="Fail", explain=LogAction.print())
+            LogAction.save(func = "testCaseCheckAddressList", status="fail", explain=LogAction.print())
             self.fail("【联系人同步】出错")
 
 

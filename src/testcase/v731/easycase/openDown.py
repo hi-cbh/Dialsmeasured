@@ -53,7 +53,7 @@ class OpenDown(unittest.TestCase):
         except BaseException :
             BaseImage.screenshot(self.driver, "OpenEmailError")
             time.sleep(5)
-            LogAction.save(func = "testDownFile", status="Fail", explain=LogAction.print())
+            LogAction.save(func = "testDownFile", status="fail", explain=LogAction.print())
             self.fail('【打开未读邮件】出错')
         
         
@@ -99,5 +99,5 @@ class OpenDown(unittest.TestCase):
         except BaseException:
             BaseImage.screenshot(self.driver, "DownFileError")
             time.sleep(5)
-            LogAction.save(func = "testDownFile", status="Fail", explain=LogAction.print())
+            LogAction.save(func = "testDownFile", status="fail", explain=LogAction.print())
             self.fail('【下载附件】出错')

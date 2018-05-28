@@ -104,7 +104,7 @@ class Login(unittest.TestCase):
             BaseImage.screenshot(self.driver, "LoginError")
             # 超时，数据超时
             time.sleep(5)
-            LogAction.save(func = "testCaseLogin", status="Fail", explain=LogAction.print())
+            LogAction.save(func = "testCaseLogin", status="fail", explain=LogAction.print())
             self.fail("【手动输入账号/密码-登录】出现错误")
 
 
@@ -172,5 +172,5 @@ class Login(unittest.TestCase):
             BaseImage.screenshot(self.driver, "oneBtnLoginError")
             # 超时，数据超时
             time.sleep(5)
-            LogAction.save(func = "testCaseOnBtnLogin", status="Fail", explain=LogAction.print())
+            LogAction.save(func = "testCaseOnBtnLogin", status="fail", explain=LogAction.print())
             self.fail("【一键登录出错登录】出现错误")

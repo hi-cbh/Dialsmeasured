@@ -29,7 +29,7 @@ class TestPersion(unittest.TestCase):
         except BaseException:
             print("setUp启动出错！")
             self.driver.quit()
-            LogAction.save(func = "TestPersion", status="Fail", explain="Psam 启动出错")
+            LogAction.save(func = "TestPersion", status="fail", explain="Psam 启动出错")
             self.fail("setUp启动出错！")
 
 
@@ -69,7 +69,7 @@ class TestPersion(unittest.TestCase):
         except BaseException :
             BaseImage.screenshot(self.driver, "testCasePersionMessages")
             time.sleep(5)
-            LogAction.save(func = "testCasePersionMessages", status="Fail", explain=LogAction.print())
+            LogAction.save(func = "testCasePersionMessages", status="fail", explain=LogAction.print())
             self.fail("【个人资料】出错")
 
 

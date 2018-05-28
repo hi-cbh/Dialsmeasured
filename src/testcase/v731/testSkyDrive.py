@@ -27,7 +27,7 @@ class TestSkyDrive(unittest.TestCase):
         except BaseException:
             print("setUp启动出错！")
             self.driver.quit()
-            LogAction.save(func = "TestSkyDrive", status="Fail", explain="Psam 启动出错")
+            LogAction.save(func = "TestSkyDrive", status="fail", explain="Psam 启动出错")
             self.fail("setUp启动出错！")
 
 
@@ -68,7 +68,7 @@ class TestSkyDrive(unittest.TestCase):
         except BaseException :
             BaseImage.screenshot(self.driver, "testCaseSkyDrive")
             time.sleep(5)
-            LogAction.save(func = "testCaseSkyDrive", status="Fail", explain=LogAction.print())
+            LogAction.save(func = "testCaseSkyDrive", status="fail", explain=LogAction.print())
             self.fail("【彩云网盘】出错")
 
 

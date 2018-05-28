@@ -85,13 +85,15 @@ class Send(unittest.TestCase):
         except BaseException:
             BaseImage.screenshot(self.driver, "SendError")
             time.sleep(5)
-            LogAction.save(func = "send_action", status="Fail", explain=LogAction.print())
+            LogAction.save(func = "send_action", status="fail", explain=LogAction.print())
+            time.sleep(3)
             self.fail('【带附件邮件发送】出错')
 
     def send_fwd(self):
         '''云端转发：带有的邮件，进行转发'''
         try:
             self.send_action(is_save=False)
+
             LogAction.print(isReset=True)
             LogAction.print("=>加载邮件")
             timeout = int(round(time.time() * 1000)) + 1*20 * 1000
@@ -113,7 +115,7 @@ class Send(unittest.TestCase):
 
             # 点击第一封
             LogAction.print('【验证点：否存在"暂无邮件"字段】')
-            self.assertTrue(self.driver.get_element(u"uiautomator=>暂无邮件",5) == None, "收件箱没有邮件")
+            self.assertTrue(self.driver.get_element(u"uiautomator=>暂无邮件",40) == None, "收件箱没有邮件")
             els = self.driver.get_sub_element(r"id=>android:id/list","class=>android.widget.LinearLayout")
             time.sleep(2)
 
@@ -136,7 +138,7 @@ class Send(unittest.TestCase):
             start = time.time()
 
             LogAction.print('【验证点：发送是否成功】')
-            self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",40) != None, "发送邮件失败！")
+            self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",5) != None, "发送邮件失败！")
 
             print('=>记录当前时间，时间差')
             value_time = str(round((time.time() - start), 2))
@@ -149,10 +151,10 @@ class Send(unittest.TestCase):
             print('[转发邮件带附件]: %r'  %value_time)
             save.save("云端转发:%s" %value_time)
 
-            print('返回收件箱')
+            LogAction.print('返回收件箱')
             BaseAdb.adb_back()
 
-            print("等待邮件出现，等待FW邮件出现")
+            LogAction.print("等待邮件出现，等待FW邮件出现")
             timeout = int(round(time.time() * 1000)) + 1*40 * 1000
             # 找到邮件结束
             while int(round(time.time() * 1000)) < timeout :
@@ -168,7 +170,8 @@ class Send(unittest.TestCase):
         except BaseException:
             BaseImage.screenshot(self.driver, "fwSendError")
             time.sleep(5)
-            LogAction.save(func = "send_fwd", status="Fail", explain=LogAction.print())
+            LogAction.save(func = "send_fwd", status="fail", explain=LogAction.print())
+            time.sleep(3)
             self.fail("【云端转发】出错")
 
     def forward(self,reveicer,sender):
@@ -266,7 +269,8 @@ class Send(unittest.TestCase):
         except BaseException:
             BaseImage.screenshot(self.driver, "forwardError")
             time.sleep(5)
-            LogAction.save(func = "forward", status="Fail", explain=LogAction.print())
+            LogAction.save(func = "forward", status="fail", explain=LogAction.print())
+            time.sleep(5)
             self.fail("【smtp转发】出错")
 
 
@@ -343,5 +347,6 @@ class Send(unittest.TestCase):
         except BaseException:
             BaseImage.screenshot(self.driver, "replyError")
             time.sleep(5)
-            LogAction.save(func = "reply", status="Fail", explain=LogAction.print())
+            LogAction.save(func = "reply", status="fail", explain=LogAction.print())
+            time.sleep(5)
             self.fail("【回复邮件】出错")

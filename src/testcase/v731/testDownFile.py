@@ -46,7 +46,7 @@ class TestDownFile(unittest.TestCase):
         except BaseException :
             print("setUp启动出错！")
             self.driver.quit()
-            LogAction.save(func = "TestDownFile", status="Fail", explain=stat)
+            LogAction.save(func = "TestDownFile", status="fail", explain=stat)
             self.fail("setUp启动出错！")
 
 

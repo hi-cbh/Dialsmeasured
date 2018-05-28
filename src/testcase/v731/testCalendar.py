@@ -28,7 +28,7 @@ class TestCalendar(unittest.TestCase):
         except BaseException:
             print("setUp启动出错！")
             self.driver.quit()
-            LogAction.save(func = "TestCalendar", status="Fail", explain="Psam 启动出错")
+            LogAction.save(func = "TestCalendar", status="fail", explain="Psam 启动出错")
             self.fail("setUp启动出错！")
 
 
@@ -68,7 +68,7 @@ class TestCalendar(unittest.TestCase):
         except BaseException :
             BaseImage.screenshot(self.driver, "testCaseCalendar")
             time.sleep(5)
-            LogAction.save(func = "testCaseCalendar", status="Fail", explain=LogAction.print())
+            LogAction.save(func = "testCaseCalendar", status="fail", explain=LogAction.print())
             self.fail("【日历】出错")
 
 

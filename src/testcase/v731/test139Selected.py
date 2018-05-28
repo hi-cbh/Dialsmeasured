@@ -24,7 +24,7 @@ class TestSelect(unittest.TestCase):
             self.driver = Psam(version="5.1")
         except BaseException:
             print("setUp启动出错！")
-            LogAction.save(func = "TestSelect", status="Fail", explain="Psam 启动出错")
+            LogAction.save(func = "TestSelect", status="fail", explain="Psam 启动出错")
             self.fail("setUp启动出错！")
 
 
@@ -104,7 +104,7 @@ class TestSelect(unittest.TestCase):
         except BaseException:
             BaseImage.screenshot(self.driver, "Case139SelectedError")
             time.sleep(5)
-            LogAction.save(func = "testCaseSelected", status="Fail", explain=LogAction.print())
+            LogAction.save(func = "testCaseSelected", status="fail", explain=LogAction.print())
             self.fail("【139精选】出错！")
 
 
