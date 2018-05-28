@@ -170,7 +170,7 @@ class Send(unittest.TestCase):
         except BaseException:
             BaseImage.screenshot(self.driver, "fwSendError")
             time.sleep(5)
-            LogAction.save(func = "send_fwd", status="fail", explain=LogAction.print())
+            LogAction.save(func = "testCaseFwdSend", status="fail", explain=LogAction.print())
             time.sleep(3)
             self.fail("【云端转发】出错")
 
@@ -269,7 +269,7 @@ class Send(unittest.TestCase):
         except BaseException:
             BaseImage.screenshot(self.driver, "forwardError")
             time.sleep(5)
-            LogAction.save(func = "forward", status="fail", explain=LogAction.print())
+            LogAction.save(func = "testCaseForward", status="fail", explain=LogAction.print())
             time.sleep(5)
             self.fail("【smtp转发】出错")
 
@@ -347,6 +347,6 @@ class Send(unittest.TestCase):
         except BaseException:
             BaseImage.screenshot(self.driver, "replyError")
             time.sleep(5)
-            LogAction.save(func = "reply", status="fail", explain=LogAction.print())
+            LogAction.save(func = "testCaseReply", status="fail", explain=LogAction.print())
             time.sleep(5)
             self.fail("【回复邮件】出错")
