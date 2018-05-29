@@ -96,7 +96,7 @@ class Send(unittest.TestCase):
 
             LogAction.print(isReset=True)
             LogAction.print("=>加载邮件")
-            timeout = int(round(time.time() * 1000)) + 1*20 * 1000
+            timeout = int(round(time.time() * 1000)) + 1*80 * 1000
             # 找到邮件结束
             while int(round(time.time() * 1000)) < timeout :
 
@@ -138,7 +138,7 @@ class Send(unittest.TestCase):
             start = time.time()
 
             LogAction.print('【验证点：发送是否成功】')
-            self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",5) != None, "发送邮件失败！")
+            self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",80) != None, "发送邮件失败！")
 
             print('=>记录当前时间，时间差')
             value_time = str(round((time.time() - start), 2))

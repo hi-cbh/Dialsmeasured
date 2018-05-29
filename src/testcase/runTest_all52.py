@@ -2,7 +2,7 @@
 # encoding:utf-8
 
 import unittest,os,sys,time
-from readwriteconf.rwconf import ReadWriteConfFile
+from src.readwriteconf.rwconf import ReadWriteConfFile
 
 # 添加环境路径，脚本
 p = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -110,7 +110,7 @@ if __name__ == "__main__":
     if int(ReadWriteConfFile.get_section_value('reportconf', 'testCaseSend'))<=_run :
         suite.addTest(TestSend('testCaseSend'))
 
-    if int(ReadWriteConfFile.get_section_value('reportconf', 'testCaseFwdSend'))<=_run :
+    if int(ReadWriteConfFile.get_section_value('reportconf', 'testCaseFwdSend'))<= 5 :
         suite.addTest(TestSend('testCaseFwdSend'))
 
     if int(ReadWriteConfFile.get_section_value('reportconf', 'testCaseForward'))<=_run :
