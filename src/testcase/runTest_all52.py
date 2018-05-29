@@ -2,14 +2,14 @@
 # encoding:utf-8
 
 import unittest,os,sys,time
-from src.readwriteconf.rwconf import ReadWriteConfFile
+
 
 # 添加环境路径，脚本
 p = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 print("path: %s" %p)
 sys.path.append(p+"/")
 # sys.path.append("/Users/apple/autoTest/workspace/DialsMeasured/")
-
+from src.readwriteconf.rwconf import ReadWriteConfFile
 
 localPath = "/var/appiumRunLog"
 # 信息存储路径
