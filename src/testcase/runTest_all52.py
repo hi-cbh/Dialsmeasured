@@ -2,7 +2,7 @@
 # encoding:utf-8
 
 import unittest,os,sys,time
-
+from readwriteconf.rwconf import ReadWriteConfFile
 
 # 添加环境路径，脚本
 p = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -55,37 +55,93 @@ if __name__ == "__main__":
     print('需要运行的脚本')
     testtxt = []
 
-    testtxt.append(('账号登录',"testCaseLogin"))
-    testtxt.append(('一键登录',"testCaseOnBtnLogin"))
-    testtxt.append(('发送邮件带附件',"testCaseSend"))
-    testtxt.append(('云端转发',"testCaseFwdSend"))
-    testtxt.append(('回复邮件',"testCaseReply"))
-    testtxt.append(('SMTP转发',"testCaseForward"))
-    testtxt.append(('日历',"testCaseCalendar"))
-    testtxt.append(('发现主页',"testCaseDiscover"))
-    testtxt.append(('个人资料',"testCasePersionMessages"))
-    testtxt.append(('彩云网盘',"testCaseSkyDrive"))
-    testtxt.append(('附件下载',"testDownFile"))
-    testtxt.append(('联系人同步',"testCaseCheckAddressList"))
-    testtxt.append(('收件箱列表中精选',"testCaseSelected"))
-    testtxt.append(('接收推送',"testCasePush"))
+    _run = 8
+
+    if int(ReadWriteConfFile.get_section_value('reportconf', 'testCaseLogin')) <=_run :
+        testtxt.append(('账号登录',"testCaseLogin"))
+
+    if int(ReadWriteConfFile.get_section_value('reportconf', 'testCaseOnBtnLogin'))<=_run :
+        testtxt.append(('一键登录',"testCaseOnBtnLogin"))
+
+    if int(ReadWriteConfFile.get_section_value('reportconf', 'testCaseSend'))<=_run :
+        testtxt.append(('发送邮件带附件',"testCaseSend"))
+
+    if int(ReadWriteConfFile.get_section_value('reportconf', 'testCaseFwdSend'))<=_run :
+        testtxt.append(('云端转发',"testCaseFwdSend"))
+
+    if int(ReadWriteConfFile.get_section_value('reportconf', 'testCaseReply'))<=_run :
+        testtxt.append(('回复邮件',"testCaseReply"))
+
+    if int(ReadWriteConfFile.get_section_value('reportconf', 'testCaseForward'))<=_run :
+        testtxt.append(('SMTP转发',"testCaseForward"))
+
+    if int(ReadWriteConfFile.get_section_value('reportconf', 'testCaseCalendar'))<=_run :
+        testtxt.append(('日历',"testCaseCalendar"))
+
+    if int(ReadWriteConfFile.get_section_value('reportconf', 'testCaseDiscover'))<=_run :
+        testtxt.append(('发现主页',"testCaseDiscover"))
+
+    if int(ReadWriteConfFile.get_section_value('reportconf', 'testCasePersionMessages'))<=_run :
+        testtxt.append(('个人资料',"testCasePersionMessages"))
+
+    if int(ReadWriteConfFile.get_section_value('reportconf', 'testCaseSkyDrive'))<=_run :
+        testtxt.append(('彩云网盘',"testCaseSkyDrive"))
+
+    if int(ReadWriteConfFile.get_section_value('reportconf', 'testDownFile'))<=_run :
+        testtxt.append(('附件下载',"testDownFile"))
+
+    if int(ReadWriteConfFile.get_section_value('reportconf', 'testCaseCheckAddressList'))<=_run :
+        testtxt.append(('联系人同步',"testCaseCheckAddressList"))
+
+    if int(ReadWriteConfFile.get_section_value('reportconf', 'testCaseSelected'))<=_run :
+        testtxt.append(('收件箱列表中精选',"testCaseSelected"))
+
+    if int(ReadWriteConfFile.get_section_value('reportconf', 'testCasePush'))<=_run :
+        testtxt.append(('接收推送',"testCasePush"))
 
 
     suite = unittest.TestSuite()
-    suite.addTest(TestLogin('testCaseOnBtnLogin'))
-    suite.addTest(TestLogin('testCaseLogin'))
-    suite.addTest(TestSend('testCaseSend'))
-    suite.addTest(TestSend('testCaseFwdSend'))
-    suite.addTest(TestSend('testCaseForward'))
-    suite.addTest(TestSend('testCaseReply'))
-    suite.addTest(TestCalendar('testCaseCalendar'))
-    suite.addTest(TestDiscover('testCaseDiscover'))
-    suite.addTest(TestPersion('testCasePersionMessages'))
-    suite.addTest(TestSkyDrive('testCaseSkyDrive'))
-    suite.addTest(TestDownFile('testDownFile'))
-    suite.addTest(TestContant('testCaseCheckAddressList'))
-    suite.addTest(TestSelect('testCaseSelected'))
-    suite.addTest(TestPush('testCasePush'))
+    if int(ReadWriteConfFile.get_section_value('reportconf', 'testCaseOnBtnLogin'))<=_run :
+        suite.addTest(TestLogin('testCaseOnBtnLogin'))
+
+    if int(ReadWriteConfFile.get_section_value('reportconf', 'testCaseLogin'))<=_run :
+        suite.addTest(TestLogin('testCaseLogin'))
+
+    if int(ReadWriteConfFile.get_section_value('reportconf', 'testCaseSend'))<=_run :
+        suite.addTest(TestSend('testCaseSend'))
+
+    if int(ReadWriteConfFile.get_section_value('reportconf', 'testCaseFwdSend'))<=_run :
+        suite.addTest(TestSend('testCaseFwdSend'))
+
+    if int(ReadWriteConfFile.get_section_value('reportconf', 'testCaseForward'))<=_run :
+        suite.addTest(TestSend('testCaseForward'))
+
+    if int(ReadWriteConfFile.get_section_value('reportconf', 'testCaseReply'))<=_run :
+        suite.addTest(TestSend('testCaseReply'))
+
+    if int(ReadWriteConfFile.get_section_value('reportconf', 'testCaseCalendar'))<=_run :
+        suite.addTest(TestCalendar('testCaseCalendar'))
+
+    if int(ReadWriteConfFile.get_section_value('reportconf', 'testCaseDiscover'))<=_run :
+        suite.addTest(TestDiscover('testCaseDiscover'))
+
+    if int(ReadWriteConfFile.get_section_value('reportconf', 'testCasePersionMessages'))<=_run :
+        suite.addTest(TestPersion('testCasePersionMessages'))
+
+    if int(ReadWriteConfFile.get_section_value('reportconf', 'testCaseSkyDrive'))<=_run :
+        suite.addTest(TestSkyDrive('testCaseSkyDrive'))
+
+    if int(ReadWriteConfFile.get_section_value('reportconf', 'testDownFile'))<=_run :
+        suite.addTest(TestDownFile('testDownFile'))
+
+    if int(ReadWriteConfFile.get_section_value('reportconf', 'testCaseCheckAddressList'))<=_run :
+        suite.addTest(TestContant('testCaseCheckAddressList'))
+
+    if int(ReadWriteConfFile.get_section_value('reportconf', 'testCaseSelected'))<=_run :
+        suite.addTest(TestSelect('testCaseSelected'))
+
+    if int(ReadWriteConfFile.get_section_value('reportconf', 'testCasePush'))<=_run :
+        suite.addTest(TestPush('testCasePush'))
 
     runner = unittest.TextTestRunner()
 
