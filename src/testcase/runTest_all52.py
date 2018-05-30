@@ -55,7 +55,7 @@ if __name__ == "__main__":
     print('需要运行的脚本')
     testtxt = []
 
-    _run = 8
+    _run = 1
 
     if int(ReadWriteConfFile.get_section_value('reportconf', 'testCaseLogin')) <=_run :
         testtxt.append(('账号登录',"testCaseLogin"))
@@ -156,12 +156,12 @@ if __name__ == "__main__":
     testResultReport = runner.run(suite)
     fp.close()
 
-
-
-    ReportClass(testResultReport.failures,testtxt,speed,now).all()
-
-    time.sleep(5)
-    # 休眠状态
-    BaseAdb.adb_sleep()
-
-    time.sleep(5)
+    #
+    #
+    # ReportClass(testResultReport.failures,testtxt,speed,now).all()
+    #
+    # time.sleep(5)
+    # # 休眠状态
+    # BaseAdb.adb_sleep()
+    #
+    # time.sleep(5)
