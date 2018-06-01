@@ -79,7 +79,7 @@ class TestSelect(unittest.TestCase):
 
             LogAction.print("=>等待30秒")
             # 等待两分钟
-            timeout = int(round(time.time() * 1000)) + 30 * 1000
+            timeout = int(round(time.time() * 1000)) + 60 * 1000
             try:
                 while (int(round(time.time() * 1000) < timeout)):
 

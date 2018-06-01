@@ -185,7 +185,7 @@ class Send(unittest.TestCase):
             self.assertTrue(s.send_mail_test('sendsmtpEmail','测试邮件...'),"邮件发送失败")
             time.sleep(10)
             LogAction.print("=>加载邮件")
-            timeout = int(round(time.time() * 1000)) + 1*40 * 1000
+            timeout = int(round(time.time() * 1000)) + 1*60 * 1000
             # 找到邮件结束
             while int(round(time.time() * 1000)) < timeout :
 
@@ -239,7 +239,7 @@ class Send(unittest.TestCase):
             start = time.time()
 
             LogAction.print('【验证点：发送是否成功】')
-            self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",40) != None, "发送邮件失败！")
+            self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",60) != None, "发送邮件失败！")
 
             print('=>记录当前时间，时间差')
             value_time = str(round((time.time() - start), 2))
@@ -288,7 +288,7 @@ class Send(unittest.TestCase):
             time.sleep(10)
 
             LogAction.print("=>加载邮件")
-            timeout = int(round(time.time() * 1000)) + 1*40 * 1000
+            timeout = int(round(time.time() * 1000)) + 1*80 * 1000
             # 找到邮件结束
             while int(round(time.time() * 1000)) < timeout :
 
@@ -331,7 +331,7 @@ class Send(unittest.TestCase):
             start = time.time()
 
             LogAction.print('【验证点：发送是否成功】')
-            self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",20) != None, "发送邮件失败！")
+            self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",60) != None, "发送邮件失败！")
 
             print('=>记录当前时间，时间差')
             value_time = str(round((time.time() - start), 2))

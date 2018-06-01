@@ -52,8 +52,7 @@ class TestDiscover(unittest.TestCase):
             start = time.time()
 
             LogAction.print('【验证点：页面是否显示正常】')
-            self.driver.element_wait(u"uiautomator=>查看更多",20)
-            self.assertTrue(self.driver.element_wait(u"uiautomator=>139精选",20),"页面显示不正常")
+            self.assertTrue(self.driver.element_wait(u"uiautomator=>139精选",80),"页面显示不正常")
 
             print('=>记录当前时间，时间差')
             value_time = str(round((time.time() - start), 2))

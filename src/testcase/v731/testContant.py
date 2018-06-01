@@ -74,7 +74,7 @@ class TestContant(unittest.TestCase):
 
     def waitfor_notification(self):
         '''找到需要的通知栏信息'''
-        for i in range(5):
+        for i in range(8):
             print("下拉通讯录列表")
             self.driver.swipe_down()
             print("检查通知栏信息")
