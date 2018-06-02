@@ -93,8 +93,8 @@ if __name__ == "__main__":
     if int(ReadWriteConfFile.get_section_value('reportconf', 'testCaseCheckAddressList'))<=_run :
         testtxt.append(('联系人同步',"testCaseCheckAddressList"))
 
-    if int(ReadWriteConfFile.get_section_value('reportconf', 'testCaseSelected'))<=_run :
-        testtxt.append(('收件箱列表中精选',"testCaseSelected"))
+    # if int(ReadWriteConfFile.get_section_value('reportconf', 'testCaseSelected'))<=_run :
+    #     testtxt.append(('收件箱列表中精选',"testCaseSelected"))
 
     if int(ReadWriteConfFile.get_section_value('reportconf', 'testCasePush'))<=_run :
         testtxt.append(('接收推送',"testCasePush"))
@@ -137,8 +137,8 @@ if __name__ == "__main__":
     if int(ReadWriteConfFile.get_section_value('reportconf', 'testCaseCheckAddressList'))<=_run :
         suite.addTest(TestContant('testCaseCheckAddressList'))
 
-    if int(ReadWriteConfFile.get_section_value('reportconf', 'testCaseSelected'))<=_run :
-        suite.addTest(TestSelect('testCaseSelected'))
+    # if int(ReadWriteConfFile.get_section_value('reportconf', 'testCaseSelected'))<=_run :
+    #     suite.addTest(TestSelect('testCaseSelected'))
 
     if int(ReadWriteConfFile.get_section_value('reportconf', 'testCasePush'))<=_run :
         suite.addTest(TestPush('testCasePush'))
