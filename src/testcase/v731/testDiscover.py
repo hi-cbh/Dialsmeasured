@@ -3,7 +3,7 @@
 import datetime
 import random,time,unittest
 
-from base.baseAdb import BaseAdb
+from src.base.baseAdb import BaseAdb
 from src.psam.psam import Psam
 from src.testcase.v731.easycase.login import Login
 from src.readwriteconf.initData import InitData
