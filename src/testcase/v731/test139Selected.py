@@ -19,9 +19,9 @@ class TestSelect(unittest.TestCase):
     '''139精选是否显示正常'''
     def setUp(self):
         try:
-            # BaseAdb.adb_intall_uiautmator()
+            BaseAdb.adb_intall_uiautmator()
             # self.driver = Psam()
-            self.driver = Psam(version="5.1")
+            self.driver = Psam(version="6.0")
         except BaseException:
             print("setUp启动出错！")
             LogAction.save(func = "TestSelect", status="fail", explain="Psam 启动出错")

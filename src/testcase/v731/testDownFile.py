@@ -2,6 +2,8 @@
 # encoding:utf-8
 import datetime
 import time,unittest,random
+
+from base.baseAdb import BaseAdb
 from src.base.baseLog import LogAction
 from src.psam.psam import Psam
 from src.testcase.v731.easycase.login import Login
@@ -36,9 +38,9 @@ class TestDownFile(unittest.TestCase):
     def setUp(self):
         stat=""
         try:
-            # BaseAdb.adb_intall_uiautmator()
+            BaseAdb.adb_intall_uiautmator()
             stat="Pasm初始化出错"
-            self.driver = Psam(version="5.1")
+            self.driver = Psam(version="6.0")
 
             stat = "账号登录出错"
             Login(self.driver,username, pwd).login_action(is_save=False)

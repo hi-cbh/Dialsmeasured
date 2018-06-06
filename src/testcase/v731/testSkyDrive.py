@@ -3,6 +3,8 @@
 import datetime
 import random
 import time,unittest
+
+from base.baseAdb import BaseAdb
 from src.psam.psam import Psam
 from src.testcase.v731.easycase.login import Login
 from src.readwriteconf.initData import InitData
@@ -22,8 +24,8 @@ class TestSkyDrive(unittest.TestCase):
     '''彩云网盘是否正常打开'''
     def setUp(self):
         try:
-            # BaseAdb.adb_intall_uiautmator()
-            self.driver = Psam(version="5.1")
+            BaseAdb.adb_intall_uiautmator()
+            self.driver = Psam(version="6.0")
         except BaseException:
             print("setUp启动出错！")
             self.driver.quit()

@@ -2,6 +2,8 @@
 # encoding:utf-8
 import datetime
 import random,time,unittest
+
+from base.baseAdb import BaseAdb
 from src.psam.psam import Psam
 from src.testcase.v731.easycase.login import Login
 from src.readwriteconf.initData import InitData
@@ -24,8 +26,8 @@ class TestDiscover(unittest.TestCase):
     '''发现页面是否显示正常'''
     def setUp(self):
         try:
-            # BaseAdb.adb_intall_uiautmator()
-            self.driver = Psam(version="5.1")
+            BaseAdb.adb_intall_uiautmator()
+            self.driver = Psam(version="6.0")
         except BaseException:
             print("setUp启动出错！")
             LogAction.save(func = "TestDiscover", status="Fail", explain="Psam 启动出错")

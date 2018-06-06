@@ -33,9 +33,9 @@ class TestPush(unittest.TestCase):
     def setUp(self):
         stat =""
         try:
-            # BaseAdb.adb_intall_uiautmator()
+            BaseAdb.adb_intall_uiautmator()
             stat="Psam 初始化出错"
-            self.driver = Psam(version="5.1")
+            self.driver = Psam(version="6.0")
             time.sleep(5)
 
 

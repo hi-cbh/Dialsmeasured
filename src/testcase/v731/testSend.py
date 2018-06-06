@@ -2,6 +2,8 @@
 # encoding:utf-8
 import datetime
 import time,unittest,random
+
+from base.baseAdb import BaseAdb
 from src.mail.mailOperation import EmailOperation
 from src.psam.psam import Psam
 from src.testcase.v731.easycase.login import Login
@@ -35,8 +37,9 @@ class TestSend(unittest.TestCase):
     def setUp(self):
         stat = ""
         try:
+            BaseAdb.adb_intall_uiautmator()
             stat="Psam初始化出错"
-            self.driver = Psam(version="5.1")
+            self.driver = Psam(version="6.0")
         except BaseException :
             self.driver.quit()
             LogAction.save(func = "TestSend", status="Fail", explain=stat)

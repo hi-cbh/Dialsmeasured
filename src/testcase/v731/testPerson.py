@@ -24,8 +24,8 @@ class TestPersion(unittest.TestCase):
     '''个人资料是否显示正常'''
     def setUp(self):
         try:
-            # BaseAdb.adb_intall_uiautmator()
-            self.driver = Psam(version="5.1")
+            BaseAdb.adb_intall_uiautmator()
+            self.driver = Psam(version="6.0")
         except BaseException:
             print("setUp启动出错！")
             self.driver.quit()

@@ -2,6 +2,8 @@
 # encoding:utf-8
 import datetime
 import time,unittest,random
+
+from base.baseAdb import BaseAdb
 from src.psam.psam import Psam
 from src.testcase.v731.easycase.login import Login
 from src.readwriteconf.initData import InitData
@@ -23,8 +25,8 @@ class TestCalendar(unittest.TestCase):
     '''日历是否能打开'''
     def setUp(self):
         try:
-            # BaseAdb.adb_intall_uiautmator()
-            self.driver = Psam(version="5.1")
+            BaseAdb.adb_intall_uiautmator()
+            self.driver = Psam(version="6.0")
         except BaseException:
             print("setUp启动出错！")
             self.driver.quit()
