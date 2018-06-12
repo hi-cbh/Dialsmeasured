@@ -42,13 +42,28 @@ class ReadWriteConfFile:
         cf.set(section, key, value)
         ReadWriteConfFile.write_config_parser(cf)
 
+    @staticmethod
+    def read_section_all(section):
+        '''读取配置中所有数据'''
+        cf=ReadWriteConfFile.get_config_parser()
+        all_sections=cf.items(section)
+        for k,v in all_sections:
+            print("key: %s, value: %s" %(k, v))
+        return all_sections
 
+    @staticmethod
+    def read_section_zero(section):
+        '''读取配置中所有数据，并设置为0'''
+        cf=ReadWriteConfFile.get_config_parser()
+        all_sections=cf.items(section)
+        for k,v in all_sections:
+            ReadWriteConfFile.set_section_value(section,k,"0")
 
 
 
 
 if __name__ == '__main__':
-    # ReadWriteConfFile.add_section('sendconf')
-    ReadWriteConfFile.set_section_value('sendconf', 'error', '0')
-    x=ReadWriteConfFile.get_section_value('reportconf', 'testcase01')
-    print(x)
+    ReadWriteConfFile.read_section_zero('reportconf')
+    # ReadWriteConfFile.set_section_value('sendconf', 'error', '0')
+    # x=ReadWriteConfFile.get_section_value('reportconf', 'testcase01')
+    # print(x)

@@ -260,12 +260,10 @@ class ReportClass(object):
     def _set_case_conf(self):
         '''各个用例复位'''
         rwc.add_section('caseconf')
-        for k,v in ReportClass._result.items():
-            rwc.set_section_value('caseconf', k, "0")
+        rwc.read_section_zero("caseconf")
 
         rwc.add_section('reportconf')
-        for k,v in ReportClass._result.items():
-            rwc.set_section_value('reportconf', k, "0")
+        rwc.read_section_zero('reportconf')
 
 
     def save_true_log(self):
