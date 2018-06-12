@@ -489,7 +489,8 @@ class ReportClass(object):
 
                 rwc.set_section_value('sendconf', 'send', 'True')
                 # #发送后，用例是否复位
-                if morning != datetime.datetime.now().hour:
+                if changetime == datetime.datetime.now().hour:
+                    print("复原操作")
                     self._set_case_conf()
 
         else:
