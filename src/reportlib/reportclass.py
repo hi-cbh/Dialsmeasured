@@ -367,17 +367,17 @@ class ReportClass(object):
         self.save_log(fhtmlFilePath, htmlFilePath)
 
 
-
-        print("写入成功率--> 假数据(需要修改成功率)")
-        # 这里修改百分率，保存正常数据
-        with open(fsaveFilePath,'a+') as fq1:
-            fq1.write(write_time)
-            for cline in cs.get_successercentage_fail_not_type(caselt):
-                fq1.write(cline)
-            fq1.write(write_line)
-
-        # 这里修改Fail字段
-        self.save_log(fsaveFilePath,orgFilePath)
+        # 屏蔽
+        # print("写入成功率--> 假数据(需要修改成功率)")
+        # # 这里修改百分率，保存正常数据
+        # with open(fsaveFilePath,'a+') as fq1:
+        #     fq1.write(write_time)
+        #     for cline in cs.get_successercentage_fail_not_type(caselt):
+        #         fq1.write(cline)
+        #     fq1.write(write_line)
+        #
+        # # 这里修改Fail字段
+        # self.save_log(fsaveFilePath,orgFilePath)
 
 
 
@@ -454,12 +454,13 @@ class ReportClass(object):
                 print('到点发送邮件')
 
                 # 写入文件
-                self.save_true_log()
+                # 屏蔽
+                # self.save_true_log()
                 self.save_fail_log()
 
-                time.sleep(5)
-                with open(logPath + 'true_'+logfileName,'r') as fq:
-                    all_sendtxt = fq.readlines()
+                # time.sleep(5)
+                # with open(logPath + 'true_'+logfileName,'r') as fq:
+                #     all_sendtxt = fq.readlines()
 
                 time.sleep(5)
                 with open(logPath + 'false_'+logfileName,'r') as fq:
@@ -469,7 +470,6 @@ class ReportClass(object):
                 #==============发送内容读取=========
 
 
-                print("内部发送 %s：" %all_sendtxt)
                 print("外部发送 %s：" %false_txt)
 
                 s = SendMail("13697485262","chinasoft123","13697485262")
@@ -516,7 +516,7 @@ class ReportClass(object):
         print('运行结束')
         time.sleep(10)
 
-    def all(self, is_test=False):
+    def all(self, is_test=True):
         self._get_error_case()
         self._use_case_results()
         self._sort_fail()

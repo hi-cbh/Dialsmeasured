@@ -60,6 +60,28 @@ class ReadWriteConfFile:
             ReadWriteConfFile.set_section_value(section,k,"0")
 
 
+    @staticmethod
+    def value_add_one(section,case_name):
+        '''用例只加1'''
+        try:
+            value = ReadWriteConfFile.get_section_value(section, case_name)
+            ReadWriteConfFile.set_section_value(section, case_name, str(int(value)+1))
+        except BaseException as e:
+            print(e)
+            print("值出错")
+
+    @staticmethod
+    def value_set_zero(section,case_name):
+        '''用例只为0'''
+        try:
+            value = ReadWriteConfFile.get_section_value(section, case_name)
+            if int(value) != 0:
+                ReadWriteConfFile.set_section_value(section, case_name, "0")
+        except BaseException:
+            print("值出错")
+
+
+
 
 
 if __name__ == '__main__':

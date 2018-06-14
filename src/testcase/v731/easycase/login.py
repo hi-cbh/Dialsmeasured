@@ -102,8 +102,6 @@ class Login(unittest.TestCase):
             LogAction.save(func = "testCaseLogin", status="fail", explain=LogAction.print())
             self.fail("【手动输入账号/密码-登录】出现错误")
 
-
-
     def one_btn_Login(self, is_save=True):
         '''一键登录'''
         try:
