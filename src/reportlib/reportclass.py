@@ -516,7 +516,7 @@ class ReportClass(object):
         print('运行结束')
         time.sleep(10)
 
-    def all(self, is_test=True):
+    def all(self, is_test=False):
         self._get_error_case()
         self._use_case_results()
         self._sort_fail()
