@@ -64,4 +64,5 @@ class TestLogin(unittest.TestCase):
 if __name__ == "__main__":
     suite = unittest.TestSuite()
     runner = unittest.TextTestRunner(verbosity=2)
+    suite.addTest(TestLogin('testCaseLogin'))
     runner.run(suite)

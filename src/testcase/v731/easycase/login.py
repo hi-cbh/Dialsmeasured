@@ -74,7 +74,7 @@ class Login(unittest.TestCase):
                 time.sleep(1)
 
             LogAction.print('【验证点：等待弹窗广告出现】')
-            if self.driver.get_element(u"uiautomator=>广告", 30) != None:
+            if self.driver.get_element("id=>cn.cj.pe:id/btn", 60) != None:
                 self.driver.click("id=>cn.cj.pe:id/btn")
 
             if 22 >= datetime.datetime.now().hour >= 7:
