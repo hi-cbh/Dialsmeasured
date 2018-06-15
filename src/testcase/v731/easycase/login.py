@@ -86,9 +86,9 @@ class Login(unittest.TestCase):
                 else:
                     self.driver.get_element("uiautomator=>我的", 2).click()
                     time.sleep(0.2)
-                    self.driver.get_element("uiautomator=>发现", 2).click()
-                    time.sleep(0.2)
-                    self.driver.get_element("id=>cn.cj.pe:id/message_list_bottom_email",2).click()
+                    # self.driver.get_element("uiautomator=>发现", 2).click()
+                    # time.sleep(0.2)
+                    # self.driver.get_element("id=>cn.cj.pe:id/message_list_bottom_email",2).click()
 
                 time.sleep(1)
 
