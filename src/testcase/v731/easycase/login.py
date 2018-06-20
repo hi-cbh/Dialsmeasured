@@ -73,29 +73,29 @@ class Login(unittest.TestCase):
                 self.driver.click(u"uiautomator=>允许")
                 time.sleep(1)
 
-            LogAction.print('【验证点：等待弹窗广告出现】')
-            if self.driver.get_element("id=>cn.cj.pe:id/btn", 20) != None:
-                self.driver.click("id=>cn.cj.pe:id/btn")
-            # # 切换模块
-            # timeout = int(round(time.time() * 1000)) + 1*30 * 1000
-            # # 找到邮件结束
-            # while int(round(time.time() * 1000)) < timeout :
-            #
-            #     if self.driver.get_element("id=>cn.cj.pe:id/btn", 2) != None:
-            #         self.driver.click("id=>cn.cj.pe:id/btn")
-            #         break
-            #     else:
-            #         self.driver.get_element("uiautomator=>我的", 2).click()
-            #         time.sleep(0.2)
-            #         # self.driver.get_element("uiautomator=>发现", 2).click()
-            #         # time.sleep(0.2)
-            #         # self.driver.get_element("id=>cn.cj.pe:id/message_list_bottom_email",2).click()
-            #
-            #     time.sleep(1)
+            # LogAction.print('【验证点：等待弹窗广告出现】')
+            # if self.driver.get_element("id=>cn.cj.pe:id/btn", 20) != None:
+            #     self.driver.click("id=>cn.cj.pe:id/btn")
+            # 切换模块
+            timeout = int(round(time.time() * 1000)) + 1*30 * 1000
+            # 找到邮件结束
+            while int(round(time.time() * 1000)) < timeout :
+
+                if self.driver.element_wait("id=>cn.cj.pe:id/btn", 2) != None:
+                    self.driver.click("id=>cn.cj.pe:id/btn")
+                    break
+                else:
+                    self.driver.click("uiautomator=>我的", 2)
+                    time.sleep(0.2)
+                    self.driver.click("uiautomator=>发现", 2)
+                    time.sleep(0.2)
+                    self.driver.click("id=>cn.cj.pe:id/message_list_bottom_email",2)
+
+                time.sleep(1)
 
 
             time.sleep(2)
-            self.driver.get_element("id=>cn.cj.pe:id/message_list_bottom_email",2).click()
+            self.driver.click("id=>cn.cj.pe:id/message_list_bottom_email",2)
 
 
             if 22 >= datetime.datetime.now().hour >= 7:
@@ -157,11 +157,21 @@ class Login(unittest.TestCase):
             self.driver.click(u"uiautomator=>快速登录")
             start = time.time()
 
-            # time.sleep(30)
-            LogAction.print('【验证点：等待弹窗广告出现】')
-            if self.driver.get_element(u"uiautomator=>广告", 30) != None:
+            timeout = int(round(time.time() * 1000)) + 1*30 * 1000
+            # 找到邮件结束
+            while int(round(time.time() * 1000)) < timeout :
 
-                self.driver.click("id=>cn.cj.pe:id/btn")
+                if self.driver.element_wait("id=>cn.cj.pe:id/btn", 2) != None:
+                    self.driver.click("id=>cn.cj.pe:id/btn")
+                    break
+                else:
+                    self.driver.click("uiautomator=>我的", 2)
+                    time.sleep(0.2)
+                    self.driver.click("uiautomator=>发现", 2)
+                    time.sleep(0.2)
+                    self.driver.click("id=>cn.cj.pe:id/message_list_bottom_email",2)
+
+                time.sleep(1)
 
 
             if 22 >= datetime.datetime.now().hour >= 7:
