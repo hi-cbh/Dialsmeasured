@@ -56,10 +56,10 @@ class TestLogin(unittest.TestCase):
         Login(self.driver,username, pwd).login_action()
 
 
-    # def testCaseOnBtnLogin(self):
-    #     '''一键登录'''
-    #     Login(self.driver,username, pwd).one_btn_Login()
-    #
+    def testCaseOnBtnLogin(self):
+        '''一键登录'''
+        Login(self.driver,username, pwd).one_btn_Login()
+
 
 if __name__ == "__main__":
     suite = unittest.TestSuite()
