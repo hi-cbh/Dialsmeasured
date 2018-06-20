@@ -77,7 +77,7 @@ class Login(unittest.TestCase):
             # if self.driver.get_element("id=>cn.cj.pe:id/btn", 20) != None:
             #     self.driver.click("id=>cn.cj.pe:id/btn")
             # 切换模块
-            timeout = int(round(time.time() * 1000)) + 1*30 * 1000
+            timeout = int(round(time.time() * 1000)) + 1*60 * 1000
             # 找到邮件结束
             while int(round(time.time() * 1000)) < timeout :
 

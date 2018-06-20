@@ -310,9 +310,13 @@ class Psam(object):
         return self.driver.page_source
 
 
+    def current_app(self):
+        return self.driver.current_activity
+
+
 if __name__ == '__main__':
 
-    driver = Psam(version="5.0")
-    driver.swipe_right()
+    driver = Psam(version="6.0")
+    print(driver.current_app())
 
             

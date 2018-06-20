@@ -27,36 +27,55 @@ class InitData():
     def get_sys_path(self):
         return dict(cf.items("sysconf"))
 
+class duser(object):
+    '''单例模式，只获取一次用户名字典'''
+    __species = None
+    __first_init = True
 
-#
-#
-# conf=cparser.ConfigParser() #生成conf对象
-# conf.read(file_path)   #读取ini配置文件
-# def readConfigFile():
-#     """
-#     sections:配置文件中[]中的值
-#     options:每组中的键
-#     items:键-值的列表形式
-#     """
-#     # 获取每组类型中的section值
-#     sections = conf.sections()  # 获取所有sections
-#     print("---conf.ini文件中的section内容有：%s" %sections)
-#
-#     # 获取每行数据的键即指定section的所有option
-#     print("---userconf 的所有键为：%s"  %conf.options("userconf"))
-#     print("---mysqlconf 的所有键为：%s"  %conf.options("mysqlconf"))
-#
-#     # 获取指定section的所有键值对
-#     print("---userconf 的所有键-值为：%s" %conf.items("userconf"))
-#
-#     # 指定section，option读取具体值
-#     print("---userconf 组的 user1 值为：%s" %conf.get("userconf", "user1"))
-#
-#
-#     # for k,v in conf.items("userconf"):
-#     #     print(k,v)
-#
-#     print(dict(conf.items("userconf"))
+    def __new__(cls, *args, **kwargs):
+        if cls.__species == None:
+            cls.__species = object.__new__(cls)
+        return cls.__species
+
+    def __init__(self):
+        if self.__first_init:
+            print("赋值......")
+            self.users = self.__getusers()
+            self.__class__.__first_init = False
+            # 相当于Animal.__first_init = False
+
+    def __getusers(self):
+        '''获取值'''
+        print("__getusers.........")
+        d = InitData().get_users()
+
+        username = "13533218540"
+        pwd = "hy12345678"
+
+        # # 主账号
+        # if datetime.datetime.now().hour%2 == 0:
+        #     username = d['user3']
+        #     pwd = d['pwd3']
+        # else:
+        #     username = d['user4']
+        #     pwd = d['pwd4']
+
+        username2 = d['user2']
+        pwd2 = d['pwd2']
+
+        users = {"name": username, 'pwd': pwd,"name2":username2,"pwd2":pwd2}
+        print(users)
+        print(type(users))
+        return users
+
+    # def __str__(self):
+    #     return str(self.users)
+
+    def getuser(self):
+        return self.users
+
+
+
 if __name__ == "__main__":
     print(InitData().get_file())
     print(InitData().get_sys_path())
