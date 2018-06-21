@@ -23,18 +23,18 @@ class Login(unittest.TestCase):
         if self.driver.current_app().__contains__(".activity.MessageList"):
             BaseAdb.adb_start_app("cn.cj.pe","com.mail139.about.LaunchActivity")
             # print("在主页")
-            time.sleep(8)
+            time.sleep(6)
             self.driver.click(u"uiautomator=>邮件")
             return
 
         BaseAdb.adb_stop("cn.cj.pe")
         time.sleep(3)
         BaseAdb.adb_start_app("cn.cj.pe","com.mail139.about.LaunchActivity")
-        time.sleep(10)
+        time.sleep(6)
         if self.driver.current_app().__contains__(".activity.MessageList"):
             BaseAdb.adb_start_app("cn.cj.pe","com.mail139.about.LaunchActivity")
             # print("在主页")
-            time.sleep(10)
+            time.sleep(6)
             self.driver.click(u"uiautomator=>邮件")
         else:
             # 杀进程启动，清除缓存，重新登录

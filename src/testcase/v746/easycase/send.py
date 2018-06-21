@@ -65,7 +65,7 @@ class Send(unittest.TestCase):
             time.sleep(2)
 
 
-            LogAction.print("等待邮件出现，等待FW邮件出现")
+            LogAction.print("等待邮件出现")
             timeout = int(round(time.time() * 1000)) + 1*40 * 1000
             # 找到邮件结束
             while int(round(time.time() * 1000)) < timeout :

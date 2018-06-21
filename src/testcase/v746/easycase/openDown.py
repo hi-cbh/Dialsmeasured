@@ -39,22 +39,11 @@ class OpenDown(unittest.TestCase):
 
 
             # 点击第一封
-            LogAction.print('【验证点：判断是否存在"暂无邮件"字段】')
-            self.assertTrue(self.driver.get_element(u"uiautomator=>暂无邮件",5) == None, "收件箱没有邮件")
-            # els = self.driver.get_sub_element(r"id=>android:id/list","class=>android.widget.LinearLayout")
-            # time.sleep(2)
-
             LogAction.print('=>点击 %s' %subject)
-            # els[0].click()
             self.driver.click("uiautomator=>%s" %subject)
-
-
 
             LogAction.print('【验证点：查找控件，确认进入邮件详情页】')
             self.assertTrue(self.driver.element_wait(r"id=>cn.cj.pe:id/circular_progress_container",10) != None , "测试邮件不存在!")
-            # self.driver.element_wait(r"class=>android.webkit.WebView")
-
-
 
             # 清除
             LogAction.print('=>清除下载的旧数据')
@@ -88,7 +77,7 @@ class OpenDown(unittest.TestCase):
             save.save("附件下载:%s" %value_time)
 
             LogAction.print('=>返回收件箱')
-            time.sleep(5)
+            time.sleep(2)
             BaseAdb.adb_back()
             BaseAdb.adb_back()
 
