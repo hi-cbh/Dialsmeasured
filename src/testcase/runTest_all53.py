@@ -138,22 +138,22 @@ if __name__ == "__main__":
     testtxt.append(('回复邮件',"testCaseReply"))
 
     testtxt.append(('SMTP转发',"testCaseForward"))
-
-    testtxt.append(('日历',"testCaseCalendar"))
-
-    testtxt.append(('发现主页',"testCaseDiscover"))
-
-    testtxt.append(('个人资料',"testCasePersionMessages"))
-
-    testtxt.append(('彩云网盘',"testCaseSkyDrive"))
-
-    testtxt.append(('附件下载',"testDownFile"))
-
-    testtxt.append(('联系人同步',"testCaseCheckAddressList"))
-
-    testtxt.append(('收件箱列表中精选',"testCaseSelected"))
-
-    testtxt.append(('接收推送',"testCasePush"))
+    #
+    # testtxt.append(('日历',"testCaseCalendar"))
+    #
+    # testtxt.append(('发现主页',"testCaseDiscover"))
+    #
+    # testtxt.append(('个人资料',"testCasePersionMessages"))
+    #
+    # testtxt.append(('彩云网盘',"testCaseSkyDrive"))
+    #
+    # testtxt.append(('附件下载',"testDownFile"))
+    #
+    # testtxt.append(('联系人同步',"testCaseCheckAddressList"))
+    #
+    # testtxt.append(('收件箱列表中精选',"testCaseSelected"))
+    #
+    # testtxt.append(('接收推送',"testCasePush"))
 
 
     suite = unittest.TestSuite()
@@ -170,22 +170,22 @@ if __name__ == "__main__":
     suite.addTest(TestCase('testCaseForward'))
 
     suite.addTest(TestCase('testCaseReply'))
-
-    suite.addTest(TestCase('testCaseCalendar'))
-
-    suite.addTest(TestCase('testCaseDiscover'))
-
-    suite.addTest(TestCase('testCasePersionMessages'))
-
-    suite.addTest(TestCase('testCaseSkyDrive'))
-
-    suite.addTest(TestCase('testDownFile'))
-
-    suite.addTest(TestCase('testCaseCheckAddressList'))
-
-    suite.addTest(TestCase('testCaseSelected'))
-
-    suite.addTest(TestCase('testCasePush'))
+    #
+    # suite.addTest(TestCase('testCaseCalendar'))
+    #
+    # suite.addTest(TestCase('testCaseDiscover'))
+    #
+    # suite.addTest(TestCase('testCasePersionMessages'))
+    #
+    # suite.addTest(TestCase('testCaseSkyDrive'))
+    #
+    # suite.addTest(TestCase('testDownFile'))
+    #
+    # suite.addTest(TestCase('testCaseCheckAddressList'))
+    #
+    # suite.addTest(TestCase('testCaseSelected'))
+    #
+    # suite.addTest(TestCase('testCasePush'))
 
     runner = unittest.TextTestRunner()
 

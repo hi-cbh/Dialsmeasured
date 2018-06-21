@@ -64,6 +64,20 @@ class Send(unittest.TestCase):
             BaseAdb.adb_back()
             time.sleep(2)
 
+
+            LogAction.print("等待邮件出现，等待FW邮件出现")
+            timeout = int(round(time.time() * 1000)) + 1*40 * 1000
+            # 找到邮件结束
+            while int(round(time.time() * 1000)) < timeout :
+                if self.driver.element_wait(u"uiautomator=>%s" %subject,2) == None:
+                    self.driver.swipe_down()
+                    time.sleep(2)
+                    self.driver.swipe_down()
+                    time.sleep(2)
+                else:
+                    break
+
+
         except BaseException:
             time.sleep(3)
             self.fail('【邮件发送】出错')
@@ -130,6 +144,18 @@ class Send(unittest.TestCase):
             BaseAdb.adb_back()
             time.sleep(2)
 
+            LogAction.print("等待邮件出现，等待FW邮件出现")
+            timeout = int(round(time.time() * 1000)) + 1*40 * 1000
+            # 找到邮件结束
+            while int(round(time.time() * 1000)) < timeout :
+                if self.driver.element_wait(u"uiautomator=>Fwd: %s" %subject,2) == None:
+                    self.driver.swipe_down()
+                    time.sleep(2)
+                    self.driver.swipe_down()
+                    time.sleep(2)
+                else:
+                    break
+
         except BaseException:
             BaseImage.screenshot(self.driver, "SendError")
             time.sleep(5)
@@ -143,22 +169,22 @@ class Send(unittest.TestCase):
             # self.send_action(is_save=False)
 
             LogAction.print(isReset=True)
-            LogAction.print("=>加载邮件")
-            timeout = int(round(time.time() * 1000)) + 1*80 * 1000
-            # 找到邮件结束
-            while int(round(time.time() * 1000)) < timeout :
-
-                el = self.driver.element_wait(u"uiautomator=>%s" %subject ,secs = 2)
-                if el == None:
-                    print("下拉")
-                    self.driver.swipe_down()
-                    time.sleep(1)
-                    self.driver.swipe_down()
-                else:
-                    print("列表有邮件，退出循环")
-                    break
-
-                time.sleep(1)
+            # LogAction.print("=>加载邮件")
+            # timeout = int(round(time.time() * 1000)) + 1*80 * 1000
+            # # 找到邮件结束
+            # while int(round(time.time() * 1000)) < timeout :
+            #
+            #     el = self.driver.element_wait(u"uiautomator=>%s" %subject ,secs = 2)
+            #     if el == None:
+            #         print("下拉")
+            #         self.driver.swipe_down()
+            #         time.sleep(1)
+            #         self.driver.swipe_down()
+            #     else:
+            #         print("列表有邮件，退出循环")
+            #         break
+            #
+            #     time.sleep(1)
 
 
             # 点击第一封
@@ -226,25 +252,25 @@ class Send(unittest.TestCase):
         '''stmp转发：本地无附件的邮件，添加附件后，转发'''
         try:
             LogAction.print(isReset=True)
-
-
-            time.sleep(10)
-            LogAction.print("=>加载邮件")
-            timeout = int(round(time.time() * 1000)) + 1*60 * 1000
-            # 找到邮件结束
-            while int(round(time.time() * 1000)) < timeout :
-
-                el = self.driver.element_wait(u"uiautomator=>暂无邮件",secs = 2)
-                if el != None:
-                    print("下拉")
-                    self.driver.swipe_down()
-                    time.sleep(1)
-                    self.driver.swipe_down()
-                else:
-                    print("列表有邮件，退出循环")
-                    break
-
-                time.sleep(1)
+            #
+            #
+            # time.sleep(10)
+            # LogAction.print("=>加载邮件")
+            # timeout = int(round(time.time() * 1000)) + 1*60 * 1000
+            # # 找到邮件结束
+            # while int(round(time.time() * 1000)) < timeout :
+            #
+            #     el = self.driver.element_wait(u"uiautomator=>暂无邮件",secs = 2)
+            #     if el != None:
+            #         print("下拉")
+            #         self.driver.swipe_down()
+            #         time.sleep(1)
+            #         self.driver.swipe_down()
+            #     else:
+            #         print("列表有邮件，退出循环")
+            #         break
+            #
+            #     time.sleep(1)
 
 
             # 点击第一封
@@ -325,25 +351,25 @@ class Send(unittest.TestCase):
         try:
 
             LogAction.print(isReset=True)
-
-            time.sleep(10)
-            LogAction.print("=>加载邮件")
-            timeout = int(round(time.time() * 1000)) + 1*80 * 1000
-            # 找到邮件结束
-            while int(round(time.time() * 1000)) < timeout :
-
-                el = self.driver.element_wait(u"uiautomator=>%s" %subject,secs = 2)
-                if el == None:
-                    print("下拉")
-                    self.driver.swipe_down()
-                    time.sleep(1)
-                    self.driver.swipe_down()
-                else:
-                    print("列表有邮件，退出循环")
-                    break
-
-                time.sleep(1)
-
+            #
+            # time.sleep(10)
+            # LogAction.print("=>加载邮件")
+            # timeout = int(round(time.time() * 1000)) + 1*80 * 1000
+            # # 找到邮件结束
+            # while int(round(time.time() * 1000)) < timeout :
+            #
+            #     el = self.driver.element_wait(u"uiautomator=>%s" %subject,secs = 2)
+            #     if el == None:
+            #         print("下拉")
+            #         self.driver.swipe_down()
+            #         time.sleep(1)
+            #         self.driver.swipe_down()
+            #     else:
+            #         print("列表有邮件，退出循环")
+            #         break
+            #
+            #     time.sleep(1)
+            #
 
             # 点击第一封
             LogAction.print('【验证点：否存在"暂无邮件"字段】')
