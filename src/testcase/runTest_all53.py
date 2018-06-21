@@ -208,4 +208,4 @@ if __name__ == "__main__":
     # 休眠状态
     BaseAdb.adb_sleep()
 
-    time.sleep(5)
+    time.sleep(10)
