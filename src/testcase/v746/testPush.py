@@ -6,22 +6,16 @@ from src.base.baseAdb import BaseAdb
 from src.psam.psam import Psam
 from src.testcase.v746.easycase.login import Login
 from src.mail.sendEmailSmtp import SendMail
-from src.readwriteconf.initData import InitData
+from src.readwriteconf.initData import InitData, duser
 from src.base.baseImage import BaseImage
 from src.base.baseLog import LogAction
 from src.readwriteconf.saveData import save
 
 
-d = InitData().get_users()
+users = duser().getuser()
+user = {"name": users['name'], 'pwd': users['pwd']}
 
-
-# 主账号，接收者
-if datetime.datetime.now().hour%2 == 0:
-    reveicer = {"name": d['user3'], 'pwd': d['pwd3']}
-else:
-    reveicer = {"name": d['user4'], 'pwd': d['pwd4']}
-
-sender = {"name": d['user2'], 'pwd': d['pwd2']} # 接收者，改为发送者
+sender = {"name": users['name2'], 'pwd': users['pwd2']} # 接收者，改为发送者
 
 '''
 用户没有做到参数化
@@ -47,37 +41,36 @@ class TestPush(unittest.TestCase):
     #         LogAction.save(func = "TestPush", status="fail", explain=stat)
     #         self.fail("setUp启动出错！")
 
-
-    #释放实例,释放资源
-    def tearDown(self):
-        self.driver.quit()
-        print("运行结束")
-
-        time.sleep(5)
+    #
+    # #释放实例,释放资源
+    # def tearDown(self):
+    #     self.driver.quit()
+    #     print("运行结束")
+    #
+    #     time.sleep(5)
 
     def testCasePush(self):
         '''推送'''
-
         try:
             LogAction.print(isReset=True)
 
             '''将IMAPClient纳入判断范围'''
 
-            LogAction.print("=>登录")
-            Login(self.driver,reveicer['name'], reveicer['pwd']).login_action(is_save=False)
+            # LogAction.print("=>登录")
+            # Login(self.driver,user['name'], user['pwd']).login_action(is_save=False)
 
-            LogAction.print('=>注销账号')
-            self.logout()
+            # LogAction.print('=>注销账号')
+            # self.logout()
 
-            LogAction.print("=>重新登录")
-            Login(self.driver,reveicer['name'], reveicer['pwd']).login_action(is_save=False)
-
+            # LogAction.print("=>重新登录")
+            # Login(self.driver,user['name'], user['pwd']).login_action(is_save=False)
+            Login(self.driver,user['name'], user['pwd']).login()
             LogAction.print("=>点击Home键")
             BaseAdb.adb_home()
             time.sleep(2)
 
             LogAction.print("=>第三方发送邮件")
-            s = SendMail(sender['name'], sender['pwd'], reveicer['name'])
+            s = SendMail(sender['name'], sender['pwd'], user['name'])
 
             LogAction.print("【验证点：第三方邮件是否发送失败】")
             self.assertTrue(s.send_mail_test('sendsmtpEmail','测试邮件...'),"邮件发送失败")

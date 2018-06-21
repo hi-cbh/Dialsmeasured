@@ -16,7 +16,36 @@ class Login(unittest.TestCase):
         self.username = username
         self.pwd = pwd
         self.driver = driver
-        
+
+    def login(self):
+        '''判断是否在收件箱页面，否则重新登录'''
+
+        if self.driver.current_app().__contains__(".activity.MessageList"):
+            BaseAdb.adb_start_app("cn.cj.pe","com.mail139.about.LaunchActivity")
+            # print("在主页")
+            time.sleep(8)
+            self.driver.click(u"uiautomator=>邮件")
+            return
+
+        BaseAdb.adb_stop("cn.cj.pe")
+        time.sleep(3)
+        BaseAdb.adb_start_app("cn.cj.pe","com.mail139.about.LaunchActivity")
+        time.sleep(10)
+        if self.driver.current_app().__contains__(".activity.MessageList"):
+            BaseAdb.adb_start_app("cn.cj.pe","com.mail139.about.LaunchActivity")
+            # print("在主页")
+            time.sleep(10)
+            self.driver.click(u"uiautomator=>邮件")
+        else:
+            # 杀进程启动，清除缓存，重新登录
+            BaseAdb.adb_home()
+            BaseAdb.adb_stop("cn.cj.pe")
+            time.sleep(5)
+            self.login_action(is_save=False)
+
+
+
+
     def login_action(self, first_fogin=False, is_save=True):
         try:
 
@@ -81,8 +110,26 @@ class Login(unittest.TestCase):
                 time.sleep(1)
 
             LogAction.print('【验证点：等待弹窗广告出现】')
-            if self.driver.get_element("id=>cn.cj.pe:id/btn", 30) != None:
-                self.driver.click("id=>cn.cj.pe:id/btn")
+            timeout = int(round(time.time() * 1000)) + 1*60 * 1000
+            # 找到邮件结束
+            while int(round(time.time() * 1000)) < timeout :
+
+                if self.driver.element_wait("id=>cn.cj.pe:id/btn", 2) != None:
+                    self.driver.click("id=>cn.cj.pe:id/btn")
+                    break
+                else:
+                    # self.driver.click("uiautomator=>我的", 1)
+                    # time.sleep(0.2)
+                    self.driver.click("uiautomator=>发现", 1)
+                    time.sleep(0.5)
+                    self.driver.click("id=>cn.cj.pe:id/message_list_bottom_email",1)
+
+                time.sleep(0.5)
+
+
+            time.sleep(2)
+            self.driver.click("id=>cn.cj.pe:id/message_list_bottom_email",2)
+
 
             if 22 >= datetime.datetime.now().hour >= 7:
                 '''7点-20点做验证判断'''

@@ -4,16 +4,17 @@
 import time,unittest
 from src.psam.psam import Psam
 from src.testcase.v746.easycase.login import Login
-from src.readwriteconf.initData import InitData
+from src.readwriteconf.initData import InitData, duser
 from src.base.baseImage import BaseImage
 from src.readwriteconf.saveData import save
 from src.base.baseLog import LogAction
 from src.base.baseAdb import BaseAdb
 from src.mail.mailOperation import EmailOperation
 
-d= InitData().get_users()
+users = duser().getuser()
+user = {"name": users['name'], 'pwd': users['pwd']}
 
-user = {"name": d['user2'], 'pwd': d['pwd2']}
+
 
 class TestSelect(unittest.TestCase):
     '''139精选是否显示正常'''
@@ -42,13 +43,14 @@ class TestSelect(unittest.TestCase):
         '''收件箱列表139精选'''
 
         try:
-            EmailOperation(user['name']+"@139.com", user['pwd']).clear_forlder([u'已删除', u'已发送'])
-            EmailOperation(user['name']+"@139.com", user['pwd']).check_inbox()
-            EmailOperation(user['name']+"@139.com", user['pwd']).seen()
-
-            LogAction.print(isReset=True)
-            LogAction.print("=>账号登录")
-            Login(self.driver,user['name'], user['pwd']).login_action(is_save=False)
+            # EmailOperation(user['name']+"@139.com", user['pwd']).clear_forlder([u'已删除', u'已发送'])
+            # EmailOperation(user['name']+"@139.com", user['pwd']).check_inbox()
+            # EmailOperation(user['name']+"@139.com", user['pwd']).seen()
+            #
+            # LogAction.print(isReset=True)
+            # LogAction.print("=>账号登录")
+            # Login(self.driver,user['name'], user['pwd']).login_action(is_save=False)
+            Login(self.driver,user['name'], user['pwd']).login()
 
             LogAction.print("=>加载本地邮件")
             timeout = int(round(time.time() * 1000)) + 30 * 1000

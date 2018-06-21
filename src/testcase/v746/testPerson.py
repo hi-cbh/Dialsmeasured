@@ -5,18 +5,13 @@ import time,unittest,random
 from src.base.baseAdb import BaseAdb
 from src.psam.psam import Psam
 from src.testcase.v746.easycase.login import Login
-from src.readwriteconf.initData import InitData
+from src.readwriteconf.initData import InitData, duser
 from src.base.baseImage import BaseImage
 from src.readwriteconf.saveData import save
 from src.base.baseLog import LogAction
 
-d = InitData().get_users()
-
-# 主账号
-if datetime.datetime.now().hour%2 == 0:
-    user = {"name": d['user3'], 'pwd': d['pwd3']}
-else:
-    user = {"name": d['user4'], 'pwd': d['pwd4']}
+users = duser().getuser()
+user = {"name": users['name'], 'pwd': users['pwd']}
 
 
 
@@ -44,11 +39,11 @@ class TestPersion(unittest.TestCase):
     def testCasePersionMessages(self):
         '''个人资料'''
         try:
-            LogAction.print(isReset=True)
-
-            login=Login(self.driver,user['name'], user['pwd'])
-            login.login_action(is_save=False)
-
+            # LogAction.print(isReset=True)
+            #
+            # login=Login(self.driver,user['name'], user['pwd'])
+            # login.login_action(is_save=False)
+            Login(self.driver,user['name'], user['pwd']).login()
             LogAction.print("【验证点：页面是否存在联系人字段】")
             self.assertTrue(self.driver.get_element(u"uiautomator=>我的",10) !=None, "页面找不到联系人字段")
 

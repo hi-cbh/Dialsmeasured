@@ -47,7 +47,6 @@ class TestCase(unittest.TestCase):
     @classmethod
     def setUpClass(self):
         # BaseAdb.adb_intall_uiautmator()
-        # self.driver = Psam()
         self.driver = Psam(version="6.0")
         EmailOperation(user["name"]+"@139.com", user["pwd"]).clear_forlder(['INBOX'])
 
@@ -55,15 +54,8 @@ class TestCase(unittest.TestCase):
     def tearDownClass(self):
         self.driver.quit()
         print("运行结束")
-
         time.sleep(5)
 
-
-    # def setUp(self):
-    #     print("setUp")
-    #
-    # def tearDown(self):
-    #     print("tearDown")
 
     def testCaseOnBtnLogin(self):
         '''一键登录'''
@@ -168,24 +160,24 @@ if __name__ == "__main__":
     # suite.addTest(TestCase('testCaseOnBtnLogin'))
 
     suite.addTest(TestCase('testCaseLogin'))
-    #
-    # suite.addTest(TestCase('testCaseSendNoAttach'))
-    #
-    # suite.addTest(TestCase('testCaseSendAttach'))
-    #
-    # suite.addTest(TestCase('testCaseFwdSend'))
-    #
-    # suite.addTest(TestCase('testCaseForward'))
-    #
-    # suite.addTest(TestCase('testCaseReply'))
-    #
-    # suite.addTest(TestCase('testCaseCalendar'))
-    #
-    # suite.addTest(TestCase('testCaseDiscover'))
-    #
-    # suite.addTest(TestCase('testCasePersionMessages'))
-    #
-    # suite.addTest(TestCase('testCaseSkyDrive'))
+
+    suite.addTest(TestCase('testCaseSendNoAttach'))
+
+    suite.addTest(TestCase('testCaseSendAttach'))
+
+    suite.addTest(TestCase('testCaseFwdSend'))
+
+    suite.addTest(TestCase('testCaseForward'))
+
+    suite.addTest(TestCase('testCaseReply'))
+
+    suite.addTest(TestCase('testCaseCalendar'))
+
+    suite.addTest(TestCase('testCaseDiscover'))
+
+    suite.addTest(TestCase('testCasePersionMessages'))
+
+    suite.addTest(TestCase('testCaseSkyDrive'))
 
     suite.addTest(TestCase('testDownFile'))
 

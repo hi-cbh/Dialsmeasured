@@ -1,25 +1,18 @@
 # urs/bin/python
 # encoding:utf-8
-import datetime
+
 import random,time,unittest
 
 from src.base.baseAdb import BaseAdb
 from src.psam.psam import Psam
 from src.testcase.v746.easycase.login import Login
-from src.readwriteconf.initData import InitData
+from src.readwriteconf.initData import duser
 from src.base.baseImage import BaseImage
 from src.readwriteconf.saveData import save
 from src.base.baseLog import LogAction
 
-d= InitData().get_users()
-print(d)
-
-
-# 主账号
-if datetime.datetime.now().hour%2 == 0:
-    user = {"name": d['user3'], 'pwd': d['pwd3']}
-else:
-    user = {"name": d['user4'], 'pwd': d['pwd4']}
+users = duser().getuser()
+user = {"name": users['name'], 'pwd': users['pwd']}
 print(user)
 
 class TestDiscover(unittest.TestCase):
@@ -47,9 +40,10 @@ class TestDiscover(unittest.TestCase):
         '''发现主页'''
 
         try:
-            LogAction.print(isReset=True)
-            LogAction.print("=>账号登录")
-            Login(self.driver,user['name'], user['pwd']).login_action(is_save=False)
+            # LogAction.print(isReset=True)
+            # LogAction.print("=>账号登录")
+            # Login(self.driver,user['name'], user['pwd']).login_action(is_save=False)
+            Login(self.driver,user['name'], user['pwd']).login()
 
             LogAction.print('=>发现')
             self.driver.click(u'uiautomator=>发现')

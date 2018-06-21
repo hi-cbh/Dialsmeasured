@@ -8,29 +8,16 @@ from src.base.baseLog import LogAction
 from src.psam.psam import Psam
 from src.testcase.v746.easycase.login import Login
 from src.testcase.v746.easycase.send import Send
-from src.readwriteconf.initData import InitData
+from src.readwriteconf.initData import InitData, duser
 from src.testcase.v746.easycase.openDown import OpenDown
 
 
-d = InitData().get_users()
-
-# 主账号
-if datetime.datetime.now().hour%2 == 0:
-    username = d['user3']
-    pwd = d['pwd3']
-else:
-    username = d['user4']
-    pwd = d['pwd4']
-
-username2 = d['user2']
-pwd2 = d['pwd2']
-
-receiver = {'name':username, 'pwd':pwd}
-sender = {'name':username2, 'pwd':pwd2}
+users = duser().getuser()
+user = {"name": users['name'], 'pwd': users['pwd']}
 
 filename = InitData().get_file()['filename']
 
-path = r'/mnt/sdcard/139PushEmail/download/%s@139.com/*%s.rar'  %(username, filename)
+path = r'/mnt/sdcard/139PushEmail/download/%s@139.com/*%s.rar'  %(user["name"], filename)
 
 
 class TestDownFile(unittest.TestCase):
@@ -53,29 +40,24 @@ class TestDownFile(unittest.TestCase):
     #         LogAction.save(func = "TestDownFile", status="fail", explain=stat)
     #         self.fail("setUp启动出错！")
     #
-
-
-
-
-    #释放实例,释放资源
-    def tearDown(self):
-        self.driver.quit()
-        print("运行结束")
-
-        time.sleep(5)
+    #
+    # #释放实例,释放资源
+    # def tearDown(self):
+    #     self.driver.quit()
+    #     print("运行结束")
+    #
+    #     time.sleep(5)
 
     def testDownFile(self):
         '''下载附件'''
         # 发送带附件邮件
-        send = Send(self.driver,username+'@139.com')
-        send.send_action()
-
+        # send = Send(self.driver,username+'@139.com')
+        # send.send_action()
+        Login(self.driver,user['name'], user['pwd']).login()
         # 打开附件
         od = OpenDown(self.driver, path, filename)
-        # 打开附件
-        od.open_action()
         # 下载附件
-        od.down_action()
+        od.down_action("SendAttach")
 
 
 if __name__ == "__main__":

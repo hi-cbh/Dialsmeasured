@@ -8,28 +8,17 @@ from src.mail.mailOperation import EmailOperation
 from src.psam.psam import Psam
 from src.testcase.v746.easycase.login import Login
 from src.testcase.v746.easycase.send import Send
-from src.readwriteconf.initData import InitData
+from src.readwriteconf.initData import InitData, duser
 from src.base.baseLog import LogAction
 
-d = InitData().get_users()
+users = duser().getuser()
+user = {"name": users['name'], 'pwd': users['pwd']}
+sender = {'name':users["name2"], 'pwd':users["pwd2"]}
 
-# 主账号
-if datetime.datetime.now().hour%2 == 0:
-    username = d['user3']
-    pwd = d['pwd3']
-else:
-    username = d['user4']
-    pwd = d['pwd4']
-
-username2 = d['user2']
-pwd2 = d['pwd2']
-
-receiver = {'name':username, 'pwd':pwd}
-sender = {'name':username2, 'pwd':pwd2}
 
 filename = InitData().get_file()['filename']
 
-path = r'/mnt/sdcard/139PushEmail/download/%s@139.com/*%s.rar'  %(username, filename)
+path = r'/mnt/sdcard/139PushEmail/download/%s@139.com/*%s.rar'  %(user["name"], filename)
 
 
 class TestSend(unittest.TestCase):
@@ -51,30 +40,39 @@ class TestSend(unittest.TestCase):
     #         EmailOperation(username+"@139.com", pwd).clear_forlder(['INBOX'])
     #         Login(self.driver,username, pwd).login_action(is_save=False)
 
+    #
+    # #释放实例,释放资源
+    # def tearDown(self):
+    #     self.driver.quit()
+    #     print("运行结束")
+    #     time.sleep(5)
 
-    #释放实例,释放资源
-    def tearDown(self):
-        self.driver.quit()
-        print("运行结束")
-        time.sleep(5)
+    def testCaseSendNoAttach(self):
+        '''发送邮件，无附件'''
+        Login(self.driver,user['name'], user['pwd']).login()
+        Send(self.driver,user["name"]+'@139.com').send(subject="NoAttach",is_add=False)
 
-    def testCaseSend(self):
-        '''发送邮件'''
 
-        Send(self.driver,username+'@139.com').send_action()
+    def testCaseSendAttach(self):
+        '''发送邮件，带附件'''
+        Login(self.driver,user['name'], user['pwd']).login()
+        Send(self.driver,user["name"]+'@139.com').send_action(subject="SendAttach")
 
     def testCaseFwdSend(self):
         '''云端转发'''
-        Send(self.driver,username+'@139.com').send_fwd()
+        Login(self.driver,user['name'], user['pwd']).login()
+        Send(self.driver,user["name"]+'@139.com').send_fwd(subject="SendAttach")
 
 
     def testCaseReply(self):
         '''回复邮件'''
-        Send(self.driver,username+'@139.com').reply(receiver,sender)
+        Login(self.driver,user['name'], user['pwd']).login()
+        Send(self.driver,user["name"]+'@139.com').reply(subject="NoAttach")
 
     def testCaseForward(self):
         '''SMTP转发附件'''
-        Send(self.driver,username+'@139.com').forward(receiver,sender)
+        Login(self.driver,user['name'], user['pwd']).login()
+        Send(self.driver,user["name"]+'@139.com').forward(subject="NoAttach")
 
 if __name__ == "__main__":
     suite = unittest.TestSuite()
