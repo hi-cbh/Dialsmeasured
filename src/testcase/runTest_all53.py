@@ -3,7 +3,9 @@
 
 import unittest,os,sys,time
 
-
+p = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+print("path: %s" %p)
+sys.path.append(p+"/")
 # 添加环境路径，脚本
 from src.readwriteconf.initData import duser
 from src.mail.mailOperation import EmailOperation
@@ -19,9 +21,7 @@ from testcase.v746.testPush import TestPush
 from testcase.v746.testSend import TestSend
 from testcase.v746.testSkyDrive import TestSkyDrive
 
-p = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-print("path: %s" %p)
-sys.path.append(p+"/")
+
 
 localPath = "/var/appiumRunLog"
 # 信息存储路径
