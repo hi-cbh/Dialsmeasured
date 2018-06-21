@@ -85,10 +85,10 @@ class Login(unittest.TestCase):
                     self.driver.click("id=>cn.cj.pe:id/btn")
                     break
                 else:
-                    self.driver.click("uiautomator=>我的", 1)
-                    time.sleep(0.2)
-                    # self.driver.click("uiautomator=>发现", 1)
+                    # self.driver.click("uiautomator=>我的", 1)
                     # time.sleep(0.2)
+                    self.driver.click("uiautomator=>发现", 1)
+                    time.sleep(0.5)
                     self.driver.click("id=>cn.cj.pe:id/message_list_bottom_email",1)
 
                 time.sleep(1)

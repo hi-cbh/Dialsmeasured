@@ -5,6 +5,8 @@ import unittest,os,sys,time
 
 
 # 添加环境路径，脚本
+from src.readwriteconf.initData import duser
+from src.mail.mailOperation import EmailOperation
 from src.psam.psam import Psam
 from testcase.v746.test139Selected import TestSelect
 from testcase.v746.testCalendar import TestCalendar
@@ -29,6 +31,8 @@ from src.testcase.HTMLTestRunner import HTMLTestRunner
 from src.reportlib.reportclass import ReportClass
 from src.base.baseAdb import BaseAdb
 
+users = duser().getuser()
+user = {"name": users['name'], 'pwd': users['pwd']}
 
 
 '''
@@ -42,9 +46,10 @@ class TestCase(unittest.TestCase):
 
     @classmethod
     def setUpClass(self):
-        BaseAdb.adb_intall_uiautmator()
+        # BaseAdb.adb_intall_uiautmator()
         # self.driver = Psam()
         self.driver = Psam(version="6.0")
+        EmailOperation(user["name"]+"@139.com", user["pwd"]).clear_forlder(['INBOX'])
 
     @classmethod
     def tearDownClass(self):
@@ -54,11 +59,11 @@ class TestCase(unittest.TestCase):
         time.sleep(5)
 
 
-    def setUp(self):
-        print("setUp")
-
-    def tearDown(self):
-        print("tearDown")
+    # def setUp(self):
+    #     print("setUp")
+    #
+    # def tearDown(self):
+    #     print("tearDown")
 
     def testCaseOnBtnLogin(self):
         '''一键登录'''
@@ -68,9 +73,13 @@ class TestCase(unittest.TestCase):
         '''账号登录'''
         TestLogin(self.driver).testCaseLogin()
 
-    def testCaseSend(self):
-        '''发送邮件'''
-        TestSend(self.driver).testCaseSend()
+    def testCaseSendNoAttach(self):
+        '''发送邮件，无附件'''
+        TestSend(self.driver).testCaseSendNoAttach()
+
+    def testCaseSendAttach(self):
+        '''发送邮件，带附件'''
+        TestSend(self.driver).testCaseSendAttach()
 
     def testCaseFwdSend(self):
         '''云端转发'''
@@ -119,19 +128,18 @@ class TestCase(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    BaseAdb.adb_wake_up()
-    time.sleep(5)
+    # BaseAdb.adb_wake_up()
+    # time.sleep(5)
 
     print('需要运行的脚本')
     testtxt = []
 
-    _run = 5
-
     testtxt.append(('账号登录',"testCaseLogin"))
 
-    testtxt.append(('一键登录',"testCaseOnBtnLogin"))
+    # testtxt.append(('一键登录',"testCaseOnBtnLogin"))
 
-    testtxt.append(('发送邮件带附件',"testCaseSend"))
+    testtxt.append(('发送邮件带附件',"testCaseSendNoAttach"))
+    testtxt.append(('发送邮件带附件',"testCaseSendAttach"))
 
     testtxt.append(('云端转发',"testCaseFwdSend"))
 
@@ -157,25 +165,27 @@ if __name__ == "__main__":
 
 
     suite = unittest.TestSuite()
-    suite.addTest(TestCase('testCaseOnBtnLogin'))
+    # suite.addTest(TestCase('testCaseOnBtnLogin'))
 
     suite.addTest(TestCase('testCaseLogin'))
-
-    suite.addTest(TestCase('testCaseSend'))
-
-    suite.addTest(TestCase('testCaseFwdSend'))
-
-    suite.addTest(TestCase('testCaseForward'))
-
-    suite.addTest(TestCase('testCaseReply'))
-
-    suite.addTest(TestCase('testCaseCalendar'))
-
-    suite.addTest(TestCase('testCaseDiscover'))
-
-    suite.addTest(TestCase('testCasePersionMessages'))
-
-    suite.addTest(TestCase('testCaseSkyDrive'))
+    #
+    # suite.addTest(TestCase('testCaseSendNoAttach'))
+    #
+    # suite.addTest(TestCase('testCaseSendAttach'))
+    #
+    # suite.addTest(TestCase('testCaseFwdSend'))
+    #
+    # suite.addTest(TestCase('testCaseForward'))
+    #
+    # suite.addTest(TestCase('testCaseReply'))
+    #
+    # suite.addTest(TestCase('testCaseCalendar'))
+    #
+    # suite.addTest(TestCase('testCaseDiscover'))
+    #
+    # suite.addTest(TestCase('testCasePersionMessages'))
+    #
+    # suite.addTest(TestCase('testCaseSkyDrive'))
 
     suite.addTest(TestCase('testDownFile'))
 
