@@ -10,16 +10,16 @@ sys.path.append(p+"/")
 from src.readwriteconf.initData import duser
 from src.mail.mailOperation import EmailOperation
 from src.psam.psam import Psam
-from testcase.v746.test139Selected import TestSelect
-from testcase.v746.testCalendar import TestCalendar
-from testcase.v746.testContant import TestContant
-from testcase.v746.testDiscover import TestDiscover
-from testcase.v746.testDownFile import TestDownFile
-from testcase.v746.testLogin import TestLogin
-from testcase.v746.testPerson import TestPersion
-from testcase.v746.testPush import TestPush
-from testcase.v746.testSend import TestSend
-from testcase.v746.testSkyDrive import TestSkyDrive
+from src.testcase.v746.test139Selected import TestSelect
+from src.testcase.v746.testCalendar import TestCalendar
+from src.testcase.v746.testContant import TestContant
+from src.testcase.v746.testDiscover import TestDiscover
+from src.testcase.v746.testDownFile import TestDownFile
+from src.testcase.v746.testLogin import TestLogin
+from src.testcase.v746.testPerson import TestPersion
+from src.testcase.v746.testPush import TestPush
+from src.testcase.v746.testSend import TestSend
+from src.testcase.v746.testSkyDrive import TestSkyDrive
 
 
 
