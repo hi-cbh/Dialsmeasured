@@ -148,7 +148,7 @@ class Send(unittest.TestCase):
             timeout = int(round(time.time() * 1000)) + 1*40 * 1000
             # 找到邮件结束
             while int(round(time.time() * 1000)) < timeout :
-                if self.driver.element_wait(u"uiautomator=>Fwd: %s" %subject,2) == None:
+                if self.driver.element_wait(u"uiautomator=>%s" %subject,2) == None:
                     self.driver.swipe_down()
                     time.sleep(2)
                     self.driver.swipe_down()
@@ -166,35 +166,11 @@ class Send(unittest.TestCase):
     def send_fwd(self, subject):
         '''云端转发：带有的邮件，进行转发'''
         try:
-            # self.send_action(is_save=False)
-
             LogAction.print(isReset=True)
-            # LogAction.print("=>加载邮件")
-            # timeout = int(round(time.time() * 1000)) + 1*80 * 1000
-            # # 找到邮件结束
-            # while int(round(time.time() * 1000)) < timeout :
-            #
-            #     el = self.driver.element_wait(u"uiautomator=>%s" %subject ,secs = 2)
-            #     if el == None:
-            #         print("下拉")
-            #         self.driver.swipe_down()
-            #         time.sleep(1)
-            #         self.driver.swipe_down()
-            #     else:
-            #         print("列表有邮件，退出循环")
-            #         break
-            #
-            #     time.sleep(1)
-
 
             # 点击第一封
-            LogAction.print('【验证点：否存在"暂无邮件"字段】')
-            self.assertTrue(self.driver.get_element(u"uiautomator=>暂无邮件",40) == None, "收件箱没有邮件")
-            els = self.driver.get_sub_element(r"id=>android:id/list","class=>android.widget.LinearLayout")
-            time.sleep(2)
-
-            LogAction.print('=>点击第一封邮件')
-            els[0].click()
+            LogAction.print('=>点击 %s' %subject)
+            self.driver.click("uiautomator=>%s" %subject)
 
             LogAction.print('=>查找控件，确认进入邮件详情页')
             text = self.driver.get_element(r"id=>cn.cj.pe:id/title").get_attribute("text")
@@ -252,35 +228,11 @@ class Send(unittest.TestCase):
         '''stmp转发：本地无附件的邮件，添加附件后，转发'''
         try:
             LogAction.print(isReset=True)
-            #
-            #
-            # time.sleep(10)
-            # LogAction.print("=>加载邮件")
-            # timeout = int(round(time.time() * 1000)) + 1*60 * 1000
-            # # 找到邮件结束
-            # while int(round(time.time() * 1000)) < timeout :
-            #
-            #     el = self.driver.element_wait(u"uiautomator=>暂无邮件",secs = 2)
-            #     if el != None:
-            #         print("下拉")
-            #         self.driver.swipe_down()
-            #         time.sleep(1)
-            #         self.driver.swipe_down()
-            #     else:
-            #         print("列表有邮件，退出循环")
-            #         break
-            #
-            #     time.sleep(1)
-
 
             # 点击第一封
-            LogAction.print('【验证点：否存在"暂无邮件"字段】')
-            self.assertTrue(self.driver.get_element(u"uiautomator=>暂无邮件",5) == None, "收件箱没有邮件")
-            els = self.driver.get_sub_element(r"id=>android:id/list","class=>android.widget.LinearLayout")
             time.sleep(2)
-
             LogAction.print('=>点击第一封邮件')
-            els[0].click()
+            self.driver.click("uiautomator=>%s" %subject)
 
             LogAction.print('=>查找控件，确认进入邮件详情页')
             text = self.driver.get_element(r"id=>cn.cj.pe:id/title").get_attribute("text")
@@ -351,34 +303,10 @@ class Send(unittest.TestCase):
         try:
 
             LogAction.print(isReset=True)
-            #
-            # time.sleep(10)
-            # LogAction.print("=>加载邮件")
-            # timeout = int(round(time.time() * 1000)) + 1*80 * 1000
-            # # 找到邮件结束
-            # while int(round(time.time() * 1000)) < timeout :
-            #
-            #     el = self.driver.element_wait(u"uiautomator=>%s" %subject,secs = 2)
-            #     if el == None:
-            #         print("下拉")
-            #         self.driver.swipe_down()
-            #         time.sleep(1)
-            #         self.driver.swipe_down()
-            #     else:
-            #         print("列表有邮件，退出循环")
-            #         break
-            #
-            #     time.sleep(1)
-            #
 
             # 点击第一封
-            LogAction.print('【验证点：否存在"暂无邮件"字段】')
-            self.assertTrue(self.driver.get_element(u"uiautomator=>暂无邮件",5) == None, "收件箱没有邮件")
-            els = self.driver.get_sub_element(r"id=>android:id/list","class=>android.widget.LinearLayout")
-            time.sleep(2)
-
-            LogAction.print('=>点击第一封邮件')
-            els[0].click()
+            LogAction.print('=>点击 %s' %subject)
+            self.driver.click("uiautomator=>%s" %subject)
 
             LogAction.print('=>查找控件，确认进入邮件详情页')
             text = self.driver.get_element(r"id=>cn.cj.pe:id/title").get_attribute("text")
