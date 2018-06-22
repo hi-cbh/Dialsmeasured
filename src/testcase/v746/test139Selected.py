@@ -2,6 +2,8 @@
 # encoding:utf-8
 
 import time,unittest
+
+from src.base.baseAdb import BaseAdb
 from src.testcase.v746.easycase.login import Login
 from src.readwriteconf.initData import duser
 from src.base.baseImage import BaseImage
@@ -79,6 +81,8 @@ class TestSelect(unittest.TestCase):
 
             print('[139精选出现时间]: %r'  %value_time)
             save.save("收件箱列表中精选:%s" %value_time)
+
+            BaseAdb.adb_back()
             LogAction.save(func = "testCaseSelected", status="success", explain="value_time:%s" %value_time)
         except BaseException:
             BaseImage.screenshot(self.driver, "Case139SelectedError")
