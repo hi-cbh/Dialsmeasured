@@ -200,12 +200,15 @@ if __name__ == "__main__":
     testResultReport = runner.run(suite)
     fp.close()
 
-
-
-    ReportClass(testResultReport.failures,testtxt,"",now).all()
-
     time.sleep(5)
     # 休眠状态
     BaseAdb.adb_sleep()
+    time.sleep(5)
+
+    ReportClass(testResultReport.failures,testtxt,"",now).all()
+
+    # time.sleep(5)
+    # 休眠状态
+    # BaseAdb.adb_sleep()
 
     time.sleep(10)
