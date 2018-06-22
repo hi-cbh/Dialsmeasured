@@ -16,9 +16,10 @@ class LogAction():
         print("log_time=%s,func=%s,status=%s,explain=%s,version=%s"  %(BaseTime.get_current_time(), func, status,explain,version))
         msg = "%s,%s,%s,%s,%s"  %(BaseTime.get_current_time(), func, status,explain,version)
         print(_path)
+        print(msg)
         # 去除前后空格
-        with open(_path.lstrip(" ").rstrip(" "),'a+') as fn:
-            fn.write(msg+'\n')
+        # with open(_path.lstrip(" ").rstrip(" "),'a+') as fn:
+        #     fn.write(msg+'\n')
 
     def print(self, str="", isReset= False):
         print(str)

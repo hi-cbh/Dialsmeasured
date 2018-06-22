@@ -22,7 +22,7 @@ class TestSkyDrive(unittest.TestCase):
     def testCaseSkyDrive(self):
         '''彩云网盘'''
         try:
-            # LogAction.print(isReset=True)
+            LogAction.print(isReset=True)
             Login(self.driver,user['name'], user['pwd']).login()
 
 

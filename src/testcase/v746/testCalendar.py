@@ -21,7 +21,7 @@ class TestCalendar(unittest.TestCase):
     def testCaseCalendar(self):
         '''日历'''
         try:
-            # LogAction.print(isReset=True)
+            LogAction.print(isReset=True)
             Login(self.driver,user['name'], user['pwd']).login()
 
             LogAction.print("【验证点：页面是否存在联系人字段】")

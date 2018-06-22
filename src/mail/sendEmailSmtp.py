@@ -292,7 +292,7 @@ class SendMail():
         msg['Subject'] = Header(subject, 'utf-8')
 
         try:
-            s = smtplib.SMTP_SSL(smtp_server, "465")
+            s = smtplib.SMTP_SSL(smtp_server, "465") # ssl去除 connect
             s.login(from_mail, mail_pass)
             s.sendmail(from_mail, areceiver.split(','), msg.as_string())
             s.quit()

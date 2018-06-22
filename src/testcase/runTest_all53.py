@@ -128,7 +128,7 @@ if __name__ == "__main__":
 
     testtxt.append(('账号登录',"testCaseLogin"))
 
-    # testtxt.append(('一键登录',"testCaseOnBtnLogin"))
+    testtxt.append(('一键登录',"testCaseOnBtnLogin"))
 
     testtxt.append(('发送邮件带附件',"testCaseSendNoAttach"))
     testtxt.append(('发送邮件带附件',"testCaseSendAttach"))
@@ -157,7 +157,7 @@ if __name__ == "__main__":
 
 
     suite = unittest.TestSuite()
-    # suite.addTest(TestCase('testCaseOnBtnLogin'))
+    suite.addTest(TestCase('testCaseOnBtnLogin'))
 
     suite.addTest(TestCase('testCaseLogin'))
 

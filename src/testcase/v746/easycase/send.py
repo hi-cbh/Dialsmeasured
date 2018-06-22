@@ -168,6 +168,11 @@ class Send(unittest.TestCase):
         try:
             LogAction.print(isReset=True)
 
+            print("判断是否存在邮件")
+            if self.driver.element_wait("uiautomator=>%s" %subject) == None:
+                self.send_action(subject=subject)
+
+
             # 点击第一封
             LogAction.print('=>点击 %s' %subject)
             self.driver.click("uiautomator=>%s" %subject)
@@ -228,6 +233,10 @@ class Send(unittest.TestCase):
         '''stmp转发：本地无附件的邮件，添加附件后，转发'''
         try:
             LogAction.print(isReset=True)
+
+            print("判断是否存在邮件")
+            if self.driver.element_wait("uiautomator=>%s" %subject) == None:
+                self.send(subject=subject)
 
             # 点击第一封
             time.sleep(2)
@@ -303,6 +312,10 @@ class Send(unittest.TestCase):
         try:
 
             LogAction.print(isReset=True)
+
+            print("判断是否存在邮件")
+            if self.driver.element_wait("uiautomator=>%s" %subject) == None:
+                self.send(subject=subject)
 
             # 点击第一封
             LogAction.print('=>点击 %s' %subject)

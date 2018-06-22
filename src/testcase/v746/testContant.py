@@ -19,6 +19,7 @@ class TestContant(unittest.TestCase):
     def testCaseCheckAddressList(self):
         '''联系人同步'''
         try:
+            LogAction.print(isReset=True)
             Login(self.driver,user['name'], user['pwd']).login()
 
             LogAction.print("【验证点：页面是否存在联系人字段】")

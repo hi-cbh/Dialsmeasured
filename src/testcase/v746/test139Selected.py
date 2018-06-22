@@ -23,7 +23,7 @@ class TestSelect(unittest.TestCase):
         '''收件箱列表139精选'''
 
         try:
-            # LogAction.print(isReset=True)
+            LogAction.print(isReset=True)
             Login(self.driver,user['name'], user['pwd']).login()
 
             LogAction.print("=>加载本地邮件")

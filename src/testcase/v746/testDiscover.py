@@ -20,7 +20,7 @@ class TestDiscover(unittest.TestCase):
     def testCaseDiscover(self):
         '''发现主页'''
         try:
-            # LogAction.print(isReset=True)
+            LogAction.print(isReset=True)
             Login(self.driver,user['name'], user['pwd']).login()
 
             LogAction.print('=>发现')
