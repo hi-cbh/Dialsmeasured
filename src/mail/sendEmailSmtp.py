@@ -293,7 +293,7 @@ class SendMail():
 
         try:
             s = smtplib.SMTP_SSL()
-            s.connect(smtp_server, "25")
+            s.connect(smtp_server, "465")
             s.login(from_mail, mail_pass)
             s.sendmail(from_mail, areceiver.split(','), msg.as_string())
             s.quit()
