@@ -28,7 +28,6 @@ class TestDownFile(unittest.TestCase):
         od = OpenDown(self.driver, path, filename)
         # 下载附件
         od.down_action("SendAttach")
-        BaseAdb.adb_back()
 
 
 if __name__ == "__main__":
