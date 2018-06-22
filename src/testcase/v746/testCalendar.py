@@ -2,8 +2,6 @@
 # encoding:utf-8
 
 import time,unittest
-from src.base.baseAdb import BaseAdb
-from src.psam.psam import Psam
 from src.testcase.v746.easycase.login import Login
 from src.readwriteconf.initData import  duser
 from src.base.baseImage import BaseImage
@@ -20,30 +18,10 @@ class TestCalendar(unittest.TestCase):
     def __init__(self,driver):
         self.driver = driver
 
-    # def setUp(self):
-    #     try:
-    #         BaseAdb.adb_intall_uiautmator()
-    #         self.driver = Psam(version="6.0")
-    #     except BaseException:
-    #         print("setUp启动出错！")
-    #         self.driver.quit()
-    #         LogAction.save(func = "TestCalendar", status="fail", explain="Psam 启动出错")
-    #         self.fail("setUp启动出错！")
-    #
-    #
-    # #释放实例,释放资源
-    # def tearDown(self):
-    #     self.driver.quit()
-    #     print("运行结束")
-    #     time.sleep(5)
-
     def testCaseCalendar(self):
         '''日历'''
         try:
             # LogAction.print(isReset=True)
-            #
-            # login=Login(self.driver,user['name'], user['pwd'])
-            # login.login_action(is_save=False)
             Login(self.driver,user['name'], user['pwd']).login()
 
             LogAction.print("【验证点：页面是否存在联系人字段】")

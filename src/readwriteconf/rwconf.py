@@ -86,6 +86,6 @@ class ReadWriteConfFile:
 
 if __name__ == '__main__':
     ReadWriteConfFile.read_section_zero('reportconf')
-    # ReadWriteConfFile.set_section_value('sendconf', 'error', '0')
-    # x=ReadWriteConfFile.get_section_value('reportconf', 'testcase01')
-    # print(x)
+    ReadWriteConfFile.set_section_value('sendconf', 'error', '0')
+    x=ReadWriteConfFile.get_section_value('reportconf', 'testcase01')
+    print(x)

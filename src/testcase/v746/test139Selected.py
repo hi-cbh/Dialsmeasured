@@ -2,14 +2,11 @@
 # encoding:utf-8
 
 import time,unittest
-from src.psam.psam import Psam
 from src.testcase.v746.easycase.login import Login
-from src.readwriteconf.initData import InitData, duser
+from src.readwriteconf.initData import duser
 from src.base.baseImage import BaseImage
 from src.readwriteconf.saveData import save
 from src.base.baseLog import LogAction
-from src.base.baseAdb import BaseAdb
-from src.mail.mailOperation import EmailOperation
 
 users = duser().getuser()
 user = {"name": users['name'], 'pwd': users['pwd']}
@@ -21,35 +18,12 @@ class TestSelect(unittest.TestCase):
 
     def __init__(self,driver):
         self.driver = driver
-    # def setUp(self):
-    #     try:
-    #         BaseAdb.adb_intall_uiautmator()
-    #         # self.driver = Psam()
-    #         self.driver = Psam(version="6.0")
-    #     except BaseException:
-    #         print("setUp启动出错！")
-    #         LogAction.save(func = "TestSelect", status="fail", explain="Psam 启动出错")
-    #         self.fail("setUp启动出错！")
-    #
-    #
-    # #释放实例,释放资源
-    # def tearDown(self):
-    #     self.driver.quit()
-    #     print("运行结束")
-    #
-    #     time.sleep(5)
 
     def testCaseSelected(self, ):
         '''收件箱列表139精选'''
 
         try:
-            # EmailOperation(user['name']+"@139.com", user['pwd']).clear_forlder([u'已删除', u'已发送'])
-            # EmailOperation(user['name']+"@139.com", user['pwd']).check_inbox()
-            # EmailOperation(user['name']+"@139.com", user['pwd']).seen()
-            #
             # LogAction.print(isReset=True)
-            # LogAction.print("=>账号登录")
-            # Login(self.driver,user['name'], user['pwd']).login_action(is_save=False)
             Login(self.driver,user['name'], user['pwd']).login()
 
             LogAction.print("=>加载本地邮件")

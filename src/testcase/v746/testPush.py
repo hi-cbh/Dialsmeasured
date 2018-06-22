@@ -26,38 +26,14 @@ class TestPush(unittest.TestCase):
     '''推送测试'''
     def __init__(self,driver):
         self.driver = driver
-    # def setUp(self):
-    #     stat =""
-    #     try:
-    #         BaseAdb.adb_intall_uiautmator()
-    #         stat="Psam 初始化出错"
-    #         self.driver = Psam(version="6.0")
-    #         time.sleep(5)
-    #
-    #
-    #     except BaseException:
-    #         print("setUp启动出错！")
-    #         self.driver.quit()
-    #         LogAction.save(func = "TestPush", status="fail", explain=stat)
-    #         self.fail("setUp启动出错！")
-
-    #
-    # #释放实例,释放资源
-    # def tearDown(self):
-    #     self.driver.quit()
-    #     print("运行结束")
-    #
-    #     time.sleep(5)
 
     def testCasePush(self):
         '''推送'''
         try:
             LogAction.print(isReset=True)
 
-            '''将IMAPClient纳入判断范围'''
 
             # LogAction.print("=>登录")
-            # Login(self.driver,user['name'], user['pwd']).login_action(is_save=False)
 
             # LogAction.print('=>注销账号')
             # self.logout()

@@ -118,11 +118,13 @@ class Login(unittest.TestCase):
                     self.driver.click("id=>cn.cj.pe:id/btn")
                     break
                 else:
-                    # self.driver.click("uiautomator=>我的", 1)
-                    # time.sleep(0.2)
-                    self.driver.click("uiautomator=>发现", 1)
                     time.sleep(0.5)
-                    self.driver.click("id=>cn.cj.pe:id/message_list_bottom_email",1)
+                    self.driver.swipe_down()
+                    time.sleep(0.5)
+                    self.driver.swipe_down()
+                    # self.driver.click("uiautomator=>发现",1)
+                    # time.sleep(0.5)
+                    # self.driver.click("id=>cn.cj.pe:id/message_list_bottom_email",1)
 
                 time.sleep(0.5)
 
@@ -162,11 +164,14 @@ class Login(unittest.TestCase):
             '''最基础的登录'''
             LogAction.print(isReset=True)
             LogAction.print("=>清除APP缓存")
-            self.driver.reset()
+
+            BaseAdb.adb_clear("cn.cj.pe")
 
             time.sleep(5)
 
             BaseAdb.add_pressmission()
+            time.sleep(5)
+            BaseAdb.adb_start_app("cn.cj.pe","com.mail139.about.LaunchActivity")
 
             time.sleep(4)
 
@@ -194,11 +199,24 @@ class Login(unittest.TestCase):
             self.driver.click(u"uiautomator=>快速登录")
             start = time.time()
 
-            # time.sleep(30)
             LogAction.print('【验证点：等待弹窗广告出现】')
-            if self.driver.get_element(u"uiautomator=>广告", 30) != None:
+            timeout = int(round(time.time() * 1000)) + 1*60 * 1000
+            # 找到邮件结束
+            while int(round(time.time() * 1000)) < timeout :
 
-                self.driver.click("id=>cn.cj.pe:id/btn")
+                if self.driver.element_wait("id=>cn.cj.pe:id/btn", 2) != None:
+                    self.driver.click("id=>cn.cj.pe:id/btn")
+                    break
+                else:
+                    self.driver.click("uiautomator=>发现", 1)
+                    time.sleep(0.5)
+                    self.driver.click("id=>cn.cj.pe:id/message_list_bottom_email",1)
+
+                time.sleep(0.5)
+
+
+            time.sleep(2)
+            self.driver.click("id=>cn.cj.pe:id/message_list_bottom_email",2)
 
 
             if 22 >= datetime.datetime.now().hour >= 7:
@@ -218,6 +236,8 @@ class Login(unittest.TestCase):
             # 这里添加判断，是否记录时间
             if is_save:
                 save.save("一键登录:%s" %value_time)
+
+            BaseAdb.adb_clear("cn.cj.pe")
 
         except BaseException:
             BaseImage.screenshot(self.driver, "oneBtnLoginError")

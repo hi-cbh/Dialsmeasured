@@ -18,31 +18,11 @@ class TestSkyDrive(unittest.TestCase):
     '''彩云网盘是否正常打开'''
     def __init__(self,driver):
         self.driver = driver
-    # def setUp(self):
-    #     try:
-    #         BaseAdb.adb_intall_uiautmator()
-    #         self.driver = Psam(version="6.0")
-    #     except BaseException:
-    #         print("setUp启动出错！")
-    #         self.driver.quit()
-    #         LogAction.save(func = "TestSkyDrive", status="fail", explain="Psam 启动出错")
-    #         self.fail("setUp启动出错！")
-    #
-    #
-    # #释放实例,释放资源
-    # def tearDown(self):
-    #     self.driver.quit()
-    #     print("运行结束")
-    #     time.sleep(5)
 
     def testCaseSkyDrive(self):
         '''彩云网盘'''
         try:
-            # self.assertTrue(False, "测试错误")
             # LogAction.print(isReset=True)
-            #
-            # login=Login(self.driver,user['name'], user['pwd'])
-            # login.login_action(is_save=False)
             Login(self.driver,user['name'], user['pwd']).login()
 
 

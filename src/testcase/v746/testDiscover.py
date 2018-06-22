@@ -1,10 +1,7 @@
 # urs/bin/python
 # encoding:utf-8
 
-import random,time,unittest
-
-from src.base.baseAdb import BaseAdb
-from src.psam.psam import Psam
+import time,unittest
 from src.testcase.v746.easycase.login import Login
 from src.readwriteconf.initData import duser
 from src.base.baseImage import BaseImage
@@ -19,30 +16,11 @@ class TestDiscover(unittest.TestCase):
     '''发现页面是否显示正常'''
     def __init__(self,driver):
         self.driver = driver
-    # def setUp(self):
-    #     try:
-    #         BaseAdb.adb_intall_uiautmator()
-    #         self.driver = Psam(version="6.0")
-    #     except BaseException:
-    #         print("setUp启动出错！")
-    #         LogAction.save(func = "TestDiscover", status="Fail", explain="Psam 启动出错")
-    #         self.fail("setUp启动出错！")
-    #
-    #
-    # #释放实例,释放资源
-    # def tearDown(self):
-    #     self.driver.quit()
-    #     print("运行结束")
-    #
-    #     time.sleep(5)
 
     def testCaseDiscover(self):
         '''发现主页'''
-
         try:
             # LogAction.print(isReset=True)
-            # LogAction.print("=>账号登录")
-            # Login(self.driver,user['name'], user['pwd']).login_action(is_save=False)
             Login(self.driver,user['name'], user['pwd']).login()
 
             LogAction.print('=>发现')

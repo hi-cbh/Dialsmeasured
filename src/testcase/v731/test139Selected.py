@@ -20,7 +20,6 @@ class TestSelect(unittest.TestCase):
     def setUp(self):
         try:
             BaseAdb.adb_intall_uiautmator()
-            # self.driver = Psam()
             self.driver = Psam(version="6.0")
         except BaseException:
             print("setUp启动出错！")

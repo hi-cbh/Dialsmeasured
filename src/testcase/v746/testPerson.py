@@ -19,30 +19,11 @@ class TestPersion(unittest.TestCase):
     '''个人资料是否显示正常'''
     def __init__(self,driver):
         self.driver = driver
-    # def setUp(self):
-    #     try:
-    #         BaseAdb.adb_intall_uiautmator()
-    #         self.driver = Psam(version="6.0")
-    #     except BaseException:
-    #         print("setUp启动出错！")
-    #         self.driver.quit()
-    #         LogAction.save(func = "TestPersion", status="fail", explain="Psam 启动出错")
-    #         self.fail("setUp启动出错！")
-    #
-    #
-    # #释放实例,释放资源
-    # def tearDown(self):
-    #     self.driver.quit()
-    #     print("运行结束")
-    #     time.sleep(5)
 
     def testCasePersionMessages(self):
         '''个人资料'''
         try:
             # LogAction.print(isReset=True)
-            #
-            # login=Login(self.driver,user['name'], user['pwd'])
-            # login.login_action(is_save=False)
             Login(self.driver,user['name'], user['pwd']).login()
             LogAction.print("【验证点：页面是否存在联系人字段】")
             self.assertTrue(self.driver.get_element(u"uiautomator=>我的",10) !=None, "页面找不到联系人字段")
