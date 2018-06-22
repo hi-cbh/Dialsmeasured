@@ -3,13 +3,13 @@
 import random
 import unittest,os,sys,time
 
-from src.mail.sendEmailSmtp import SendMail
+
 
 p = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 print("path: %s" %p)
 sys.path.append(p+"/")
 
-
+from src.mail.sendEmailSmtp import SendMail
 
 if __name__ == "__main__":
 
