@@ -120,8 +120,8 @@ class TestCase(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    # BaseAdb.adb_wake_up()
-    # time.sleep(5)
+    BaseAdb.adb_wake_up()
+    time.sleep(5)
 
     print('需要运行的脚本')
     testtxt = []
@@ -206,6 +206,6 @@ if __name__ == "__main__":
 
     time.sleep(5)
     # 休眠状态
-    # BaseAdb.adb_sleep()
+    BaseAdb.adb_sleep()
 
-    # time.sleep(10)
+    time.sleep(10)
