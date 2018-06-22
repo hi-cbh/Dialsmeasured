@@ -2,6 +2,8 @@
 # encoding:utf-8
 
 import time,unittest
+
+from src.base.baseAdb import BaseAdb
 from src.testcase.v746.easycase.login import Login
 from src.readwriteconf.initData import  duser
 from src.base.baseImage import BaseImage
