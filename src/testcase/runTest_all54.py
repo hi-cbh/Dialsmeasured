@@ -39,6 +39,6 @@ if __name__ == "__main__":
         line = "不要被教条所束缚，任何问题都没有一个唯一的简单的答案。还记得当我帮助你高中的辩论课程时，我总是让你站在你不认可的那一方来辩论吗？我这么做的理由就是希望你能够理解：看待一个问题不应该非黑即白，而是有很多方法和角度。当你意识到这点的时候，你就会成为一个很好的解决问题者。这就是“批判的思维”——你的一生都会需要的最重要的思考方式，"
 
 
-    s.send_mail_str_163_ssl("testEmail",line,is_test=True)
+    s.send_mail_str_163("testEmail",line,is_test=True)
     # s.send_mail_out_163("testEmail",["邮件发送测试","test2"],is_test=True)
     time.sleep(5)
