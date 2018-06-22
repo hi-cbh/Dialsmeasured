@@ -231,7 +231,7 @@ class SendMail():
 
         if is_test:
             # areceiver = 'hi_cbh@qq.com'
-            areceiver = '13501538531@139.com,hi_cbh@qq.com'
+            areceiver = '13501538531@139.com'
         else:
             # areceiver = "hi_cbh@qq.com,wujun11121@163.com"
             areceiver = "hi_cbh@qq.com"
