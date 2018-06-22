@@ -292,8 +292,7 @@ class SendMail():
         msg['Subject'] = Header(subject, 'utf-8')
 
         try:
-            s = smtplib.SMTP_SSL()
-            s.connect(smtp_server, "465")
+            s = smtplib.SMTP_SSL(smtp_server, "465")
             s.login(from_mail, mail_pass)
             s.sendmail(from_mail, areceiver.split(','), msg.as_string())
             s.quit()
@@ -303,7 +302,6 @@ class SendMail():
             return False
         else:
             return True
-
 
     def send_mail_out_163(self, subject, message=[], is_test=False):
         '''发送邮件，固定格式，发送移动'''
