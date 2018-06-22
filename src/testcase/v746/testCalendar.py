@@ -43,7 +43,7 @@ class TestCalendar(unittest.TestCase):
             print('[日历]: %r'  %value_time)
             save.save("日历:%s" %value_time)
 
-
+            BaseAdb.adb_back()
             LogAction.save(func = "testCaseCalendar", status="success", explain="value_time:%s" %value_time)
         except BaseException :
             BaseImage.screenshot(self.driver, "testCaseCalendar")

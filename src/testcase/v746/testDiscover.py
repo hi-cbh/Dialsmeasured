@@ -37,7 +37,7 @@ class TestDiscover(unittest.TestCase):
 
             print('[发现页面]: %r'  %value_time)
             save.save("发现主页:%s" %value_time)
-            BaseAdb.adb_back()
+
             LogAction.save(func = "testCaseDiscover", status="success", explain="value_time:%s" %value_time)
         except BaseException:
             BaseImage.screenshot(self.driver, "testCaseDiscover")
