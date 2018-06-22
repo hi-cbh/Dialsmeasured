@@ -43,6 +43,7 @@ class TestPersion(unittest.TestCase):
             value_time = str(round((time.time() - start), 2))
             print('[个人资料]: %r'  %value_time)
             save.save("个人资料:%s" %value_time)
+            BaseAdb.adb_back()
             LogAction.save(func = "testCasePersionMessages", status="success", explain="value_time:%s" %value_time)
         except BaseException :
             BaseImage.screenshot(self.driver, "testCasePersionMessages")

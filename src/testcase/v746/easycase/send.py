@@ -350,6 +350,20 @@ class Send(unittest.TestCase):
 
             print('[回复邮件]: %r'  %value_time)
             save.save("回复邮件:%s" %value_time)
+            print('返回收件箱')
+            BaseAdb.adb_back()
+
+            print("等待邮件出现，等待FW邮件出现")
+            timeout = int(round(time.time() * 1000)) + 1*20 * 1000
+            # 找到邮件结束
+            while int(round(time.time() * 1000)) < timeout :
+                if self.driver.element_wait(u"uiautomator=>Re: %s" %subject,2) == None:
+                    self.driver.swipe_down()
+                    time.sleep(2)
+                    self.driver.swipe_down()
+                    time.sleep(2)
+                else:
+                    break
 
         except BaseException:
             BaseImage.screenshot(self.driver, "replyError")

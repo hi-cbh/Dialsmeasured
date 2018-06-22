@@ -31,15 +31,6 @@ class TestPush(unittest.TestCase):
         '''推送'''
         try:
             LogAction.print(isReset=True)
-
-
-            # LogAction.print("=>登录")
-
-            # LogAction.print('=>注销账号')
-            # self.logout()
-
-            # LogAction.print("=>重新登录")
-            # Login(self.driver,user['name'], user['pwd']).login_action(is_save=False)
             Login(self.driver,user['name'], user['pwd']).login()
             LogAction.print("=>点击Home键")
             BaseAdb.adb_home()

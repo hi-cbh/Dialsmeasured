@@ -43,6 +43,8 @@ class TestSkyDrive(unittest.TestCase):
             value_time = str(round((time.time() - start), 2))
             print('[彩云网盘]: %r'  %value_time)
             save.save("彩云网盘:%s" %value_time)
+            BaseAdb.adb_back()
+
             LogAction.save(func = "testCaseSkyDrive", status="success", explain="value_time:%s" %value_time)
         except BaseException :
             BaseImage.screenshot(self.driver, "testCaseSkyDrive")
