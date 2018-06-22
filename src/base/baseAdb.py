@@ -24,6 +24,8 @@ class BaseAdb(object):
         self.adb_shell('adb shell pm grant cn.cj.pe android.permission.READ_EXTERNAL_STORAGE')
         self.adb_shell('adb shell pm grant cn.cj.pe android.permission.READ_PHONE_STATE')
         self.adb_shell('adb shell pm grant cn.cj.pe android.permission.READ_CONTACTS')
+        self.adb_shell('adb shell pm grant cn.cj.pe android.permission.RECEIVE_SMS')
+        self.adb_shell('adb shell pm grant cn.cj.pe android.permission.READ_SMS')
 
     def adb_intall_uiautmator(self):
         '''调用以及导入的jar包，运行uiautmator辅助工具'''

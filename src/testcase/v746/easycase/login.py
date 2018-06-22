@@ -150,17 +150,14 @@ class Login(unittest.TestCase):
         '''一键登录'''
         try:
             LogAction.print(isReset=True)
-            LogAction.print("=>清除APP缓存")
-
-            BaseAdb.adb_clear("cn.cj.pe")
-
             sleep(5)
-
+            BaseAdb.adb_clear("cn.cj.pe")
+            sleep(5)
             BaseAdb.add_pressmission()
             sleep(5)
             BaseAdb.adb_start_app("cn.cj.pe","com.mail139.about.LaunchActivity")
 
-            sleep(4)
+            sleep(5)
 
             LogAction.print("=>右滑")
             self.driver.swipe_right()
@@ -195,9 +192,10 @@ class Login(unittest.TestCase):
                     self.driver.click("id=>cn.cj.pe:id/btn")
                     break
                 else:
-                    self.driver.click("uiautomator=>发现", 1)
                     sleep(0.5)
-                    self.driver.click("id=>cn.cj.pe:id/message_list_bottom_email",1)
+                    self.driver.swipe_down()
+                    sleep(0.5)
+                    self.driver.swipe_down()
 
                 sleep(0.5)
 
@@ -221,7 +219,7 @@ class Login(unittest.TestCase):
 
             if is_save:
                 save.save("一键登录:%s" %value_time)
-
+            BaseAdb.adb_stop("cn.cj.pe")
             BaseAdb.adb_clear("cn.cj.pe")
 
         except BaseException:
