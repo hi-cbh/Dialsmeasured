@@ -230,7 +230,8 @@ class SendMail():
         mail_pass = self.pwd
 
         if is_test:
-            areceiver = 'hi_cbh@qq.com'
+            # areceiver = 'hi_cbh@qq.com'
+            areceiver = '13501538531@139.com,hi_cbh@qq.com'
         else:
             # areceiver = "hi_cbh@qq.com,wujun11121@163.com"
             areceiver = "hi_cbh@qq.com"
@@ -309,7 +310,7 @@ class SendMail():
 
 if __name__ == "__main__":
 
-    s = SendMail("13580491603","chinasoft123","13570535616")
+    s = SendMail("13580491603","chinasoft123","13533218540")
 
     for i in range(1):
 
@@ -318,5 +319,5 @@ if __name__ == "__main__":
 
         line = ["testemail"]
         s.send_mail_str_163("testEmail"," 邮件发送测试",is_test=True)
-        s.send_mail_out_163("testEmail",["邮件发送测试","test2"],is_test=True)
+        # s.send_mail_out_163("testEmail",["邮件发送测试","test2"],is_test=True)
         time.sleep(5)
