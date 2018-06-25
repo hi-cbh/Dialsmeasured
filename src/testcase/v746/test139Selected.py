@@ -67,6 +67,7 @@ class TestSelect(unittest.TestCase):
             self.assertTrue(self.driver.page_source().__contains__(u"阅读全文"),"页面显示不正常")
 
             BaseAdb.adb_back()
+            LogAction.save(func = "testCaseSelected", status="success", explain=LogAction.print())
         except BaseException:
             BaseImage.screenshot(self.driver, "Case139SelectedError")
             time.sleep(2)

@@ -12,7 +12,7 @@ class LogAction():
     def __init__(self):
         self.s = ""
 
-    def save(self, func, status="success", explain="null",version="745"):
+    def save(self, func, status="success", explain="null",version="746"):
         print("log_time=%s,func=%s,status=%s,explain=%s,version=%s"  %(BaseTime.get_current_time(), func, status,explain,version))
         msg = "%s,%s,%s,%s,%s"  %(BaseTime.get_current_time(), func, status,explain,version)
         print(_path)

@@ -15,6 +15,7 @@ class Login(unittest.TestCase):
 
     def login(self):
         '''判断是否在收件箱页面，否则重新登录'''
+        LogAction.print("判断是否在收件箱页面")
         # 判断是否在收件箱页面
         if self.driver.current_app().__contains__(".activity.MessageList"):
             BaseAdb.adb_start_app("cn.cj.pe","com.mail139.about.LaunchActivity")
@@ -23,12 +24,13 @@ class Login(unittest.TestCase):
             self.driver.click(u"uiautomator=>邮件")
             return
 
+        LogAction.print("杀进程，重启")
         # 杀进程，重启
         BaseAdb.adb_stop("cn.cj.pe")
         sleep(3)
         BaseAdb.adb_start_app("cn.cj.pe","com.mail139.about.LaunchActivity")
         sleep(6)
-
+        LogAction.print("如果页面不在收集箱页面，清除缓存登录")
         # 如果页面不在收集箱页面，清除缓存登录
         if self.driver.current_app().__contains__(".activity.MessageList"):
             BaseAdb.adb_start_app("cn.cj.pe","com.mail139.about.LaunchActivity")
@@ -36,6 +38,7 @@ class Login(unittest.TestCase):
             sleep(6)
             self.driver.click(u"uiautomator=>邮件")
         else:
+            LogAction.print("杀进程启动，清除缓存，重新登录")
             # 杀进程启动，清除缓存，重新登录
             BaseAdb.adb_home()
             BaseAdb.adb_stop("cn.cj.pe")
@@ -48,8 +51,8 @@ class Login(unittest.TestCase):
     def login_action(self, first_fogin=False):
         '''账号登录'''
         try:
-            LogAction.print(isReset=True)
-            LogAction.print("=>清除APP缓存")
+            # LogAction.print(isReset=True)
+            LogAction.print("=>清除APP缓存，添加权限，启动139")
             BaseAdb.adb_clear("cn.cj.pe")
             sleep(5)
             BaseAdb.add_pressmission()
@@ -120,7 +123,7 @@ class Login(unittest.TestCase):
 
             LogAction.print('【验证点：等待收件箱底部导航栏出现】')
             self.assertTrue(self.driver.get_element("id=>cn.cj.pe:id/message_list_bottom_email",60) != None, "登录失败！")
-
+            LogAction.save(func = "testCaseLogin", status="success", explain=LogAction.print())
         except BaseException:
             BaseImage.screenshot(self.driver, "LoginError")
             sleep(5)
@@ -130,7 +133,7 @@ class Login(unittest.TestCase):
     def one_btn_Login(self):
         '''一键登录'''
         try:
-            LogAction.print(isReset=True)
+            # LogAction.print(isReset=True)
             sleep(5)
             BaseAdb.adb_clear("cn.cj.pe")
             sleep(5)
@@ -186,13 +189,12 @@ class Login(unittest.TestCase):
             sleep(2)
             self.driver.click("id=>cn.cj.pe:id/message_list_bottom_email",2)
 
-
             LogAction.print('【验证点：等待收件箱底部导航栏出现】')
             self.assertTrue(self.driver.get_element("id=>cn.cj.pe:id/message_list_bottom_email",60) != None, "登录失败！")
 
             BaseAdb.adb_stop("cn.cj.pe")
             BaseAdb.adb_clear("cn.cj.pe")
-
+            LogAction.save(func = "testCaseOnBtnLogin", status="success", explain=LogAction.print())
         except BaseException:
             BaseImage.screenshot(self.driver, "oneBtnLoginError")
             sleep(5)
