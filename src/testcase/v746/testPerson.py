@@ -27,7 +27,7 @@ class TestPersion(unittest.TestCase):
             LogAction.print("=>个人资料")
             self.driver.click(u"uiautomator=>个人资料")
 
-            LogAction.print("【个人头像】")
+            LogAction.print("=>【个人头像】")
             self.assertTrue(self.wait_for_message(), "个人资料同步失败！！")
 
             BaseAdb.adb_back()

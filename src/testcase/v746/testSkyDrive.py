@@ -31,7 +31,7 @@ class TestSkyDrive(unittest.TestCase):
             LogAction.print("=>彩云网盘")
             self.driver.click(u"uiautomator=>彩云网盘")
 
-            LogAction.print("【彩云网盘】")
+            LogAction.print("=>【彩云网盘】")
             self.assertTrue(self.driver.element_wait("uiautomator=>手机图片",60)!=None, "彩云网盘同步失败！！")
             BaseAdb.adb_back()
             LogAction.save(func = "testCaseSkyDrive", status="success", explain=LogAction.print())

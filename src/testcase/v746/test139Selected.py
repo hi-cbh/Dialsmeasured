@@ -39,7 +39,7 @@ class TestSelect(unittest.TestCase):
                 else:
                     break
 
-            LogAction.print("【139精选】")
+            LogAction.print("=>【139精选】")
             self.assertTrue(self.driver.get_element(u'uiautomator=>139精选',10),'收件箱列表没有139精选')
 
             # 经常出现误报
@@ -63,7 +63,7 @@ class TestSelect(unittest.TestCase):
                 print(msg)
 
 
-            LogAction.print('【页面显示】')
+            LogAction.print('=>【页面显示】')
             self.assertTrue(self.driver.page_source().__contains__(u"阅读全文"),"页面显示不正常")
 
             BaseAdb.adb_back()

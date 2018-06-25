@@ -41,7 +41,7 @@ class OpenDown(unittest.TestCase):
             LogAction.print('=>点击 %s' %subject)
             self.driver.click("uiautomator=>%s" %subject)
 
-            LogAction.print('【邮件详情页】')
+            LogAction.print('=>【邮件详情页】')
             self.assertTrue(self.driver.element_wait(r"id=>cn.cj.pe:id/circular_progress_container",10) != None , "测试邮件不存在!")
 
             # 清除
@@ -52,13 +52,13 @@ class OpenDown(unittest.TestCase):
             time.sleep(3)
              
             # 点击全部下载
-            LogAction.print('【附件按钮】')
+            LogAction.print('=>【附件按钮】')
             self.assertTrue(self.driver.get_element(r"id=>cn.cj.pe:id/message_detail_attachment_download",10),'没有下载按钮')
             LogAction.print('=>点击全部下载')
             self.driver.click(r"id=>cn.cj.pe:id/message_detail_attachment_download")
 
             # 等待文件出现
-            LogAction.print('【文件下载】')
+            LogAction.print('=>【文件下载】')
             self.assertTrue(BaseFile.wait_for_file(self.path, self.filename, 15), '下载附件出错')
 
             LogAction.print('=>返回收件箱')

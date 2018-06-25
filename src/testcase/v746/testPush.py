@@ -39,12 +39,12 @@ class TestPush(unittest.TestCase):
             LogAction.print("=>第三方发送邮件")
             s = SendMail(sender['name'], sender['pwd'], user['name'])
 
-            LogAction.print("【邮件发送】")
+            LogAction.print("=>【邮件发送】")
             self.assertTrue(s.send_mail_test('sendsmtpEmail','测试邮件...'),"邮件发送失败")
             time.sleep(5)
-            LogAction.print("【邮件成功】")
+            LogAction.print("=>邮件成功")
             time.sleep(5)
-            LogAction.print("【等待推送】")
+            LogAction.print("=>【等待推送】")
             self.assertTrue(self.wait_for_notification(), "接收推送失败")
 
             app_package = "cn.cj.pe"  # 程序的package

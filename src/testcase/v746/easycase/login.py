@@ -80,7 +80,7 @@ class Login(unittest.TestCase):
             # 输入
             els = self.driver.get_elements("id=>cn.cj.pe:id/input",5)
 
-            LogAction.print("【进入登录界面】")
+            LogAction.print("=>【进入登录界面】")
             self.assertTrue(els != None, "没有进入登录 页面")
 
             LogAction.print('=>输入用户名' + self.username)
@@ -115,9 +115,10 @@ class Login(unittest.TestCase):
 
 
             sleep(2)
+            LogAction.print("=>点击邮件")
             self.driver.click("id=>cn.cj.pe:id/message_list_bottom_email",2)
 
-            LogAction.print('【收件箱底部导航栏】')
+            LogAction.print('=>【收件箱底部导航栏】')
             self.assertTrue(self.driver.get_element("id=>cn.cj.pe:id/message_list_bottom_email",60) != None, "登录失败！")
             LogAction.save(func = "testCaseLogin", status="success", explain=LogAction.print())
         except BaseException:
@@ -155,7 +156,7 @@ class Login(unittest.TestCase):
             # BaseAdb.adbTap(500, 1700) #其他手机需要调试
             sleep(2)
 
-            LogAction.print("【进入登录界面】")
+            LogAction.print("=>【进入登录界面】")
             self.assertTrue(self.driver.get_element(u"uiautomator=>快速登录",10) != None, "页面不存在快捷登录按钮")
 
 
@@ -165,7 +166,7 @@ class Login(unittest.TestCase):
             LogAction.print('=>等待收件箱')
             self.driver.element_wait(u"uiautomator=>收件箱",10)
 
-            LogAction.print('=>等待弹窗广告】')
+            LogAction.print('=>等待弹窗广告')
             timeout = int(round(time() * 1000)) + 1*60 * 1000
             # 找到邮件结束
             while int(round(time() * 1000)) < timeout :
@@ -186,7 +187,7 @@ class Login(unittest.TestCase):
             LogAction.print('=>点击底部导航栏')
             self.driver.click("id=>cn.cj.pe:id/message_list_bottom_email",2)
 
-            LogAction.print('【收件箱底部导航栏】')
+            LogAction.print('=>【收件箱底部导航栏】')
             self.assertTrue(self.driver.get_element("id=>cn.cj.pe:id/message_list_bottom_email",60) != None, "登录失败！")
             LogAction.print('=>杀进程，清除缓存')
             BaseAdb.adb_stop("cn.cj.pe")

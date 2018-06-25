@@ -46,13 +46,13 @@ class Send(unittest.TestCase):
             btn = self.driver.get_element("id=>cn.cj.pe:id/txt_send",5)
             btn.click()
 
-            LogAction.print('【已完成】')
+            LogAction.print('=>【已完成】')
             self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",40) != None, "发送邮件失败！")
 
             print('返回收件箱')
             BaseAdb.adb_back()
 
-            LogAction.print("等待邮件")
+            LogAction.print("=>等待邮件")
             timeout = int(round(time.time() * 1000)) + 1*40 * 1000
             # 找到邮件结束
             while int(round(time.time() * 1000)) < timeout :
@@ -102,7 +102,7 @@ class Send(unittest.TestCase):
             btn = self.driver.get_element("id=>cn.cj.pe:id/txt_send",5)
             btn.click()
 
-            LogAction.print('【已完成】')
+            LogAction.print('=>【已完成】')
             self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",40) != None, "发送邮件失败！")
 
             print('返回收件箱')
@@ -143,23 +143,23 @@ class Send(unittest.TestCase):
             text = self.driver.get_element(r"id=>cn.cj.pe:id/title").get_attribute("text")
             print("text %s" %text)
 
-            LogAction.print("点击转发")
+            LogAction.print("=>点击转发")
             self.driver.click(u"uiautomator=>转发")
 
-            LogAction.print("输入收件人" + self.username)
+            LogAction.print("=>输入收件人" + self.username)
             self.driver.set_value(r"id=>cn.cj.pe:id/to_wrapper",self.username)
 
             # 点击发送按钮
             LogAction.print('=>点击发送')
             self.driver.get_element("id=>cn.cj.pe:id/txt_send").click()
 
-            LogAction.print('【发已完成】')
+            LogAction.print('=>【发已完成】')
             self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",80) != None, "发送邮件失败！")
 
-            LogAction.print('返回收件箱')
+            LogAction.print('=>返回收件箱')
             BaseAdb.adb_back()
 
-            LogAction.print("等待FW邮件")
+            LogAction.print("=>等待FW邮件")
             timeout = int(round(time.time() * 1000)) + 1*40 * 1000
             # 找到邮件结束
             while int(round(time.time() * 1000)) < timeout :
@@ -193,10 +193,10 @@ class Send(unittest.TestCase):
             text = self.driver.get_element(r"id=>cn.cj.pe:id/title").get_attribute("text")
             print("text %s" %text)
 
-            LogAction.print("点击转发")
+            LogAction.print("=>点击转发")
             self.driver.click(u"uiautomator=>转发")
 
-            LogAction.print("收件人" + self.username)
+            LogAction.print("=>收件人" + self.username)
             self.driver.set_value(r"id=>cn.cj.pe:id/to_wrapper",self.username)
 
             time.sleep(1)
@@ -215,13 +215,13 @@ class Send(unittest.TestCase):
             LogAction.print('=>点击发送')
             self.driver.get_element("id=>cn.cj.pe:id/txt_send").click()
 
-            LogAction.print('【已完成】')
+            LogAction.print('=>【已完成】')
             self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",60) != None, "发送邮件失败！")
 
             print('返回收件箱')
             BaseAdb.adb_back()
 
-            LogAction.print("等待FW邮件")
+            LogAction.print("=>等待FW邮件")
             timeout = int(round(time.time() * 1000)) + 1*20 * 1000
             # 找到邮件结束
             while int(round(time.time() * 1000)) < timeout :
@@ -257,7 +257,7 @@ class Send(unittest.TestCase):
             text = self.driver.get_element(r"id=>cn.cj.pe:id/title").get_attribute("text")
             print("text %s" %text)
 
-            LogAction.print("点击回复")
+            LogAction.print("=>点击回复")
             self.driver.click(u"uiautomator=>回复")
 
             # 点击发送按钮
@@ -268,13 +268,13 @@ class Send(unittest.TestCase):
             LogAction.print('=>点击确定')
             self.driver.get_element(u"uiautomator=>确定").click()
 
-            LogAction.print('【已完成】')
+            LogAction.print('=>【已完成】')
             self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",60) != None, "发送邮件失败！")
 
             print('返回收件箱')
             BaseAdb.adb_back()
 
-            LogAction.print("等待Re邮件")
+            LogAction.print("=>等待Re邮件")
             timeout = int(round(time.time() * 1000)) + 1*20 * 1000
             # 找到邮件结束
             while int(round(time.time() * 1000)) < timeout :
