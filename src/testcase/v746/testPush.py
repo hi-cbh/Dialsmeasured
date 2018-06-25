@@ -62,7 +62,7 @@ class TestPush(unittest.TestCase):
 
         except BaseException:
             BaseImage.screenshot(self.driver, "PushError")
-            time.sleep(5)
+            time.sleep(2)
             LogAction.save(func = "testCasePush", status="fail", explain=LogAction.print())
             self.fail("【接收邮件推送】出错！")
 

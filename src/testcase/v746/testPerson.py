@@ -47,7 +47,7 @@ class TestPersion(unittest.TestCase):
             LogAction.save(func = "testCasePersionMessages", status="success", explain="value_time:%s" %value_time)
         except BaseException :
             BaseImage.screenshot(self.driver, "testCasePersionMessages")
-            time.sleep(5)
+            time.sleep(2)
             LogAction.save(func = "testCasePersionMessages", status="fail", explain=LogAction.print())
             self.fail("【个人资料】出错")
 

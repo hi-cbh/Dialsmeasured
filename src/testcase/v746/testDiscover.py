@@ -41,7 +41,7 @@ class TestDiscover(unittest.TestCase):
             LogAction.save(func = "testCaseDiscover", status="success", explain="value_time:%s" %value_time)
         except BaseException:
             BaseImage.screenshot(self.driver, "testCaseDiscover")
-            time.sleep(5)
+            time.sleep(2)
             LogAction.save(func = "testCaseDiscover", status="fail", explain=LogAction.print())
             self.fail("【发现】出错！")
 

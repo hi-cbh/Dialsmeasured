@@ -45,7 +45,7 @@ class TestSelect(unittest.TestCase):
             self.assertTrue(self.driver.get_element(u'uiautomator=>139精选',10),'收件箱列表没有139精选')
 
             # 等待
-            time.sleep(5)
+            # time.sleep(5)
 
 
             # 经常出现误报
@@ -86,7 +86,7 @@ class TestSelect(unittest.TestCase):
             LogAction.save(func = "testCaseSelected", status="success", explain="value_time:%s" %value_time)
         except BaseException:
             BaseImage.screenshot(self.driver, "Case139SelectedError")
-            time.sleep(5)
+            time.sleep(2)
             LogAction.save(func = "testCaseSelected", status="fail", explain=LogAction.print())
             self.fail("【139精选】出错！")
 

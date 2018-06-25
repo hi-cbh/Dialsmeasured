@@ -49,7 +49,7 @@ class TestCalendar(unittest.TestCase):
             LogAction.save(func = "testCaseCalendar", status="success", explain="value_time:%s" %value_time)
         except BaseException :
             BaseImage.screenshot(self.driver, "testCaseCalendar")
-            time.sleep(5)
+            time.sleep(2)
             LogAction.save(func = "testCaseCalendar", status="fail", explain=LogAction.print())
             self.fail("【日历】出错")
 

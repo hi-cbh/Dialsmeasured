@@ -47,8 +47,8 @@ class Send(unittest.TestCase):
                 self.driver.click(r"uiautomator=>test2M.rar")
                 self.driver.click(r"id=>cn.cj.pe:id/check_button")
 
-            print("等待2秒")
-            time.sleep(2)
+            # print("等待2秒")
+            # time.sleep(2)
 
             # 点击发送按钮
             LogAction.print('=>点击发送按钮')
@@ -62,7 +62,7 @@ class Send(unittest.TestCase):
 
             print('返回收件箱')
             BaseAdb.adb_back()
-            time.sleep(2)
+            # time.sleep(2)
 
 
             LogAction.print("等待邮件出现")
@@ -79,7 +79,7 @@ class Send(unittest.TestCase):
 
 
         except BaseException:
-            time.sleep(3)
+            time.sleep(2)
             self.fail('【邮件发送】出错')
 
 
@@ -112,8 +112,8 @@ class Send(unittest.TestCase):
             self.driver.click(r"uiautomator=>test2M.rar")
             self.driver.click(r"id=>cn.cj.pe:id/check_button")
 
-            print("等待2秒")
-            time.sleep(2)
+            # print("等待2秒")
+            # time.sleep(1)
          
             # 点击发送按钮
             LogAction.print('=>点击发送按钮')
@@ -142,7 +142,7 @@ class Send(unittest.TestCase):
 
             print('返回收件箱')
             BaseAdb.adb_back()
-            time.sleep(2)
+            # time.sleep(2)
 
             LogAction.print("等待邮件出现，等待FW邮件出现")
             timeout = int(round(time.time() * 1000)) + 1*40 * 1000
@@ -158,9 +158,9 @@ class Send(unittest.TestCase):
 
         except BaseException:
             BaseImage.screenshot(self.driver, "SendError")
-            time.sleep(5)
+            time.sleep(2)
             LogAction.save(func = "send_action", status="fail", explain=LogAction.print())
-            time.sleep(3)
+            time.sleep(2)
             self.fail('【带附件邮件发送】出错')
 
     def send_fwd(self, subject):
@@ -253,7 +253,7 @@ class Send(unittest.TestCase):
             LogAction.print("输入收件人" + self.username)
             self.driver.set_value(r"id=>cn.cj.pe:id/to_wrapper",self.username)
 
-            time.sleep(3)
+            time.sleep(1)
 
             # 添加附件
             LogAction.print('=>添加附件')
@@ -300,9 +300,9 @@ class Send(unittest.TestCase):
 
         except BaseException:
             BaseImage.screenshot(self.driver, "forwardError")
-            time.sleep(5)
+            time.sleep(2)
             LogAction.save(func = "testCaseForward", status="fail", explain=LogAction.print())
-            time.sleep(5)
+            time.sleep(2)
             self.fail("【smtp转发】出错")
 
 
@@ -367,7 +367,7 @@ class Send(unittest.TestCase):
 
         except BaseException:
             BaseImage.screenshot(self.driver, "replyError")
-            time.sleep(5)
+            time.sleep(2)
             LogAction.save(func = "testCaseReply", status="fail", explain=LogAction.print())
-            time.sleep(5)
+            time.sleep(2)
             self.fail("【回复邮件】出错")
