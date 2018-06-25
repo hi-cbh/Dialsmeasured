@@ -111,8 +111,8 @@ class Login(unittest.TestCase):
                 else:
                     sleep(0.5)
                     self.driver.swipe_down()
-                    sleep(0.5)
-                    self.driver.swipe_down()
+                    # sleep(0.5)
+                    # self.driver.swipe_down()
 
                 sleep(0.5)
 
@@ -180,8 +180,8 @@ class Login(unittest.TestCase):
                 else:
                     sleep(0.5)
                     self.driver.swipe_down()
-                    sleep(0.5)
-                    self.driver.swipe_down()
+                    # sleep(0.5)
+                    # self.driver.swipe_down()
 
                 sleep(0.5)
 
