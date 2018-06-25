@@ -1,6 +1,8 @@
 # urs/bin/python
 # encoding:utf-8
 import unittest
+
+from src.base.baseLog import LogAction
 from src.testcase.v746.easycase.login import Login
 from src.readwriteconf.initData import InitData, duser
 from src.testcase.v746.easycase.openDown import OpenDown
@@ -21,6 +23,7 @@ class TestDownFile(unittest.TestCase):
 
     def testDownFile(self):
         '''下载附件'''
+        LogAction.print(isReset=True)
         Login(self.driver,user['name'], user['pwd']).login()
         # 打开附件
         od = OpenDown(self.driver, path, filename)

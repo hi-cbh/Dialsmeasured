@@ -1,6 +1,8 @@
 # urs/bin/python
 # encoding:utf-8
 import unittest
+
+from src.base.baseLog import LogAction
 from src.testcase.v746.easycase.login import Login
 from src.testcase.v746.easycase.send import Send
 from src.readwriteconf.initData import InitData, duser
@@ -22,28 +24,33 @@ class TestSend(unittest.TestCase):
 
     def testCaseSendNoAttach(self):
         '''发送邮件，无附件'''
+        LogAction.print(isReset=True)
         Login(self.driver,user['name'], user['pwd']).login()
         Send(self.driver,user["name"]+'@139.com').send(subject="NoAttach",is_add=False)
 
 
     def testCaseSendAttach(self):
         '''发送邮件，带附件'''
+        LogAction.print(isReset=True)
         Login(self.driver,user['name'], user['pwd']).login()
         Send(self.driver,user["name"]+'@139.com').send_action(subject="SendAttach")
 
     def testCaseFwdSend(self):
         '''云端转发'''
+        LogAction.print(isReset=True)
         Login(self.driver,user['name'], user['pwd']).login()
         Send(self.driver,user["name"]+'@139.com').send_fwd(subject="SendAttach")
 
 
     def testCaseReply(self):
         '''回复邮件'''
+        LogAction.print(isReset=True)
         Login(self.driver,user['name'], user['pwd']).login()
         Send(self.driver,user["name"]+'@139.com').reply(subject="NoAttach")
 
     def testCaseForward(self):
         '''SMTP转发附件'''
+        LogAction.print(isReset=True)
         Login(self.driver,user['name'], user['pwd']).login()
         Send(self.driver,user["name"]+'@139.com').forward(subject="NoAttach")
 

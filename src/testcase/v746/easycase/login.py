@@ -15,30 +15,31 @@ class Login(unittest.TestCase):
 
     def login(self):
         '''判断是否在收件箱页面，否则重新登录'''
-        LogAction.print("判断是否在收件箱页面")
+
         # 判断是否在收件箱页面
         if self.driver.current_app().__contains__(".activity.MessageList"):
+            LogAction.print("=>当前页面在收件箱")
             BaseAdb.adb_start_app("cn.cj.pe","com.mail139.about.LaunchActivity")
             # print("在主页")
             sleep(6)
             self.driver.click(u"uiautomator=>邮件")
             return
 
-        LogAction.print("杀进程，重启")
         # 杀进程，重启
         BaseAdb.adb_stop("cn.cj.pe")
         sleep(3)
         BaseAdb.adb_start_app("cn.cj.pe","com.mail139.about.LaunchActivity")
         sleep(6)
-        LogAction.print("如果页面不在收集箱页面，清除缓存登录")
+
         # 如果页面不在收集箱页面，清除缓存登录
         if self.driver.current_app().__contains__(".activity.MessageList"):
+            LogAction.print("=>杀进程启动，进入收件箱")
             BaseAdb.adb_start_app("cn.cj.pe","com.mail139.about.LaunchActivity")
             # print("在主页")
             sleep(6)
             self.driver.click(u"uiautomator=>邮件")
         else:
-            LogAction.print("杀进程启动，清除缓存，重新登录")
+            LogAction.print("=>清除缓存后，重新登录")
             # 杀进程启动，清除缓存，重新登录
             BaseAdb.adb_home()
             BaseAdb.adb_stop("cn.cj.pe")
@@ -64,18 +65,14 @@ class Login(unittest.TestCase):
                 self.driver.click(u"uiautomator=>允许")
                 sleep(4)
 
-            LogAction.print("=>右滑")
+            LogAction.print("=>右滑 * 2")
             self.driver.swipe_right()
-            LogAction.print("=>右滑")
             self.driver.swipe_right()
             print("点击坐标")
-            # BaseAdb.adbTap(700, 2300)  # vivo 1603  w * 0.5, h * 0.899
-
             w = self.driver.get_window_size()['width']
             h = self.driver.get_window_size()['height']
-            LogAction.print("=>点击坐标体验")
+            LogAction.print("=>点击体验")
             BaseAdb.adb_tap(w / 2, int(h * 0.899))
-            # BaseAdb.adbTap(500, 1700) #其他手机需要调试
 
             LogAction.print('=>选择139邮箱')
             self.driver.click(r"xpath=>//android.widget.ImageView[@index='0']")
@@ -89,7 +86,6 @@ class Login(unittest.TestCase):
             LogAction.print('=>输入用户名' + self.username)
             els[0].set_value(self.username)
 
-
             LogAction.print('=>输入密码')
             els[1].set_value(self.pwd)
 
@@ -101,7 +97,7 @@ class Login(unittest.TestCase):
                 self.driver.click(u"uiautomator=>允许")
                 sleep(1)
 
-            LogAction.print('【验证点：等待弹窗广告出现】')
+            LogAction.print('=>等待弹窗广告出现')
             timeout = int(round(time() * 1000)) + 1*60 * 1000
             # 找到邮件结束
             while int(round(time() * 1000)) < timeout :
@@ -133,7 +129,8 @@ class Login(unittest.TestCase):
     def one_btn_Login(self):
         '''一键登录'''
         try:
-            # LogAction.print(isReset=True)
+            LogAction.print(isReset=True)
+            LogAction.print("=>清除APP缓存，添加权限，启动139")
             sleep(5)
             BaseAdb.adb_clear("cn.cj.pe")
             sleep(5)

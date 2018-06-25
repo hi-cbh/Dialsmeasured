@@ -25,7 +25,6 @@ class TestSkyDrive(unittest.TestCase):
             LogAction.print(isReset=True)
             Login(self.driver,user['name'], user['pwd']).login()
 
-
             LogAction.print("【验证点：页面是否存在联系人字段】")
             self.assertTrue(self.driver.get_element(u"uiautomator=>我的",10) !=None, "页面找不到联系人字段")
 

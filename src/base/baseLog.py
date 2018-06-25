@@ -21,7 +21,7 @@ class LogAction():
         with open(_path.lstrip(" ").rstrip(" "),'a+') as fn:
             fn.write(msg+'\n')
 
-    def print(self, str="", isReset= False):
+    def print(self, str: object = "", isReset: object = False) -> object:
         print(str)
         if(isReset):
             self.s = ""
