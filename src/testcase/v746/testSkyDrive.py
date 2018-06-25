@@ -38,6 +38,7 @@ class TestSkyDrive(unittest.TestCase):
             LogAction.print("【验证点：获页面手机图片字段】")
             self.assertTrue(self.driver.element_wait("uiautomator=>手机图片",60)!=None, "彩云网盘同步失败！！")
             BaseAdb.adb_back()
+            LogAction.save(func = "testCaseSkyDrive", status="success", explain=LogAction.print())
         except BaseException :
             BaseImage.screenshot(self.driver, "testCaseSkyDrive")
             time.sleep(5)

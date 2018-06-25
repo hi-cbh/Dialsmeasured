@@ -38,6 +38,7 @@ class TestCalendar(unittest.TestCase):
             self.assertTrue(self.driver.element_wait("uiautomator=>创建日程提醒",10)!=None, "日历同步失败！！")
 
             BaseAdb.adb_back()
+            LogAction.save(func = "testCaseCalendar", status="success", explain=LogAction.print())
         except BaseException :
             BaseImage.screenshot(self.driver, "testCaseCalendar")
             time.sleep(2)

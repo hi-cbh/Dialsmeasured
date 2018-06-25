@@ -28,7 +28,7 @@ class TestDiscover(unittest.TestCase):
 
             LogAction.print('【验证点：页面是否显示正常】')
             self.assertTrue(self.driver.element_wait(u"uiautomator=>139精选",80),"页面显示不正常")
-
+            LogAction.save(func = "testCaseDiscover", status="success", explain=LogAction.print())
         except BaseException:
             BaseImage.screenshot(self.driver, "testCaseDiscover")
             time.sleep(2)

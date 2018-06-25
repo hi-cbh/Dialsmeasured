@@ -17,7 +17,7 @@ class Send(unittest.TestCase):
         '''发送邮件'''
         try:
             # 点击写邮件按钮
-            LogAction.print(isReset=True)
+            # LogAction.print(isReset=True)
             LogAction.print("【验证点：页面没有找到写信按钮】")
             self.assertTrue(self.driver.get_element(r"id=>cn.cj.pe:id/actionbar_right_view",10) != None, "页面没有找到写信按钮")
             LogAction.print('=>点击写邮件按钮')
@@ -69,9 +69,10 @@ class Send(unittest.TestCase):
                 else:
                     break
 
-
+            LogAction.save(func = "send", status="success", explain=LogAction.print())
         except BaseException:
             time.sleep(2)
+            LogAction.save(func = "send", status="fail", explain=LogAction.print())
             self.fail('【邮件发送】出错')
 
 
@@ -79,7 +80,7 @@ class Send(unittest.TestCase):
         '''正常的发送邮件，添加附件'''
         try:
             # 点击写邮件按钮
-            LogAction.print(isReset=True)
+            # LogAction.print(isReset=True)
             LogAction.print("【验证点：页面没有找到写信按钮】")
             self.assertTrue(self.driver.get_element(r"id=>cn.cj.pe:id/actionbar_right_view",10) != None, "页面没有找到写信按钮")
             LogAction.print('=>点击写邮件按钮')
@@ -126,7 +127,7 @@ class Send(unittest.TestCase):
                     time.sleep(2)
                 else:
                     break
-
+            LogAction.save(func = "send_action", status="success", explain=LogAction.print())
         except BaseException:
             BaseImage.screenshot(self.driver, "SendError")
             time.sleep(2)
@@ -137,7 +138,7 @@ class Send(unittest.TestCase):
     def send_fwd(self, subject):
         '''云端转发：带有的邮件，进行转发'''
         try:
-            LogAction.print(isReset=True)
+            # LogAction.print(isReset=True)
 
             print("判断是否存在邮件")
             if self.driver.element_wait("uiautomator=>%s" %subject) == None:
@@ -178,7 +179,7 @@ class Send(unittest.TestCase):
                     time.sleep(2)
                 else:
                     break
-
+            LogAction.save(func = "testCaseFwdSend", status="success", explain=LogAction.print())
         except BaseException:
             BaseImage.screenshot(self.driver, "fwSendError")
             time.sleep(2)
@@ -189,7 +190,7 @@ class Send(unittest.TestCase):
     def forward(self,subject):
         '''stmp转发：本地无附件的邮件，添加附件后，转发'''
         try:
-            LogAction.print(isReset=True)
+            # LogAction.print(isReset=True)
 
             print("判断是否存在邮件")
             if self.driver.element_wait("uiautomator=>%s" %subject) == None:
@@ -241,7 +242,7 @@ class Send(unittest.TestCase):
                     time.sleep(2)
                 else:
                     break
-
+            LogAction.save(func = "testCaseForward", status="success", explain=LogAction.print())
         except BaseException:
             BaseImage.screenshot(self.driver, "forwardError")
             time.sleep(2)
@@ -255,7 +256,7 @@ class Send(unittest.TestCase):
         '''回复邮件-无附件'''
         try:
 
-            LogAction.print(isReset=True)
+            # LogAction.print(isReset=True)
 
             print("判断是否存在邮件")
             if self.driver.element_wait("uiautomator=>%s" %subject) == None:
@@ -297,7 +298,7 @@ class Send(unittest.TestCase):
                     time.sleep(2)
                 else:
                     break
-
+            LogAction.save(func = "testCaseReply", status="success", explain=LogAction.print())
         except BaseException:
             BaseImage.screenshot(self.driver, "replyError")
             time.sleep(2)

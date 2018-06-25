@@ -52,7 +52,7 @@ class TestPush(unittest.TestCase):
             time.sleep(2)
             BaseAdb.adb_start_app(app_package, app_activity)
             time.sleep(5)
-
+            LogAction.save(func = "testCasePush", status="success", explain=LogAction.print())
         except BaseException:
             BaseImage.screenshot(self.driver, "PushError")
             time.sleep(2)

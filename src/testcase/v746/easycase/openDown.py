@@ -18,7 +18,7 @@ class OpenDown(unittest.TestCase):
         '''下载文件时延'''
         try:
 
-            LogAction.print(isReset=True)
+            # LogAction.print(isReset=True)
             LogAction.print("=>加载本地邮件")
             timeout = int(round(time.time() * 1000)) + 1*20 * 1000
             # 找到邮件结束
@@ -65,7 +65,7 @@ class OpenDown(unittest.TestCase):
             time.sleep(2)
             BaseAdb.adb_back()
             BaseAdb.adb_back()
-
+            LogAction.save(func = "testDownFile", status="success", explain=LogAction.print())
         except BaseException:
             BaseImage.screenshot(self.driver, "DownFileError")
             time.sleep(5)

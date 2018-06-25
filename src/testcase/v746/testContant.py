@@ -29,7 +29,7 @@ class TestContant(unittest.TestCase):
 
             LogAction.print("【验证点：是否获取通知栏信息】")
             self.assertTrue(self.waitfor_notification(), "通讯录同步失败！！")
-
+            LogAction.save(func = "CheckAddressListError", status="success", explain=LogAction.print())
         except BaseException :
             BaseImage.screenshot(self.driver, "CheckAddressListError")
             time.sleep(5)

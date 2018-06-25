@@ -33,6 +33,7 @@ class TestPersion(unittest.TestCase):
             self.assertTrue(self.wait_for_message(), "个人资料同步失败！！")
 
             BaseAdb.adb_back()
+            LogAction.save(func = "testCasePersionMessages", status="success", explain=LogAction.print())
         except BaseException :
             BaseImage.screenshot(self.driver, "testCasePersionMessages")
             time.sleep(2)
