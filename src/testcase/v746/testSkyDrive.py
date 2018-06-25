@@ -35,17 +35,9 @@ class TestSkyDrive(unittest.TestCase):
             LogAction.print("=>彩云网盘")
             self.driver.click(u"uiautomator=>彩云网盘")
 
-            start = time.time()
             LogAction.print("【验证点：获页面手机图片字段】")
             self.assertTrue(self.driver.element_wait("uiautomator=>手机图片",60)!=None, "彩云网盘同步失败！！")
-
-            print('=>记录当前时间，时间差')
-            value_time = str(round((time.time() - start), 2))
-            print('[彩云网盘]: %r'  %value_time)
-            save.save("彩云网盘:%s" %value_time)
             BaseAdb.adb_back()
-
-            LogAction.save(func = "testCaseSkyDrive", status="success", explain="value_time:%s" %value_time)
         except BaseException :
             BaseImage.screenshot(self.driver, "testCaseSkyDrive")
             time.sleep(5)

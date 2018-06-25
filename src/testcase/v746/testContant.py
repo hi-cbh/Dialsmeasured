@@ -5,7 +5,6 @@ from src.base.baseAdb import BaseAdb
 from src.testcase.v746.easycase.login import Login
 from src.readwriteconf.initData import duser
 from src.base.baseImage import BaseImage
-from src.readwriteconf.saveData import save
 from src.base.baseLog import LogAction
 
 users = duser().getuser()
@@ -27,23 +26,15 @@ class TestContant(unittest.TestCase):
 
             LogAction.print("=>点击联系人")
             self.driver.click(u"uiautomator=>联系人")
-            start = time.time()
 
             LogAction.print("【验证点：是否获取通知栏信息】")
             self.assertTrue(self.waitfor_notification(), "通讯录同步失败！！")
 
-            print('=>记录当前时间，时间差')
-            value_time = str(round((time.time() - start), 2))
-            print('[联系人同步]: %r'  %value_time)
-            save.save("联系人同步:%s" %value_time)
-            LogAction.save(func = "testCaseCheckAddressList", status="success", explain="value_time:%s" %value_time)
         except BaseException :
             BaseImage.screenshot(self.driver, "CheckAddressListError")
             time.sleep(5)
             LogAction.save(func = "testCaseCheckAddressList", status="fail", explain=LogAction.print())
             self.fail("【联系人同步】出错")
-
-
 
 
     def waitfor_notification(self):

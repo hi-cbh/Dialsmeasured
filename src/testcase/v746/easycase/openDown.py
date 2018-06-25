@@ -2,12 +2,11 @@
 # encoding:utf-8
 
 import time
-import unittest,random
+import unittest
 from src.base.baseAdb import BaseAdb
 from src.base.baseFile import BaseFile
 from src.base.baseImage import BaseImage
 from src.base.baseLog import LogAction
-from src.readwriteconf.saveData import save
 class OpenDown(unittest.TestCase):
     
     def __init__(self,driver, path, filename):
@@ -58,23 +57,9 @@ class OpenDown(unittest.TestCase):
             LogAction.print('=>点击全部下载')
             self.driver.click(r"id=>cn.cj.pe:id/message_detail_attachment_download")
 
-
-            print('=>记录当前时')
-            start = time.time()
-
             # 等待文件出现
             LogAction.print('【验证点：等待文件下载完成】')
             self.assertTrue(BaseFile.wait_for_file(self.path, self.filename, 15), '下载附件出错')
-
-            print('=>记录当前时间，时间差')
-            value_time = str(round((time.time() - start), 2))
-            LogAction.save(func = "testDownFile", status="success", explain="value_time:%s" %value_time)
-            # 时间过滤(生成2-9)
-            if float(value_time) > 10:
-                value_time = str(round(random.uniform(2, 9),2))
-
-            print('[登录时延]: %r'  %value_time)
-            save.save("附件下载:%s" %value_time)
 
             LogAction.print('=>返回收件箱')
             time.sleep(2)

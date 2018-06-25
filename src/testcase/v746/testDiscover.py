@@ -3,11 +3,9 @@
 
 import time,unittest
 
-from src.base.baseAdb import BaseAdb
 from src.testcase.v746.easycase.login import Login
 from src.readwriteconf.initData import duser
 from src.base.baseImage import BaseImage
-from src.readwriteconf.saveData import save
 from src.base.baseLog import LogAction
 
 users = duser().getuser()
@@ -27,18 +25,10 @@ class TestDiscover(unittest.TestCase):
 
             LogAction.print('=>发现')
             self.driver.click(u'uiautomator=>发现')
-            start = time.time()
 
             LogAction.print('【验证点：页面是否显示正常】')
             self.assertTrue(self.driver.element_wait(u"uiautomator=>139精选",80),"页面显示不正常")
 
-            print('=>记录当前时间，时间差')
-            value_time = str(round((time.time() - start), 2))
-
-            print('[发现页面]: %r'  %value_time)
-            save.save("发现主页:%s" %value_time)
-
-            LogAction.save(func = "testCaseDiscover", status="success", explain="value_time:%s" %value_time)
         except BaseException:
             BaseImage.screenshot(self.driver, "testCaseDiscover")
             time.sleep(2)

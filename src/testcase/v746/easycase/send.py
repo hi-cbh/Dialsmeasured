@@ -3,13 +3,9 @@
 
 import time
 import unittest
-import random
 from src.base.baseAdb import BaseAdb
-from src.base.baseFile import BaseFile
-from src.mail.sendEmailSmtp import SendMail
 from src.base.baseImage import BaseImage
 from src.base.baseLog import LogAction
-from src.readwriteconf.saveData import save
 
 class Send(unittest.TestCase):
     
@@ -47,8 +43,6 @@ class Send(unittest.TestCase):
                 self.driver.click(r"uiautomator=>test2M.rar")
                 self.driver.click(r"id=>cn.cj.pe:id/check_button")
 
-            # print("等待2秒")
-            # time.sleep(2)
 
             # 点击发送按钮
             LogAction.print('=>点击发送按钮')
@@ -62,8 +56,6 @@ class Send(unittest.TestCase):
 
             print('返回收件箱')
             BaseAdb.adb_back()
-            # time.sleep(2)
-
 
             LogAction.print("等待邮件出现")
             timeout = int(round(time.time() * 1000)) + 1*40 * 1000
@@ -112,37 +104,16 @@ class Send(unittest.TestCase):
             self.driver.click(r"uiautomator=>test2M.rar")
             self.driver.click(r"id=>cn.cj.pe:id/check_button")
 
-            # print("等待2秒")
-            # time.sleep(1)
-         
             # 点击发送按钮
             LogAction.print('=>点击发送按钮')
             btn = self.driver.get_element("id=>cn.cj.pe:id/txt_send",5)
             btn.click()
 
-            print('=>开始记录时间')
-            start = time.time()
-
-
             LogAction.print('【验证点：是否发送成功】')
             self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",40) != None, "发送邮件失败！")
 
-            print('=>记录当前时间，时间差')
-            value_time = str(round((time.time() - start), 2))
-            LogAction.save(func = "send_action", status="success", explain="value_time:%s" %value_time)
-
-            # 时间过滤(生成2-9)
-            if float(value_time) > 10:
-                value_time = str(round(random.uniform(2, 9),2))
-
-            print('[登录时延]: %r'  %value_time)
-
-            if is_save:
-                save.save("发送邮件带附件:%s" %value_time)
-
             print('返回收件箱')
             BaseAdb.adb_back()
-            # time.sleep(2)
 
             LogAction.print("等待邮件出现，等待FW邮件出现")
             timeout = int(round(time.time() * 1000)) + 1*40 * 1000
@@ -173,7 +144,6 @@ class Send(unittest.TestCase):
                 self.send_action(subject=subject)
 
 
-            # 点击第一封
             LogAction.print('=>点击 %s' %subject)
             self.driver.click("uiautomator=>%s" %subject)
 
@@ -190,21 +160,9 @@ class Send(unittest.TestCase):
             # 点击发送按钮
             LogAction.print('=>点击发送按钮')
             self.driver.get_element("id=>cn.cj.pe:id/txt_send").click()
-            start = time.time()
 
             LogAction.print('【验证点：发送是否成功】')
             self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",80) != None, "发送邮件失败！")
-
-            print('=>记录当前时间，时间差')
-            value_time = str(round((time.time() - start), 2))
-            LogAction.save(func = "send_fwd", status="success", explain="value_time:%s" %value_time)
-            # 时间过滤(生成2-9)
-            if float(value_time) > 10:
-                value_time = str(round(random.uniform(2, 9),2))
-
-
-            print('[转发邮件带附件]: %r'  %value_time)
-            save.save("云端转发:%s" %value_time)
 
             LogAction.print('返回收件箱')
             BaseAdb.adb_back()
@@ -221,10 +179,9 @@ class Send(unittest.TestCase):
                 else:
                     break
 
-
         except BaseException:
             BaseImage.screenshot(self.driver, "fwSendError")
-            time.sleep(5)
+            time.sleep(2)
             LogAction.save(func = "testCaseFwdSend", status="fail", explain=LogAction.print())
             time.sleep(3)
             self.fail("【云端转发】出错")
@@ -238,8 +195,6 @@ class Send(unittest.TestCase):
             if self.driver.element_wait("uiautomator=>%s" %subject) == None:
                 self.send(subject=subject)
 
-            # 点击第一封
-            time.sleep(2)
             LogAction.print('=>点击第一封邮件')
             self.driver.click("uiautomator=>%s" %subject)
 
@@ -268,20 +223,9 @@ class Send(unittest.TestCase):
             # 点击发送按钮
             LogAction.print('=>点击发送按钮')
             self.driver.get_element("id=>cn.cj.pe:id/txt_send").click()
-            start = time.time()
 
             LogAction.print('【验证点：发送是否成功】')
             self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",60) != None, "发送邮件失败！")
-
-            print('=>记录当前时间，时间差')
-            value_time = str(round((time.time() - start), 2))
-            LogAction.save(func = "forward", status="success", explain="value_time:%s" %value_time)
-            # 时间过滤(生成2-9)
-            if float(value_time) > 10:
-                value_time = str(round(random.uniform(2, 9),2))
-
-            print('[stmp转发]: %r'  %value_time)
-            save.save("SMTP转发:%s" %value_time)
 
             print('返回收件箱')
             BaseAdb.adb_back()
@@ -335,21 +279,10 @@ class Send(unittest.TestCase):
             # 点击发送按钮
             LogAction.print('=>点击确定按钮')
             self.driver.get_element(u"uiautomator=>确定").click()
-            start = time.time()
 
             LogAction.print('【验证点：发送是否成功】')
             self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",60) != None, "发送邮件失败！")
 
-            print('=>记录当前时间，时间差')
-            value_time = str(round((time.time() - start), 2))
-            LogAction.save(func = "reply", status="success", explain="value_time:%s" %value_time)
-            # 时间过滤(生成2-9)
-            if float(value_time) > 10:
-                value_time = str(round(random.uniform(2, 9),2))
-
-
-            print('[回复邮件]: %r'  %value_time)
-            save.save("回复邮件:%s" %value_time)
             print('返回收件箱')
             BaseAdb.adb_back()
 

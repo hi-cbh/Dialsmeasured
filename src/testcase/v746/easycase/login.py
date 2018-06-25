@@ -2,13 +2,10 @@
 # encoding:utf-8
 
 from time import sleep,time
-import unittest,random
-
-
+import unittest
 from src.base.baseAdb import BaseAdb
 from src.base.baseImage import BaseImage
 from src.base.baseLog import LogAction
-from src.readwriteconf.saveData import save
 class Login(unittest.TestCase):
     '''当前版本没有添加弹窗广告'''
     def __init__(self,driver, username, pwd):
@@ -94,11 +91,7 @@ class Login(unittest.TestCase):
             els[1].set_value(self.pwd)
 
             LogAction.print('=>点击登录')
-            loginbtn = self.driver.get_element("id=>cn.cj.pe:id/login",5)
-
-            LogAction.print('=>记录当前时间、点击登录')
-            loginbtn.click()
-            start = time()
+            self.driver.click("id=>cn.cj.pe:id/login",5)
 
 
             if first_fogin == True:
@@ -128,25 +121,13 @@ class Login(unittest.TestCase):
             LogAction.print('【验证点：等待收件箱底部导航栏出现】')
             self.assertTrue(self.driver.get_element("id=>cn.cj.pe:id/message_list_bottom_email",60) != None, "登录失败！")
 
-            LogAction.print('=>记录当前时间，')
-            value_time = str(round((time() - start), 2))
-            LogAction.save(func = "testCaseLogin", status="success", explain="value_time:%s" %value_time)
-            # 时间过滤(生成2-9)
-            if float(value_time) > 10:
-                value_time = str(round(random.uniform(2, 9),2))
-
-            print('[登录时延]: %r'  %value_time)
-
-            if is_save:
-                save.save("账号登录:%s" %value_time)
-
         except BaseException:
             BaseImage.screenshot(self.driver, "LoginError")
             sleep(5)
             LogAction.save(func = "testCaseLogin", status="fail", explain=LogAction.print())
             self.fail("【手动输入账号/密码-登录】出现错误")
 
-    def one_btn_Login(self, is_save=True):
+    def one_btn_Login(self):
         '''一键登录'''
         try:
             LogAction.print(isReset=True)
@@ -181,7 +162,9 @@ class Login(unittest.TestCase):
 
             LogAction.print('=>点击快捷登录')
             self.driver.click(u"uiautomator=>快速登录")
-            start = time()
+
+            LogAction.print('等待收件箱出现')
+            self.driver.element_wait(u"uiautomator=>收件箱",10)
 
             LogAction.print('【验证点：等待弹窗广告出现】')
             timeout = int(round(time() * 1000)) + 1*60 * 1000
@@ -207,18 +190,6 @@ class Login(unittest.TestCase):
             LogAction.print('【验证点：等待收件箱底部导航栏出现】')
             self.assertTrue(self.driver.get_element("id=>cn.cj.pe:id/message_list_bottom_email",60) != None, "登录失败！")
 
-            print('=>记录当前时间，')
-            value_time = str(round((time() - start), 2))
-            LogAction.save(func = "testCaseOnBtnLogin", status="success", explain="value_time:%s" %value_time)
-
-            # 时间过滤(生成2-9)
-            if float(value_time) > 10:
-                value_time = str(round(random.uniform(2, 9),2))
-
-            print('[登录时延]: %r'  %value_time)
-
-            if is_save:
-                save.save("一键登录:%s" %value_time)
             BaseAdb.adb_stop("cn.cj.pe")
             BaseAdb.adb_clear("cn.cj.pe")
 

@@ -134,24 +134,13 @@ class ReportClass(object):
 
         # 写入文件，并添加发送邮件格式
         for case, reason in self.caseresult.items():
-            # 含有时延的用例
-            if case in demotime:
-                resulttxt.append('case：%s , 时延：%s, result：%s \n' %(case,demotime[case], reason ))
-                if reason == 'Fail':
-                    # 用例错误
-                    sendresult.append('case：<font size="3" color="blue"> %s </font> ,result：<font size="4" color="red"> %s </font>\n' %(case, reason) )
-                else:
-                    # 用例Success
-                    sendresult.append('case：<font size="3" color="blue"> %s </font> , 时延：%s,  result：<font size="3" color="green"> %s </font>\n' %(case,demotime[case], reason) )
-            # 不含时延的用例
+            resulttxt.append('case：%s , result：%s \n' %(case, reason))
+            if reason == 'Fail':
+                # 用例错误
+                sendresult.append('case：<font size="3" color="blue"> %s </font> , result：<font size="4" color="red"> %s </font>\n' %(case, reason) )
             else:
-                resulttxt.append('case：%s , result：%s \n' %(case, reason))
-                if reason == 'Fail':
-                    # 用例错误
-                    sendresult.append('case：<font size="3" color="blue"> %s </font> , result：<font size="4" color="red"> %s </font>\n' %(case, reason) )
-                else:
-                    # 用例success
-                    sendresult.append('case：<font size="3" color="blue"> %s </font> , result：<font size="3" color="green"> %s </font>\n' %(case, reason) )
+                # 用例success
+                sendresult.append('case：<font size="3" color="blue"> %s </font> , result：<font size="3" color="green"> %s </font>\n' %(case, reason) )
 
 
 

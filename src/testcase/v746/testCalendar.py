@@ -7,7 +7,6 @@ from src.base.baseAdb import BaseAdb
 from src.testcase.v746.easycase.login import Login
 from src.readwriteconf.initData import  duser
 from src.base.baseImage import BaseImage
-from src.readwriteconf.saveData import save
 from src.base.baseLog import LogAction
 
 users = duser().getuser()
@@ -35,18 +34,10 @@ class TestCalendar(unittest.TestCase):
             LogAction.print("=>日历")
             self.driver.click(u"uiautomator=>日历")
 
-
-            start = time.time()
             LogAction.print("【验证点：获页面创建日程提醒字段】")
             self.assertTrue(self.driver.element_wait("uiautomator=>创建日程提醒",10)!=None, "日历同步失败！！")
 
-            print('=>记录当前时间，时间差')
-            value_time = str(round((time.time() - start), 2))
-            print('[日历]: %r'  %value_time)
-            save.save("日历:%s" %value_time)
-
             BaseAdb.adb_back()
-            LogAction.save(func = "testCaseCalendar", status="success", explain="value_time:%s" %value_time)
         except BaseException :
             BaseImage.screenshot(self.driver, "testCaseCalendar")
             time.sleep(2)

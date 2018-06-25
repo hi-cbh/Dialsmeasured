@@ -7,7 +7,6 @@ from src.base.baseAdb import BaseAdb
 from src.testcase.v746.easycase.login import Login
 from src.readwriteconf.initData import duser
 from src.base.baseImage import BaseImage
-from src.readwriteconf.saveData import save
 from src.base.baseLog import LogAction
 
 users = duser().getuser()
@@ -40,23 +39,14 @@ class TestSelect(unittest.TestCase):
                 else:
                     break
 
-
             LogAction.print("【验证点：页面是否存在139精选】")
             self.assertTrue(self.driver.get_element(u'uiautomator=>139精选',10),'收件箱列表没有139精选')
-
-            # 等待
-            # time.sleep(5)
-
 
             # 经常出现误报
             for i in range(3):
                 if self.driver.get_element(u'uiautomator=>139精选',3) != None:
                     LogAction.print('=>点击139精选')
                     self.driver.click(u'uiautomator=>139精选')
-
-
-            start = time.time()
-
 
             LogAction.print("=>等待30秒")
             # 等待两分钟
@@ -76,14 +66,7 @@ class TestSelect(unittest.TestCase):
             LogAction.print('【验证点：页面是否显示正常】')
             self.assertTrue(self.driver.page_source().__contains__(u"阅读全文"),"页面显示不正常")
 
-            print('=>记录当前时间，时间差')
-            value_time = str(round((time.time() - start), 2))
-
-            print('[139精选出现时间]: %r'  %value_time)
-            save.save("收件箱列表中精选:%s" %value_time)
-
             BaseAdb.adb_back()
-            LogAction.save(func = "testCaseSelected", status="success", explain="value_time:%s" %value_time)
         except BaseException:
             BaseImage.screenshot(self.driver, "Case139SelectedError")
             time.sleep(2)

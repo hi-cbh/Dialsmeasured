@@ -1,8 +1,6 @@
 # urs/bin/python
 # encoding:utf-8
 import unittest
-
-from src.base.baseAdb import BaseAdb
 from src.testcase.v746.easycase.login import Login
 from src.readwriteconf.initData import InitData, duser
 from src.testcase.v746.easycase.openDown import OpenDown

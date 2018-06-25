@@ -42,16 +42,9 @@ class TestPush(unittest.TestCase):
             LogAction.print("【验证点：第三方邮件是否发送失败】")
             self.assertTrue(s.send_mail_test('sendsmtpEmail','测试邮件...'),"邮件发送失败")
             time.sleep(10)
-            start = time.time()
 
             LogAction.print("【验证点：等待推送信息】")
             self.assertTrue(self.wait_for_notification(), "接收推送失败")
-
-            print('=>记录当前时间，时间差')
-            value_time = str(round((time.time() - start), 2))
-            LogAction.save(func = "testCasePush", status="success", explain="value_time:%s" %value_time)
-            print('[接收推送]: %r'  %value_time)
-            save.save("接收推送:%s" %value_time)
 
             app_package = "cn.cj.pe"  # 程序的package
             app_activity = "com.mail139.about.LaunchActivity"  # 程序的Activity
@@ -101,8 +94,6 @@ class TestPush(unittest.TestCase):
             time.sleep(9)
         print('找不到了')
         return False
-
-
 
 if __name__ == "__main__":
     suite = unittest.TestSuite()
