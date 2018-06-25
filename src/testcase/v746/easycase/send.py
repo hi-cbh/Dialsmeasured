@@ -17,13 +17,10 @@ class Send(unittest.TestCase):
         '''发送邮件'''
         try:
             # 点击写邮件按钮
-            # LogAction.print(isReset=True)
-            LogAction.print("【验证点：页面没有找到写信按钮】")
-            self.assertTrue(self.driver.get_element(r"id=>cn.cj.pe:id/actionbar_right_view",10) != None, "页面没有找到写信按钮")
-            LogAction.print('=>点击写邮件按钮')
+            LogAction.print('=>点击写邮件')
             self.driver.click(r"id=>cn.cj.pe:id/actionbar_right_view")
             # 收件人输入内容
-            LogAction.print('=>收件人输入内容'+self.username)
+            LogAction.print('=>收件人'+self.username)
             self.driver.set_value(r"id=>cn.cj.pe:id/to_wrapper",self.username) # appium 1.6
             # 点击空白地方
             LogAction.print('=>点击空白地方')
@@ -45,19 +42,17 @@ class Send(unittest.TestCase):
 
 
             # 点击发送按钮
-            LogAction.print('=>点击发送按钮')
+            LogAction.print('=>点击发送')
             btn = self.driver.get_element("id=>cn.cj.pe:id/txt_send",5)
             btn.click()
 
-            LogAction.print('【验证点：是否发送成功】')
+            LogAction.print('【已完成】')
             self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",40) != None, "发送邮件失败！")
-
-            print('=>记录当前时间，时间差')
 
             print('返回收件箱')
             BaseAdb.adb_back()
 
-            LogAction.print("等待邮件出现")
+            LogAction.print("等待邮件")
             timeout = int(round(time.time() * 1000)) + 1*40 * 1000
             # 找到邮件结束
             while int(round(time.time() * 1000)) < timeout :
@@ -80,13 +75,10 @@ class Send(unittest.TestCase):
         '''正常的发送邮件，添加附件'''
         try:
             # 点击写邮件按钮
-            # LogAction.print(isReset=True)
-            LogAction.print("【验证点：页面没有找到写信按钮】")
-            self.assertTrue(self.driver.get_element(r"id=>cn.cj.pe:id/actionbar_right_view",10) != None, "页面没有找到写信按钮")
-            LogAction.print('=>点击写邮件按钮')
+            LogAction.print('=>点击写邮件')
             self.driver.click(r"id=>cn.cj.pe:id/actionbar_right_view")
             # 收件人输入内容
-            LogAction.print('=>收件人输入内容'+self.username)
+            LogAction.print('=>收件人输入'+self.username)
             self.driver.set_value(r"id=>cn.cj.pe:id/to_wrapper",self.username) # appium 1.6
             # 点击空白地方
             LogAction.print('=>点击空白地方')
@@ -106,17 +98,17 @@ class Send(unittest.TestCase):
             self.driver.click(r"id=>cn.cj.pe:id/check_button")
 
             # 点击发送按钮
-            LogAction.print('=>点击发送按钮')
+            LogAction.print('=>点击发送')
             btn = self.driver.get_element("id=>cn.cj.pe:id/txt_send",5)
             btn.click()
 
-            LogAction.print('【验证点：是否发送成功】')
+            LogAction.print('【已完成】')
             self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",40) != None, "发送邮件失败！")
 
             print('返回收件箱')
             BaseAdb.adb_back()
 
-            LogAction.print("等待邮件出现，等待FW邮件出现")
+            LogAction.print("=>等待FW邮件")
             timeout = int(round(time.time() * 1000)) + 1*40 * 1000
             # 找到邮件结束
             while int(round(time.time() * 1000)) < timeout :
@@ -138,7 +130,6 @@ class Send(unittest.TestCase):
     def send_fwd(self, subject):
         '''云端转发：带有的邮件，进行转发'''
         try:
-            # LogAction.print(isReset=True)
 
             print("判断是否存在邮件")
             if self.driver.element_wait("uiautomator=>%s" %subject) == None:
@@ -148,27 +139,27 @@ class Send(unittest.TestCase):
             LogAction.print('=>点击 %s' %subject)
             self.driver.click("uiautomator=>%s" %subject)
 
-            LogAction.print('=>查找控件，确认进入邮件详情页')
+            LogAction.print('=>邮件详情页')
             text = self.driver.get_element(r"id=>cn.cj.pe:id/title").get_attribute("text")
             print("text %s" %text)
 
-            LogAction.print("点击转发按钮")
+            LogAction.print("点击转发")
             self.driver.click(u"uiautomator=>转发")
 
             LogAction.print("输入收件人" + self.username)
             self.driver.set_value(r"id=>cn.cj.pe:id/to_wrapper",self.username)
 
             # 点击发送按钮
-            LogAction.print('=>点击发送按钮')
+            LogAction.print('=>点击发送')
             self.driver.get_element("id=>cn.cj.pe:id/txt_send").click()
 
-            LogAction.print('【验证点：发送是否成功】')
+            LogAction.print('【发已完成】')
             self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",80) != None, "发送邮件失败！")
 
             LogAction.print('返回收件箱')
             BaseAdb.adb_back()
 
-            LogAction.print("等待邮件出现，等待FW邮件出现")
+            LogAction.print("等待FW邮件")
             timeout = int(round(time.time() * 1000)) + 1*40 * 1000
             # 找到邮件结束
             while int(round(time.time() * 1000)) < timeout :
@@ -190,23 +181,22 @@ class Send(unittest.TestCase):
     def forward(self,subject):
         '''stmp转发：本地无附件的邮件，添加附件后，转发'''
         try:
-            # LogAction.print(isReset=True)
 
             print("判断是否存在邮件")
             if self.driver.element_wait("uiautomator=>%s" %subject) == None:
                 self.send(subject=subject)
 
-            LogAction.print('=>点击第一封邮件')
+            LogAction.print('=>点击 %s' %subject)
             self.driver.click("uiautomator=>%s" %subject)
 
-            LogAction.print('=>查找控件，确认进入邮件详情页')
+            LogAction.print('=>进入邮件详情页')
             text = self.driver.get_element(r"id=>cn.cj.pe:id/title").get_attribute("text")
             print("text %s" %text)
 
-            LogAction.print("点击转发按钮")
+            LogAction.print("点击转发")
             self.driver.click(u"uiautomator=>转发")
 
-            LogAction.print("输入收件人" + self.username)
+            LogAction.print("收件人" + self.username)
             self.driver.set_value(r"id=>cn.cj.pe:id/to_wrapper",self.username)
 
             time.sleep(1)
@@ -222,16 +212,16 @@ class Send(unittest.TestCase):
 
 
             # 点击发送按钮
-            LogAction.print('=>点击发送按钮')
+            LogAction.print('=>点击发送')
             self.driver.get_element("id=>cn.cj.pe:id/txt_send").click()
 
-            LogAction.print('【验证点：发送是否成功】')
+            LogAction.print('【已完成】')
             self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",60) != None, "发送邮件失败！")
 
             print('返回收件箱')
             BaseAdb.adb_back()
 
-            print("等待邮件出现，等待FW邮件出现")
+            LogAction.print("等待FW邮件")
             timeout = int(round(time.time() * 1000)) + 1*20 * 1000
             # 找到邮件结束
             while int(round(time.time() * 1000)) < timeout :
@@ -255,9 +245,6 @@ class Send(unittest.TestCase):
     def reply(self,subject):
         '''回复邮件-无附件'''
         try:
-
-            # LogAction.print(isReset=True)
-
             print("判断是否存在邮件")
             if self.driver.element_wait("uiautomator=>%s" %subject) == None:
                 self.send(subject=subject)
@@ -266,28 +253,28 @@ class Send(unittest.TestCase):
             LogAction.print('=>点击 %s' %subject)
             self.driver.click("uiautomator=>%s" %subject)
 
-            LogAction.print('=>查找控件，确认进入邮件详情页')
+            LogAction.print('=>进入邮件详情页')
             text = self.driver.get_element(r"id=>cn.cj.pe:id/title").get_attribute("text")
             print("text %s" %text)
 
-            LogAction.print("点击回复按钮")
+            LogAction.print("点击回复")
             self.driver.click(u"uiautomator=>回复")
 
             # 点击发送按钮
-            LogAction.print('=>点击发送按钮')
+            LogAction.print('=>点击发送')
             self.driver.get_element("id=>cn.cj.pe:id/txt_send").click()
 
             # 点击发送按钮
-            LogAction.print('=>点击确定按钮')
+            LogAction.print('=>点击确定')
             self.driver.get_element(u"uiautomator=>确定").click()
 
-            LogAction.print('【验证点：发送是否成功】')
+            LogAction.print('【已完成】')
             self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",60) != None, "发送邮件失败！")
 
             print('返回收件箱')
             BaseAdb.adb_back()
 
-            print("等待邮件出现，等待FW邮件出现")
+            LogAction.print("等待Re邮件")
             timeout = int(round(time.time() * 1000)) + 1*20 * 1000
             # 找到邮件结束
             while int(round(time.time() * 1000)) < timeout :

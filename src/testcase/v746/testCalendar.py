@@ -25,16 +25,13 @@ class TestCalendar(unittest.TestCase):
             LogAction.print(isReset=True)
             Login(self.driver,user['name'], user['pwd']).login()
 
-            LogAction.print("【验证点：页面是否存在联系人字段】")
-            self.assertTrue(self.driver.get_element(u"uiautomator=>我的",10) !=None, "页面找不到联系人字段")
-
             LogAction.print("=>我的")
             self.driver.click(u"uiautomator=>我的")
 
             LogAction.print("=>日历")
             self.driver.click(u"uiautomator=>日历")
 
-            LogAction.print("【验证点：获页面创建日程提醒字段】")
+            LogAction.print("【创建日程】")
             self.assertTrue(self.driver.element_wait("uiautomator=>创建日程提醒",10)!=None, "日历同步失败！！")
 
             BaseAdb.adb_back()

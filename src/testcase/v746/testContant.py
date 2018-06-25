@@ -21,13 +21,10 @@ class TestContant(unittest.TestCase):
             LogAction.print(isReset=True)
             Login(self.driver,user['name'], user['pwd']).login()
 
-            LogAction.print("【验证点：页面是否存在联系人字段】")
-            self.assertTrue(self.driver.get_element(u"uiautomator=>联系人",10) !=None, "页面找不到联系人字段")
-
             LogAction.print("=>点击联系人")
             self.driver.click(u"uiautomator=>联系人")
 
-            LogAction.print("【验证点：是否获取通知栏信息】")
+            LogAction.print("【通讯录同步】")
             self.assertTrue(self.waitfor_notification(), "通讯录同步失败！！")
             LogAction.save(func = "CheckAddressListError", status="success", explain=LogAction.print())
         except BaseException :

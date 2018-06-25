@@ -20,8 +20,6 @@ class TestPersion(unittest.TestCase):
         try:
             LogAction.print(isReset=True)
             Login(self.driver,user['name'], user['pwd']).login()
-            LogAction.print("【验证点：页面是否存在联系人字段】")
-            self.assertTrue(self.driver.get_element(u"uiautomator=>我的",10) !=None, "页面找不到联系人字段")
 
             LogAction.print("=>我的")
             self.driver.click(u"uiautomator=>我的")
@@ -29,7 +27,7 @@ class TestPersion(unittest.TestCase):
             LogAction.print("=>个人资料")
             self.driver.click(u"uiautomator=>个人资料")
 
-            LogAction.print("【验证点：是否获页面头像字段】")
+            LogAction.print("【个人头像】")
             self.assertTrue(self.wait_for_message(), "个人资料同步失败！！")
 
             BaseAdb.adb_back()

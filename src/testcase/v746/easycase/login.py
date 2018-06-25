@@ -33,13 +33,13 @@ class Login(unittest.TestCase):
 
         # 如果页面不在收集箱页面，清除缓存登录
         if self.driver.current_app().__contains__(".activity.MessageList"):
-            LogAction.print("=>杀进程启动，进入收件箱")
+            LogAction.print("=>杀进程，入收件箱")
             BaseAdb.adb_start_app("cn.cj.pe","com.mail139.about.LaunchActivity")
             # print("在主页")
             sleep(6)
             self.driver.click(u"uiautomator=>邮件")
         else:
-            LogAction.print("=>清除缓存后，重新登录")
+            LogAction.print("=>清缓存，重登录")
             # 杀进程启动，清除缓存，重新登录
             BaseAdb.adb_home()
             BaseAdb.adb_stop("cn.cj.pe")
@@ -80,7 +80,7 @@ class Login(unittest.TestCase):
             # 输入
             els = self.driver.get_elements("id=>cn.cj.pe:id/input",5)
 
-            LogAction.print("【验证点：是否进入登录界面】")
+            LogAction.print("【进入登录界面】")
             self.assertTrue(els != None, "没有进入登录 页面")
 
             LogAction.print('=>输入用户名' + self.username)
@@ -97,7 +97,7 @@ class Login(unittest.TestCase):
                 self.driver.click(u"uiautomator=>允许")
                 sleep(1)
 
-            LogAction.print('=>等待弹窗广告出现')
+            LogAction.print('=>等待弹窗广告')
             timeout = int(round(time() * 1000)) + 1*60 * 1000
             # 找到邮件结束
             while int(round(time() * 1000)) < timeout :
@@ -117,7 +117,7 @@ class Login(unittest.TestCase):
             sleep(2)
             self.driver.click("id=>cn.cj.pe:id/message_list_bottom_email",2)
 
-            LogAction.print('【验证点：等待收件箱底部导航栏出现】')
+            LogAction.print('【收件箱底部导航栏】')
             self.assertTrue(self.driver.get_element("id=>cn.cj.pe:id/message_list_bottom_email",60) != None, "登录失败！")
             LogAction.save(func = "testCaseLogin", status="success", explain=LogAction.print())
         except BaseException:
@@ -140,9 +140,8 @@ class Login(unittest.TestCase):
 
             sleep(5)
 
-            LogAction.print("=>右滑")
+            LogAction.print("=>右滑 * 2")
             self.driver.swipe_right()
-            LogAction.print("=>右滑")
             self.driver.swipe_right()
             print("点击坐标")
             # BaseAdb.adbTap(700, 2300)  # vivo 1603  w * 0.5, h * 0.899
@@ -156,17 +155,17 @@ class Login(unittest.TestCase):
             # BaseAdb.adbTap(500, 1700) #其他手机需要调试
             sleep(2)
 
-            LogAction.print("【验证点：是否进入登录界面】")
+            LogAction.print("【进入登录界面】")
             self.assertTrue(self.driver.get_element(u"uiautomator=>快速登录",10) != None, "页面不存在快捷登录按钮")
 
 
-            LogAction.print('=>点击快捷登录')
+            LogAction.print('=>点击快速登录')
             self.driver.click(u"uiautomator=>快速登录")
 
-            LogAction.print('等待收件箱出现')
+            LogAction.print('=>等待收件箱')
             self.driver.element_wait(u"uiautomator=>收件箱",10)
 
-            LogAction.print('【验证点：等待弹窗广告出现】')
+            LogAction.print('=>等待弹窗广告】')
             timeout = int(round(time() * 1000)) + 1*60 * 1000
             # 找到邮件结束
             while int(round(time() * 1000)) < timeout :
@@ -184,13 +183,15 @@ class Login(unittest.TestCase):
 
 
             sleep(2)
+            LogAction.print('=>点击底部导航栏')
             self.driver.click("id=>cn.cj.pe:id/message_list_bottom_email",2)
 
-            LogAction.print('【验证点：等待收件箱底部导航栏出现】')
+            LogAction.print('【收件箱底部导航栏】')
             self.assertTrue(self.driver.get_element("id=>cn.cj.pe:id/message_list_bottom_email",60) != None, "登录失败！")
-
+            LogAction.print('=>杀进程，清除缓存')
             BaseAdb.adb_stop("cn.cj.pe")
             BaseAdb.adb_clear("cn.cj.pe")
+
             LogAction.save(func = "testCaseOnBtnLogin", status="success", explain=LogAction.print())
         except BaseException:
             BaseImage.screenshot(self.driver, "oneBtnLoginError")
