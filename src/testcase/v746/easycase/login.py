@@ -21,6 +21,9 @@ class Login(unittest.TestCase):
             LogAction.print("=>当前页面在收件箱")
             BaseAdb.adb_start_app("cn.cj.pe","com.mail139.about.LaunchActivity")
             # print("在主页")
+            if self.driver.element_wait("id=>cn.cj.pe:id/btn", 2) != None:
+                self.driver.click("id=>cn.cj.pe:id/btn", 2)
+
             sleep(6)
             self.driver.click(u"uiautomator=>邮件")
             return
