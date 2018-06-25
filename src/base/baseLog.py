@@ -18,8 +18,8 @@ class LogAction():
         print(_path)
         print(msg)
         # 去除前后空格
-        # with open(_path.lstrip(" ").rstrip(" "),'a+') as fn:
-        #     fn.write(msg+'\n')
+        with open(_path.lstrip(" ").rstrip(" "),'a+') as fn:
+            fn.write(msg+'\n')
 
     def print(self, str="", isReset= False):
         print(str)
