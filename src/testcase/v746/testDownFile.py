@@ -6,7 +6,7 @@ from src.base.baseLog import LogAction
 from src.testcase.v746.easycase.login import Login
 from src.readwriteconf.initData import InitData, duser
 from src.testcase.v746.easycase.openDown import OpenDown
-
+from src.testcase.v746.easycase.send import Send
 
 users = duser().getuser()
 user = {"name": users['name'], 'pwd': users['pwd']}
@@ -25,6 +25,11 @@ class TestDownFile(unittest.TestCase):
         '''下载附件'''
         LogAction.print(isReset=True)
         Login(self.driver,user['name'], user['pwd']).login()
+
+        print("判断是否存在邮件")
+        if self.driver.element_wait("uiautomator=>SendAttach") == None:
+            Send(self.driver,user["name"]+'@139.com').send_action(subject="SendAttach")
+
         # 打开附件
         od = OpenDown(self.driver, path, filename)
         # 下载附件

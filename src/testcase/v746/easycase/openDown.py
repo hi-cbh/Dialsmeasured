@@ -7,6 +7,8 @@ from src.base.baseAdb import BaseAdb
 from src.base.baseFile import BaseFile
 from src.base.baseImage import BaseImage
 from src.base.baseLog import LogAction
+
+
 class OpenDown(unittest.TestCase):
     
     def __init__(self,driver, path, filename):
@@ -19,23 +21,6 @@ class OpenDown(unittest.TestCase):
         try:
 
             # LogAction.print(isReset=True)
-            LogAction.print("=>加载本地邮件")
-            timeout = int(round(time.time() * 1000)) + 1*20 * 1000
-            # 找到邮件结束
-            while int(round(time.time() * 1000)) < timeout :
-
-                el = self.driver.element_wait(u"uiautomator=>暂无邮件",secs = 2)
-                if el != None:
-                    print("下拉")
-                    self.driver.swipe_down()
-                    time.sleep(1)
-                    self.driver.swipe_down()
-                else:
-                    print("列表有邮件，退出循环")
-                    break
-
-                time.sleep(1)
-
 
             # 点击第一封
             LogAction.print('=>点击 %s' %subject)
