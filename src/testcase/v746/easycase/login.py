@@ -40,12 +40,12 @@ class Login(unittest.TestCase):
             BaseAdb.adb_home()
             BaseAdb.adb_stop("cn.cj.pe")
             sleep(5)
-            self.login_action(is_save=False)
+            self.login_action()
 
 
 
 
-    def login_action(self, first_fogin=False, is_save=True):
+    def login_action(self, first_fogin=False):
         '''账号登录'''
         try:
             LogAction.print(isReset=True)

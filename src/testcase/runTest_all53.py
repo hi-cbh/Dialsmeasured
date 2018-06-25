@@ -20,20 +20,17 @@ from src.testcase.v746.testPerson import TestPersion
 from src.testcase.v746.testPush import TestPush
 from src.testcase.v746.testSend import TestSend
 from src.testcase.v746.testSkyDrive import TestSkyDrive
-
+from src.testcase.HTMLTestRunner import HTMLTestRunner
+from src.reportlib.reportclass import ReportClass
+from src.base.baseAdb import BaseAdb
 
 
 localPath = "/var/appiumRunLog"
 # 信息存储路径
 reportPath = localPath + "/report/"
 
-from src.testcase.HTMLTestRunner import HTMLTestRunner
-from src.reportlib.reportclass import ReportClass
-from src.base.baseAdb import BaseAdb
-
 users = duser().getuser()
 user = {"name": users['name'], 'pwd': users['pwd']}
-
 
 '''
 1、账号统一；
@@ -55,7 +52,6 @@ class TestCase(unittest.TestCase):
         self.driver.quit()
         print("运行结束")
         time.sleep(5)
-
 
     def testCaseOnBtnLogin(self):
         '''一键登录'''
@@ -93,7 +89,6 @@ class TestCase(unittest.TestCase):
         '''日历'''
         TestCalendar(self.driver).testCaseCalendar()
 
-
     def testCaseDiscover(self):
         '''发现主页'''
         TestDiscover(self.driver).testCaseDiscover()
@@ -127,88 +122,47 @@ if __name__ == "__main__":
     testtxt = []
 
     testtxt.append(('账号登录',"testCaseLogin"))
-
     testtxt.append(('一键登录',"testCaseOnBtnLogin"))
-
     testtxt.append(('发送邮件带附件',"testCaseSendNoAttach"))
     testtxt.append(('发送邮件带附件',"testCaseSendAttach"))
-
     testtxt.append(('云端转发',"testCaseFwdSend"))
-
     testtxt.append(('回复邮件',"testCaseReply"))
-
     testtxt.append(('SMTP转发',"testCaseForward"))
-
     testtxt.append(('日历',"testCaseCalendar"))
-
     testtxt.append(('发现主页',"testCaseDiscover"))
-
     testtxt.append(('个人资料',"testCasePersionMessages"))
-
     testtxt.append(('彩云网盘',"testCaseSkyDrive"))
-
     testtxt.append(('附件下载',"testDownFile"))
-
     testtxt.append(('联系人同步',"testCaseCheckAddressList"))
-
     testtxt.append(('收件箱列表中精选',"testCaseSelected"))
-
     testtxt.append(('接收推送',"testCasePush"))
-
 
     suite = unittest.TestSuite()
     suite.addTest(TestCase('testCaseOnBtnLogin'))
-
     suite.addTest(TestCase('testCaseLogin'))
-
     suite.addTest(TestCase('testCaseSendNoAttach'))
-
     suite.addTest(TestCase('testCaseSendAttach'))
-
     suite.addTest(TestCase('testCaseFwdSend'))
-
     suite.addTest(TestCase('testCaseForward'))
-
     suite.addTest(TestCase('testCaseReply'))
-
     suite.addTest(TestCase('testCaseCalendar'))
-
-    suite.addTest(TestCase('testCaseDiscover'))
-
     suite.addTest(TestCase('testCasePersionMessages'))
-
     suite.addTest(TestCase('testCaseSkyDrive'))
-
     suite.addTest(TestCase('testDownFile'))
-
     suite.addTest(TestCase('testCaseCheckAddressList'))
-
     suite.addTest(TestCase('testCaseSelected'))
-
     suite.addTest(TestCase('testCasePush'))
-
     runner = unittest.TextTestRunner()
-
-
 
     # 生成html
     now = time.strftime("%Y-%m-%d %H_%M_%S")
-    filename_now = time.strftime("%Y_%m_%d_%H_%M_%S")
-    filename = reportPath + now + '_result.html'
-    fp = open(filename, 'wb')
+    fp = open(reportPath + now + '_result.html', 'wb')
     runner = HTMLTestRunner(stream=fp,title='Test Report', description='DialsMeasured with: ')
     testResultReport = runner.run(suite)
     fp.close()
 
-    time.sleep(5)
     # 休眠状态
     BaseAdb.adb_sleep()
     time.sleep(5)
 
     ReportClass(testResultReport.failures,testtxt,"",now).all()
-
-    # time.sleep(5)
-    # 休眠状态
-    # BaseAdb.adb_sleep()
-
-    time.sleep(10)

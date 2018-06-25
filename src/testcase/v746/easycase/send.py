@@ -75,7 +75,7 @@ class Send(unittest.TestCase):
             self.fail('【邮件发送】出错')
 
 
-    def send_action(self,subject, is_save=True):
+    def send_action(self,subject):
         '''正常的发送邮件，添加附件'''
         try:
             # 点击写邮件按钮
