@@ -19,7 +19,7 @@ def run_case():
     BaseAdb.adb_wake_up()
     time.sleep(5)
 
-    print('=================测试用例加入测试套件=================')
+    print('=================重跑用例=================')
     suite = unittest.TestSuite()
     suite.addTest(TestCase('testCaseOnBtnLogin'))
     suite.addTest(TestCase('testCaseLogin'))
