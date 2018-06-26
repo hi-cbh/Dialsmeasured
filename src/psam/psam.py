@@ -273,7 +273,7 @@ class Psam(object):
         height = self.driver.get_window_size()['height']
         self.driver.swipe(width - 50, height / 2, 50, height /2 ,
                           500)
-        time.sleep(1)
+        time.sleep(2)
 
     def get_window_size(self):
         width = self.driver.get_window_size()['width']

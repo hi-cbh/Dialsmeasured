@@ -1,6 +1,8 @@
 # urs/bin/python
 # encoding:utf-8
 import time,unittest
+
+from src.readwriteconf.rwconf import ReadWriteConfFile
 from src.base.baseAdb import BaseAdb
 from src.testcase.v746.easycase.login import Login
 from src.readwriteconf.initData import duser
@@ -32,7 +34,10 @@ class TestPersion(unittest.TestCase):
 
             BaseAdb.adb_back()
             LogAction.save(func = "testCasePersionMessages", status="success", explain=LogAction.print())
+            ReadWriteConfFile.value_set_zero("testCasePersionMessages")
         except BaseException :
+            ReadWriteConfFile.value_add_one("testCasePersionMessages")
+
             BaseImage.screenshot(self.driver, "testCasePersionMessages")
             time.sleep(2)
             LogAction.save(func = "testCasePersionMessages", status="fail", explain=LogAction.print())

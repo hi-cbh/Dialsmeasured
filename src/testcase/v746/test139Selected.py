@@ -3,6 +3,7 @@
 
 import time,unittest
 
+from src.readwriteconf.rwconf import ReadWriteConfFile
 from src.base.baseAdb import BaseAdb
 from src.testcase.v746.easycase.login import Login
 from src.readwriteconf.initData import duser
@@ -68,7 +69,10 @@ class TestSelect(unittest.TestCase):
 
             BaseAdb.adb_back()
             LogAction.save(func = "testCaseSelected", status="success", explain=LogAction.print())
+
+            ReadWriteConfFile.value_set_zero("testCaseSelected")
         except BaseException:
+            ReadWriteConfFile.value_add_one("testCaseSelected")
             BaseImage.screenshot(self.driver, "Case139SelectedError")
             time.sleep(2)
             LogAction.save(func = "testCaseSelected", status="fail", explain=LogAction.print())

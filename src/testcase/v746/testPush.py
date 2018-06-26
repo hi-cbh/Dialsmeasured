@@ -1,20 +1,17 @@
 # urs/bin/python
 # encoding:utf-8
-import datetime
-import random,time,unittest
+import time,unittest
+
+from src.readwriteconf.rwconf import ReadWriteConfFile
 from src.base.baseAdb import BaseAdb
-from src.psam.psam import Psam
 from src.testcase.v746.easycase.login import Login
 from src.mail.sendEmailSmtp import SendMail
-from src.readwriteconf.initData import InitData, duser
+from src.readwriteconf.initData import duser
 from src.base.baseImage import BaseImage
 from src.base.baseLog import LogAction
-from src.readwriteconf.saveData import save
-
 
 users = duser().getuser()
 user = {"name": users['name'], 'pwd': users['pwd']}
-
 sender = {"name": users['name2'], 'pwd': users['pwd2']} # 接收者，改为发送者
 
 '''
@@ -54,7 +51,9 @@ class TestPush(unittest.TestCase):
             BaseAdb.adb_start_app(app_package, app_activity)
             time.sleep(5)
             LogAction.save(func = "testCasePush", status="success", explain=LogAction.print())
+            ReadWriteConfFile.value_set_zero("testCasePush")
         except BaseException:
+            ReadWriteConfFile.value_add_one("testCasePush")
             BaseImage.screenshot(self.driver, "PushError")
             time.sleep(2)
             LogAction.save(func = "testCasePush", status="fail", explain=LogAction.print())

@@ -1,6 +1,8 @@
 # urs/bin/python
 # encoding:utf-8
 import time,unittest
+
+from src.readwriteconf.rwconf import ReadWriteConfFile
 from src.base.baseAdb import BaseAdb
 from src.testcase.v746.easycase.login import Login
 from src.readwriteconf.initData import duser
@@ -27,7 +29,9 @@ class TestContant(unittest.TestCase):
             LogAction.print("=>【通讯录同步】")
             self.assertTrue(self.waitfor_notification(), "通讯录同步失败！！")
             LogAction.save(func = "CheckAddressListError", status="success", explain=LogAction.print())
+            ReadWriteConfFile.value_set_zero("CheckAddressListError")
         except BaseException :
+            ReadWriteConfFile.value_add_one("CheckAddressListError")
             BaseImage.screenshot(self.driver, "CheckAddressListError")
             time.sleep(5)
             LogAction.save(func = "testCaseCheckAddressList", status="fail", explain=LogAction.print())

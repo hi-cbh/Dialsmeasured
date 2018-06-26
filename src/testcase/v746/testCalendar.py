@@ -3,6 +3,7 @@
 
 import time,unittest
 
+from src.readwriteconf.rwconf import ReadWriteConfFile
 from src.base.baseAdb import BaseAdb
 from src.testcase.v746.easycase.login import Login
 from src.readwriteconf.initData import  duser
@@ -36,7 +37,9 @@ class TestCalendar(unittest.TestCase):
 
             BaseAdb.adb_back()
             LogAction.save(func = "testCaseCalendar", status="success", explain=LogAction.print())
+            ReadWriteConfFile.value_set_zero("testCaseCalendar")
         except BaseException :
+            ReadWriteConfFile.value_add_one("testCaseCalendar")
             BaseImage.screenshot(self.driver, "testCaseCalendar")
             time.sleep(2)
             LogAction.save(func = "testCaseCalendar", status="fail", explain=LogAction.print())

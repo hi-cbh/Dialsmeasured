@@ -1,14 +1,12 @@
 # urs/bin/python
 # encoding:utf-8
-import datetime
 import time,unittest
 
+from src.readwriteconf.rwconf import ReadWriteConfFile
 from src.base.baseAdb import BaseAdb
-from src.psam.psam import Psam
 from src.testcase.v746.easycase.login import Login
-from src.readwriteconf.initData import InitData, duser
+from src.readwriteconf.initData import duser
 from src.base.baseImage import BaseImage
-from src.readwriteconf.saveData import save
 from src.base.baseLog import LogAction
 
 users = duser().getuser()
@@ -34,8 +32,10 @@ class TestSkyDrive(unittest.TestCase):
             LogAction.print("=>【彩云网盘】")
             self.assertTrue(self.driver.element_wait("uiautomator=>手机图片",60)!=None, "彩云网盘同步失败！！")
             BaseAdb.adb_back()
-            LogAction.save(func = "testCaseSkyDrive", status="success", explain=LogAction.print())
+            LogAction.save(func = "testCaseSkyDrive", explain=LogAction.print())
+            ReadWriteConfFile.value_set_zero("testCaseSkyDrive")
         except BaseException :
+            ReadWriteConfFile.value_add_one("testCaseSkyDrive")
             BaseImage.screenshot(self.driver, "testCaseSkyDrive")
             time.sleep(5)
             LogAction.save(func = "testCaseSkyDrive", status="fail", explain=LogAction.print())

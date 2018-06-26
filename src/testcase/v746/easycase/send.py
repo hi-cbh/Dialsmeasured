@@ -3,6 +3,8 @@
 
 import time
 import unittest
+
+from src.readwriteconf.rwconf import ReadWriteConfFile
 from src.base.baseAdb import BaseAdb
 from src.base.baseImage import BaseImage
 from src.base.baseLog import LogAction
@@ -65,7 +67,9 @@ class Send(unittest.TestCase):
                     break
 
             LogAction.save(func = "send", status="success", explain=LogAction.print())
+            ReadWriteConfFile.value_set_zero("testCaseSendNoAttach")
         except BaseException:
+            ReadWriteConfFile.value_add_one("testCaseSendNoAttach")
             time.sleep(2)
             LogAction.save(func = "send", status="fail", explain=LogAction.print())
             self.fail('【邮件发送】出错')
@@ -120,7 +124,9 @@ class Send(unittest.TestCase):
                 else:
                     break
             LogAction.save(func = "send_action", status="success", explain=LogAction.print())
+            ReadWriteConfFile.value_set_zero("testCaseSendAttach")
         except BaseException:
+            ReadWriteConfFile.value_add_one("testCaseSendAttach")
             BaseImage.screenshot(self.driver, "SendError")
             time.sleep(2)
             LogAction.save(func = "send_action", status="fail", explain=LogAction.print())
@@ -171,7 +177,9 @@ class Send(unittest.TestCase):
                 else:
                     break
             LogAction.save(func = "testCaseFwdSend", status="success", explain=LogAction.print())
+            ReadWriteConfFile.value_set_zero("testCaseFwdSend")
         except BaseException:
+            ReadWriteConfFile.value_add_one("testCaseFwdSend")
             BaseImage.screenshot(self.driver, "fwSendError")
             time.sleep(2)
             LogAction.save(func = "testCaseFwdSend", status="fail", explain=LogAction.print())
@@ -232,8 +240,10 @@ class Send(unittest.TestCase):
                     time.sleep(2)
                 else:
                     break
-            LogAction.save(func = "testCaseForward", status="success", explain=LogAction.print())
+            LogAction.save(func = "testCaseForward", explain=LogAction.print())
+            ReadWriteConfFile.value_set_zero("testCaseForward")
         except BaseException:
+            ReadWriteConfFile.value_add_one("testCaseForward")
             BaseImage.screenshot(self.driver, "forwardError")
             time.sleep(2)
             LogAction.save(func = "testCaseForward", status="fail", explain=LogAction.print())
@@ -285,8 +295,11 @@ class Send(unittest.TestCase):
                     time.sleep(2)
                 else:
                     break
-            LogAction.save(func = "testCaseReply", status="success", explain=LogAction.print())
+            LogAction.save(func = "testCaseReply", explain=LogAction.print())
+
+            ReadWriteConfFile.value_set_zero("testCaseReply")
         except BaseException:
+            ReadWriteConfFile.value_add_one("testCaseReply")
             BaseImage.screenshot(self.driver, "replyError")
             time.sleep(2)
             LogAction.save(func = "testCaseReply", status="fail", explain=LogAction.print())

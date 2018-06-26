@@ -3,6 +3,8 @@
 
 from time import sleep,time
 import unittest
+
+from src.readwriteconf.rwconf import ReadWriteConfFile
 from src.base.baseAdb import BaseAdb
 from src.base.baseImage import BaseImage
 from src.base.baseLog import LogAction
@@ -111,8 +113,6 @@ class Login(unittest.TestCase):
                 else:
                     sleep(0.5)
                     self.driver.swipe_down()
-                    # sleep(0.5)
-                    # self.driver.swipe_down()
 
                 sleep(0.5)
 
@@ -124,7 +124,9 @@ class Login(unittest.TestCase):
             LogAction.print('=>【收件箱底部导航栏】')
             self.assertTrue(self.driver.get_element("id=>cn.cj.pe:id/message_list_bottom_email",60) != None, "登录失败！")
             LogAction.save(func = "testCaseLogin", status="success", explain=LogAction.print())
+            ReadWriteConfFile.value_set_zero("testCaseLogin")
         except BaseException:
+            ReadWriteConfFile.value_add_one("testCaseLogin")
             BaseImage.screenshot(self.driver, "LoginError")
             sleep(5)
             LogAction.save(func = "testCaseLogin", status="fail", explain=LogAction.print())
@@ -180,8 +182,6 @@ class Login(unittest.TestCase):
                 else:
                     sleep(0.5)
                     self.driver.swipe_down()
-                    # sleep(0.5)
-                    # self.driver.swipe_down()
 
                 sleep(0.5)
 
@@ -195,9 +195,11 @@ class Login(unittest.TestCase):
             LogAction.print('=>杀进程，清除缓存')
             BaseAdb.adb_stop("cn.cj.pe")
             BaseAdb.adb_clear("cn.cj.pe")
-
             LogAction.save(func = "testCaseOnBtnLogin", status="success", explain=LogAction.print())
+
+            ReadWriteConfFile.value_set_zero("testCaseOnBtnLogin")
         except BaseException:
+            ReadWriteConfFile.value_add_one("testCaseOnBtnLogin")
             BaseImage.screenshot(self.driver, "oneBtnLoginError")
             sleep(5)
             LogAction.save(func = "testCaseOnBtnLogin", status="fail", explain=LogAction.print())

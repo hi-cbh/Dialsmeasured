@@ -93,20 +93,20 @@ class ReportClass(object):
                 tmp = int(rwc.get_section_value("reportconf", k)) + value
                 rwc.set_section_value('reportconf', k, str(tmp))
 
-        time.sleep(2)
+        # time.sleep(2)
         # 用于非连续错误用例清0
-        rwc.add_section('caseconf')
-        for k,v in ReportClass._result.items():
-            if v == "Success" and int(rwc.get_section_value('caseconf', k)) !=0 :
-                rwc.set_section_value('caseconf', k, "0")
+        # rwc.add_section('caseconf')
+        # for k,v in ReportClass._result.items():
+        #     if v == "Success" and int(rwc.get_section_value('caseconf', k)) !=0 :
+        #         rwc.set_section_value('caseconf', k, "0")
 
-        time.sleep(2)
-        # 记录连续错误的用例
-        for k,v in ReportClass._result.items():
-            if v == "Fail":
-                x = rwc.get_section_value('caseconf', k)
-                x = int(x) + 1
-                rwc.set_section_value('caseconf', k, str(x))
+        # time.sleep(2)
+        # # 记录连续错误的用例
+        # for k,v in ReportClass._result.items():
+        #     if v == "Fail":
+        #         x = rwc.get_section_value('caseconf', k)
+        #         x = int(x) + 1
+        #         rwc.set_section_value('caseconf', k, str(x))
 
 
 
@@ -120,17 +120,14 @@ class ReportClass(object):
 
     def _save_date(self):
         '''保存每一轮的数据，分为带样式和无样式'''
-        # 获取用例对应的时延
-        demotime=save.get_value()
-        print("时延：%s" %demotime)
+
+        print('=================将结果写入日志=================')
 
         resulttxt = [] # 写入日志
         resulttxt.append('\n'+"====="+self.nowtime +"====="+'\n')
-        resulttxt.append(self.speed +'\n')
 
         sendresult = [] # 邮件发送正文
         sendresult.append('\n'+"====="+self.nowtime +"====="+'\n')
-        sendresult.append(self.speed+'\n')
 
         # 写入文件，并添加发送邮件格式
         for case, reason in self.caseresult.items():
@@ -141,8 +138,6 @@ class ReportClass(object):
             else:
                 # 用例success
                 sendresult.append('case：<font size="3" color="blue"> %s </font> , result：<font size="3" color="green"> %s </font>\n' %(case, reason) )
-
-
 
         #每天的测试记录
         for line in resulttxt:
@@ -422,7 +417,7 @@ class ReportClass(object):
         2、出现错误的结果不纳入计算范围内
         :return:
         '''
-
+        print('=================统计并发送邮件处理=================')
         rwc.add_section('sendconf')
         changetime = rwc.get_section_value('sendconf', 'changetime')
         changetime = int (changetime)

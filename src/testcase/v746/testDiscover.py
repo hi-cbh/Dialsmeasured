@@ -3,6 +3,7 @@
 
 import time,unittest
 
+from src.readwriteconf.rwconf import ReadWriteConfFile
 from src.testcase.v746.easycase.login import Login
 from src.readwriteconf.initData import duser
 from src.base.baseImage import BaseImage
@@ -29,7 +30,9 @@ class TestDiscover(unittest.TestCase):
             LogAction.print('=>【发现页面】')
             self.assertTrue(self.driver.element_wait(u"uiautomator=>139精选",80),"页面显示不正常")
             LogAction.save(func = "testCaseDiscover", status="success", explain=LogAction.print())
+            ReadWriteConfFile.value_set_zero("testCaseDiscover")
         except BaseException:
+            ReadWriteConfFile.value_add_one("testCaseDiscover")
             BaseImage.screenshot(self.driver, "testCaseDiscover")
             time.sleep(2)
             LogAction.save(func = "testCaseDiscover", status="fail", explain=LogAction.print())

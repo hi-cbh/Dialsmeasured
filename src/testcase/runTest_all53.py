@@ -118,7 +118,8 @@ if __name__ == "__main__":
     BaseAdb.adb_wake_up()
     time.sleep(5)
 
-    print('需要运行的脚本')
+
+    print('=================中文-英文对应测试用例=================')
     testtxt = []
 
     testtxt.append(('账号登录',"testCaseLogin"))
@@ -137,6 +138,7 @@ if __name__ == "__main__":
     testtxt.append(('收件箱列表中精选',"testCaseSelected"))
     testtxt.append(('接收推送',"testCasePush"))
 
+    print('=================测试用例加入测试套件=================')
     suite = unittest.TestSuite()
     suite.addTest(TestCase('testCaseOnBtnLogin'))
     suite.addTest(TestCase('testCaseLogin'))
@@ -154,15 +156,16 @@ if __name__ == "__main__":
     suite.addTest(TestCase('testCasePush'))
     runner = unittest.TextTestRunner()
 
+    print('=================运行测试=================')
     # 生成html
     now = time.strftime("%Y-%m-%d %H_%M_%S")
     fp = open(reportPath + now + '_result.html', 'wb')
     runner = HTMLTestRunner(stream=fp,title='Test Report', description='DialsMeasured with: ')
     testResultReport = runner.run(suite)
     fp.close()
-
+    print('=================运行结束=================')
     # 休眠状态
     BaseAdb.adb_sleep()
     time.sleep(5)
-
+    print('=================处理测试结果=================')
     ReportClass(testResultReport.failures,testtxt,"",now).all()

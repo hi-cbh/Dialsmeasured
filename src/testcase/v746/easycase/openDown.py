@@ -3,6 +3,8 @@
 
 import time
 import unittest
+
+from src.readwriteconf.rwconf import ReadWriteConfFile
 from src.base.baseAdb import BaseAdb
 from src.base.baseFile import BaseFile
 from src.base.baseImage import BaseImage
@@ -51,7 +53,9 @@ class OpenDown(unittest.TestCase):
             BaseAdb.adb_back()
             BaseAdb.adb_back()
             LogAction.save(func = "testDownFile", status="success", explain=LogAction.print())
+            ReadWriteConfFile.value_set_zero("testDownFile")
         except BaseException:
+            ReadWriteConfFile.value_add_one("testDownFile")
             BaseImage.screenshot(self.driver, "DownFileError")
             time.sleep(5)
             LogAction.save(func = "testDownFile", status="fail", explain=LogAction.print())
