@@ -5,9 +5,9 @@ from src.base.baseTime import BaseTime
 from src.base.baseAdb import BaseAdb
 from src.readwriteconf.rwconf import ReadWriteConfFile as rwc
 from src.readwriteconf.initData import InitData
-from src.readwriteconf.saveData import save
 from src.readwriteconf.calcSucPer import CalcSuccess
 from collections import Counter
+from src.testcase.runTest_rest import run_case
 
 logPath = InitData().get_sys_path()["savepath"] + "/logs/"
 logfileName= BaseTime.get_date_hour() + '.log'
@@ -481,7 +481,17 @@ class ReportClass(object):
                 rwc.set_section_value('sendconf', 'send', 'False')
 
             maxtimes = rwc.get_section_value('sendconf', 'maxtimes')
+
+            # 获取错误次数
             err = self._read_case_conf(int(maxtimes))
+
+            # 出现错误，全部用例重新跑
+            if len(err) != 0:
+                run_case()
+
+            # 再次获取错误次数
+            err = self._read_case_conf(int(maxtimes))
+
 
             # 错误次数
             if len(err) != 0:
