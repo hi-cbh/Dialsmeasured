@@ -230,8 +230,7 @@ class SendMail():
         mail_pass = self.pwd
 
         if is_test:
-            # areceiver = 'hi_cbh@qq.com'
-            areceiver = '13501538531@139.com'
+            areceiver = 'hi_cbh@qq.com'
         else:
             # areceiver = "hi_cbh@qq.com,wujun11121@163.com"
             areceiver = "hi_cbh@qq.com"
