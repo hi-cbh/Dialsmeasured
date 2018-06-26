@@ -251,8 +251,8 @@ class SendMail():
 
         try:
             s = smtplib.SMTP()
-            # s.connect(smtp_server, "25")
-            s.connect(smtp_server, "465")
+            s.connect(smtp_server, "25")
+            # s.connect(smtp_server, "465")
             s.login(from_mail, mail_pass)
             s.sendmail(from_mail, areceiver.split(','), msg.as_string())
             s.quit()
@@ -357,6 +357,6 @@ if __name__ == "__main__":
         # s.sendMail('testEmail','Python 邮件发送测试...')
 
         line = ["testemail"]
-        s.send_mail_str_163_ssl("testEmail"," 邮件发送测试",is_test=True)
+        s.send_mail_str_163("testEmail"," 邮件发送测试",is_test=True)
         # s.send_mail_out_163("testEmail",["邮件发送测试","test2"],is_test=True)
         time.sleep(5)
