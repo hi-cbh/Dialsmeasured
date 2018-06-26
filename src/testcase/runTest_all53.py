@@ -4,8 +4,9 @@
 import unittest,os,sys,time
 
 p = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-print("path: %s" %p)
+print("spath: %s" %p)
 sys.path.append(p+"/")
+
 # 添加环境路径，脚本
 from src.readwriteconf.initData import duser
 from src.mail.mailOperation import EmailOperation
@@ -36,7 +37,6 @@ user = {"name": users['name'], 'pwd': users['pwd']}
 1、账号统一；
 2、用例使用一个文件中
 '''
-
 class TestCase(unittest.TestCase):
 
     driver = None

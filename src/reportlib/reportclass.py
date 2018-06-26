@@ -1,13 +1,18 @@
+import os,sys
+import time, datetime,copy
+
+p = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+print("path: %s" %p)
+sys.path.append(p+"/")
+
 from src.mail.sendEmailSmtp import  SendMail
-import time, datetime
-import copy
 from src.base.baseTime import BaseTime
 from src.base.baseAdb import BaseAdb
 from src.readwriteconf.rwconf import ReadWriteConfFile as rwc
 from src.readwriteconf.initData import InitData
 from src.readwriteconf.calcSucPer import CalcSuccess
 from collections import Counter
-from src.testcase.runTest_rest import run_case
+# from src.testcase.runTest_rest import RunAll
 
 logPath = InitData().get_sys_path()["savepath"] + "/logs/"
 logfileName= BaseTime.get_date_hour() + '.log'
@@ -481,13 +486,13 @@ class ReportClass(object):
                 rwc.set_section_value('sendconf', 'send', 'False')
 
             maxtimes = rwc.get_section_value('sendconf', 'maxtimes')
-
-            # 获取错误次数
-            err = self._read_case_conf(int(maxtimes))
-
-            # 出现错误，全部用例重新跑
-            if len(err) != 0:
-                run_case()
+            #
+            # # 获取错误次数
+            # err = self._read_case_conf(int(maxtimes))
+            #
+            # # 出现错误，全部用例重新跑
+            # if len(err) != 0:
+            #     RunAll().run_case()
 
             # 再次获取错误次数
             err = self._read_case_conf(int(maxtimes))
