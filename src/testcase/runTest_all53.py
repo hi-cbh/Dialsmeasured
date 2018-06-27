@@ -1,10 +1,9 @@
 # urs/bin/python
 # encoding:utf-8
-
 import unittest,os,sys,time
 
 p = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-print("spath: %s" %p)
+print("all53 path: %s" %p)
 sys.path.append(p+"/")
 
 # 添加环境路径，脚本
@@ -43,7 +42,7 @@ class TestCase(unittest.TestCase):
 
     @classmethod
     def setUpClass(self):
-        # BaseAdb.adb_intall_uiautmator()
+        BaseAdb.adb_intall_uiautmator()
         self.driver = Psam(version="6.0")
         EmailOperation(user["name"]+"@139.com", user["pwd"]).clear_forlder(['INBOX'])
 
