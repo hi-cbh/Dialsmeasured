@@ -18,6 +18,12 @@ class BaseAdb(object):
         '''杀进程'''
         self.adb_shell(self.path + 'adb shell am force-stop %s' % cmd)
 
+
+    def adb_devicename(self):
+        value = os.popen("adb shell getprop ro.product.model")
+        return  value.readline()
+
+
     def add_pressmission(self):
         '''添加权限'''
         self.adb_shell('adb shell pm grant cn.cj.pe android.permission.WRITE_EXTERNAL_STORAGE')
@@ -278,4 +284,4 @@ BaseAdb = BaseAdb()
 
 
 if __name__ == '__main__':
-    BaseAdb.adb_sleep()
+    print(BaseAdb.adb_devicename())

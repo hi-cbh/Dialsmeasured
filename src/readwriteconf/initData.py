@@ -50,16 +50,17 @@ class duser(object):
         print("__getusers.........")
         d = InitData().get_users()
 
-        # username = "13533218540"
-        # pwd = "hy12345678"
+        # 调试账号
+        username = "13533218540"
+        pwd = "hy12345678"
 
-        # 主账号
-        if datetime.datetime.now().hour%2 == 0:
-            username = d['user3']
-            pwd = d['pwd3']
-        else:
-            username = d['user4']
-            pwd = d['pwd4']
+        # # 主账号
+        # if datetime.datetime.now().hour%2 == 0:
+        #     username = d['user3']
+        #     pwd = d['pwd3']
+        # else:
+        #     username = d['user4']
+        #     pwd = d['pwd4']
 
         username2 = d['user2']
         pwd2 = d['pwd2']

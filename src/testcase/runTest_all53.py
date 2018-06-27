@@ -42,7 +42,13 @@ class TestCase(unittest.TestCase):
 
     @classmethod
     def setUpClass(self):
-        BaseAdb.adb_intall_uiautmator()
+        BaseAdb.adb_wake_up()
+        time.sleep(10)
+
+        devicename = BaseAdb.adb_devicename()
+        if devicename.__contains__("vivo"):
+            BaseAdb.adb_intall_uiautmator()
+
         self.driver = Psam(version="6.0")
         EmailOperation(user["name"]+"@139.com", user["pwd"]).clear_forlder(['INBOX'])
 
@@ -114,16 +120,13 @@ class TestCase(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    BaseAdb.adb_wake_up()
-    time.sleep(5)
-
 
     print('=================中文-英文对应测试用例=================')
     testtxt = []
 
     testtxt.append(('账号登录',"testCaseLogin"))
     testtxt.append(('一键登录',"testCaseOnBtnLogin"))
-    testtxt.append(('发送邮件带附件',"testCaseSendNoAttach"))
+    testtxt.append(('发送邮件无附件',"testCaseSendNoAttach"))
     testtxt.append(('发送邮件带附件',"testCaseSendAttach"))
     testtxt.append(('云端转发',"testCaseFwdSend"))
     testtxt.append(('回复邮件',"testCaseReply"))

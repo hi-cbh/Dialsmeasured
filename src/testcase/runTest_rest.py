@@ -3,41 +3,101 @@
 
 import unittest,os,sys,time
 
+
+
 p = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-print("path: %s" %p)
+print("RunAll path: %s" %p)
 sys.path.append(p+"/")
+from src.readwriteconf.initData import duser
+from src.mail.mailOperation import EmailOperation
+from src.psam.psam import Psam
+from src.testcase.v746.test139Selected import TestSelect
+from src.testcase.v746.testCalendar import TestCalendar
+from src.testcase.v746.testContant import TestContant
+from src.testcase.v746.testDiscover import TestDiscover
+from src.testcase.v746.testDownFile import TestDownFile
+from src.testcase.v746.testLogin import TestLogin
+from src.testcase.v746.testPerson import TestPersion
+from src.testcase.v746.testPush import TestPush
+from src.testcase.v746.testSend import TestSend
+from src.testcase.v746.testSkyDrive import TestSkyDrive
 # 添加环境路径，脚本
 from src.base.baseAdb import BaseAdb
-from src.testcase.runTest_all53 import TestCase
+# from src.testcase.runTest_all53 import TestCase
+
+
+localPath = "/var/appiumRunLog"
+# 信息存储路径
+reportPath = localPath + "/report/"
+
+users = duser().getuser()
+user = {"name": users['name'], 'pwd': users['pwd']}
+
+
 '''
-全部用例重跑
+全部用例重跑，这里需要优化，逻辑不对
+问题：
+1、使用调用 TestCase类的方法，出现异常。
+
+替代方法：
+1、变相的把case当做方法调用
 '''
 
-class RunAll(unittest.TestCase):
+class RunAll(object):
 
     def run_case(self):
         BaseAdb.adb_wake_up()
-        time.sleep(5)
+        time.sleep(10)
+        print("run................")
+
+        BaseAdb.adb_intall_uiautmator()
+        self.driver2 = Psam(version="6.0")
+        EmailOperation(user["name"]+"@139.com", user["pwd"]).clear_forlder(['INBOX'])
 
         print('=================重跑用例=================')
-        suite = unittest.TestSuite()
-        suite.addTest(TestCase('testCaseOnBtnLogin'))
-        suite.addTest(TestCase('testCaseLogin'))
-        suite.addTest(TestCase('testCaseSendNoAttach'))
-        suite.addTest(TestCase('testCaseSendAttach'))
-        suite.addTest(TestCase('testCaseFwdSend'))
-        suite.addTest(TestCase('testCaseForward'))
-        suite.addTest(TestCase('testCaseReply'))
-        suite.addTest(TestCase('testCaseCalendar'))
-        suite.addTest(TestCase('testCasePersionMessages'))
-        suite.addTest(TestCase('testCaseSkyDrive'))
-        suite.addTest(TestCase('testDownFile'))
-        suite.addTest(TestCase('testCaseCheckAddressList'))
-        suite.addTest(TestCase('testCaseSelected'))
-        suite.addTest(TestCase('testCasePush'))
-        runner = unittest.TextTestRunner()
-        runner.run(suite)
+
+        TestLogin(self.driver2).testCaseLogin()
+        '''一键登录'''
+        TestLogin(self.driver2).testCaseOnBtnLogin()
+        '''账号登录'''
+        TestLogin(self.driver2).testCaseLogin()
+        '''发送邮件，无附件'''
+        TestSend(self.driver2).testCaseSendNoAttach()
+        '''发送邮件，带附件'''
+        TestSend(self.driver2).testCaseSendAttach()
+        '''云端转发'''
+        TestSend(self.driver2).testCaseFwdSend()
+        '''回复邮件'''
+        TestSend(self.driver2).testCaseReply()
+        '''SMTP转发附件'''
+        TestSend(self.driver2).testCaseForward()
+        '''下载附件'''
+        TestDownFile(self.driver2).testDownFile()
+        '''日历'''
+        TestCalendar(self.driver2).testCaseCalendar()
+        '''发现主页'''
+        TestDiscover(self.driver2).testCaseDiscover()
+        '''个人资料'''
+        TestPersion(self.driver2).testCasePersionMessages()
+        '''联系人同步'''
+        TestContant(self.driver2).testCaseCheckAddressList()
+        '''收件箱列表139精选'''
+        TestSelect(self.driver2).testCaseSelected()
+        '''彩云网盘'''
+        TestSkyDrive(self.driver2).testCaseSkyDrive()
+        '''推送'''
+        TestPush(self.driver2).testCasePush()
+
+        self.driver2.quit()
+        print("运行结束")
+        time.sleep(5)
         print('=================运行结束=================')
         # 休眠状态
         BaseAdb.adb_sleep()
         time.sleep(5)
+
+RunAll=RunAll()
+
+
+if __name__ == "__main__":
+    RunAll.run_case()
