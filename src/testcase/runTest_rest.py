@@ -23,7 +23,6 @@ from src.testcase.v746.testSend import TestSend
 from src.testcase.v746.testSkyDrive import TestSkyDrive
 # 添加环境路径，脚本
 from src.base.baseAdb import BaseAdb
-# from src.testcase.runTest_all53 import TestCase
 
 
 localPath = "/var/appiumRunLog"
@@ -50,7 +49,9 @@ class RunAll(object):
         time.sleep(10)
         print("run................")
 
-        BaseAdb.adb_intall_uiautmator()
+        devicename = BaseAdb.adb_devicename()
+        if devicename.__contains__("vivo"):
+            BaseAdb.adb_intall_uiautmator()
         self.driver2 = Psam(version="6.0")
         EmailOperation(user["name"]+"@139.com", user["pwd"]).clear_forlder(['INBOX'])
 
