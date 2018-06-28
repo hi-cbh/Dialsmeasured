@@ -82,10 +82,31 @@ class ReadWriteConfFile:
         except BaseException:
             print("值出错")
 
+    @staticmethod
+    def value_set_true_false(value):
+        try:
+            ReadWriteConfFile.set_section_value('statusconf', 'accept', str(value))
+        except BaseException:
+            print("值出错")
+
+    @staticmethod
+    def get_status_value():
+        try:
+            x = ReadWriteConfFile.get_section_value('statusconf','accept')
+            if "True" == x:
+                return True
+            else:
+                return False
+        except BaseException:
+            print("值出错")
 
 
 if __name__ == '__main__':
-    ReadWriteConfFile.read_section_zero('reportconf')
-    ReadWriteConfFile.set_section_value('sendconf', 'error', '0')
-    x=ReadWriteConfFile.get_section_value('reportconf', 'testcase01')
+    # ReadWriteConfFile.read_section_zero('reportconf')
+    # ReadWriteConfFile.set_section_value('sendconf', 'error', '0')
+    ReadWriteConfFile.value_set_true_false(True)
+    x = ReadWriteConfFile.get_status_value()
+    print(x)
+    ReadWriteConfFile.value_set_true_false(False)
+    x = ReadWriteConfFile.get_status_value()
     print(x)

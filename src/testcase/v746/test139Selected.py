@@ -13,7 +13,7 @@ from src.base.baseLog import LogAction
 users = duser().getuser()
 user = {"name": users['name'], 'pwd': users['pwd']}
 
-
+is_status=ReadWriteConfFile.get_status_value()
 
 class TestSelect(unittest.TestCase):
     '''139精选是否显示正常'''
@@ -76,7 +76,8 @@ class TestSelect(unittest.TestCase):
             BaseImage.screenshot(self.driver, "Case139SelectedError")
             time.sleep(2)
             LogAction.save(func = "testCaseSelected", status="fail", explain=LogAction.print())
-            self.fail("【139精选】出错！")
+            if is_status:
+                self.fail("【139精选】出错！")
 
 
 if __name__ == "__main__":

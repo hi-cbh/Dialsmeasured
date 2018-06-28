@@ -8,6 +8,9 @@ from src.readwriteconf.rwconf import ReadWriteConfFile
 from src.base.baseAdb import BaseAdb
 from src.base.baseImage import BaseImage
 from src.base.baseLog import LogAction
+
+is_status=ReadWriteConfFile.get_status_value()
+
 class Login(unittest.TestCase):
     '''当前版本没有添加弹窗广告'''
     def __init__(self,driver, username, pwd):
@@ -130,7 +133,9 @@ class Login(unittest.TestCase):
             BaseImage.screenshot(self.driver, "LoginError")
             sleep(5)
             LogAction.save(func = "testCaseLogin", status="fail", explain=LogAction.print())
-            self.fail("【手动输入账号/密码-登录】出现错误")
+
+            if is_status:
+                self.fail("【手动输入账号/密码-登录】出现错误")
 
     def one_btn_Login(self):
         '''一键登录'''
@@ -203,4 +208,6 @@ class Login(unittest.TestCase):
             BaseImage.screenshot(self.driver, "oneBtnLoginError")
             sleep(5)
             LogAction.save(func = "testCaseOnBtnLogin", status="fail", explain=LogAction.print())
-            self.fail("【一键登录出错登录】出现错误")
+
+            if is_status:
+                self.fail("【一键登录出错登录】出现错误")

@@ -13,6 +13,8 @@ users = duser().getuser()
 user = {"name": users['name'], 'pwd': users['pwd']}
 print(user)
 
+is_status=ReadWriteConfFile.get_status_value()
+
 class TestDiscover(unittest.TestCase):
     '''发现页面是否显示正常'''
     def __init__(self,driver):
@@ -36,7 +38,9 @@ class TestDiscover(unittest.TestCase):
             BaseImage.screenshot(self.driver, "testCaseDiscover")
             time.sleep(2)
             LogAction.save(func = "testCaseDiscover", status="fail", explain=LogAction.print())
-            self.fail("【发现】出错！")
+
+            if is_status:
+                self.fail("【发现】出错！")
 
 
 if __name__ == "__main__":

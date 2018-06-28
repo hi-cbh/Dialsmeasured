@@ -2,6 +2,8 @@
 # encoding:utf-8
 import unittest,os,sys,time
 
+
+
 p = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 print("all53 path: %s" %p)
 sys.path.append(p+"/")
@@ -23,7 +25,7 @@ from src.testcase.v746.testSkyDrive import TestSkyDrive
 from src.testcase.HTMLTestRunner import HTMLTestRunner
 from src.reportlib.reportclass import ReportClass
 from src.base.baseAdb import BaseAdb
-
+from src.readwriteconf.rwconf import ReadWriteConfFile
 
 localPath = "/var/appiumRunLog"
 # 信息存储路径
@@ -44,6 +46,7 @@ class TestCase(unittest.TestCase):
     def setUpClass(self):
         BaseAdb.adb_wake_up()
         time.sleep(10)
+        ReadWriteConfFile.value_set_true_false(True)
 
         devicename = BaseAdb.adb_devicename()
         if devicename.__contains__("vivo"):

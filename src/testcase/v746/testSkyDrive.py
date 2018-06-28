@@ -12,6 +12,8 @@ from src.base.baseLog import LogAction
 users = duser().getuser()
 user = {"name": users['name'], 'pwd': users['pwd']}
 
+is_status=ReadWriteConfFile.get_status_value()
+
 class TestSkyDrive(unittest.TestCase):
     '''彩云网盘是否正常打开'''
     def __init__(self,driver):
@@ -39,7 +41,9 @@ class TestSkyDrive(unittest.TestCase):
             BaseImage.screenshot(self.driver, "testCaseSkyDrive")
             time.sleep(5)
             LogAction.save(func = "testCaseSkyDrive", status="fail", explain=LogAction.print())
-            self.fail("【彩云网盘】出错")
+
+            if is_status:
+                self.fail("【彩云网盘】出错")
 
 
 if __name__ == "__main__":

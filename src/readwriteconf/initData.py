@@ -6,8 +6,9 @@ import configparser as cparser
 
 import datetime
 
+# 读取项目内的配置文件，非/var目录下的文件
 file_path = str(os.path.dirname(os.path.dirname(__file__))) + "/user_db.ini"
-
+print(file_path)
 cf = cparser.ConfigParser()
 cf.read(file_path)
 
@@ -80,4 +81,3 @@ class duser(object):
 
 if __name__ == "__main__":
     print(InitData().get_file())
-    print(InitData().get_sys_path())

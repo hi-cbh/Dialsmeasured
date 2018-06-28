@@ -9,6 +9,8 @@ from src.base.baseAdb import BaseAdb
 from src.base.baseImage import BaseImage
 from src.base.baseLog import LogAction
 
+is_status=ReadWriteConfFile.get_status_value()
+
 class Send(unittest.TestCase):
     
     def __init__(self,driver, username):
@@ -72,7 +74,9 @@ class Send(unittest.TestCase):
             ReadWriteConfFile.value_add_one("testCaseSendNoAttach")
             time.sleep(2)
             LogAction.save(func = "send", status="fail", explain=LogAction.print())
-            self.fail('【邮件发送】出错')
+
+            if is_status:
+                self.fail('【邮件发送】出错')
 
 
     def send_action(self,subject):
@@ -131,7 +135,8 @@ class Send(unittest.TestCase):
             time.sleep(2)
             LogAction.save(func = "send_action", status="fail", explain=LogAction.print())
             time.sleep(2)
-            self.fail('【带附件邮件发送】出错')
+            if is_status:
+                self.fail('【带附件邮件发送】出错')
 
     def send_fwd(self, subject):
         '''云端转发：带有的邮件，进行转发'''
@@ -184,7 +189,9 @@ class Send(unittest.TestCase):
             time.sleep(2)
             LogAction.save(func = "testCaseFwdSend", status="fail", explain=LogAction.print())
             time.sleep(3)
-            self.fail("【云端转发】出错")
+
+            if is_status:
+                self.fail("【云端转发】出错")
 
     def forward(self,subject):
         '''stmp转发：本地无附件的邮件，添加附件后，转发'''
@@ -248,7 +255,8 @@ class Send(unittest.TestCase):
             time.sleep(2)
             LogAction.save(func = "testCaseForward", status="fail", explain=LogAction.print())
             time.sleep(2)
-            self.fail("【smtp转发】出错")
+            if is_status:
+                self.fail("【smtp转发】出错")
 
 
 
@@ -304,4 +312,5 @@ class Send(unittest.TestCase):
             time.sleep(2)
             LogAction.save(func = "testCaseReply", status="fail", explain=LogAction.print())
             time.sleep(2)
-            self.fail("【回复邮件】出错")
+            if is_status:
+                self.fail("【回复邮件】出错")

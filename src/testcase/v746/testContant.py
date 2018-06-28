@@ -12,6 +12,8 @@ from src.base.baseLog import LogAction
 users = duser().getuser()
 user = {"name": users['name'], 'pwd': users['pwd']}
 
+is_status=ReadWriteConfFile.get_status_value()
+
 class TestContant(unittest.TestCase):
     '''联系人同步是否成功'''
     def __init__(self,driver):
@@ -35,7 +37,9 @@ class TestContant(unittest.TestCase):
             BaseImage.screenshot(self.driver, "CheckAddressListError")
             time.sleep(5)
             LogAction.save(func = "testCaseCheckAddressList", status="fail", explain=LogAction.print())
-            self.fail("【联系人同步】出错")
+
+            if is_status:
+                self.fail("【联系人同步】出错")
 
 
     def waitfor_notification(self):

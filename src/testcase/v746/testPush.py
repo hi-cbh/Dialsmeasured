@@ -13,7 +13,7 @@ from src.base.baseLog import LogAction
 users = duser().getuser()
 user = {"name": users['name'], 'pwd': users['pwd']}
 sender = {"name": users['name2'], 'pwd': users['pwd2']} # 接收者，改为发送者
-
+is_status=ReadWriteConfFile.get_status_value()
 '''
 用户没有做到参数化
 
@@ -57,7 +57,9 @@ class TestPush(unittest.TestCase):
             BaseImage.screenshot(self.driver, "PushError")
             time.sleep(2)
             LogAction.save(func = "testCasePush", status="fail", explain=LogAction.print())
-            self.fail("【接收邮件推送】出错！")
+
+            if is_status:
+                self.fail("【接收邮件推送】出错！")
 
 
 

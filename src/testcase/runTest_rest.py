@@ -23,7 +23,7 @@ from src.testcase.v746.testSend import TestSend
 from src.testcase.v746.testSkyDrive import TestSkyDrive
 # 添加环境路径，脚本
 from src.base.baseAdb import BaseAdb
-
+from src.readwriteconf.rwconf import ReadWriteConfFile
 
 localPath = "/var/appiumRunLog"
 # 信息存储路径
@@ -33,6 +33,7 @@ users = duser().getuser()
 user = {"name": users['name'], 'pwd': users['pwd']}
 
 
+
 '''
 全部用例重跑，这里需要优化，逻辑不对
 问题：
@@ -40,6 +41,7 @@ user = {"name": users['name'], 'pwd': users['pwd']}
 
 替代方法：
 1、变相的把case当做方法调用
+2、需要处理fail，否则会运行失败
 '''
 
 class RunAll(object):
@@ -48,7 +50,7 @@ class RunAll(object):
         BaseAdb.adb_wake_up()
         time.sleep(10)
         print("run................")
-
+        ReadWriteConfFile.value_set_true_false(False)
         devicename = BaseAdb.adb_devicename()
         if devicename.__contains__("vivo"):
             BaseAdb.adb_intall_uiautmator()

@@ -13,6 +13,7 @@ from src.base.baseLog import LogAction
 users = duser().getuser()
 user = {"name": users['name'], 'pwd': users['pwd']}
 
+is_status=ReadWriteConfFile.get_status_value()
 
 class TestCalendar(unittest.TestCase):
     '''日历是否能打开'''
@@ -43,7 +44,8 @@ class TestCalendar(unittest.TestCase):
             BaseImage.screenshot(self.driver, "testCaseCalendar")
             time.sleep(2)
             LogAction.save(func = "testCaseCalendar", status="fail", explain=LogAction.print())
-            self.fail("【日历】出错")
+            if is_status:
+                self.fail("【日历】出错")
 
 
 if __name__ == "__main__":
