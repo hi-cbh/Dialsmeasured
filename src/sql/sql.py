@@ -3,12 +3,20 @@
 import pymysql.cursors
 import os
 import configparser as cparser
+from src.readwriteconf.rwconf import ReadWriteConfFile
 
-host = "127.0.0.1"
-port = "3306"
-user="root"
-password="123456"
-db="monitor"
+base_dir = str((os.path.dirname(os.path.dirname(__file__))))
+file_path = base_dir + "/user_db.ini"
+
+cf = cparser.ConfigParser()
+print(file_path)
+cf.read(file_path)
+host = cf.get("mysqlconf", "host")
+port = cf.get("mysqlconf", "port")
+db   = cf.get("mysqlconf", "db_name")
+user = cf.get("mysqlconf", "user")
+password = cf.get("mysqlconf", "password")
+
 
 class DB:
 
@@ -47,6 +55,23 @@ class DB:
 
         self.connection.commit()
 
+
+    # 修改
+    def update(self, table_name, table_data):
+        key   = "='%d',".join(table_data.keys())
+        key = key + "='%d'"
+        # print(tuple(table_data.values()))
+        real_sql = "UPDATE " + table_name + " SET " + key %tuple(table_data.values())
+        print(real_sql)
+
+        with self.connection.cursor() as cursor:
+            cursor.execute(real_sql)
+
+        self.connection.commit()
+
+
+
+
     # close database
     def close(self):
         self.connection.close()
@@ -70,13 +95,19 @@ class DB:
 
 if __name__ == '__main__':
 
-    db = DB()
-    result=db.show_data("test_data")
-    print(result[0]["id"])
-    l=[]
-    for k,v in result[0].items():
-        print(v)
-        l.append(v)
 
-    print(l[2:])
+    l = ['testcaseonbtnlogin', 'testcaselogin', 'testcasesendnoattach', 'testcasesendattach', 'testcasefwdsend', 'testcaseforward', 'testcasereply', 'testdownfile', 'testcasecheckaddresslist', 'testcaseselected', 'testcasepush', 'testcasecalendar', 'testcasediscover', 'testcasepersionmessages', 'testcaseskydrive']
+    tc = ReadWriteConfFile.read_section_all("caseconf")
+    # print(type(tc))
+    tc = dict(tc)
+
+    new_dict = {}
+    for k,v in tc.items():
+        if k in l:
+            new_dict[k] = int(v)
+
+    print(new_dict)
+
+    db = DB()
+    db.update("test_data",new_dict)
     db.close()

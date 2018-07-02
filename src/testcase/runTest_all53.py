@@ -26,7 +26,7 @@ from src.testcase.HTMLTestRunner import HTMLTestRunner
 from src.reportlib.reportclass import ReportClass
 from src.base.baseAdb import BaseAdb
 from src.readwriteconf.rwconf import ReadWriteConfFile
-
+from src.sql.sql import DB
 localPath = "/var/appiumRunLog"
 # 信息存储路径
 reportPath = localPath + "/report/"
@@ -161,6 +161,29 @@ if __name__ == "__main__":
     suite.addTest(TestCase('testCasePush'))
     runner = unittest.TextTestRunner()
 
+    print("=================更新到数据库=================")
+    l = ['testcaseonbtnlogin', 'testcaselogin', 'testcasesendnoattach', 'testcasesendattach', 'testcasefwdsend', 'testcaseforward', 'testcasereply', 'testdownfile', 'testcasecheckaddresslist', 'testcaseselected', 'testcasepush', 'testcasecalendar', 'testcasediscover', 'testcasepersionmessages', 'testcaseskydrive']
+    tc = ReadWriteConfFile.read_section_all("caseconf")
+    # print(type(tc))
+    tc = dict(tc)
+    new_dict = {}
+    for k,v in tc.items():
+        if k in l:
+            new_dict[k] = int(v)
+
+    print(new_dict)
+    try:
+        db = DB()
+        db.update("test_data",new_dict)
+        db.close()
+    except Exception:
+        print("数据库连接失败")
+
+
+
+
+
+
     print('=================运行测试=================')
     # 生成html
     now = time.strftime("%Y-%m-%d %H_%M_%S")
@@ -174,3 +197,6 @@ if __name__ == "__main__":
     time.sleep(5)
     print('=================处理测试结果=================')
     ReportClass(testResultReport.failures,testtxt,"",now).all()
+
+
+    print("=================结束=================")

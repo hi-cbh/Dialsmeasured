@@ -104,9 +104,26 @@ class ReadWriteConfFile:
 if __name__ == '__main__':
     # ReadWriteConfFile.read_section_zero('reportconf')
     # ReadWriteConfFile.set_section_value('sendconf', 'error', '0')
-    ReadWriteConfFile.value_set_true_false(True)
-    x = ReadWriteConfFile.get_status_value()
-    print(x)
-    ReadWriteConfFile.value_set_true_false(False)
-    x = ReadWriteConfFile.get_status_value()
-    print(x)
+    # ReadWriteConfFile.value_set_true_false(True)
+    # x = ReadWriteConfFile.get_status_value()
+    # print(x)
+    # ReadWriteConfFile.value_set_true_false(False)
+    # x = ReadWriteConfFile.get_status_value()
+    # print(x)
+
+
+
+    l = ['testcaseonbtnlogin', 'testcaselogin', 'testcasesendnoattach', 'testcasesendattach', 'testcasefwdsend', 'testcaseforward', 'testcasereply', 'testdownfile', 'testcasecheckaddresslist', 'testcaseselected', 'testcasepush', 'testcasecalendar', 'testcasediscover', 'testcasepersionmessages', 'testcaseskydrive']
+    tc = ReadWriteConfFile.read_section_all("caseconf")
+    # print(type(tc))
+    tc = dict(tc)
+
+    new_dict = {}
+    for k,v in tc.items():
+        if k in l:
+            new_dict[k] = v
+
+    print(new_dict)
+
+
+
