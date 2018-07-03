@@ -106,7 +106,7 @@ class Login(unittest.TestCase):
                 sleep(1)
 
             LogAction.print('=>等待弹窗广告')
-            timeout = int(round(time() * 1000)) + 1*60 * 1000
+            timeout = int(round(time() * 1000)) + 1*30 * 1000
             # 找到邮件结束
             while int(round(time() * 1000)) < timeout :
 
@@ -177,7 +177,7 @@ class Login(unittest.TestCase):
             self.driver.element_wait(u"uiautomator=>收件箱",10)
 
             LogAction.print('=>等待弹窗广告')
-            timeout = int(round(time() * 1000)) + 1*60 * 1000
+            timeout = int(round(time() * 1000)) + 1*30 * 1000
             # 找到邮件结束
             while int(round(time() * 1000)) < timeout :
 
