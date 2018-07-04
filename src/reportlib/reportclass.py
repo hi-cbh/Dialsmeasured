@@ -185,7 +185,7 @@ class ReportClass(object):
         rwc.add_section('caseconf')
         for k,v in ReportClass._result.items():
             tmp = int(rwc.get_section_value('caseconf', k))
-            if tmp >= max and tmp % max == 0: # 最大值的倍数才加入列表
+            if tmp >= max:  # and tmp % max == 0: # 最大值的倍数才加入列表，不适用3次，直接发送邮件
                 errl.append(k)
         print(errl)
         return errl
