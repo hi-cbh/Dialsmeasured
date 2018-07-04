@@ -58,8 +58,8 @@ class DB:
 
     # 修改
     def update(self, table_name, table_data):
-        key   = "='%d',".join(table_data.keys())
-        key = key + "='%d'"
+        key   = "=%r,".join(table_data.keys())
+        key = key + "=%r"
         # print(tuple(table_data.values()))
         real_sql = "UPDATE " + table_name + " SET " + key %tuple(table_data.values())
         print(real_sql)
@@ -68,6 +68,7 @@ class DB:
             cursor.execute(real_sql)
 
         self.connection.commit()
+
 
 
 

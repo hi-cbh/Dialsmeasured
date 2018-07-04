@@ -1,3 +1,4 @@
+from sql.sql import DB
 from src.base.baseTime import BaseTime
 from readwriteconf.rwconf import ReadWriteConfFile
 
@@ -17,3 +18,11 @@ for k,v in tc.items():
 
 new_dict["times"] = BaseTime.get_current_time()
 print(new_dict)
+print(new_dict)
+try:
+    db = DB()
+    db.update("test_data",new_dict)
+    db.close()
+except Exception as e:
+    print("数据库连接失败")
+    print(e)
