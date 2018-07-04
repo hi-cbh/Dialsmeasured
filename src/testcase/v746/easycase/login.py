@@ -125,7 +125,7 @@ class Login(unittest.TestCase):
             self.driver.click("id=>cn.cj.pe:id/message_list_bottom_email",2)
 
             LogAction.print('=>【收件箱底部导航栏】')
-            self.assertTrue(self.driver.get_element("id=>cn.cj.pe:id/message_list_bottom_email",60) != None, "登录失败！")
+            self.assertTrue(self.driver.get_element("id=>cn.cj.pe:id/message_list_bottom_email",5) != None, "登录失败！")
             LogAction.save(func = "testCaseLogin", status="success", explain=LogAction.print())
             ReadWriteConfFile.value_set_zero("testCaseLogin")
         except BaseException:
@@ -196,7 +196,7 @@ class Login(unittest.TestCase):
             self.driver.click("id=>cn.cj.pe:id/message_list_bottom_email",2)
 
             LogAction.print('=>【收件箱底部导航栏】')
-            self.assertTrue(self.driver.get_element("id=>cn.cj.pe:id/message_list_bottom_email",60) != None, "登录失败！")
+            self.assertTrue(self.driver.get_element("id=>cn.cj.pe:id/message_list_bottom_email",5) != None, "登录失败！")
             LogAction.print('=>杀进程，清除缓存')
             BaseAdb.adb_stop("cn.cj.pe")
             BaseAdb.adb_clear("cn.cj.pe")

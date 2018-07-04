@@ -126,6 +126,26 @@ class TestCase(unittest.TestCase):
 
 if __name__ == "__main__":
 
+    print("=================更新到数据库=================")
+    l = ['testcaseonbtnlogin', 'testcaselogin', 'testcasesendnoattach', 'testcasesendattach', 'testcasefwdsend', 'testcaseforward', 'testcasereply', 'testdownfile', 'testcasecheckaddresslist', 'testcaseselected', 'testcasepush', 'testcasecalendar', 'testcasediscover', 'testcasepersionmessages', 'testcaseskydrive']
+    tc = ReadWriteConfFile.read_section_all("caseconf")
+    # print(type(tc))
+    tc = dict(tc)
+    new_dict2 = {}
+    for k,v in tc.items():
+        if k in l:
+            new_dict2[k] = int(v)
+
+    new_dict2["times"] = BaseTime.get_current_time()
+    print(new_dict2)
+    try:
+        db = DB()
+        db.update("test_data",new_dict2)
+        db.close()
+    except Exception:
+        print("数据库连接失败")
+
+
     print('=================中文-英文对应测试用例=================')
     testtxt = []
 
@@ -196,21 +216,4 @@ if __name__ == "__main__":
     ReportClass(testResultReport.failures,testtxt,"",now).all()
     print("=================结束=================")
 
-    print("=================更新到数据库=================")
-    l = ['testcaseonbtnlogin', 'testcaselogin', 'testcasesendnoattach', 'testcasesendattach', 'testcasefwdsend', 'testcaseforward', 'testcasereply', 'testdownfile', 'testcasecheckaddresslist', 'testcaseselected', 'testcasepush', 'testcasecalendar', 'testcasediscover', 'testcasepersionmessages', 'testcaseskydrive']
-    tc = ReadWriteConfFile.read_section_all("caseconf")
-    # print(type(tc))
-    tc = dict(tc)
-    new_dict2 = {}
-    for k,v in tc.items():
-        if k in l:
-            new_dict2[k] = int(v)
 
-    new_dict2["times"] = BaseTime.get_current_time()
-    print(new_dict2)
-    try:
-        db = DB()
-        db.update("test_data",new_dict2)
-        db.close()
-    except Exception:
-        print("数据库连接失败")
