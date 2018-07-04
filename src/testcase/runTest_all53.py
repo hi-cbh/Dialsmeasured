@@ -27,6 +27,8 @@ from src.reportlib.reportclass import ReportClass
 from src.base.baseAdb import BaseAdb
 from src.readwriteconf.rwconf import ReadWriteConfFile
 from src.sql.sql import DB
+from src.base.baseTime import BaseTime
+
 localPath = "/var/appiumRunLog"
 # 信息存储路径
 reportPath = localPath + "/report/"
@@ -171,6 +173,7 @@ if __name__ == "__main__":
         if k in l:
             new_dict[k] = int(v)
 
+    new_dict["times"] = BaseTime.get_current_time()
     print(new_dict)
     try:
         db = DB()
@@ -178,12 +181,6 @@ if __name__ == "__main__":
         db.close()
     except Exception:
         print("数据库连接失败")
-
-
-
-
-
-
     print('=================运行测试=================')
     # 生成html
     now = time.strftime("%Y-%m-%d %H_%M_%S")
@@ -197,6 +194,23 @@ if __name__ == "__main__":
     time.sleep(5)
     print('=================处理测试结果=================')
     ReportClass(testResultReport.failures,testtxt,"",now).all()
-
-
     print("=================结束=================")
+
+    print("=================更新到数据库=================")
+    l = ['testcaseonbtnlogin', 'testcaselogin', 'testcasesendnoattach', 'testcasesendattach', 'testcasefwdsend', 'testcaseforward', 'testcasereply', 'testdownfile', 'testcasecheckaddresslist', 'testcaseselected', 'testcasepush', 'testcasecalendar', 'testcasediscover', 'testcasepersionmessages', 'testcaseskydrive']
+    tc = ReadWriteConfFile.read_section_all("caseconf")
+    # print(type(tc))
+    tc = dict(tc)
+    new_dict2 = {}
+    for k,v in tc.items():
+        if k in l:
+            new_dict2[k] = int(v)
+
+    new_dict2["times"] = BaseTime.get_current_time()
+    print(new_dict2)
+    try:
+        db = DB()
+        db.update("test_data",new_dict2)
+        db.close()
+    except Exception:
+        print("数据库连接失败")

@@ -1,3 +1,4 @@
+from src.base.baseTime import BaseTime
 from readwriteconf.rwconf import ReadWriteConfFile
 
 
@@ -14,4 +15,5 @@ for k,v in tc.items():
     if k in l:
         new_dict[k] = v
 
+new_dict["times"] = BaseTime.get_current_time()
 print(new_dict)
