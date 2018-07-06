@@ -91,11 +91,14 @@ class ReadWriteConfFile:
 
     @staticmethod
     def get_status_value():
+
         try:
             x = ReadWriteConfFile.get_section_value('statusconf','accept')
             if "True" == x:
+                print("get_status_value, 当前是否fai状态 true")
                 return True
             else:
+                print("get_status_value, 当前是否fai状态 false")
                 return False
         except BaseException:
             print("值出错")
@@ -107,23 +110,8 @@ if __name__ == '__main__':
     # ReadWriteConfFile.value_set_true_false(True)
     # x = ReadWriteConfFile.get_status_value()
     # print(x)
-    # ReadWriteConfFile.value_set_true_false(False)
-    # x = ReadWriteConfFile.get_status_value()
-    # print(x)
-
-
-
-    l = ['testcaseonbtnlogin', 'testcaselogin', 'testcasesendnoattach', 'testcasesendattach', 'testcasefwdsend', 'testcaseforward', 'testcasereply', 'testdownfile', 'testcasecheckaddresslist', 'testcaseselected', 'testcasepush', 'testcasecalendar', 'testcasediscover', 'testcasepersionmessages', 'testcaseskydrive']
-    tc = ReadWriteConfFile.read_section_all("caseconf")
-    # print(type(tc))
-    tc = dict(tc)
-
-    new_dict = {}
-    for k,v in tc.items():
-        if k in l:
-            new_dict[k] = v
-
-    print(new_dict)
-
+    ReadWriteConfFile.value_set_true_false(False)
+    x = ReadWriteConfFile.get_status_value()
+    print(x)
 
 

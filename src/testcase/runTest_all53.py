@@ -48,7 +48,6 @@ class TestCase(unittest.TestCase):
     def setUpClass(self):
         BaseAdb.adb_wake_up()
         time.sleep(10)
-        ReadWriteConfFile.value_set_true_false(True)
 
         devicename = BaseAdb.adb_devicename()
         if devicename.__contains__("vivo"):
@@ -145,6 +144,7 @@ if __name__ == "__main__":
     except Exception:
         print("数据库连接失败")
 
+    ReadWriteConfFile.value_set_true_false(True)
 
     print('=================中文-英文对应测试用例=================')
     testtxt = []

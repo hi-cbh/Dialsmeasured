@@ -51,6 +51,7 @@ class RunAll(object):
         time.sleep(10)
         print("run................")
         ReadWriteConfFile.value_set_true_false(False)
+        time.sleep(3)
         devicename = BaseAdb.adb_devicename()
         if devicename.__contains__("vivo"):
             BaseAdb.adb_intall_uiautmator()
