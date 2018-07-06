@@ -85,6 +85,7 @@ class ReadWriteConfFile:
     @staticmethod
     def value_set_true_false(value):
         try:
+            print("value_set_true_false，设置: %s" %str(value))
             ReadWriteConfFile.set_section_value('statusconf', 'accept', str(value))
         except BaseException:
             print("值出错")
