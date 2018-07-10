@@ -2,7 +2,7 @@
 # encoding:utf-8
 import unittest,os,sys,time
 
-from sql.docker_mysql import DockerDB
+
 
 p = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 print("all53 path: %s" %p)
@@ -28,6 +28,7 @@ from src.base.baseAdb import BaseAdb
 from src.readwriteconf.rwconf import ReadWriteConfFile
 from src.sql.sql import DB
 from src.base.baseTime import BaseTime
+from src.sql.docker_mysql import DockerDB
 
 localPath = "/var/appiumRunLog"
 # 信息存储路径
