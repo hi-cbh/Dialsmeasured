@@ -60,7 +60,10 @@ class DockerDB:
     # close database
     def close(self):
         print("数据更新到阿里云，结束........")
-        self.connection.close()
+        try:
+            self.connection.close()
+        except BaseException:
+            print('无连接')
 
 
 
