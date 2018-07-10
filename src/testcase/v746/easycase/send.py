@@ -102,7 +102,7 @@ class Send(unittest.TestCase):
             self.driver.click(u"uiautomator=>本地文件夹") # appium 1.6
             self.driver.click(r"uiautomator=>0")
             self.driver.click(r"uiautomator=>0.")
-            self.driver.click(r"uiautomator=>test2M.rar")
+            self.driver.click(r"uiautomator=>test2K.rar")
             self.driver.click(r"id=>cn.cj.pe:id/check_button")
 
             # 点击发送按钮
@@ -222,7 +222,7 @@ class Send(unittest.TestCase):
             self.driver.click(u"uiautomator=>本地文件夹") # appium 1.6
             self.driver.click(r"uiautomator=>0")
             self.driver.click(r"uiautomator=>0.")
-            self.driver.click(r"uiautomator=>test2M.rar")
+            self.driver.click(r"uiautomator=>test2K.rar")
             self.driver.click(r"id=>cn.cj.pe:id/check_button")
 
 
