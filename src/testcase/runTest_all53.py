@@ -2,7 +2,7 @@
 # encoding:utf-8
 import unittest,os,sys,time
 
-
+from sql.docker_mysql import DockerDB
 
 p = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 print("all53 path: %s" %p)
@@ -144,6 +144,8 @@ if __name__ == "__main__":
     except Exception:
         print("数据库连接失败")
 
+    DockerDB().update(new_dict2)
+
     ReadWriteConfFile.value_set_true_false(True)
 
     print('=================中文-英文对应测试用例=================')
@@ -201,6 +203,9 @@ if __name__ == "__main__":
         db.close()
     except Exception:
         print("数据库连接失败")
+
+    DockerDB().update(new_dict)
+
     print('=================运行测试=================')
     # 生成html
     now = time.strftime("%Y-%m-%d %H_%M_%S")

@@ -494,6 +494,7 @@ class ReportClass(object):
             err = self._read_case_conf(int(maxtimes))
 
             # 出现错误，全部用例重新跑
+            print("判断是否需要重跑")
             if len(err) != 0:
                 RunAll.run_case()
 
