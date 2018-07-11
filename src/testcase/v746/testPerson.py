@@ -12,8 +12,6 @@ from src.base.baseLog import LogAction
 users = duser().getuser()
 user = {"name": users['name'], 'pwd': users['pwd']}
 
-is_status=ReadWriteConfFile.get_status_value()
-
 class TestPersion(unittest.TestCase):
     '''个人资料是否显示正常'''
     def __init__(self,driver):
@@ -44,7 +42,7 @@ class TestPersion(unittest.TestCase):
             time.sleep(2)
             LogAction.save(func = "testCasePersionMessages", status="fail", explain=LogAction.print())
 
-            if is_status:
+            if ReadWriteConfFile.get_status_value():
                 self.fail("【个人资料】出错")
 
 

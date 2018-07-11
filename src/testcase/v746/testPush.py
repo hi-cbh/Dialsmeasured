@@ -13,7 +13,6 @@ from src.base.baseLog import LogAction
 users = duser().getuser()
 user = {"name": users['name'], 'pwd': users['pwd']}
 sender = {"name": users['name2'], 'pwd': users['pwd2']} # 接收者，改为发送者
-is_status=ReadWriteConfFile.get_status_value()
 '''
 用户没有做到参数化
 
@@ -58,7 +57,7 @@ class TestPush(unittest.TestCase):
             time.sleep(2)
             LogAction.save(func = "testCasePush", status="fail", explain=LogAction.print())
 
-            if is_status:
+            if ReadWriteConfFile.get_status_value():
                 self.fail("【接收邮件推送】出错！")
 
 

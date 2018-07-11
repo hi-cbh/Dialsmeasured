@@ -10,8 +10,6 @@ from src.base.baseFile import BaseFile
 from src.base.baseImage import BaseImage
 from src.base.baseLog import LogAction
 
-is_status=ReadWriteConfFile.get_status_value()
-
 class OpenDown(unittest.TestCase):
     
     def __init__(self,driver, path, filename):
@@ -60,5 +58,5 @@ class OpenDown(unittest.TestCase):
             BaseImage.screenshot(self.driver, "DownFileError")
             time.sleep(5)
             LogAction.save(func = "testDownFile", status="fail", explain=LogAction.print())
-            if is_status:
+            if ReadWriteConfFile.get_status_value():
                 self.fail('【下载附件】出错')

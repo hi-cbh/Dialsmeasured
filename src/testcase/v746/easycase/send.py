@@ -9,7 +9,6 @@ from src.base.baseAdb import BaseAdb
 from src.base.baseImage import BaseImage
 from src.base.baseLog import LogAction
 
-is_status=ReadWriteConfFile.get_status_value()
 
 class Send(unittest.TestCase):
     
@@ -75,7 +74,7 @@ class Send(unittest.TestCase):
             time.sleep(2)
             LogAction.save(func = "send", status="fail", explain=LogAction.print())
 
-            if is_status:
+            if ReadWriteConfFile.get_status_value():
                 self.fail('【邮件发送】出错')
 
 
@@ -135,7 +134,7 @@ class Send(unittest.TestCase):
             time.sleep(2)
             LogAction.save(func = "send_action", status="fail", explain=LogAction.print())
             time.sleep(2)
-            if is_status:
+            if ReadWriteConfFile.get_status_value():
                 self.fail('【带附件邮件发送】出错')
 
     def send_fwd(self, subject):
@@ -190,7 +189,7 @@ class Send(unittest.TestCase):
             LogAction.save(func = "testCaseFwdSend", status="fail", explain=LogAction.print())
             time.sleep(3)
 
-            if is_status:
+            if ReadWriteConfFile.get_status_value():
                 self.fail("【云端转发】出错")
 
     def forward(self,subject):
@@ -255,7 +254,7 @@ class Send(unittest.TestCase):
             time.sleep(2)
             LogAction.save(func = "testCaseForward", status="fail", explain=LogAction.print())
             time.sleep(2)
-            if is_status:
+            if ReadWriteConfFile.get_status_value():
                 self.fail("【smtp转发】出错")
 
 
@@ -312,5 +311,5 @@ class Send(unittest.TestCase):
             time.sleep(2)
             LogAction.save(func = "testCaseReply", status="fail", explain=LogAction.print())
             time.sleep(2)
-            if is_status:
+            if ReadWriteConfFile.get_status_value():
                 self.fail("【回复邮件】出错")

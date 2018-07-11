@@ -2,11 +2,12 @@ import unittest
 
 from readwriteconf.rwconf import ReadWriteConfFile
 
+stat = ReadWriteConfFile.get_status_value()
 
 class MyTest1(unittest.TestCase):
 
     def __init__(self):
-        print("MyTest1,__init__ %s"  %str(ReadWriteConfFile.get_status_value()))
+        print("MyTest1,__init__ %s"  %str(stat))
 
 
     def testCase01(self):
