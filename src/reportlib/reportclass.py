@@ -494,27 +494,36 @@ class ReportClass(object):
             err = self._read_case_conf(int(maxtimes))
 
             # 出现错误，全部用例重新跑
-            print("判断是否需要重跑")
+            print("第一次判断是否需要重跑")
             if len(err) != 0:
                 RunAll.run_case()
 
             # 再次获取错误次数
             err = self._read_case_conf(int(maxtimes))
+            # 错误次数
+            if len(err) != 0:
+                errstr = ','.join(err) + "到目前为止，以上提及的功能出现多次错误，请及时查证"
+                s = SendMail("13580491603","chinasoft123","")
+                s.send_mail_str_163('[预测]139Android客户端'+test_version+'版本_功能拨测疑是出现故障，请及时查证',errstr,is_test=is_test)
 
+            # 出现错误，全部用例重新跑
+            print("第二次判断是否需要重跑")
+            if len(err) != 0:
+                RunAll.run_case()
 
+            # 再次获取错误次数
+            err = self._read_case_conf(int(maxtimes))
             # 错误次数
             if len(err) != 0:
                 # 发送广播，传递参数
                 error_case = self._get_sms_case(int(maxtimes))
                 BaseAdb.adb_broadcast_sms(error_case)
 
+                errstr2 = ','.join(err) + "到目前为止，以上提及的功能出现多次错误，请及时查证"
+                s = SendMail("13697485262","chinasoft123","13697485262")
+                s.send_mail_str('139Android客户端'+test_version+'版本_功能拨测疑是出现故障，请及时查证',errstr2,is_test=is_test)
 
-                # errstr = ','.join(err) + "到目前为止，以上提及的功能出现多次错误，请及时查证"
-                # s = SendMail("13697485262","chinasoft123","13697485262")
-                # s.send_mail_str('139Android客户端'+test_version+'版本_功能拨测疑是出现故障，请及时查证',errstr,is_test=is_test)
 
-                s = SendMail("13580491603","chinasoft123","")
-                s.send_mail_str_163('[预测]139Android客户端'+test_version+'版本_功能拨测疑是出现故障，请及时查证',errstr,is_test=is_test)
 
         print('运行结束')
         time.sleep(10)
