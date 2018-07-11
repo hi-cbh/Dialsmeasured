@@ -13,13 +13,13 @@ class LogAction():
         self.s = ""
 
     def save(self, func, status="success", explain="null",version="746"):
-        print("log_time=%s,func=%s,status=%s,explain=%s,version=%s"  %(BaseTime.get_current_time(), func, status,explain,version))
+        # print("log_time=%s,func=%s,status=%s,explain=%s,version=%s"  %(BaseTime.get_current_time(), func, status,explain,version))
         msg = "%s,%s,%s,%s,%s"  %(BaseTime.get_current_time(), func, status,explain,version)
-        print(_path)
-        print(msg)
+        # print(_path)
+        # print(msg)
         # 去除前后空格
-        with open(_path.lstrip(" ").rstrip(" "),'a+') as fn:
-            fn.write(msg+'\n')
+        # with open(_path.lstrip(" ").rstrip(" "),'a+') as fn:
+        #     fn.write(msg+'\n')
 
     def print(self, str: object = "", isReset: object = False) -> object:
         print(str)
