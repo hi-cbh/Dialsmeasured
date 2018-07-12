@@ -128,6 +128,7 @@ class Login(unittest.TestCase):
             ReadWriteConfFile.value_set_zero("testCaseLogin")
         except BaseException:
             ReadWriteConfFile.value_add_one("testCaseLogin")
+            ReadWriteConfFile.value_error_add_one("testCaseLogin")
             BaseImage.screenshot(self.driver, "LoginError")
             sleep(5)
             LogAction.save(func = "testCaseLogin", status="fail", explain=LogAction.print())
@@ -203,6 +204,7 @@ class Login(unittest.TestCase):
             ReadWriteConfFile.value_set_zero("testCaseOnBtnLogin")
         except BaseException:
             ReadWriteConfFile.value_add_one("testCaseOnBtnLogin")
+            ReadWriteConfFile.value_error_add_one("testCaseOnBtnLogin")
             BaseImage.screenshot(self.driver, "oneBtnLoginError")
             sleep(5)
             LogAction.save(func = "testCaseOnBtnLogin", status="fail", explain=LogAction.print())

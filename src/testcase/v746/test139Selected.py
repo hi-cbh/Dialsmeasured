@@ -71,6 +71,7 @@ class TestSelect(unittest.TestCase):
             ReadWriteConfFile.value_set_zero("testCaseSelected")
         except BaseException:
             ReadWriteConfFile.value_add_one("testCaseSelected")
+            ReadWriteConfFile.value_error_add_one("testCaseSelected")
             BaseImage.screenshot(self.driver, "Case139SelectedError")
             time.sleep(2)
             LogAction.save(func = "testCaseSelected", status="fail", explain=LogAction.print())

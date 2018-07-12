@@ -71,8 +71,6 @@ class duser(object):
         print(type(users))
         return users
 
-    # def __str__(self):
-    #     return str(self.users)
 
     def getuser(self):
         return self.users

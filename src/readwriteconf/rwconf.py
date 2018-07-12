@@ -72,6 +72,17 @@ class ReadWriteConfFile:
             print("值出错")
 
     @staticmethod
+    def value_error_add_one(case_name):
+        '''错误用例只加1'''
+        try:
+            section="caseconf"
+            value = ReadWriteConfFile.get_section_value(section, case_name)
+            ReadWriteConfFile.set_section_value(section, case_name, str(int(value)+1))
+        except BaseException as e:
+            print(e)
+            print("值出错")
+
+    @staticmethod
     def value_set_zero(case_name):
         '''用例只为0'''
         try:

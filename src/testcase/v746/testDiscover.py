@@ -33,6 +33,7 @@ class TestDiscover(unittest.TestCase):
             ReadWriteConfFile.value_set_zero("testCaseDiscover")
         except BaseException:
             ReadWriteConfFile.value_add_one("testCaseDiscover")
+            ReadWriteConfFile.value_error_add_one("testCaseDiscover")
             BaseImage.screenshot(self.driver, "testCaseDiscover")
             time.sleep(2)
             LogAction.save(func = "testCaseDiscover", status="fail", explain=LogAction.print())

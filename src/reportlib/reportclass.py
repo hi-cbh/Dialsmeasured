@@ -251,12 +251,17 @@ class ReportClass(object):
 
     def _set_case_conf(self):
         '''各个用例复位'''
+        #用例记录
         rwc.add_section('caseconf')
         rwc.read_section_zero("caseconf")
 
+        # 报告错误
         rwc.add_section('reportconf')
         rwc.read_section_zero('reportconf')
 
+        # error错误
+        rwc.add_section('errorconf')
+        rwc.read_section_zero('errorconf')
 
     def save_true_log(self):
         '''存储每天的记录，包括统计，并做数据处理（连续出现错误，不纳入计算）'''

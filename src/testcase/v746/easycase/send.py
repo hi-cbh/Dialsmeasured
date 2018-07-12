@@ -71,6 +71,7 @@ class Send(unittest.TestCase):
             ReadWriteConfFile.value_set_zero("testCaseSendNoAttach")
         except BaseException:
             ReadWriteConfFile.value_add_one("testCaseSendNoAttach")
+            ReadWriteConfFile.value_error_add_one("testCaseSendNoAttach")
             time.sleep(2)
             LogAction.save(func = "send", status="fail", explain=LogAction.print())
 
@@ -130,6 +131,7 @@ class Send(unittest.TestCase):
             ReadWriteConfFile.value_set_zero("testCaseSendAttach")
         except BaseException:
             ReadWriteConfFile.value_add_one("testCaseSendAttach")
+            ReadWriteConfFile.value_error_add_one("testCaseSendAttach")
             BaseImage.screenshot(self.driver, "SendError")
             time.sleep(2)
             LogAction.save(func = "send_action", status="fail", explain=LogAction.print())
@@ -184,6 +186,7 @@ class Send(unittest.TestCase):
             ReadWriteConfFile.value_set_zero("testCaseFwdSend")
         except BaseException:
             ReadWriteConfFile.value_add_one("testCaseFwdSend")
+            ReadWriteConfFile.value_error_add_one("testCaseFwdSend")
             BaseImage.screenshot(self.driver, "fwSendError")
             time.sleep(2)
             LogAction.save(func = "testCaseFwdSend", status="fail", explain=LogAction.print())
@@ -250,6 +253,7 @@ class Send(unittest.TestCase):
             ReadWriteConfFile.value_set_zero("testCaseForward")
         except BaseException:
             ReadWriteConfFile.value_add_one("testCaseForward")
+            ReadWriteConfFile.value_error_add_one("testCaseForward")
             BaseImage.screenshot(self.driver, "forwardError")
             time.sleep(2)
             LogAction.save(func = "testCaseForward", status="fail", explain=LogAction.print())
@@ -307,6 +311,7 @@ class Send(unittest.TestCase):
             ReadWriteConfFile.value_set_zero("testCaseReply")
         except BaseException:
             ReadWriteConfFile.value_add_one("testCaseReply")
+            ReadWriteConfFile.value_error_add_one("testCaseReply")
             BaseImage.screenshot(self.driver, "replyError")
             time.sleep(2)
             LogAction.save(func = "testCaseReply", status="fail", explain=LogAction.print())
