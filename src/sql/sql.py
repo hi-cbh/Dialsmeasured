@@ -58,24 +58,31 @@ class DB:
 
     # 修改
     def update(self, table_name, table_data):
-        key   = "=%r,".join(table_data.keys())
-        key = key + "=%r"
-        # print(tuple(table_data.values()))
-        real_sql = "UPDATE " + table_name + " SET " + key %tuple(table_data.values())
-        print(real_sql)
+        try:
+            key   = "=%r,".join(table_data.keys())
+            key = key + "=%r"
+            # print(tuple(table_data.values()))
+            real_sql = "UPDATE " + table_name + " SET " + key %tuple(table_data.values())
+            print(real_sql)
 
-        with self.connection.cursor() as cursor:
-            cursor.execute(real_sql)
+            with self.connection.cursor() as cursor:
+                cursor.execute(real_sql)
 
-        self.connection.commit()
-
-
+            self.connection.commit()
+        except BaseException as e:
+            print("本地数据库连接失败")
+            print(e)
+        finally:
+            self.close()
 
 
 
     # close database
     def close(self):
-        self.connection.close()
+        try:
+            self.connection.close()
+        except BaseException:
+            print("数据库连接失败")
 
     # init data
     def init_data(self, datas):
@@ -109,6 +116,4 @@ if __name__ == '__main__':
 
     print(new_dict)
 
-    db = DB()
-    db.update("test_data",new_dict)
-    db.close()
+    DB().update("test_data",new_dict)

@@ -124,28 +124,37 @@ class TestCase(unittest.TestCase):
         TestPush(self.driver).testCasePush()
 
 
+# 创建一个返回字典的方法
+def get_dict(data_dict = {}, case_list=[]):
+
+    new_dict = {}
+    for k,v in data_dict.items():
+        if k in case_list:
+            new_dict[k] = int(v)
+
+    new_dict["times"] = BaseTime.get_current_time()
+
+    return new_dict
+
+
 if __name__ == "__main__":
 
     print("=================更新到数据库=================")
     l = ['testcaseonbtnlogin', 'testcaselogin', 'testcasesendnoattach', 'testcasesendattach', 'testcasefwdsend', 'testcaseforward', 'testcasereply', 'testdownfile', 'testcasecheckaddresslist', 'testcaseselected', 'testcasepush', 'testcasecalendar', 'testcasediscover', 'testcasepersionmessages', 'testcaseskydrive']
-    tc = ReadWriteConfFile.read_section_all("caseconf")
-    # print(type(tc))
-    tc = dict(tc)
-    new_dict2 = {}
-    for k,v in tc.items():
-        if k in l:
-            new_dict2[k] = int(v)
 
-    new_dict2["times"] = BaseTime.get_current_time()
+    new_dict2 = get_dict(dict(ReadWriteConfFile.read_section_all("caseconf")),l)
+
     print(new_dict2)
-    try:
-        db = DB()
-        db.update("test_data",new_dict2)
-        db.close()
-    except Exception:
-        print("数据库连接失败")
 
-    DockerDB().update(new_dict2)
+    # ------------- 更新汇总数据库------------
+    error_dict2 = get_dict(dict(ReadWriteConfFile.read_section_all("errorconf")),l)
+    print(error_dict2)
+    # 更新本地数据库
+    DB().update("test_data",new_dict2)
+
+    # 更新到阿里云
+    DockerDB().update("sign_case",new_dict2)
+    DockerDB().update("sign_error",error_dict2)
 
     ReadWriteConfFile.value_set_true_false(True)
 
@@ -188,24 +197,13 @@ if __name__ == "__main__":
 
     print("=================更新到数据库=================")
     l = ['testcaseonbtnlogin', 'testcaselogin', 'testcasesendnoattach', 'testcasesendattach', 'testcasefwdsend', 'testcaseforward', 'testcasereply', 'testdownfile', 'testcasecheckaddresslist', 'testcaseselected', 'testcasepush', 'testcasecalendar', 'testcasediscover', 'testcasepersionmessages', 'testcaseskydrive']
-    tc = ReadWriteConfFile.read_section_all("caseconf")
-    # print(type(tc))
-    tc = dict(tc)
-    new_dict = {}
-    for k,v in tc.items():
-        if k in l:
-            new_dict[k] = int(v)
 
-    new_dict["times"] = BaseTime.get_current_time()
+    new_dict = get_dict(dict(ReadWriteConfFile.read_section_all("caseconf")),l)
     print(new_dict)
-    try:
-        db = DB()
-        db.update("test_data",new_dict)
-        db.close()
-    except Exception:
-        print("数据库连接失败")
 
-    DockerDB().update(new_dict)
+    DB().update("test_data",new_dict)
+
+    DockerDB().update("sign_case",new_dict)
 
     print('=================运行测试=================')
     # 生成html
@@ -221,5 +219,3 @@ if __name__ == "__main__":
     print('=================处理测试结果=================')
     ReportClass(testResultReport.failures,testtxt,"",now).all()
     print("=================结束=================")
-
-

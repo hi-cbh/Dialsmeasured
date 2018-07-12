@@ -37,9 +37,9 @@ class DockerDB:
             print("Mysql Error %d: %s" % (e.args[0], e.args[1]))
 
     # 修改
-    def update(self, table_data):
+    def update(self,table_name, table_data):
         try:
-            table_name = "sign_case"
+
             key   = "=%r,".join(table_data.keys())
             key = key + "=%r"
             # print(tuple(table_data.values()))
@@ -91,4 +91,5 @@ if __name__ == '__main__':
 
     print(new_dict)
 
-    DockerDB().update(new_dict)
+    DockerDB().update("sign_case", new_dict)
+    DockerDB().update("sign_error", new_dict)
