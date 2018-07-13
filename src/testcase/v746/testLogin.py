@@ -1,6 +1,9 @@
 # urs/bin/python
 # encoding:utf-8
 import unittest
+
+# from base.baseAdb import BaseAdb
+# from psam.psam import Psam
 from src.testcase.v746.easycase.login import Login
 from src.readwriteconf.initData import InitData, duser
 
@@ -15,6 +18,17 @@ path = r'/mnt/sdcard/139PushEmail/download/%s@139.com/*%s.rar'  %(user["name"], 
 
 class TestLogin(unittest.TestCase):
     '''登录是否成功'''
+
+    # def setUp(self):
+    #     try:
+    #         BaseAdb.adb_intall_uiautmator()
+    #         self.driver = Psam(version= "6.0")
+    #
+    #     except BaseException:
+    #         print("setUp启动出错！")
+    #         self.driver.quit()
+
+
     def __init__(self,driver):
         self.driver = driver
 

@@ -66,7 +66,7 @@ class Login(unittest.TestCase):
             sleep(5)
             BaseAdb.adb_start_app("cn.cj.pe","com.mail139.about.LaunchActivity")
 
-            sleep(4)
+            sleep(8)
             if first_fogin == True:
                 self.driver.click(u"uiautomator=>允许")
                 sleep(4)
@@ -84,6 +84,8 @@ class Login(unittest.TestCase):
             if BaseAdb.adb_version().__contains__("8.1.1"):
                 self.driver.click("id=>cn.cj.pe:id/add_account")
                 #cn.cj.pe:id/add_account 8.11新增步骤
+            sleep(2)
+
 
             LogAction.print('=>选择139邮箱')
             self.driver.click(r"xpath=>//android.widget.ImageView[@index='0']")
@@ -131,13 +133,13 @@ class Login(unittest.TestCase):
             self.assertTrue(self.driver.get_element("id=>cn.cj.pe:id/message_list_bottom_email",5) != None, "登录失败！")
             LogAction.save(func = "testCaseLogin", status="success", explain=LogAction.print())
             ReadWriteConfFile.value_set_zero("testCaseLogin")
-        except BaseException:
+        except BaseException as e:
             ReadWriteConfFile.value_add_one("testCaseLogin")
             ReadWriteConfFile.value_error_add_one("testCaseLogin")
             BaseImage.screenshot(self.driver, "LoginError")
             sleep(5)
             LogAction.save(func = "testCaseLogin", status="fail", explain=LogAction.print())
-
+            print(e)
             if ReadWriteConfFile.get_status_value():
                 self.fail("【手动输入账号/密码-登录】出现错误")
 
@@ -153,7 +155,7 @@ class Login(unittest.TestCase):
             sleep(5)
             BaseAdb.adb_start_app("cn.cj.pe","com.mail139.about.LaunchActivity")
 
-            sleep(5)
+            sleep(8)
 
             LogAction.print("=>右滑 * 2")
             self.driver.swipe_right()

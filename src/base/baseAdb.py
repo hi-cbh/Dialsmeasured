@@ -13,7 +13,17 @@ class BaseAdb(object):
     
     def __init__(self):
         self.path=""
-    
+
+    def adb_version(self):
+        '''获取版本号'''
+        try:
+            result = os.popen("adb shell dumpsys package cn.cj.pe |grep versionName")
+
+            return result.readline().split("=")[1]
+        except BaseException:
+            return "1.1.1"
+
+
     def adb_stop(self, cmd):
         '''杀进程'''
         self.adb_shell(self.path + 'adb shell am force-stop %s' % cmd)
