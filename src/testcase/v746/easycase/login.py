@@ -80,6 +80,11 @@ class Login(unittest.TestCase):
             LogAction.print("=>点击体验")
             BaseAdb.adb_tap(w / 2, int(h * 0.899))
 
+            sleep(2)
+            if BaseAdb.adb_version().__contains__("8.1.1"):
+                self.driver.click("id=>cn.cj.pe:id/add_account")
+                #cn.cj.pe:id/add_account 8.11新增步骤
+
             LogAction.print('=>选择139邮箱')
             self.driver.click(r"xpath=>//android.widget.ImageView[@index='0']")
 
@@ -164,6 +169,9 @@ class Login(unittest.TestCase):
 
             # BaseAdb.adbTap(500, 1700) #其他手机需要调试
             sleep(2)
+            if BaseAdb.adb_version().__contains__("8.1.1"):
+                self.driver.click("id=>cn.cj.pe:id/add_account")
+                #cn.cj.pe:id/add_account 8.11新增步骤
 
             LogAction.print("=>【进入登录界面】")
             self.assertTrue(self.driver.get_element(u"uiautomator=>快速登录",10) != None, "页面不存在快捷登录按钮")
