@@ -9,6 +9,8 @@ from src.base.baseAdb import BaseAdb
 from src.base.baseImage import BaseImage
 from src.base.baseLog import LogAction
 
+time_min = 20
+time_max = 40
 
 class Send(unittest.TestCase):
     
@@ -49,14 +51,22 @@ class Send(unittest.TestCase):
             btn = self.driver.get_element("id=>cn.cj.pe:id/txt_send",5)
             btn.click()
 
+            # 修改等待时间
+            devicename = BaseAdb.adb_devicename()
+            if devicename.__contains__("vivo"):
+                waittime = time_min
+            else:
+                waittime = time_max
+
+
             LogAction.print('=>【已完成】')
-            self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",40) != None, "发送邮件失败！")
+            self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",waittime) != None, "发送邮件失败！")
 
             print('返回收件箱')
             BaseAdb.adb_back()
 
             LogAction.print("=>等待邮件")
-            timeout = int(round(time.time() * 1000)) + 1*40 * 1000
+            timeout = int(round(time.time() * 1000)) + 1*waittime * 1000
             # 找到邮件结束
             while int(round(time.time() * 1000)) < timeout :
                 if self.driver.element_wait(u"uiautomator=>%s" %subject,2) == None:
@@ -110,14 +120,22 @@ class Send(unittest.TestCase):
             btn = self.driver.get_element("id=>cn.cj.pe:id/txt_send",5)
             btn.click()
 
+            # 修改等待时间
+            devicename = BaseAdb.adb_devicename()
+            if devicename.__contains__("vivo"):
+                waittime = time_min
+            else:
+                waittime = time_max
+
+
             LogAction.print('=>【已完成】')
-            self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",40) != None, "发送邮件失败！")
+            self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",waittime) != None, "发送邮件失败！")
 
             print('返回收件箱')
             BaseAdb.adb_back()
 
             LogAction.print("=>等待FW邮件")
-            timeout = int(round(time.time() * 1000)) + 1*40 * 1000
+            timeout = int(round(time.time() * 1000)) + 1*waittime * 1000
             # 找到邮件结束
             while int(round(time.time() * 1000)) < timeout :
                 if self.driver.element_wait(u"uiautomator=>%s" %subject,2) == None:
@@ -165,14 +183,22 @@ class Send(unittest.TestCase):
             LogAction.print('=>点击发送')
             self.driver.get_element("id=>cn.cj.pe:id/txt_send").click()
 
+            # 修改等待时间
+            devicename = BaseAdb.adb_devicename()
+            if devicename.__contains__("vivo"):
+                waittime = time_min
+            else:
+                waittime = time_max
+
+
             LogAction.print('=>【发已完成】')
-            self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",80) != None, "发送邮件失败！")
+            self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",waittime) != None, "发送邮件失败！")
 
             LogAction.print('=>返回收件箱')
             BaseAdb.adb_back()
 
             LogAction.print("=>等待FW邮件")
-            timeout = int(round(time.time() * 1000)) + 1*40 * 1000
+            timeout = int(round(time.time() * 1000)) + 1*waittime * 1000
             # 找到邮件结束
             while int(round(time.time() * 1000)) < timeout :
                 if self.driver.element_wait(u"uiautomator=>Fwd: %s" %subject,2) == None:
@@ -232,14 +258,21 @@ class Send(unittest.TestCase):
             LogAction.print('=>点击发送')
             self.driver.get_element("id=>cn.cj.pe:id/txt_send").click()
 
+            # 修改等待时间
+            devicename = BaseAdb.adb_devicename()
+            if devicename.__contains__("vivo"):
+                waittime = time_min
+            else:
+                waittime = time_max
+
             LogAction.print('=>【已完成】')
-            self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",60) != None, "发送邮件失败！")
+            self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",waittime) != None, "发送邮件失败！")
 
             print('返回收件箱')
             BaseAdb.adb_back()
 
             LogAction.print("=>等待FW邮件")
-            timeout = int(round(time.time() * 1000)) + 1*20 * 1000
+            timeout = int(round(time.time() * 1000)) + 1*waittime * 1000
             # 找到邮件结束
             while int(round(time.time() * 1000)) < timeout :
                 if self.driver.element_wait(u"uiautomator=>Fwd: %s" %subject,2) == None:
@@ -289,14 +322,21 @@ class Send(unittest.TestCase):
             LogAction.print('=>点击确定')
             self.driver.get_element(u"uiautomator=>确定").click()
 
+            # 修改等待时间
+            devicename = BaseAdb.adb_devicename()
+            if devicename.__contains__("vivo"):
+                waittime = time_min
+            else:
+                waittime = time_max
+
             LogAction.print('=>【已完成】')
-            self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",60) != None, "发送邮件失败！")
+            self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",waittime) != None, "发送邮件失败！")
 
             print('返回收件箱')
             BaseAdb.adb_back()
 
             LogAction.print("=>等待Re邮件")
-            timeout = int(round(time.time() * 1000)) + 1*20 * 1000
+            timeout = int(round(time.time() * 1000)) + 1*waittime * 1000
             # 找到邮件结束
             while int(round(time.time() * 1000)) < timeout :
                 if self.driver.element_wait(u"uiautomator=>Re: %s" %subject,2) == None:
