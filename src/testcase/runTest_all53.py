@@ -186,6 +186,7 @@ if __name__ == "__main__":
     suite.addTest(TestCase('testCaseFwdSend'))
     suite.addTest(TestCase('testCaseForward'))
     suite.addTest(TestCase('testCaseReply'))
+    suite.addTest(TestCase('testCaseDiscover'))
     suite.addTest(TestCase('testCaseCalendar'))
     suite.addTest(TestCase('testCasePersionMessages'))
     suite.addTest(TestCase('testCaseSkyDrive'))
