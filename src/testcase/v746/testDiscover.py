@@ -28,7 +28,7 @@ class TestDiscover(unittest.TestCase):
             self.driver.click(u'uiautomator=>发现')
 
             LogAction.print('=>【发现页面】')
-            self.assertTrue(self.driver.element_wait(u"uiautomator=>139精选",80),"页面显示不正常")
+            self.assertTrue(self.driver.element_wait(u"uiautomator=>139",80),"页面显示不正常")
             LogAction.save(func = "testCaseDiscover", status="success", explain=LogAction.print())
             ReadWriteConfFile.value_set_zero("testCaseDiscover")
         except BaseException:
