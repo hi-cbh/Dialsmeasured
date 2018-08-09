@@ -9,7 +9,10 @@ class HourError(object):
     def setData(self,new_dict):
 
         save_hour = ReadWriteConfFile.get_section_value("hourconf","currenthour")
-        current_hour = datetime.datetime.now().hour
+        current_hour = str(datetime.datetime.now().hour)
+
+        if current_hour.__eq__("0"):
+            current_hour = "24"
 
         if save_hour.__eq__(current_hour):
 
@@ -30,4 +33,4 @@ class HourError(object):
 
 if __name__ == "__main__":
 
-    HourError().setData()
+    HourError().setData("")
