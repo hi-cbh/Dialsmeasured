@@ -158,6 +158,16 @@ if __name__ == "__main__":
 
     ReadWriteConfFile.value_set_true_false(True)
 
+    try:
+        hour_dict = get_dict(dict(ReadWriteConfFile.read_section_all("errorhourconf")),l)
+        HourError().setData(hour_dict)
+    except BaseException as e:
+        print(e)
+        print("每小时更新数据库，错误")
+
+
+
+
     print('=================中文-英文对应测试用例=================')
     testtxt = []
     testtxt.append(('一键登录',"testCaseOnBtnLogin"))
