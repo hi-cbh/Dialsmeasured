@@ -29,7 +29,7 @@ from src.readwriteconf.rwconf import ReadWriteConfFile
 from src.sql.sql import DB
 from src.base.baseTime import BaseTime
 from src.sql.docker_mysql import DockerDB
-
+from src.readwriteconf.changehourerror import HourError
 localPath = "/var/appiumRunLog"
 # 信息存储路径
 reportPath = localPath + "/report/"
@@ -204,6 +204,14 @@ if __name__ == "__main__":
     DB().update("test_data",new_dict)
 
     DockerDB().update("sign_case",new_dict)
+
+    try:
+        hour_dict = get_dict(dict(ReadWriteConfFile.read_section_all("errorhourconf")),l)
+        HourError().setData(hour_dict)
+    except BaseException as e:
+        print(e)
+        print("每小时更新数据库，错误")
+
 
     print('=================运行测试=================')
     # 生成html

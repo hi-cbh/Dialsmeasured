@@ -38,6 +38,7 @@ class TestPersion(unittest.TestCase):
         except BaseException :
             ReadWriteConfFile.value_add_one("testCasePersionMessages")
             ReadWriteConfFile.value_error_add_one("testCasePersionMessages")
+            ReadWriteConfFile.value_hourerror_add_one("testCasePersionMessages")
 
             BaseImage.screenshot(self.driver, "testCasePersionMessages")
             time.sleep(2)

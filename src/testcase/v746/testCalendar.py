@@ -40,6 +40,7 @@ class TestCalendar(unittest.TestCase):
         except BaseException :
             ReadWriteConfFile.value_add_one("testCaseCalendar")
             ReadWriteConfFile.value_error_add_one("testCaseCalendar")
+            ReadWriteConfFile.value_hourerror_add_one("testCaseCalendar")
             BaseImage.screenshot(self.driver, "testCaseCalendar")
             time.sleep(2)
             LogAction.save(func = "testCaseCalendar", status="fail", explain=LogAction.print())

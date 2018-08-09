@@ -75,6 +75,24 @@ class DB:
         finally:
             self.close()
 
+    # 修改
+    def update_hour(self, table_name, table_data, hour):
+        try:
+            key   = "=%r,".join(table_data.keys())
+            key = key + "=%r"
+            # print(tuple(table_data.values()))
+            real_sql = "UPDATE " + table_name + " SET " + key %tuple(table_data.values()) + " WHERE hour = %d ;"  %int(hour)
+            print(real_sql)
+
+            with self.connection.cursor() as cursor:
+                cursor.execute(real_sql)
+
+            self.connection.commit()
+        except BaseException as e:
+            print("本地数据库连接失败")
+            print(e)
+        finally:
+            self.close()
 
 
     # close database
@@ -104,8 +122,12 @@ class DB:
 if __name__ == '__main__':
 
 
-    l = ['testcaseonbtnlogin', 'testcaselogin', 'testcasesendnoattach', 'testcasesendattach', 'testcasefwdsend', 'testcaseforward', 'testcasereply', 'testdownfile', 'testcasecheckaddresslist', 'testcaseselected', 'testcasepush', 'testcasecalendar', 'testcasediscover', 'testcasepersionmessages', 'testcaseskydrive']
-    tc = ReadWriteConfFile.read_section_all("caseconf")
+    l = ['testcaseonbtnlogin', 'testcaselogin', 'testcasesendnoattach',
+         'testcasesendattach', 'testcasefwdsend', 'testcaseforward', 'testcasereply',
+         'testdownfile', 'testcasecheckaddresslist', 'testcaseselected', 'testcasepush',
+         'testcasecalendar', 'testcasediscover', 'testcasepersionmessages', 'testcaseskydrive']
+
+    tc = ReadWriteConfFile.read_section_all("errorhourconf")
     # print(type(tc))
     tc = dict(tc)
 
@@ -116,4 +138,4 @@ if __name__ == '__main__':
 
     print(new_dict)
 
-    DB().update("test_data",new_dict)
+    DB().update_hour("sign_hourerror",new_dict,"1")

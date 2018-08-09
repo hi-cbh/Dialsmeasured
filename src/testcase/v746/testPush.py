@@ -54,6 +54,7 @@ class TestPush(unittest.TestCase):
         except BaseException:
             ReadWriteConfFile.value_add_one("testCasePush")
             ReadWriteConfFile.value_error_add_one("testCasePush")
+            ReadWriteConfFile.value_hourerror_add_one("testCasePush")
             BaseImage.screenshot(self.driver, "PushError")
             time.sleep(2)
             LogAction.save(func = "testCasePush", status="fail", explain=LogAction.print())

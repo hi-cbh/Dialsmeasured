@@ -56,6 +56,7 @@ class OpenDown(unittest.TestCase):
         except BaseException:
             ReadWriteConfFile.value_add_one("testDownFile")
             ReadWriteConfFile.value_error_add_one("testDownFile")
+            ReadWriteConfFile.value_hourerror_add_one("testDownFile")
             BaseImage.screenshot(self.driver, "DownFileError")
             time.sleep(5)
             LogAction.save(func = "testDownFile", status="fail", explain=LogAction.print())

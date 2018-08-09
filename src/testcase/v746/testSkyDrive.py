@@ -37,6 +37,7 @@ class TestSkyDrive(unittest.TestCase):
         except BaseException :
             ReadWriteConfFile.value_add_one("testCaseSkyDrive")
             ReadWriteConfFile.value_error_add_one("testCaseSkyDrive")
+            ReadWriteConfFile.value_hourerror_add_one("testCaseSkyDrive")
             BaseImage.screenshot(self.driver, "testCaseSkyDrive")
             time.sleep(5)
             LogAction.save(func = "testCaseSkyDrive", status="fail", explain=LogAction.print())

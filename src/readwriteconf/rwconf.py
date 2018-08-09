@@ -72,6 +72,22 @@ class ReadWriteConfFile:
             print("值出错")
 
     @staticmethod
+    def value_add(section,case_name):
+        '''错误用例只加1'''
+        try:
+            value = ReadWriteConfFile.get_section_value(section, case_name)
+            ReadWriteConfFile.set_section_value(section, case_name, str(int(value)+1))
+        except BaseException as e:
+            print(e)
+            print("值出错")
+
+    @staticmethod
+    def value_hourerror_add_one(case_name):
+        '''错误用例只加1'''
+        section="errorhourconf"
+        ReadWriteConfFile.value_add(section,case_name)
+
+    @staticmethod
     def value_error_add_one(case_name):
         '''错误用例只加1'''
         try:
@@ -81,6 +97,8 @@ class ReadWriteConfFile:
         except BaseException as e:
             print(e)
             print("值出错")
+
+
 
     @staticmethod
     def value_set_zero(case_name):

@@ -33,6 +33,7 @@ class TestContant(unittest.TestCase):
         except BaseException :
             ReadWriteConfFile.value_add_one("CheckAddressListError")
             ReadWriteConfFile.value_error_add_one("CheckAddressListError")
+            ReadWriteConfFile.value_hourerror_add_one("CheckAddressListError")
             BaseImage.screenshot(self.driver, "CheckAddressListError")
             time.sleep(5)
             LogAction.save(func = "testCaseCheckAddressList", status="fail", explain=LogAction.print())
