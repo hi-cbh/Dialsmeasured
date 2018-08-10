@@ -205,6 +205,18 @@ if __name__ == "__main__":
     suite.addTest(TestCase('testCasePush'))
     runner = unittest.TextTestRunner()
 
+
+
+
+    print('=================运行测试=================')
+    # 生成html
+    now = time.strftime("%Y-%m-%d %H_%M_%S")
+    fp = open(reportPath + now + '_result.html', 'wb')
+    runner = HTMLTestRunner(stream=fp,title='Test Report', description='DialsMeasured with: ')
+    testResultReport = runner.run(suite)
+    fp.close()
+    print('=================运行结束=================')
+
     print("=================更新到数据库=================")
     l = ['testcaseonbtnlogin', 'testcaselogin', 'testcasesendnoattach', 'testcasesendattach', 'testcasefwdsend', 'testcaseforward', 'testcasereply', 'testdownfile', 'testcasecheckaddresslist', 'testcaseselected', 'testcasepush', 'testcasecalendar', 'testcasediscover', 'testcasepersionmessages', 'testcaseskydrive']
 
@@ -223,14 +235,6 @@ if __name__ == "__main__":
         print("每小时更新数据库，错误")
 
 
-    print('=================运行测试=================')
-    # 生成html
-    now = time.strftime("%Y-%m-%d %H_%M_%S")
-    fp = open(reportPath + now + '_result.html', 'wb')
-    runner = HTMLTestRunner(stream=fp,title='Test Report', description='DialsMeasured with: ')
-    testResultReport = runner.run(suite)
-    fp.close()
-    print('=================运行结束=================')
     # 休眠状态
     BaseAdb.adb_sleep()
     time.sleep(5)

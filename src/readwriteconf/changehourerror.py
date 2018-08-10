@@ -28,7 +28,8 @@ class HourError(object):
             ReadWriteConfFile.read_section_zero("errorhourconf")
 
 
-
+        # 把数据库所有数据复位
+        # 在哪个时间段，需要复位？
 
 
 if __name__ == "__main__":
