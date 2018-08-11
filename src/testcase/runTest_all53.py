@@ -139,33 +139,31 @@ def get_dict(data_dict = {}, case_list=[]):
 
 if __name__ == "__main__":
 
-    print("=================更新到数据库=================")
-    l = ['testcaseonbtnlogin', 'testcaselogin', 'testcasesendnoattach', 'testcasesendattach', 'testcasefwdsend', 'testcaseforward', 'testcasereply', 'testdownfile', 'testcasecheckaddresslist', 'testcaseselected', 'testcasepush', 'testcasecalendar', 'testcasediscover', 'testcasepersionmessages', 'testcaseskydrive']
-
-    new_dict2 = get_dict(dict(ReadWriteConfFile.read_section_all("caseconf")),l)
-
-    print(new_dict2)
-
-    # ------------- 更新汇总数据库------------
-    error_dict2 = get_dict(dict(ReadWriteConfFile.read_section_all("errorconf")),l)
-    print(error_dict2)
-    # 更新本地数据库
-    DB().update("test_data",new_dict2)
-
-    # 更新到阿里云
-    DockerDB().update("sign_case",new_dict2)
-    DockerDB().update("sign_error",error_dict2)
-
     ReadWriteConfFile.value_set_true_false(True)
 
     try:
-        hour_dict = get_dict(dict(ReadWriteConfFile.read_section_all("errorhourconf")),l)
-        HourError().setData(hour_dict)
+
+        print("=================更新到数据库=================")
+        l = ['testcaseonbtnlogin', 'testcaselogin', 'testcasesendnoattach', 'testcasesendattach', 'testcasefwdsend', 'testcaseforward', 'testcasereply', 'testdownfile', 'testcasecheckaddresslist', 'testcaseselected', 'testcasepush', 'testcasecalendar', 'testcasediscover', 'testcasepersionmessages', 'testcaseskydrive']
+
+        new_dict2 = get_dict(dict(ReadWriteConfFile.read_section_all("caseconf")),l)
+
+        print(new_dict2)
+
+        # ------------- 更新汇总数据库------------
+        error_dict2 = get_dict(dict(ReadWriteConfFile.read_section_all("errorconf")),l)
+        print(error_dict2)
+        # 更新本地数据库
+        DB().update("test_data",new_dict2)
+
+        # 更新到阿里云
+        DockerDB().update("sign_case",new_dict2)
+        DockerDB().update("sign_error",error_dict2)
+        # hour_dict = get_dict(dict(ReadWriteConfFile.read_section_all("errorhourconf")),l)
+        # HourError().setData(hour_dict)
     except BaseException as e:
-        print(e)
+        # print(e)
         print("每小时更新数据库，错误")
-
-
 
 
     print('=================中文-英文对应测试用例=================')
@@ -205,9 +203,6 @@ if __name__ == "__main__":
     suite.addTest(TestCase('testCasePush'))
     runner = unittest.TextTestRunner()
 
-
-
-
     print('=================运行测试=================')
     # 生成html
     now = time.strftime("%Y-%m-%d %H_%M_%S")
@@ -217,21 +212,22 @@ if __name__ == "__main__":
     fp.close()
     print('=================运行结束=================')
 
-    print("=================更新到数据库=================")
-    l = ['testcaseonbtnlogin', 'testcaselogin', 'testcasesendnoattach', 'testcasesendattach', 'testcasefwdsend', 'testcaseforward', 'testcasereply', 'testdownfile', 'testcasecheckaddresslist', 'testcaseselected', 'testcasepush', 'testcasecalendar', 'testcasediscover', 'testcasepersionmessages', 'testcaseskydrive']
-
-    new_dict = get_dict(dict(ReadWriteConfFile.read_section_all("caseconf")),l)
-    print(new_dict)
-
-    DB().update("test_data",new_dict)
-
-    DockerDB().update("sign_case",new_dict)
-
     try:
-        hour_dict = get_dict(dict(ReadWriteConfFile.read_section_all("errorhourconf")),l)
-        HourError().setData(hour_dict)
+        print("=================更新到数据库=================")
+        l = ['testcaseonbtnlogin', 'testcaselogin', 'testcasesendnoattach', 'testcasesendattach', 'testcasefwdsend', 'testcaseforward', 'testcasereply', 'testdownfile', 'testcasecheckaddresslist', 'testcaseselected', 'testcasepush', 'testcasecalendar', 'testcasediscover', 'testcasepersionmessages', 'testcaseskydrive']
+
+        new_dict = get_dict(dict(ReadWriteConfFile.read_section_all("caseconf")),l)
+        print(new_dict)
+
+        DB().update("test_data",new_dict)
+
+        DockerDB().update("sign_case",new_dict)
+
+
+        # hour_dict = get_dict(dict(ReadWriteConfFile.read_section_all("errorhourconf")),l)
+        # HourError().setData(hour_dict)
     except BaseException as e:
-        print(e)
+        # print(e)
         print("每小时更新数据库，错误")
 
 
