@@ -26,10 +26,10 @@ from src.testcase.HTMLTestRunner import HTMLTestRunner
 from src.reportlib.reportclass import ReportClass
 from src.base.baseAdb import BaseAdb
 from src.readwriteconf.rwconf import ReadWriteConfFile
-from src.sql.sql import DB
+# from src.sql.sql import DB
 from src.base.baseTime import BaseTime
-from src.sql.docker_mysql import DockerDB
-from src.readwriteconf.changehourerror import HourError
+# from src.sql.docker_mysql import DockerDB
+# from src.readwriteconf.changehourerror import HourError
 localPath = "/var/appiumRunLog"
 # 信息存储路径
 reportPath = localPath + "/report/"
