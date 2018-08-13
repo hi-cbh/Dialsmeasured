@@ -29,8 +29,27 @@ class HourError(object):
             ReadWriteConfFile.read_section_zero("errorhourconf")
 
 
-        # 把数据库所有数据复位
-        # 在哪个时间段，需要复位？
+    #把数据库所有数据复位
+    #在哪个时间段，需要复位？
+    def set_zero(self):
+        try:
+
+            l = ['testcaseonbtnlogin', 'testcaselogin', 'testcasesendnoattach', 'testcasesendattach', 'testcasefwdsend', 'testcaseforward', 'testcasereply', 'testdownfile', 'testcasecheckaddresslist', 'testcaseselected', 'testcasepush', 'testcasecalendar', 'testcasediscover', 'testcasepersionmessages', 'testcaseskydrive']
+            tc = ReadWriteConfFile.read_section_all("errorhourconf")
+            # print(type(tc))
+            tc = dict(tc)
+
+            new_dict = {}
+            for k,v in tc.items():
+                if k in l:
+                    new_dict[k] = 0
+
+            # print(new_dict)
+
+            DockerDB().set_zero("sign_hourerror",new_dict)
+        except BaseException as e:
+            # print(e)
+            print('修改数据库失败')
 
 
 if __name__ == "__main__":

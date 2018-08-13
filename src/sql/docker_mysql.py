@@ -99,6 +99,25 @@ class DockerDB:
         print(results)
         return results
 
+
+    def set_zero(self, table_name, table_data):
+        try:
+            key   = "=%r,".join(table_data.keys())
+            key = key + "=%r"
+            # print(tuple(table_data.values()))
+            real_sql = "UPDATE " + table_name + " SET " + key %tuple(table_data.values()) + " WHERE times like '2018%' ;"
+            # print(real_sql)
+
+            with self.connection.cursor() as cursor:
+                cursor.execute(real_sql)
+
+            self.connection.commit()
+        except BaseException as e:
+            print("本地数据库连接失败")
+            print(e)
+        finally:
+            self.close()
+
 if __name__ == '__main__':
 
 
@@ -110,10 +129,13 @@ if __name__ == '__main__':
     new_dict = {}
     for k,v in tc.items():
         if k in l:
-            new_dict[k] = int(v)
+            new_dict[k] = 0
 
     print(new_dict)
 
     # DockerDB().update("sign_case", new_dict)
     # DockerDB().update("sign_error", new_dict)
-    DockerDB().update_hour("sign_hourerror",new_dict,"1")
+    DockerDB().set_zero("sign_hourerror",new_dict)
+
+
+

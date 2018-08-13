@@ -15,7 +15,7 @@ from src.readwriteconf.initData import InitData
 from src.readwriteconf.calcSucPer import CalcSuccess
 from collections import Counter
 from src.testcase.runTest_rest import RunAll
-
+from src.readwriteconf.changehourerror import HourError
 
 logPath = InitData().get_sys_path()["savepath"] + "/logs/"
 logfileName= BaseTime.get_date_hour() + '.log'
@@ -487,7 +487,8 @@ class ReportClass(object):
                 if changetime == datetime.datetime.now().hour:
                     print("复原操作")
                     self._set_case_conf()
-
+                    # 还原阿里云数据库
+                    HourError().set_zero()
         else:
             # 恢复邮件状态
             if rwc.get_section_value("sendconf", "send") == "True" and morning != datetime.datetime.now().hour and changetime >= datetime.datetime.now().hour >= 0:
