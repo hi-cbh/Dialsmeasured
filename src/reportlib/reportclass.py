@@ -16,7 +16,7 @@ from src.readwriteconf.calcSucPer import CalcSuccess
 from collections import Counter
 from src.testcase.runTest_rest import RunAll
 from src.readwriteconf.changehourerror import HourError
-
+from src.base.baseFile import BaseFile
 logPath = InitData().get_sys_path()["savepath"] + "/logs/"
 logfileName= BaseTime.get_date_hour() + '.log'
 
@@ -510,6 +510,13 @@ class ReportClass(object):
 
                 s = SendMail("13580491603","chinasoft123","")
                 s.send_mail_str_163('[预测]139Android客户端'+test_version+'版本_功能拨测疑是出现故障，请及时查证',errstr,is_test=is_test)
+
+                android_error_path = "/sdcard/Android/data/cn.cj.pe/log/"
+                pc_error_path = "/var/appiumRunLog/error_log/"
+                # 错误时，把日志写入本地文件，方便查阅
+                if BaseFile.adb_find_dir(android_error_path):
+                    BaseAdb.adb_pull(android_error_path,pc_error_path)
+
             else:
                 print("第一次测试完成，无异常")
                 return

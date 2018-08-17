@@ -32,8 +32,25 @@ class BaseFile(object):
             print('msg: %r' %msg)
             return False    
 
-            
- 
+
+    def adb_find_dir(self, path):
+        '''
+        查找目录是否存在
+        :param path:
+        :return:
+        '''
+        try:
+            value = os.popen("adb shell ls "+path)
+            for txt in value.readlines():
+                print('value: %r' %txt)
+                if "No such file or directory"  not in txt:
+                    return True
+
+            return False
+        except BaseException as msg:
+            print('msg: %r' %msg)
+            return False
+
     def adb_del_file(self, path, file):
         '''删除文件'''
         try:
