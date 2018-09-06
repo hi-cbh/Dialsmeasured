@@ -55,8 +55,13 @@ class duser(object):
         # username = "13533218540"
         # pwd = "hy12345678"
 
+
         # 主账号
-        if datetime.datetime.now().hour%2 == 0:
+        # 在早上6-7点，使用性能号码
+        if datetime.datetime.now().hour in [6,7]:
+            username = d['user1']
+            pwd = d['pwd1']
+        elif datetime.datetime.now().hour%2 == 0:
             username = d['user3']
             pwd = d['pwd3']
         else:
