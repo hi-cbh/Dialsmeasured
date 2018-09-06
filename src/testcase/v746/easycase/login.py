@@ -122,6 +122,10 @@ class Login(unittest.TestCase):
 
                 sleep(0.5)
 
+            LogAction.print('=>判断是否升级')
+            self.update()
+
+
 
             sleep(2)
             LogAction.print("=>点击邮件")
@@ -198,6 +202,9 @@ class Login(unittest.TestCase):
 
 
             sleep(2)
+            LogAction.print('=>判断是否升级')
+            self.update()
+
             LogAction.print('=>点击底部导航栏')
             self.driver.click("id=>cn.cj.pe:id/message_list_bottom_email",2)
 
@@ -219,3 +226,12 @@ class Login(unittest.TestCase):
 
             if ReadWriteConfFile.get_status_value():
                 self.fail("【一键登录出错登录】出现错误")
+
+
+    def update(self):
+        '''升级'''
+        # 每次登录检查是否含有升级，有就关闭。
+        # 进入选择升级或不升级，可能涉及ui的改变
+
+        if self.driver.element_wait(u"uiautomator=>立即安装",5) != None:
+            self.driver.click("id=>cn.cj.pe:id/close")
