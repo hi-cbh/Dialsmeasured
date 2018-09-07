@@ -56,7 +56,7 @@ class duser(object):
         # pwd = "hy12345678"
 
 
-        # 主账号
+        # 主账号: 主测试号码
         # 在早上6-7点，使用性能号码
         if datetime.datetime.now().hour in [6,7]:
             username = d['user1']
@@ -68,6 +68,7 @@ class duser(object):
             username = d['user4']
             pwd = d['pwd4']
 
+        # 辅助账号：辅助
         username2 = d['user2']
         pwd2 = d['pwd2']
 
