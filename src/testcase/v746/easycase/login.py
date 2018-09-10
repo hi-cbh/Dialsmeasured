@@ -233,5 +233,9 @@ class Login(unittest.TestCase):
         # 每次登录检查是否含有升级，有就关闭。
         # 进入选择升级或不升级，可能涉及ui的改变
 
-        if self.driver.element_wait(u"uiautomator=>立即更新",5) != None:
+        if self.driver.element_wait(u"uiautomator=>立即更新",5) != None \
+                or self.driver.element_wait(u"uiautomator=>立即安装",5) != None \
+                or self.driver.element_wait("id=>cn.cj.pe:id/close",5) != None:
+
+
             self.driver.click("id=>cn.cj.pe:id/close")

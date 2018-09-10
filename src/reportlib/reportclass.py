@@ -34,7 +34,7 @@ fsaveFilePath = logPath + 'savef_'+logfileName
 fhtmlFilePath = logPath + 'false_'+logfileName
 
 
-test_version ="V812"
+test_version ="V814"
 
 class ReportClass(object):
 
@@ -424,10 +424,14 @@ class ReportClass(object):
 
 
 
-    def send(self, is_test=True):
+    def send(self, is_test=True, is_debug = False):
         '''
         1、连续出现N次错误，发送邮件，邮件为一句话。
         2、出现错误的结果不纳入计算范围内
+
+
+        is_test = 控制发送人
+        is_debug = 控制错误发送邮件
         :return:
         '''
         print('=================统计并发送邮件处理=================')
@@ -521,25 +525,30 @@ class ReportClass(object):
                 print("第一次测试完成，无异常")
                 return
 
-            # # 出现错误，全部用例重新跑
-            # print("======第二次判断是否需要重跑=======")
-            # if len(self._read_case_conf(maxtimes)) != 0:
-            #     RunAll.run_case()
-            #
-            #
-            # # 错误次数
-            # if len(self._read_case_conf(maxtimes)) != 0:
-            #
-            #     # 发送广播，传递参数
-            #     error_case = self._get_sms_case(maxtimes)
-            #     BaseAdb.adb_broadcast_sms(error_case)
-            #
-            #     err = self._read_case_conf(maxtimes)
-            #     errstr2 = ','.join(err) + "到目前为止，以上提及的功能出现多次错误，请及时查证"
-            #
-            #     s = SendMail("13697485262","chinasoft123","13697485262")
-            #     s.send_mail_str('139Android客户端'+test_version+'版本_功能拨测疑是出现故障，请及时查证',errstr2,is_test=is_test)
-            #
+            # 如果是测试，不将结果发送到所有人，且不发送邮件
+            if not is_debug:
+
+                return
+
+            # 出现错误，全部用例重新跑
+            print("======第二次判断是否需要重跑=======")
+            if len(self._read_case_conf(maxtimes)) != 0:
+                RunAll.run_case()
+
+
+            # 错误次数
+            if len(self._read_case_conf(maxtimes)) != 0:
+
+                # 发送广播，传递参数
+                error_case = self._get_sms_case(maxtimes)
+                BaseAdb.adb_broadcast_sms(error_case)
+
+                err = self._read_case_conf(maxtimes)
+                errstr2 = ','.join(err) + "到目前为止，以上提及的功能出现多次错误，请及时查证"
+
+                s = SendMail("13697485262","chinasoft123","13697485262")
+                s.send_mail_str('139Android客户端'+test_version+'版本_功能拨测疑是出现故障，请及时查证',errstr2,is_test=is_test)
+
 
 
         print('运行结束')
