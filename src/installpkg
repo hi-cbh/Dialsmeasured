@@ -11,3 +11,7 @@ sudo mkdir /var/appiumRunLog && cd /var/appiumRunLog
 sudo mkdir ini logs report pics
 sudo chmod 777 /var/appiumRunLog/*
 copy user_db.ini /var/appiumRunLog/ini/
+
+
+
+

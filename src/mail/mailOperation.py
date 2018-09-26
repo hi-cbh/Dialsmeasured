@@ -38,7 +38,6 @@ class EmailOperation(object):
     def logout(self):
         try:
             self.server.logout()
-
         except BaseException:
             print("退出发生错误")
 
@@ -64,6 +63,7 @@ class EmailOperation(object):
     
     def email_body(self, mss):
         # 获取某序列id的原始信息
+        global lines
         raw_messages = self.server.fetch([mss],['BODY[]','FLAGS'])
 #         pprint.pprint(rawMessages)
         # 使用pyzmail，返回主体信息
@@ -97,7 +97,7 @@ class EmailOperation(object):
         self._into(folder)
         
         uids = self._get_uids()
-        if len(uids) ==  0 :
+        if len(uids) == 0:
             return
         else:
             self._del(uids)
@@ -107,8 +107,8 @@ class EmailOperation(object):
         self._into(fforlder)
         
         uids = self._get_uids()
-        
-        if len(uids) ==  0 :
+
+        if len(uids) == 0:
             return
         else:
             self._del(uids[-1])
@@ -120,9 +120,11 @@ class EmailOperation(object):
         
         uids = self._get_uids()
         # 邮件数量为空
-        if len(uids) ==  0 :
+        if len(uids) == 0:
             print("%s 数量为：0，该操作无效" %fforlder)
             return True
+        else:
+            print("%s 数量不为0，%r" %(uids, len(uids)))
         self._mv(uids, tforlder)
             
 
@@ -145,67 +147,64 @@ class EmailOperation(object):
     def delete_newest_mail(self):
         '''删除最新的一封邮件'''
         try:
-            is_true = False
+
             self.server.login(self.username, self.password)    
             self.del_new_message('INBOX')
-            is_true = True
+            return True
         except BaseException as error:
             print(error)
             print("删除邮件可能出现错误")
+            return False
         finally:
             self.logout()
-            return is_true
 
-    def clear_forlder(self, l=[]):
+    def clear_forlder(self, args=None):
         '''清空邮箱某个文件夹'''
         '''
         sample:
         clearForlder(['100', 'INBOX'])
         '''
-        is_true = False
-        if len(l) == 0:
-            return is_true
+        if args is None:
+            return False
         try:
             self.server.login(self.username, self.password)    
-            for f in l:
+            for f in args:
                 print("clear Forlder: %s" %f)
                 self.del_all_message(f)
                 time.sleep(1)
                 
-            is_true = True
+            return True
         except BaseException as error:
             print(error)
             print("删除邮件可能出现错误")
             LogAction.save(func = "EmailOperation", status="Fail", explain="清空邮箱某个文件夹，发生错误")
+            return False
         finally:
             self.logout() 
-            return is_true
-                
-    def move_forlder(self, l=[]):
+
+    def move_forlder(self, args=None):
         '''移动邮件
         sample:
             moveForlder(['100', 'INBOX'])
         '''
-        is_true = False
-        if len(l) == 0:
-            return is_true
+        if args is None:
+            return False
         try:
             self.server.login(self.username, self.password)    
-            self.move_all_message_to_folder(l[0], l[1])
-            print("移动邮件成功：%s => %s" %(l[0], l[1]))
-            is_true = True
+            self.move_all_message_to_folder(args[0], args[1])
+            print("移动邮件成功：%s => %s" %(args[0], args[1]))
+            return True
         except BaseException as error:
             print(error)
             print("清空邮箱某个文件夹可能出现错误")
+            return False
         finally:
             self.logout()
-            return is_true
-    
+
     def check_inbox_cnt(self):
         '''获取邮件数量'''
         try:
-            is_true = 0
-            self.server.login(self.username, self.password) 
+            self.server.login(self.username, self.password)
             
             self._into("INBOX")
             uids = self._get_uids()
@@ -222,20 +221,19 @@ class EmailOperation(object):
             else:
                 cnt = len(uids) - 100
                 print('需要删除邮件数量为：%d' %cnt)
-                is_true =  cnt
+                return cnt
         except BaseException as error:
             print(error)
             print("删除邮件可能出现错误")
+            return 0
         finally:
             self.logout() 
-            return  is_true
-    
+
     def check_inbox(self):
         _cnt = 5
         '''确保收件箱有5封邮件'''
         try:
-            is_true = True
-            self.server.login(self.username, self.password) 
+            self.server.login(self.username, self.password)
             
             self._into("INBOX")
             uids = self._get_uids()
@@ -246,7 +244,7 @@ class EmailOperation(object):
             # 判断
             if all == _cnt:
                 print("100封邮件")
-                return is_true
+                return True
             elif all < _cnt:
                 print('邮件数量少于100封')
                 return False
@@ -254,20 +252,17 @@ class EmailOperation(object):
                 print('需要删除邮件数量为：%d' %(all - _cnt))
 #                 print(uids[100:])
                 self._del(uids[_cnt:])
-                return is_true
+                return True
         except BaseException as error:
             print(error)
             print("删除邮件可能出现错误")
-            is_true = False
+            return False
         finally:
             self.logout()  
-            return is_true
-
 
     def seen(self):
         '''将收件箱邮件，标记已读'''
         try:
-
             self.server.login(self.username, self.password)
             self._into("INBOX")
             # 搜索 未读邮件
@@ -276,17 +271,16 @@ class EmailOperation(object):
             for num in typ:
                 print(num)
                 self.server.set_flags(num,  [u'Seen'])
-
         except BaseException:
             LogAction.save(func = "EmailOperation", status="Fail", explain="将收件箱邮件，标记已读，发生错误")
             print("操作失败")
 
 
 if __name__ == '__main__':
-    eo = EmailOperation("13697485262@139.com","chinasoft13")
-#     eo.moveForlder(['INBOX','100' ]) 
+    eo = EmailOperation("13533218540@139.com","hy12345678")
+    eo.move_forlder(['INBOX','20' ])
 #     eo.moveForlder(['100', 'INBOX']) 
 #     eo.clearForlder(['已发送','已删除'])
 #     eo.checkInbox()
 #     eo.seen()
-    eo.clear_forlder(['100', 'INBOX'])
+#     eo.clear_forlder(['20', 'INBOX'])

@@ -125,7 +125,13 @@ class TestCase(unittest.TestCase):
 
 
 # 创建一个返回字典的方法
-def get_dict(data_dict = {}, case_list=[]):
+def get_dict(data_dict=None, case_list=None):
+
+    if case_list is None:
+        case_list = []
+
+    if data_dict is None:
+        data_dict = {}
 
     new_dict = {}
     for k,v in data_dict.items():

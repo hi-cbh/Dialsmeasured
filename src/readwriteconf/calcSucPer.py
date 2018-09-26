@@ -5,6 +5,7 @@ class CalcSuccess(object):
 
 
     def __init__(self, caselist=[], logpath=""):
+
         self.caselist = caselist
         self.path = logpath
         print("org: %s" %self.caselist)
@@ -88,8 +89,11 @@ class CalcSuccess(object):
 
         return speedlist
 
-    def get_successercentage(self, casel={}):
+    def get_successercentage(self, casel=None):
         # 成功率
+        if casel is None:
+            casel = {}
+
         suclist = self._sort_data()
         speedlist = self._sort_speed()
 
@@ -124,8 +128,10 @@ class CalcSuccess(object):
 
         return result
 
-    def get_successercentage_not_type(self, casel={}):
+    def get_successercentage_not_type(self, casel=None):
         # 成功率没有样式
+        if casel is None:
+            casel = {}
         suclist = self._sort_data()
         speedlist = self._sort_speed()
 
@@ -159,8 +165,10 @@ class CalcSuccess(object):
         print(result)
         return result
 
-    def get_successercentage_fail(self, casel=[]):
+    def get_successercentage_fail(self, casel=None):
         # 成功率(数据过滤)
+        if casel is None:
+            casel = []
         suclist = self._sort_data()
         speedlist = self._sort_speed()
 
@@ -206,8 +214,10 @@ class CalcSuccess(object):
 
         return result
 
-    def get_successercentage_fail_not_type(self, casel=[]):
+    def get_successercentage_fail_not_type(self, casel=None):
         # 成功率没有样式(数据过滤)
+        if casel is None:
+            casel = []
         suclist = self._sort_data()
         speedlist = self._sort_speed()
 
@@ -247,10 +257,12 @@ class CalcSuccess(object):
         print(result)
         return result
 
-    def create_false_data(self, l=[]):
+    def create_false_data(self, l=None):
         '''修正数据
         总数量必须大于42以上，达到97 - 100
         '''
+        if l is None:
+            l = []
         if l[0] > 35:
             #[数据总数量，错误数]
             # 预防错误数量 > 总数量

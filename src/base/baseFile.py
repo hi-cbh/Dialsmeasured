@@ -173,13 +173,15 @@ class BaseFile(object):
     
 
     def get_time(self):
+
+        t_time = 0
         try:
             '''获取时间值'''
             content = self.adb_tail_file()
-            time = 0
+
             
             if len(content) < 60 or (not content.find('\#') == -1) :
-                return time
+                return t_time
             
             l = content.split('#')[1]
 #             print("times：%s" %l)
@@ -190,7 +192,7 @@ class BaseFile(object):
             return value_time
         
         except BaseException:
-            return time
+            return t_time
 
 
 

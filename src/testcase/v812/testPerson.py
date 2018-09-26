@@ -26,7 +26,6 @@ class TestPersion(unittest.TestCase):
             LogAction.print("=>我的")
             self.driver.click(u"uiautomator=>我的")
 
-            # 这里需要改，进入更改了
             LogAction.print("=>个人资料")
             self.driver.click(u"uiautomator=>个人资料")
 

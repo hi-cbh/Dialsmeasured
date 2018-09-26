@@ -1,7 +1,6 @@
 # urs/bin/python
 # encoding:utf-8
 import pymysql.cursors
-import os
 import configparser as cparser
 
 from src.readwriteconf.rwconf import ReadWriteConfFile

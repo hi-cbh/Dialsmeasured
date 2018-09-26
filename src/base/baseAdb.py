@@ -3,7 +3,6 @@
 
 import os
 import time
-import subprocess
 
 PATH = lambda p: os.path.abspath(
     os.path.join(os.path.dirname(__file__), p)
@@ -30,20 +29,26 @@ class BaseAdb(object):
 
 
     def adb_devicename(self):
+        '''设备名称'''
         value = os.popen("adb shell getprop ro.product.model")
         return  value.readline()
 
 
     def add_pressmission(self):
         '''添加权限'''
-        self.adb_shell('adb shell pm grant cn.cj.pe android.permission.WRITE_EXTERNAL_STORAGE')
-        self.adb_shell('adb shell pm grant cn.cj.pe android.permission.READ_EXTERNAL_STORAGE')
-        self.adb_shell('adb shell pm grant cn.cj.pe android.permission.READ_PHONE_STATE')
-        self.adb_shell('adb shell pm grant cn.cj.pe android.permission.READ_CONTACTS')
-        self.adb_shell('adb shell pm grant cn.cj.pe android.permission.RECEIVE_SMS')
-        self.adb_shell('adb shell pm grant cn.cj.pe android.permission.READ_SMS')
-        self.adb_shell('adb shell pm grant cn.cj.pe android.permission.SEND_SMS')
-        self.adb_shell('adb shell pm grant cn.cj.pe android.permission.CALL_PHONE')
+        pre = {
+            "WRITE_EXTERNAL_STORAGE":"android.permission.WRITE_EXTERNAL_STORAGE",
+            "READ_EXTERNAL_STORAGE":"android.permission.READ_EXTERNAL_STORAGE",
+            "READ_PHONE_STATE":"cn.cj.pe android.permission.READ_PHONE_STATE",
+            "READ_CONTACTS":"android.permission.READ_CONTACTS",
+            "RECEIVE_SMS":"android.permission.RECEIVE_SMS",
+            "READ_SMS":"android.permission.READ_SMS",
+            "SEND_SMS":"cn.cj.pe android.permission.SEND_SMS",
+            "CALL_PHONE":"android.permission.CALL_PHONE"
+        }
+
+        for _,v in pre.items():
+            self.adb_shell("adb shell pm grant " + v)
 
     def adb_intall_uiautmator(self):
         '''调用以及导入的jar包，运行uiautmator辅助工具'''
@@ -148,80 +153,7 @@ class BaseAdb(object):
     def adb_broadcast(self):
         '''发送自定义广播'''
         os.popen(self.path+"adb shell am broadcast -a mybroadcast")
-    
-    
-#===================以下是GT基本操作==========
 
-    def adb_start_gt(self):
-        '''启动GT'''
-        results = os.popen("adb shell am start -W -n com.tencent.wstt.gt/com.tencent.wstt.gt.activity.GTMainActivity")
-
-        for line in results.readlines():                          #依次读取每行  
-            line = line.strip()                             #去掉每行头尾空白  
-            if not len(line):       #判断是否是空行或注释行  
-                continue
-            if 'ok' in line:
-#                 print('true')
-                return True
-        else:
-#             print('False')
-            return False
-    
-    def adb_gt_add_pkg(self, pkg_name):
-        '''使gt可以采集该应用的性能信息；pkgName是包名；verName是版本号（可选参数）'''
-        results = os.popen("adb shell am broadcast -a com.tencent.wstt.gt.baseCommand.startTest --es pkg_name %s" % pkg_name)
-        for line in results.readlines():                          #依次读取每行  
-            line = line.strip()                             #去掉每行头尾空白  
-            if not len(line):       #判断是否是空行或注释行  
-                continue
-            if 'completed' in line:
-#                 print('true')
-                return True
-        else:
-#             print('False')
-            return False
-
-    def adb_gt_base_cmd(self, name, value):
-        '''记录性能项'''
-        results = os.popen("adb shell am broadcast -a com.tencent.wstt.gt.baseCommand.sampleData --ei %s %s" %(name,value))
-        for line in results.readlines():                          #依次读取每行  
-            line = line.strip()                             #去掉每行头尾空白  
-            if not len(line):       #判断是否是空行或注释行  
-                continue
-            if 'completed' in line:
-#                 print('true')
-                return True
-        else:
-#             print('False')
-            return False     
-
-    def adb_gt_save(self, path, filename):
-        '''保存数据'''
-        results = os.popen("adb shell am broadcast -a com.tencent.wstt.gt.baseCommand.endTest --es saveFolderName %s  --es desc %s" %(path, filename))
-        for line in results.readlines():                          #依次读取每行  
-            line = line.strip()                             #去掉每行头尾空白  
-            if not len(line):       #判断是否是空行或注释行  
-                continue
-            if 'completed' in line:
-#                 print('true')
-                return True
-        else:
-#             print('False')
-            return False  
-
-    def adb_gt_exit(self):
-        '''离开GT'''
-        results = os.popen("adb shell am broadcast -a com.tencent.wstt.gt.baseCommand.exitGT")
-        for line in results.readlines():                          #依次读取每行  
-            line = line.strip()                             #去掉每行头尾空白  
-            if not len(line):       #判断是否是空行或注释行  
-                continue
-            if 'completed' in line:
-#                 print('true')
-                return True
-        else:
-#             print('False')
-            return False 
 
     # 拉数据到本地
     def adb_pull(self, remote, local):
@@ -229,24 +161,12 @@ class BaseAdb(object):
         result=os.popen("adb pull %s %s"  %(remote, local))
         print(result.readline())
 
-    def test_subprocess(self, cmd):
-        p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True,
-                             stderr=subprocess.PIPE) #, close_fds=True)
-
-        # log.debug('running:%s' % cmd)
-        out, err = p.communicate()
-        # log.debg(out)
-        if p.returncode != 0:
-            print("Non zero exit code:%s executing: %s" % (p.returncode, cmd))
-            # log.critical("Non zero exit code:%s executing: %s" % (p.returncode, cmd))
-        return p.stdout
-
     def adb_apk_exist(self, pkg):
         '''第三方包是否安装'''
         results = os.popen("adb shell pm list package -3")
         for line in results.readlines():                          #依次读取每行
             line = line.strip()                             #去掉每行头尾空白
-            if not len(line):       #判断是否是空行或注释行
+            if not line:       #判断是否是空行或注释行
                 continue
             if pkg in line:
                 # print('true')
@@ -285,13 +205,13 @@ class BaseAdb(object):
             if contain_text in line:
                 print('true')
                 return True
-        else:
-            print('False')
-            return False
+
+        print('False')
+        return False
 
 # 方便其他类调用
 BaseAdb = BaseAdb()    
 
 
 if __name__ == '__main__':
-    print(BaseAdb.adb_devicename())
+    print(BaseAdb.add_pressmission())

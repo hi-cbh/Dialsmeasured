@@ -31,8 +31,7 @@ class TestCalendar(unittest.TestCase):
             LogAction.print("=>日历")
             self.driver.click(u"uiautomator=>日历")
 
-            # 这里改成判断是否闪退（即判断当前的包名或activity）
-            print("当前的包名%s" %self.driver.current_app())
+            # LogAction.print("=>【创建日程】")
             # self.assertTrue(self.driver.element_wait("uiautomator=>创建日程提醒",10)!=None, "日历同步失败！！")
 
             BaseAdb.adb_back()
