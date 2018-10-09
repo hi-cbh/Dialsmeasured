@@ -3,10 +3,10 @@
 import unittest
 
 from src.base.baseLog import LogAction
-from src.testcase.v746.easycase.login import Login
+from src.testcase.v812.easycase.login import Login
 from src.readwriteconf.initData import InitData, duser
-from src.testcase.v746.easycase.openDown import OpenDown
-from src.testcase.v746.easycase.send import Send
+from src.testcase.v812.easycase.openDown import OpenDown
+from src.testcase.v812.easycase.send import Send
 
 users = duser().getuser()
 user = {"name": users['name'], 'pwd': users['pwd']}

@@ -209,6 +209,29 @@ class BaseAdb(object):
         print('False')
         return False
 
+
+    def current_app(self):
+        # 获取返回值
+        lines = BaseAdb.adb_shell("adb shell dumpsys activity activities | grep ActivityRecord | grep mFocusedActivity")
+
+        if lines is None:
+            return None
+
+        try:
+            # 获取第一行
+            line = lines.readlines()[0].strip().split(" ")
+            # print(line)
+
+            for s in line:
+                if s.__contains__('/'):
+                    line = s.split("/")
+                    break
+
+            return {"package" : line[0], "activity" : line[1]}
+        except BaseException as error:
+            print(error)
+            return None
+
 # 方便其他类调用
 BaseAdb = BaseAdb()    
 

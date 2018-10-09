@@ -4,7 +4,7 @@ import time,unittest
 
 from src.readwriteconf.rwconf import ReadWriteConfFile
 from src.base.baseAdb import BaseAdb
-from src.testcase.v746.easycase.login import Login
+from src.testcase.v812.easycase.login import Login
 from src.readwriteconf.initData import duser
 from src.base.baseImage import BaseImage
 from src.base.baseLog import LogAction

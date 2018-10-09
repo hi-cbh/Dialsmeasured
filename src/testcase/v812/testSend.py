@@ -3,8 +3,8 @@
 import unittest
 
 from src.base.baseLog import LogAction
-from src.testcase.v746.easycase.login import Login
-from src.testcase.v746.easycase.send import Send
+from src.testcase.v812.easycase.login import Login
+from src.testcase.v812.easycase.send import Send
 from src.readwriteconf.initData import InitData, duser
 
 users = duser().getuser()

@@ -1,10 +1,10 @@
 # urs/bin/python
 # encoding:utf-8
 import unittest
-import time
-from base.baseAdb import BaseAdb
-from psam.psam import Psam
-from src.testcase.v746.easycase.login import Login
+# import time
+# from base.baseAdb import BaseAdb
+# from psam.psam import Psam
+from src.testcase.v812.easycase.login import Login
 from src.readwriteconf.initData import InitData, duser
 
 users = duser().getuser()
@@ -40,11 +40,6 @@ class TestLogin(unittest.TestCase):
     def testCaseOnBtnLogin(self):
         '''一键登录'''
         Login(self.driver,user["name"], user["pwd"]).one_btn_Login()
-
-    # def testcase(self):
-    #     print("sleep")
-    #     time.sleep(10)
-    #     print(self.driver.current_app())
 
 
 if __name__ == "__main__":

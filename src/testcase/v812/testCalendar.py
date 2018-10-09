@@ -5,7 +5,7 @@ import time,unittest
 
 from src.readwriteconf.rwconf import ReadWriteConfFile
 from src.base.baseAdb import BaseAdb
-from src.testcase.v746.easycase.login import Login
+from src.testcase.v812.easycase.login import Login
 from src.readwriteconf.initData import  duser
 from src.base.baseImage import BaseImage
 from src.base.baseLog import LogAction
@@ -31,8 +31,8 @@ class TestCalendar(unittest.TestCase):
             LogAction.print("=>日历")
             self.driver.click(u"uiautomator=>日历")
 
-            # LogAction.print("=>【创建日程】")
-            # self.assertTrue(self.driver.element_wait("uiautomator=>创建日程提醒",10)!=None, "日历同步失败！！")
+            LogAction.print("判断是否闪退")
+            self.assertTrue(BaseAdb.current_app()["package"].__eq__("cn.cj.pe"), "日历同步失败！！")
 
             BaseAdb.adb_back()
             LogAction.save(func = "testCaseCalendar", status="success", explain=LogAction.print())

@@ -120,7 +120,8 @@ class EmailOperation(object):
         
         uids = self._get_uids()
         # 邮件数量为空
-        if len(uids) == 0:
+        # if len(uids) == 0:
+        if not uids:
             print("%s 数量为：0，该操作无效" %fforlder)
             return True
         else:
@@ -180,7 +181,37 @@ class EmailOperation(object):
             LogAction.save(func = "EmailOperation", status="Fail", explain="清空邮箱某个文件夹，发生错误")
             return False
         finally:
-            self.logout() 
+            self.logout()
+
+
+    def clear_forlder_testdemo(self, args=None):
+        '''清空邮箱某个文件夹'''
+        '''
+        sample:
+        clearForlder(['100', 'INBOX'])
+        '''
+        if args is None:
+            return False
+        try:
+            self.server.login(self.username, self.password)
+            for f in args:
+                print("clear Forlder: %s" %f)
+                self.del_all_message(f)
+                time.sleep(1)
+
+            return True
+        except BaseException as error:
+            print(error)
+            print("删除邮件可能出现错误")
+            LogAction.save(func = "EmailOperation", status="Fail", explain="清空邮箱某个文件夹，发生错误")
+            return False
+        finally:
+            self.logout()
+
+
+
+
+
 
     def move_forlder(self, args=None):
         '''移动邮件
