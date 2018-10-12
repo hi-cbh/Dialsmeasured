@@ -5,15 +5,14 @@ from email.mime.text import MIMEText
 from email.header import Header
 from email.utils import parseaddr, formataddr
 
-# 格式化邮件地址
 
-#单个测试邮件
-tester = "13533348571@139.com"
-# 多个联系人
-mamEmail='13533348571@139.com,18022340679@139.com,13790383896@139.com'
-# mamEmail=''
-# 发给其他人的
-mamEmailOther='13533348571@139.com,18022340679@139.com,13790383896@139.com,wenyaoneng@139.com,13610128827@139.com,13580491687@163.com'#,13802883234@139.com
+recipient = {
+    "tester":"13533348571@139.com",
+    "three": '13533348571@139.com,18022340679@139.com',
+    "all":'13533348571@139.com,18022340679@139.com,wenyaoneng@139.com,13610128827@139.com', #,13802883234@139.com,
+    "qqemail":"hi_cbh@qq.com"
+}
+
 
 class SendMail():
     '''单个接收者'''
@@ -62,9 +61,9 @@ class SendMail():
         from_mail = self.username + '@139.com'
         mail_pass = self.pwd
         if is_test:
-            areceiver = tester
+            areceiver = recipient['tester']
         else:
-            areceiver = mamEmail
+            areceiver = recipient['all']
 
         body = []
         for txt in message:
@@ -107,7 +106,7 @@ class SendMail():
         if is_test:
             areceiver = self.receive + '@139.com'
         else:
-            areceiver = mamEmail
+            areceiver = recipient['all']
 
         body = []
         for txt in message:
@@ -148,9 +147,9 @@ class SendMail():
         from_mail = self.username + '@139.com'
         mail_pass = self.pwd
         if is_test:
-            areceiver = '13533348571@139.com'
+            areceiver = recipient["tester"]
         else:
-            areceiver = mamEmailOther
+            areceiver = recipient['three']
 
         body = []
         for txt in message:
@@ -192,9 +191,9 @@ class SendMail():
         from_mail = self.username + '@139.com'
         mail_pass = self.pwd
         if is_test:
-            areceiver = tester
+            areceiver = recipient['tester']
         else:
-            areceiver = mamEmailOther
+            areceiver = recipient['three']
 
 
         body = []
@@ -230,10 +229,10 @@ class SendMail():
         mail_pass = self.pwd
 
         if is_test:
-            areceiver = 'hi_cbh@qq.com'
+            areceiver = recipient["qqemail"]
         else:
             # areceiver = "hi_cbh@qq.com,wujun11121@163.com"
-            areceiver = "hi_cbh@qq.com"
+            areceiver = recipient["qqemail"]
 
 
         body = []
@@ -274,7 +273,7 @@ class SendMail():
             areceiver = '13501538531@139.com'
         else:
             # areceiver = "hi_cbh@qq.com,wujun11121@163.com"
-            areceiver = "hi_cbh@qq.com"
+            areceiver = recipient["qqemail"]
 
 
         body = []
@@ -310,7 +309,7 @@ class SendMail():
         if is_test:
             areceiver = 'hi_cbh@qq.com'
         else:
-            areceiver = mamEmailOther
+            areceiver = recipient['three']
 
         body = []
         for txt in message:
