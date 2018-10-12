@@ -527,7 +527,7 @@ class ReportClass(object):
 
             # 如果是测试，不将结果发送到所有人，且不发送邮件
             if not is_debug:
-
+                # False为不发送给其他人
                 return
 
             # 出现错误，全部用例重新跑
