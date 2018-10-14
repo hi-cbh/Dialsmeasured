@@ -34,7 +34,7 @@ fsaveFilePath = logPath + 'savef_'+logfileName
 fhtmlFilePath = logPath + 'false_'+logfileName
 
 
-test_version ="V814"
+test_version ="V815"
 
 class ReportClass(object):
 
@@ -511,6 +511,8 @@ class ReportClass(object):
 
                 err = self._read_case_conf(maxtimes)
                 errstr = ','.join(err) + "到目前为止，以上提及的功能出现多次错误，请及时查证"
+
+                errstr = errstr +"\n 目前测试环境为Wifi环境，若出现错误，请在wifi/4G、正常号码中进行验证。"
 
                 s = SendMail("13580491603","chinasoft123","")
                 s.send_mail_str_163('[预测]139Android客户端'+test_version+'版本_功能拨测疑是出现故障，请及时查证',errstr,is_test=is_test)
