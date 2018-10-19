@@ -479,12 +479,12 @@ class ReportClass(object):
 
                     # 发送假数据
                     s.send_mail_out('139Android客户端'+test_version+'版本_功能拨测_24小时汇总', false_txt,is_test=is_test)
-                    s.send_mail_out_163('139Android客户端'+test_version+'版本_功能拨测_24小时汇总', false_txt,is_test=True)
+                    # s.send_mail_out_163('139Android客户端'+test_version+'版本_功能拨测_24小时汇总', false_txt,is_test=is_test)
 
                 else:
                     # 发送假数据
                     s.send_mail_out('139Android客户端'+test_version+'版本_功能拨测_晚上部分汇总', false_txt,is_test=is_test)
-                    s.send_mail_out_163('139Android客户端'+test_version+'版本_功能拨测_晚上部分汇总', false_txt,is_test=True)
+                    # s.send_mail_out_163('139Android客户端'+test_version+'版本_功能拨测_晚上部分汇总', false_txt,is_test=is_test)
 
                 rwc.set_section_value('sendconf', 'send', 'True')
                 # #发送后，用例是否复位
@@ -515,7 +515,7 @@ class ReportClass(object):
                 errstr = errstr +"\n 目前测试环境为Wifi环境，若出现错误，请在wifi/4G、正常号码中进行验证。"
 
                 s = SendMail("13580491603","chinasoft123","")
-                s.send_mail_str_163('[预测]139Android客户端'+test_version+'版本_功能拨测疑是出现故障，请及时查证',errstr,is_test=is_test)
+                s.send_mail_str_163('[域外邮箱发送]139Android客户端'+test_version+'版本_功能拨测疑是出现故障，请及时查证',errstr,is_test=is_test)
 
                 android_error_path = "/sdcard/Android/data/cn.cj.pe/log/"
                 pc_error_path = "/var/appiumRunLog/error_log/"

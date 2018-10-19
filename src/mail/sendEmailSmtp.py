@@ -10,7 +10,8 @@ recipient = {
     "tester":"13533348571@139.com",
     "three": '13533348571@139.com,18022340679@139.com',
     "all":'13533348571@139.com,18022340679@139.com,wenyaoneng@139.com,13610128827@139.com', #,13802883234@139.com,
-    "qqemail":"hi_cbh@qq.com,13580491687@163.com"
+    "qqemail":"hi_cbh@qq.com,13580491687@163.com,18022340679@139.com,wenyaoneng@139.com,13610128827@139.com",
+
 }
 
 
@@ -149,7 +150,7 @@ class SendMail():
         if is_test:
             areceiver = recipient["tester"]
         else:
-            areceiver = recipient['three']
+            areceiver = recipient['all']
 
         body = []
         for txt in message:
@@ -309,7 +310,7 @@ class SendMail():
         if is_test:
             areceiver = 'hi_cbh@qq.com'
         else:
-            areceiver = recipient['three']
+            areceiver = recipient['qqemail']
 
         body = []
         for txt in message:
