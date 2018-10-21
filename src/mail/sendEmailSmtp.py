@@ -9,7 +9,7 @@ from email.utils import parseaddr, formataddr
 recipient = {
     "tester":"13533348571@139.com",
     "three": '13533348571@139.com,18022340679@139.com',
-    "all":'13533348571@139.com,18022340679@139.com,wenyaoneng@139.com,13610128827@139.com', #,13802883234@139.com,
+    "all":'13533348571@139.com,18022340679@139.com,wenyaoneng@139.com,13610128827@139.com,hi_cbh@qq.com,13580491687@163.com', #,13802883234@139.com,
     "qqemail":"hi_cbh@qq.com,13580491687@163.com,18022340679@139.com,wenyaoneng@139.com,13610128827@139.com",
 
 }
@@ -230,7 +230,7 @@ class SendMail():
         mail_pass = self.pwd
 
         if is_test:
-            areceiver = recipient["qqemail"]
+            areceiver = "13533218540@139.com"
         else:
             # areceiver = "hi_cbh@qq.com,wujun11121@163.com"
             areceiver = recipient["qqemail"]
@@ -349,14 +349,15 @@ class SendMail():
 
 if __name__ == "__main__":
 
-    s = SendMail("13580491603","chinasoft123","13533218540")
+    # s = SendMail("13580491603","chinasoft123","13533218540")
+    s = SendMail("13533218540","hy123456789","13533218540")
 
-    for i in range(1):
+    for i in range(120,200):
 
 
         # s.sendMail('testEmail','Python 邮件发送测试...')
 
         line = ["testemail"]
-        s.send_mail_str_163("testEmail"," 邮件发送测试",is_test=True)
+        s.send_mail_str_163("testEmail-"+str(i)," 邮件发送测试",is_test=True)
         # s.send_mail_out_163("testEmail",["邮件发送测试","test2"],is_test=True)
         time.sleep(5)
