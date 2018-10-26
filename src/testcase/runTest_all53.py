@@ -173,7 +173,7 @@ if __name__ == "__main__":
 
     print('=================中文-英文对应测试用例=================')
     testtxt = []
-    testtxt.append(('token测试',"testCaseToken"))
+    testtxt.append(('杭研token测试',"testCaseToken"))
     testtxt.append(('一键登录',"testCaseOnBtnLogin"))
     testtxt.append(('账号登录',"testCaseLogin"))
     testtxt.append(('发送邮件无附件',"testCaseSendNoAttach"))
