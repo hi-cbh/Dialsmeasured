@@ -294,4 +294,6 @@ BaseAdb = BaseAdb()
 
 
 if __name__ == '__main__':
-    print(BaseAdb.adb_devicename())
+    BaseAdb.adb_shell("adb shell rm -rf /mnt/sdcard/cmcc_sso_download")
+    BaseAdb.adb_shell("adb shell rm -rf /mnt/sdcard/cmcc_sso_ks")
+    BaseAdb.adb_shell("adb shell rm -rf /mnt/sdcard/cmcc_sso_south_log")

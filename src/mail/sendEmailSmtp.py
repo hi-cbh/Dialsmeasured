@@ -352,7 +352,7 @@ if __name__ == "__main__":
     # s = SendMail("13580491603","chinasoft123","13533218540")
     s = SendMail("13533218540","hy123456789","13533218540")
 
-    for i in range(120,200):
+    for i in range(1,22):
 
 
         # s.sendMail('testEmail','Python 邮件发送测试...')

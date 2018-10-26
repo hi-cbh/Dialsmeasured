@@ -69,7 +69,7 @@ class ReadWriteConfFile:
             ReadWriteConfFile.set_section_value(section, case_name, str(int(value)+1))
         except BaseException as e:
             print(e)
-            print("值出错")
+            print("value_add_one 值出错")
 
     @staticmethod
     def value_add(section,case_name):

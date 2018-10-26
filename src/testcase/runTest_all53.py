@@ -22,6 +22,7 @@ from src.testcase.v746.testPerson import TestPersion
 from src.testcase.v746.testPush import TestPush
 from src.testcase.v746.testSend import TestSend
 from src.testcase.v746.testSkyDrive import TestSkyDrive
+from src.testcase.v746.testToken import TestToken
 from src.testcase.HTMLTestRunner import HTMLTestRunner
 from src.reportlib.reportclass import ReportClass
 from src.base.baseAdb import BaseAdb
@@ -62,6 +63,9 @@ class TestCase(unittest.TestCase):
         self.driver.quit()
         print("运行结束")
         time.sleep(5)
+        '''token验证'''
+    def testCaseToken(self):
+        TestToken(self.driver).testCaseToken()
 
     def testCaseOnBtnLogin(self):
         '''一键登录'''
@@ -169,6 +173,7 @@ if __name__ == "__main__":
 
     print('=================中文-英文对应测试用例=================')
     testtxt = []
+    testtxt.append(('token测试',"testCaseToken"))
     testtxt.append(('一键登录',"testCaseOnBtnLogin"))
     testtxt.append(('账号登录',"testCaseLogin"))
     testtxt.append(('发送邮件无附件',"testCaseSendNoAttach"))
@@ -187,6 +192,7 @@ if __name__ == "__main__":
 
     print('=================测试用例加入测试套件=================')
     suite = unittest.TestSuite()
+    suite.addTest(TestCase('testCaseToken'))
     suite.addTest(TestCase('testCaseOnBtnLogin'))
     suite.addTest(TestCase('testCaseLogin'))
     suite.addTest(TestCase('testCaseSendNoAttach'))

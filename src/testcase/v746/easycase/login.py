@@ -228,6 +228,58 @@ class Login(unittest.TestCase):
                 self.fail("【一键登录出错登录】出现错误")
 
 
+    def open_token_info(self):
+        try:
+
+            LogAction.print("=>清除APP缓存，添加权限，启动139")
+            BaseAdb.adb_clear("cn.cj.pe")
+            sleep(5)
+            BaseAdb.add_pressmission()
+            sleep(5)
+            BaseAdb.adb_start_app("cn.cj.pe","com.mail139.about.LaunchActivity")
+
+            sleep(8)
+
+            LogAction.print("=>右滑 * 2")
+            self.driver.swipe_right()
+            self.driver.swipe_right()
+            print("点击坐标")
+            w = self.driver.get_window_size()['width']
+            h = self.driver.get_window_size()['height']
+            LogAction.print("=>点击体验")
+            BaseAdb.adb_tap(w / 2, int(h * 0.899))
+
+            sleep(2)
+            self.driver.click("id=>cn.cj.pe:id/add_account")
+            sleep(2)
+
+
+            LogAction.print('=>选择139邮箱')
+            self.driver.click(r"xpath=>//android.widget.ImageView[@index='0']")
+
+            LogAction.print('=>点击测试token按钮')
+            self.driver.click("id=>cn.cj.pe:id/autologin")
+            self.driver.get_element("id=>cn.cj.pe:id/message")
+
+            self.assertTrue(self.driver.get_text("id=>cn.cj.pe:id/message")
+                            .__contains__(u"成功"),"获取token失败")
+
+
+            ReadWriteConfFile.value_set_zero("testCaseToken")
+
+            self.driver.click("id=>cn.cj.pe:id/mid")
+
+        except BaseException:
+            ReadWriteConfFile.value_add_one("testCaseToken")
+            ReadWriteConfFile.value_error_add_one("testCaseToken")
+            ReadWriteConfFile.value_hourerror_add_one("testCaseToken")
+            BaseImage.screenshot(self.driver, "tokenError")
+            sleep(5)
+            LogAction.save(func = "testCaseToken", status="fail", explain=LogAction.print())
+
+            if ReadWriteConfFile.get_status_value():
+                self.fail("【获取token】出现错误")
+
     def update(self):
         '''升级'''
         # 每次登录检查是否含有升级，有就关闭。
