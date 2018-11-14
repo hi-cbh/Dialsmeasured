@@ -230,7 +230,8 @@ class SendMail():
         mail_pass = self.pwd
 
         if is_test:
-            areceiver = "13533218540@139.com"
+            areceiver = "2915673336@qq.com,13580491603@163.com"
+            # areceiver = "13697485262@139.com"
         else:
             # areceiver = "hi_cbh@qq.com,wujun11121@163.com"
             areceiver = recipient["qqemail"]
@@ -241,7 +242,7 @@ class SendMail():
         body=''.join(body)
 
         # print("邮件正式发送内容： %s" %body)
-        print('邮件正式发送')
+        print('[start] 准备邮件内容')
 
         msg = MIMEText(body, 'html', 'utf-8')
         # Header对中文进行转码
@@ -256,7 +257,7 @@ class SendMail():
             s.login(from_mail, mail_pass)
             s.sendmail(from_mail, areceiver.split(','), msg.as_string())
             s.quit()
-            print("发送成功")
+            print("[end] 发送成功")
         except smtplib.SMTPException as e:
             print("Error: %s" % e)
             return False
@@ -352,12 +353,13 @@ if __name__ == "__main__":
     # s = SendMail("13580491603","chinasoft123","13533218540")
     s = SendMail("13533218540","hy123456789","13533218540")
 
-    for i in range(1,22):
+    for i in range(101,121):
 
 
         # s.sendMail('testEmail','Python 邮件发送测试...')
 
         line = ["testemail"]
         s.send_mail_str_163("testEmail-"+str(i)," 邮件发送测试",is_test=True)
+        print("send the email: testEmail-"+str(i))
         # s.send_mail_out_163("testEmail",["邮件发送测试","test2"],is_test=True)
         time.sleep(5)

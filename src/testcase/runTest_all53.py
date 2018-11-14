@@ -173,7 +173,7 @@ if __name__ == "__main__":
 
     print('=================中文-英文对应测试用例=================')
     testtxt = []
-    testtxt.append(('杭研token测试',"testCaseToken"))
+    # testtxt.append(('杭研token测试',"testCaseToken"))
     testtxt.append(('一键登录',"testCaseOnBtnLogin"))
     testtxt.append(('账号登录',"testCaseLogin"))
     testtxt.append(('发送邮件无附件',"testCaseSendNoAttach"))
@@ -187,12 +187,12 @@ if __name__ == "__main__":
     testtxt.append(('彩云网盘',"testCaseSkyDrive"))
     testtxt.append(('附件下载',"testDownFile"))
     testtxt.append(('联系人同步',"testCaseCheckAddressList"))
-    testtxt.append(('收件箱列表中精选',"testCaseSelected"))
+    # testtxt.append(('收件箱列表中精选',"testCaseSelected"))
     testtxt.append(('接收推送',"testCasePush"))
 
     print('=================测试用例加入测试套件=================')
     suite = unittest.TestSuite()
-    suite.addTest(TestCase('testCaseToken'))
+    # suite.addTest(TestCase('testCaseToken'))
     suite.addTest(TestCase('testCaseOnBtnLogin'))
     suite.addTest(TestCase('testCaseLogin'))
     suite.addTest(TestCase('testCaseSendNoAttach'))
@@ -206,7 +206,7 @@ if __name__ == "__main__":
     suite.addTest(TestCase('testCaseSkyDrive'))
     suite.addTest(TestCase('testDownFile'))
     suite.addTest(TestCase('testCaseCheckAddressList'))
-    suite.addTest(TestCase('testCaseSelected'))
+    # suite.addTest(TestCase('testCaseSelected'))
     suite.addTest(TestCase('testCasePush'))
     runner = unittest.TextTestRunner()
 

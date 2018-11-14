@@ -27,7 +27,7 @@ class TestPersion(unittest.TestCase):
             self.driver.click(u"uiautomator=>我的")
 
             LogAction.print("=>个人资料")
-            self.driver.click(u"uiautomator=>个人资料")
+            self.driver.click(u"id=>cn.cj.pe:id/portraitItem")
 
             LogAction.print("=>【个人头像】")
             self.assertTrue(self.wait_for_message(), "个人资料同步失败！！")

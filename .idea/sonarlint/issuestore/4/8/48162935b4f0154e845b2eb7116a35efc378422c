@@ -1,0 +1,14 @@
+
+kpython:S100"QRename method "testCase01" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(á¢Øüÿÿÿÿ
+kpython:S100"QRename method "setUpClass" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(æÚøÑùÿÿÿÿ
+:python:S125"Remove this commented out code.(‡äşG8ßŞ£Ä,
+npython:S100"TRename method "tearDownClass" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(‰ÀËíúÿÿÿÿ
+dpython:S100"ORename method "tearDown" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(•ûÜë
+fpython:S100"QRename method "testCase02" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(¾â„
+;python:S125"Remove this commented out code.(ñß‚Ú8ßŞ£Ä,
+;python:S125"Remove this commented out code.(¤ÖµÈ8‚ÅÊé¿,
+;python:S125"Remove this commented out code.(óÆ­Ô8‚ÅÊé¿,
+;python:S125"Remove this commented out code.(…ùİÁ8‚ÅÊé¿,
+fpython:S100"LRename method "setUp" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(§˜œşÿÿÿÿ
+@python:S125"Remove this commented out code.(÷ÊÚìıÿÿÿÿ8‚ÅÊé¿,
+;python:S125"Remove this commented out code.(ÆÔœ¦8‚ÅÊé¿,

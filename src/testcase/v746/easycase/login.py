@@ -74,11 +74,12 @@ class Login(unittest.TestCase):
             LogAction.print("=>右滑 * 2")
             self.driver.swipe_right()
             self.driver.swipe_right()
+            self.driver.swipe_right()
             print("点击坐标")
             w = self.driver.get_window_size()['width']
             h = self.driver.get_window_size()['height']
             LogAction.print("=>点击体验")
-            BaseAdb.adb_tap(w / 2, int(h * 0.899))
+            BaseAdb.adb_tap(w / 2, int(h * 0.91))
 
             sleep(2)
             self.driver.click("id=>cn.cj.pe:id/add_account",3)
@@ -163,6 +164,7 @@ class Login(unittest.TestCase):
             LogAction.print("=>右滑 * 2")
             self.driver.swipe_right()
             self.driver.swipe_right()
+            self.driver.swipe_right()
             print("点击坐标")
             # BaseAdb.adbTap(700, 2300)  # vivo 1603  w * 0.5, h * 0.899
             #
@@ -170,7 +172,7 @@ class Login(unittest.TestCase):
             h = self.driver.get_window_size()['height']
 
             LogAction.print("=>点击立即体验")
-            BaseAdb.adb_tap(w / 2, int(h * 0.899))
+            BaseAdb.adb_tap(w / 2, int(h * 0.91))
 
             # BaseAdb.adbTap(500, 1700) #其他手机需要调试
             sleep(2)

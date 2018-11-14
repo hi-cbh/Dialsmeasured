@@ -1,0 +1,7 @@
+
+wpython:S100"VRename method "testCaseFwdSend" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(àÑþÈüÿÿÿÿ8»©Ïð„,
+upython:S100"TRename method "testCaseReply" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(€±ë¥ýÿÿÿÿ8ò÷«ƒ¸,
+mpython:S100"LRename method "setUp" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(§˜œŽþÿÿÿÿ8»©Ïð„,
+kpython:S100"ORename method "tearDown" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(•ûÜë8»©Ïð„,
+opython:S100"SRename method "testCaseSend" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(Î·îÅ8»©Ïð„,
+wpython:S100"VRename method "testCaseForward" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(èáÀÚýÿÿÿÿ8ò÷«ƒ¸,

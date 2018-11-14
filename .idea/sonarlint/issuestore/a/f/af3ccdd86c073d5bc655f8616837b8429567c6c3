@@ -1,0 +1,4 @@
+
+mpython:S100"LRename method "setUp" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(§˜œŽþÿÿÿÿ8’“Èð„,
+tpython:S100"SRename method "testCasePush" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(²Ö‘¥ýÿÿÿÿ8’“Èð„,
+kpython:S100"ORename method "tearDown" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(•ûÜë8’“Èð„,

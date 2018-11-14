@@ -1,0 +1,6 @@
+
+|python:S100"[Rename method "testCaseSendNoAttach" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(ˆ³¨ üÿÿÿÿ8Éä‚Â,
+ppython:S100"VRename method "testCaseForward" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(èáÀÚıÿÿÿÿ
+ppython:S100"VRename method "testCaseFwdSend" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(àÑşÈüÿÿÿÿ
+npython:S100"TRename method "testCaseReply" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(€±ë¥ıÿÿÿÿ
+upython:S100"YRename method "testCaseSendAttach" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(‡†‡Ê8Éä‚Â,
