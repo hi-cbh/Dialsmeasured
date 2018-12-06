@@ -230,8 +230,11 @@ class SendMail():
         mail_pass = self.pwd
 
         if is_test:
-            areceiver = "2915673336@qq.com,13580491603@163.com"
-            # areceiver = "13697485262@139.com"
+            # areceiver = "2915673336@qq.com,13580491603@163.com"
+            # areceiver = "13533218540@139.com"
+            # areceiver = "2915673336@qq.com"
+            # areceiver = "13533218540@163.com"
+            areceiver = "13533218540@189.cn"
         else:
             # areceiver = "hi_cbh@qq.com,wujun11121@163.com"
             areceiver = recipient["qqemail"]
@@ -350,10 +353,10 @@ class SendMail():
 
 if __name__ == "__main__":
 
-    # s = SendMail("13580491603","chinasoft123","13533218540")
-    s = SendMail("13533218540","hy123456789","13533218540")
+    s = SendMail("13580491603","chinasoft123","13533218540")
+    # s = SendMail("13533218540","hy123456789","13533218540")
 
-    for i in range(101,121):
+    for i in range(1,2):
 
 
         # s.sendMail('testEmail','Python 邮件发送测试...')

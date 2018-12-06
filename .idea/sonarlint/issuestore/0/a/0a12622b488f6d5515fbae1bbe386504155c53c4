@@ -1,19 +1,19 @@
 
-npython:S100"YRename method "testCaseOnBtnLogin" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(²‡¡©
-upython:S100"YRename method "testCaseSendAttach" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(‡†‡Ê8¿ã¢€Â,
 mpython:S100"SRename method "testDownFile" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(š¦¶¸ıÿÿÿÿ
-tpython:S100"_Rename method "testCaseCheckAddressList" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(Š¥é†
-qpython:S100"WRename method "testCaseSkyDrive" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(˜–×ìúÿÿÿÿ
+hpython:S100"TRename method "testCaseLogin" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(œÌ§E
 ppython:S100"VRename method "testCaseForward" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(èáÀÚıÿÿÿÿ
 kpython:S100"QRename method "setUpClass" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(æÚøÑùÿÿÿÿ
-mpython:S100"SRename method "testCasePush" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(²Ö‘¥ıÿÿÿÿ
-npython:S100"TRename method "tearDownClass" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(‰ÀËíúÿÿÿÿ
-|python:S100"[Rename method "testCaseSendNoAttach" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(ˆ³¨ üÿÿÿÿ8¿ã¢€Â,
-lpython:S100"WRename method "testCaseSelected" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(Ë±€ğ
 qpython:S100"WRename method "testCaseDiscover" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(”ÃÍ±ÿÿÿÿÿ
-ppython:S100"VRename method "testCaseFwdSend" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(àÑşÈüÿÿÿÿ
-npython:S100"TRename method "testCaseReply" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(€±ë¥ıÿÿÿÿ
+tpython:S100"_Rename method "testCaseCheckAddressList" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(Š¥é†
+npython:S100"TRename method "tearDownClass" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(‰ÀËíúÿÿÿÿ
+npython:S100"YRename method "testCaseOnBtnLogin" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(²‡¡©
 lpython:S100"WRename method "testCaseCalendar" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(¤¼€™
 xpython:S100"^Rename method "testCasePersionMessages" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(±½ŸŒøÿÿÿÿ
-hpython:S100"TRename method "testCaseLogin" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(œÌ§E
+qpython:S100"WRename method "testCaseSkyDrive" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(˜–×ìúÿÿÿÿ
+mpython:S100"SRename method "testCasePush" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(²Ö‘¥ıÿÿÿÿ
+|python:S100"[Rename method "testCaseSendNoAttach" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(ˆ³¨ üÿÿÿÿ8¿ã¢€Â,
+ppython:S100"VRename method "testCaseFwdSend" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(àÑşÈüÿÿÿÿ
+npython:S100"TRename method "testCaseReply" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(€±ë¥ıÿÿÿÿ
 upython:S100"TRename method "testCaseToken" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(ÒŞ”øÿÿÿÿ8Å´²ıê,
+upython:S100"YRename method "testCaseSendAttach" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(‡†‡Ê8¿ã¢€Â,
+lpython:S100"WRename method "testCaseSelected" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(Ë±€ğ

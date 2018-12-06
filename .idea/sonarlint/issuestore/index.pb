@@ -169,3 +169,5 @@ H
 src/testUnittest/tmp1.py,d/9/d9ed9a9a069e3deed42bfda4622c57ee6b4bee15
 N
 src/testcase/v746/testToken.py,a/d/ad3f01bea8afd889489eb8e259e3405df84297bb
+S
+#.idea/sonarlint/issuestore/index.pb,9/f/9fe84ebb15faf917b7def6236dba604453cc61e0

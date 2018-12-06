@@ -101,6 +101,11 @@ class Login(unittest.TestCase):
             LogAction.print('=>输入密码')
             els[1].set_value(self.pwd)
 
+            LogAction.print("勾选条款")
+            if self.driver.get_element("id=>cn.cj.pe:id/check_btn", 5) != None:
+                self.driver.click("id=>cn.cj.pe:id/check_btn",5)
+
+
             LogAction.print('=>点击登录')
             self.driver.click("id=>cn.cj.pe:id/login",5)
 
@@ -181,9 +186,16 @@ class Login(unittest.TestCase):
             LogAction.print("=>【进入登录界面】")
             self.assertTrue(self.driver.get_element(u"uiautomator=>快速登录",10) != None, "页面不存在快捷登录按钮")
 
+            LogAction.print('=>选择139邮箱')
+            self.driver.click(r"xpath=>//android.widget.ImageView[@index='0']")
 
-            LogAction.print('=>点击快速登录')
-            self.driver.click(u"uiautomator=>快速登录")
+            LogAction.print("勾选条款")
+            if self.driver.get_element("id=>cn.cj.pe:id/check_btn", 5) != None:
+                self.driver.click("id=>cn.cj.pe:id/check_btn",5)
+
+
+            LogAction.print('=>点击本机号码快速登录')
+            self.driver.click(u"id=>cn.cj.pe:id/sm_login",10)
 
             LogAction.print('=>等待收件箱')
             self.driver.element_wait(u"uiautomator=>收件箱",10)
