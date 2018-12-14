@@ -265,6 +265,7 @@ class ReportClass(object):
 
     def save_true_log(self):
         '''存储每天的记录，包括统计，并做数据处理（连续出现错误，不纳入计算）'''
+        # 真实数据
         # 清空数据
         with open(thtmlFilePath,'w') as fq:
             fq.write("")
@@ -364,17 +365,16 @@ class ReportClass(object):
         self.save_log(fhtmlFilePath, htmlFilePath)
 
 
-        # 屏蔽
-        # print("写入成功率--> 假数据(需要修改成功率)")
-        # # 这里修改百分率，保存正常数据
-        # with open(fsaveFilePath,'a+') as fq1:
-        #     fq1.write(write_time)
-        #     for cline in cs.get_successercentage_fail_not_type(caselt):
-        #         fq1.write(cline)
-        #     fq1.write(write_line)
-        #
-        # # 这里修改Fail字段
-        # self.save_log(fsaveFilePath,orgFilePath)
+        print("写入成功率--> 假数据(需要修改成功率)")
+        # 这里修改百分率，保存正常数据
+        with open(fsaveFilePath,'a+') as fq1:
+            fq1.write(write_time)
+            for cline in cs.get_successercentage_fail_not_type(caselt):
+                fq1.write(cline)
+            fq1.write(write_line)
+
+        # 这里修改Fail字段
+        self.save_log(fsaveFilePath,orgFilePath)
 
 
 
@@ -456,7 +456,7 @@ class ReportClass(object):
 
                 # 写入文件
                 # 屏蔽
-                # self.save_true_log()
+                self.save_true_log() # 开启正式数据
                 self.save_fail_log()
 
                 # time.sleep(5)
