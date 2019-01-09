@@ -28,6 +28,10 @@ class TestPush(unittest.TestCase):
         try:
             LogAction.print(isReset=True)
             Login(self.driver,user['name'], user['pwd']).login()
+
+            # 这里添加埋点，是否登录成功
+
+
             LogAction.print("=>点击Home键")
             BaseAdb.adb_home()
             time.sleep(2)
@@ -37,6 +41,9 @@ class TestPush(unittest.TestCase):
 
             LogAction.print("=>【邮件发送】")
             self.assertTrue(s.send_mail_test('sendsmtpEmail','测试邮件...'),"邮件发送失败")
+
+
+
             time.sleep(5)
             LogAction.print("=>邮件成功")
             time.sleep(5)

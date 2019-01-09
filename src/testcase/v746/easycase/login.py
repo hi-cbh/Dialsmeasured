@@ -89,6 +89,8 @@ class Login(unittest.TestCase):
             LogAction.print('=>选择139邮箱')
             self.driver.click(r"xpath=>//android.widget.ImageView[@index='0']")
 
+            # 这里添加埋点 ，判断是否进入账户输入界面
+
             # 输入
             els = self.driver.get_elements("id=>cn.cj.pe:id/input",5)
 
@@ -132,6 +134,7 @@ class Login(unittest.TestCase):
             self.update()
 
 
+            # 这里添加埋点，判断是否登录成功
 
             sleep(2)
             LogAction.print("=>点击邮件")
@@ -148,7 +151,7 @@ class Login(unittest.TestCase):
             BaseImage.screenshot(self.driver, "LoginError")
             sleep(5)
             LogAction.save(func = "testCaseLogin", status="fail", explain=LogAction.print())
-            print(e)
+            print("error_AccountLogin_")
             if ReadWriteConfFile.get_status_value():
                 self.fail("【手动输入账号/密码-登录】出现错误")
 
@@ -218,6 +221,9 @@ class Login(unittest.TestCase):
             sleep(2)
             LogAction.print('=>判断是否升级')
             self.update()
+
+
+            # 这里添加埋点，判断登录是否成功
 
             LogAction.print('=>点击底部导航栏')
             self.driver.click("id=>cn.cj.pe:id/message_list_bottom_email",2)

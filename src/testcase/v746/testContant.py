@@ -23,9 +23,13 @@ class TestContant(unittest.TestCase):
             LogAction.print(isReset=True)
             Login(self.driver,user['name'], user['pwd']).login()
 
+
+            # 这里添加埋点，是否登录成功
+
             LogAction.print("=>点击联系人")
             self.driver.click(u"uiautomator=>联系人")
 
+            # 这里添加埋点
             LogAction.print("=>【通讯录同步】")
             self.assertTrue(self.waitfor_notification(), "通讯录同步失败！！")
             LogAction.save(func = "CheckAddressListError", status="success", explain=LogAction.print())

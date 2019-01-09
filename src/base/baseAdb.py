@@ -23,6 +23,14 @@ class BaseAdb(object):
         except BaseException:
             return "1.1.1"
 
+    def adb_android_version(self):
+        '''获取android系统版本号'''
+        try:
+            result = os.popen("adb shell getprop ro.build.version.release")
+
+            return result.readline()
+        except BaseException:
+            return "1.1.1"
 
     def adb_stop(self, cmd):
         '''杀进程'''
@@ -30,6 +38,7 @@ class BaseAdb(object):
 
 
     def adb_devicename(self):
+        '''获取设备名称'''
         value = os.popen("adb shell getprop ro.product.model")
         return  value.readline()
 

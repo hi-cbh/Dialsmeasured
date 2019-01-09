@@ -26,6 +26,8 @@ class TestSelect(unittest.TestCase):
             LogAction.print(isReset=True)
             Login(self.driver,user['name'], user['pwd']).login()
 
+            # 这里添加埋点，是否登录成功
+
             LogAction.print("=>加载本地邮件")
             timeout = int(round(time.time() * 1000)) + 30 * 1000
             # 找到邮件结束

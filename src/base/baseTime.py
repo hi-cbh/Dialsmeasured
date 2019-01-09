@@ -69,4 +69,4 @@ class BaseTime(object):
 BaseTime = BaseTime()
 
 if __name__ == "__main__":
-    print(BaseTime.current_data_file())
+    print(BaseTime.current_time())

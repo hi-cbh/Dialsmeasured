@@ -26,6 +26,8 @@ class TestDownFile(unittest.TestCase):
         LogAction.print(isReset=True)
         Login(self.driver,user['name'], user['pwd']).login()
 
+        # 这里添加埋点，是否登录成功
+
         print("判断是否存在邮件")
         if self.driver.element_wait("uiautomator=>SendAttach") == None:
             Send(self.driver,user["name"]+'@139.com').send_action(subject="SendAttach")

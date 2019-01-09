@@ -21,6 +21,9 @@ class Send(unittest.TestCase):
     def send(self,subject, is_add = True):
         '''发送邮件'''
         try:
+
+            # 这里添加埋点，是否登录成功
+
             # 点击写邮件按钮
             LogAction.print('=>点击写邮件')
             self.driver.click(r"id=>cn.cj.pe:id/actionbar_right_view")
@@ -59,8 +62,8 @@ class Send(unittest.TestCase):
                 waittime = time_max
 
 
-            LogAction.print('=>【已完成】')
-            self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",waittime) != None, "发送邮件失败！")
+            LogAction.print('=>【发送成功】')
+            self.assertTrue(self.driver.element_wait(u"uiautomator=>发送成功",waittime) != None, "发送邮件失败！")
 
             print('返回收件箱')
             BaseAdb.adb_back()
@@ -93,6 +96,9 @@ class Send(unittest.TestCase):
     def send_action(self,subject):
         '''正常的发送邮件，添加附件'''
         try:
+
+            # 这里添加埋点，是否登录成功
+
             # 点击写邮件按钮
             LogAction.print('=>点击写邮件')
             self.driver.click(r"id=>cn.cj.pe:id/actionbar_right_view")
@@ -129,8 +135,8 @@ class Send(unittest.TestCase):
                 waittime = time_max
 
 
-            LogAction.print('=>【已完成】')
-            self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",waittime) != None, "发送邮件失败！")
+            LogAction.print('=>【发送成功】')
+            self.assertTrue(self.driver.element_wait(u"uiautomator=>发送成功",waittime) != None, "发送邮件失败！")
 
             print('返回收件箱')
             BaseAdb.adb_back()
@@ -163,6 +169,8 @@ class Send(unittest.TestCase):
         '''云端转发：带有的邮件，进行转发'''
         try:
 
+            # 这里添加埋点，是否登录成功
+
             print("判断是否存在邮件")
             if self.driver.element_wait("uiautomator=>%s" %subject) == None:
                 self.send_action(subject=subject)
@@ -193,8 +201,8 @@ class Send(unittest.TestCase):
                 waittime = time_max
 
 
-            LogAction.print('=>【发已完成】')
-            self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",waittime) != None, "发送邮件失败！")
+            LogAction.print('=>【发送成功】')
+            self.assertTrue(self.driver.element_wait(u"uiautomator=>发送成功",waittime) != None, "发送邮件失败！")
 
             LogAction.print('=>返回收件箱')
             BaseAdb.adb_back()
@@ -227,6 +235,9 @@ class Send(unittest.TestCase):
     def forward(self,subject):
         '''stmp转发：本地无附件的邮件，添加附件后，转发'''
         try:
+
+
+            # 这里添加埋点，是否登录成功
 
             print("判断是否存在邮件")
             if self.driver.element_wait("uiautomator=>%s" %subject) == None:
@@ -268,8 +279,8 @@ class Send(unittest.TestCase):
             else:
                 waittime = time_max
 
-            LogAction.print('=>【已完成】')
-            self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",waittime) != None, "发送邮件失败！")
+            LogAction.print('=>【发送成功】')
+            self.assertTrue(self.driver.element_wait(u"uiautomator=>发送成功",waittime) != None, "发送邮件失败！")
 
             print('返回收件箱')
             BaseAdb.adb_back()
@@ -303,6 +314,10 @@ class Send(unittest.TestCase):
     def reply(self,subject):
         '''回复邮件-无附件'''
         try:
+
+            # 这里添加埋点，是否登录成功
+
+
             print("判断是否存在邮件")
             if self.driver.element_wait("uiautomator=>%s" %subject) == None:
                 self.send(subject=subject)
@@ -333,8 +348,8 @@ class Send(unittest.TestCase):
             else:
                 waittime = time_max
 
-            LogAction.print('=>【已完成】')
-            self.assertTrue(self.driver.element_wait(u"uiautomator=>已完成",waittime) != None, "发送邮件失败！")
+            LogAction.print('=>【发送成功】')
+            self.assertTrue(self.driver.element_wait(u"uiautomator=>发送成功",waittime) != None, "发送邮件失败！")
 
             print('返回收件箱')
             BaseAdb.adb_back()

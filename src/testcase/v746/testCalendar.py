@@ -25,11 +25,15 @@ class TestCalendar(unittest.TestCase):
             LogAction.print(isReset=True)
             Login(self.driver,user['name'], user['pwd']).login()
 
+            # 这里添加埋点，是否登录成功
+
             LogAction.print("=>我的")
             self.driver.click(u"uiautomator=>我的")
 
             LogAction.print("=>日历")
             self.driver.click(u"uiautomator=>日历")
+
+            # 这里添加埋点
 
             # LogAction.print("=>【创建日程】")
             # self.assertTrue(self.driver.element_wait("uiautomator=>创建日程提醒",10)!=None, "日历同步失败！！")

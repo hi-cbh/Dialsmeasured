@@ -1,8 +1,9 @@
 # urs/bin/python
 # encoding:utf-8
 
-import os
+import os,time
 from src.base.baseTime import BaseTime
+from src.base.baseAdb import BaseAdb
 
 _path = "/Users/apple/autoTest/elk_tmp/logstash/data/" + BaseTime.current_data_file() +".csv"
 
@@ -29,12 +30,30 @@ class LogAction():
             self.s=self.s + str
         return self.s
 
+    def data_point(self,name):
+        '''数据埋点'''
+        #以后再做处理
+
+        print("记录，上传错误信息")
+
+    def sendLog(self,name):
+        '''错误日志以双下划线区分模块'''
+        '''
+        如：
+        error_Login__2019-01-05_14-42-19__V8.3.1__android(6.0.1)__[SM-N9108V]
+        添加错误账号，通过name传入，如
+        name = error_Login__13800138000__
+        '''
+        return name +"__"+ BaseTime.current_time()+"__V"+BaseAdb.adb_version()[0:-1]+"__android("+BaseAdb.adb_android_version()[0:-1]+')__[' + BaseAdb.adb_devicename()[0:-1] +']'
 
 LogAction=LogAction()
 
 
 if __name__ == '__main__':
-    LogAction.print("123")
-    LogAction.print("123")
-    LogAction.print("123")
-    print(LogAction.print(""))
+    # LogAction.print("123")
+    # LogAction.print("123")
+    # LogAction.print("123")
+    start = time.time()
+    print(LogAction.sendLog("error_Login"))
+    end = time.time()
+    print(end-start)
