@@ -8,9 +8,9 @@ from email.utils import parseaddr, formataddr
 
 recipient = {
     "tester":"13533348571@139.com",
-    "three": '13533348571@139.com,18022340679@139.com',
-    "all":'13533348571@139.com,18022340679@139.com,wenyaoneng@139.com,13610128827@139.com,hi_cbh@qq.com,13580491687@163.com', #,13802883234@139.com,
-    "qqemail":"hi_cbh@qq.com,13580491687@163.com,18022340679@139.com,wenyaoneng@139.com,13610128827@139.com",
+    "three": '13533348571@139.com',
+    "all":'13533348571@139.com,wenyaoneng@139.com,13610128827@139.com,hi_cbh@qq.com,13580491687@163.com', #,13802883234@139.com,
+    "qqemail":"hi_cbh@qq.com,13580491687@163.com,wenyaoneng@139.com,13610128827@139.com",
 
 }
 
