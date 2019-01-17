@@ -174,7 +174,7 @@ if __name__ == "__main__":
     print('=================中文-英文对应测试用例=================')
     testtxt = []
     # testtxt.append(('杭研token测试',"testCaseToken"))
-    testtxt.append(('一键登录',"testCaseOnBtnLogin"))
+    # testtxt.append(('一键登录',"testCaseOnBtnLogin"))
     testtxt.append(('账号登录',"testCaseLogin"))
     testtxt.append(('发送邮件无附件',"testCaseSendNoAttach"))
     testtxt.append(('发送邮件带附件',"testCaseSendAttach"))
@@ -193,7 +193,7 @@ if __name__ == "__main__":
     print('=================测试用例加入测试套件=================')
     suite = unittest.TestSuite()
     # suite.addTest(TestCase('testCaseToken'))
-    suite.addTest(TestCase('testCaseOnBtnLogin'))
+    # suite.addTest(TestCase('testCaseOnBtnLogin'))
     suite.addTest(TestCase('testCaseLogin'))
     suite.addTest(TestCase('testCaseSendNoAttach'))
     suite.addTest(TestCase('testCaseSendAttach'))
