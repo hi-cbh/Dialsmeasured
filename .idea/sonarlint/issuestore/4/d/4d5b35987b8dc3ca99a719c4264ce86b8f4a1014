@@ -1,4 +1,0 @@
-
-fpython:S100"LRename method "setUp" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(§ώÿÿÿÿ
-xpython:S100"^Rename method "testCasePersionMessages" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(±½ψÿÿÿÿ
-dpython:S100"ORename method "tearDown" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(•ϋάλ

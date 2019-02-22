@@ -7,10 +7,10 @@ from email.utils import parseaddr, formataddr
 
 
 recipient = {
-    "tester":"13533348571@139.com",
-    "three": '13533348571@139.com',
-    "all":'13533348571@139.com,wenyaoneng@139.com,13610128827@139.com,hi_cbh@qq.com,13580491687@163.com', #,13802883234@139.com,
-    "qqemail":"hi_cbh@qq.com,13580491687@163.com,wenyaoneng@139.com,13610128827@139.com",
+    "tester":"xxx@139.com",
+    "three": 'xxx@139.com',
+    "all":'xxxx',
+    "qqemail":"xxxx",
 
 }
 
@@ -230,13 +230,8 @@ class SendMail():
         mail_pass = self.pwd
 
         if is_test:
-            # areceiver = "2915673336@qq.com,13580491603@163.com"
-            areceiver = "13533218540@139.com"
-            # areceiver = "2915673336@qq.com"
-            # areceiver = "13533218540@163.com"
-            # areceiver = "13533218540@189.cn"
+            areceiver = "xxxxx@139.com"
         else:
-            # areceiver = "hi_cbh@qq.com,wujun11121@163.com"
             areceiver = recipient["qqemail"]
 
 
@@ -275,7 +270,7 @@ class SendMail():
 
         if is_test:
             # areceiver = 'hi_cbh@qq.com'
-            areceiver = '13501538531@139.com'
+            areceiver = 'xxxxxx@139.com'
         else:
             # areceiver = "hi_cbh@qq.com,wujun11121@163.com"
             areceiver = recipient["qqemail"]
@@ -312,7 +307,7 @@ class SendMail():
         from_mail = self.username + '@163.com'
         mail_pass = self.pwd
         if is_test:
-            areceiver = 'hi_cbh@qq.com'
+            areceiver = 'xxxxx@qq.com'
         else:
             areceiver = recipient['qqemail']
 
@@ -353,7 +348,7 @@ class SendMail():
 
 if __name__ == "__main__":
 
-    s = SendMail("13580491603","chinasoft123","13533218540")
+    s = SendMail("xxxx","xxx","xxx")
     # s = SendMail("13533218540","hy123456789","13533218540")
 
     for i in range(1,21):

@@ -17,7 +17,7 @@ class LogAction():
         # print("log_time=%s,func=%s,status=%s,explain=%s,version=%s"  %(BaseTime.get_current_time(), func, status,explain,version))
         msg = "%s,%s,%s,%s,%s"  %(BaseTime.get_current_time(), func, status,explain,version)
         # print(_path)
-        # print(msg)
+        print(msg)
         # 去除前后空格
         # with open(_path.lstrip(" ").rstrip(" "),'a+') as fn:
         #     fn.write(msg+'\n')
@@ -44,7 +44,16 @@ class LogAction():
         添加错误账号，通过name传入，如
         name = error_Login__13800138000__
         '''
-        return name +"__"+ BaseTime.current_time()+"__V"+BaseAdb.adb_version()[0:-1]+"__android("+BaseAdb.adb_android_version()[0:-1]+')__[' + BaseAdb.adb_devicename()[0:-1] +']'
+        # 实战
+        # print_str = name +"__"+ BaseTime.current_time()+"__V"+BaseAdb.adb_version()[0:-1]\
+        #             +"__android("+BaseAdb.adb_android_version()[0:-1]\
+        #             +')__[' + BaseAdb.adb_devicename()[0:-1] +']'
+
+        # 测试
+        print_str = name +"__"+ BaseTime.current_time()+'__V8.3.1__android(6.0.1)__[SM-N9108V]'
+        print(print_str)
+
+        return print_str
 
 LogAction=LogAction()
 

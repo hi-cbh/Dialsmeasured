@@ -41,28 +41,6 @@ H
 src/otherApk/__init__.py,c/3/c3ac2703a5e24ccf7306b88b55cef393ddbbffad
 I
 src/otherApk/testSpeed.py,1/e/1ebfcddeeb784f47efc581e84cbfbb58614ae058
-R
-"src/testcase/v731/easycase/send.py,7/d/7d7a0ab1ac060a7df71b648b2b60aaf6f8415eb4
-S
-#src/testcase/v731/easycase/login.py,f/3/f3b9cce2478534af0acebd3fdac6fdfb867142a9
-T
-$src/testcase/v731/easycase/public.py,3/3/338a824b9e5cf41f8349e7d6cdeabeb446aab1c7
-V
-&src/testcase/v731/easycase/__init__.py,b/2/b2bb4c3a1a16d6a24c796dcc0dde39a204427c62
-V
-&src/testcase/v731/easycase/openDown.py,b/b/bbc979455a68d837cb97dc31f899d2825ef9b466
-M
-src/testcase/v731/__init__.py,3/6/363ac82a590cd54b1dadeb76ad5be13a1694b18b
-M
-src/testcase/v731/testPush.py,a/f/af3ccdd86c073d5bc655f8616837b8429567c6c3
-N
-src/testcase/v731/testLogin.py,e/b/ebf58dea6956b89c0180c8ca51ecaa12e3baa5b5
-P
- src/testcase/v731/testContant.py,a/5/a52f1dac208687e1808a4cc188198493ab6d87d9
-Q
-!src/testcase/v731/testDownFile.py,a/4/a411d8b9d03af0189788fbe5465abe4c232c940a
-T
-$src/testcase/v731/test139Selected.py,8/0/809d49fd2403a55aeb489d30130d424cd0472cb7
 H
 src/testcase/__init__.py,0/8/0841852eb371e8e792f3c2584d47279b81c45015
 N
@@ -83,10 +61,6 @@ L
 .scannerwork/report-task.txt,1/f/1feadc761844720d11268cc01b88d72358e54ba6
 H
 sonar-scanner.properties,e/7/e7ab1bae6204d8df4b019a3f9cd2bb43f225c2bf
-U
-%src/testcase/v731/easycase/receive.py,6/6/66f09b5c98e469f2abde4f6eed14c64408b87443
-M
-src/testcase/v731/testSend.py,7/d/7d28b063cb69536da2a5b4c2a511a26c4e54644b
 E
 logs/org_20171228.log,9/a/9a737afee98d5798ea8306c816ed7a4255937729
 G
@@ -95,14 +69,6 @@ I
 src/testUnittest/test3.py,4/8/48162935b4f0154e845b2eb7116a35efc378422c
 C
 src/base/baseLog.py,2/4/24381d82e414af1db234242e512612e39d2fd83b
-O
-src/testcase/v731/testPerson.py,4/d/4d5b35987b8dc3ca99a719c4264ce86b8f4a1014
-Q
-!src/testcase/v731/testCalendar.py,b/1/b1e07057fea3e7ec10c9db49d00cee432f36e362
-Q
-!src/testcase/v731/testDiscover.py,0/1/01b74007126778255d8a7ba197420a7df0518a96
-Q
-!src/testcase/v731/testSkyDrive.py,f/e/fe94fe941a6c14b80182db46ee27c54f0024f37f
 Q
 !src/testUnittest/sendEmailSmtp.py,3/a/3ac4d5b25c9d01917c8dfbc5bccebd6341c9d5a7
 M

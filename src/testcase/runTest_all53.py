@@ -143,32 +143,7 @@ def get_dict(data_dict = {}, case_list=[]):
 
 if __name__ == "__main__":
 
-    ReadWriteConfFile.value_set_true_false(True)
 
-    try:
-
-        print("=================更新到数据库=================")
-        l = ['testcaseonbtnlogin', 'testcaselogin', 'testcasesendnoattach', 'testcasesendattach', 'testcasefwdsend', 'testcaseforward', 'testcasereply', 'testdownfile', 'testcasecheckaddresslist', 'testcaseselected', 'testcasepush', 'testcasecalendar', 'testcasediscover', 'testcasepersionmessages', 'testcaseskydrive']
-
-        new_dict2 = get_dict(dict(ReadWriteConfFile.read_section_all("caseconf")),l)
-
-        print(new_dict2)
-
-        # ------------- 更新汇总数据库------------
-        error_dict2 = get_dict(dict(ReadWriteConfFile.read_section_all("errorconf")),l)
-        print(error_dict2)
-        # 更新本地数据库
-        DB().update("test_data",new_dict2)
-
-        # 更新到阿里云
-        DockerDB().update("sign_case",new_dict2)
-        DockerDB().update("sign_error",error_dict2)
-        time.sleep(5)
-        hour_dict = get_dict(dict(ReadWriteConfFile.read_section_all("errorhourconf")),l)
-        HourError().setData(hour_dict)
-    except BaseException as e:
-        # print(e)
-        print("每小时更新数据库，错误")
 
 
     print('=================中文-英文对应测试用例=================')
@@ -219,23 +194,7 @@ if __name__ == "__main__":
     fp.close()
     print('=================运行结束=================')
 
-    try:
-        print("=================更新到数据库=================")
-        l = ['testcaseonbtnlogin', 'testcaselogin', 'testcasesendnoattach', 'testcasesendattach', 'testcasefwdsend', 'testcaseforward', 'testcasereply', 'testdownfile', 'testcasecheckaddresslist', 'testcaseselected', 'testcasepush', 'testcasecalendar', 'testcasediscover', 'testcasepersionmessages', 'testcaseskydrive']
 
-        new_dict = get_dict(dict(ReadWriteConfFile.read_section_all("caseconf")),l)
-        print(new_dict)
-
-        DB().update("test_data",new_dict)
-
-        DockerDB().update("sign_case",new_dict)
-        time.sleep(5)
-
-        hour_dict = get_dict(dict(ReadWriteConfFile.read_section_all("errorhourconf")),l)
-        HourError().setData(hour_dict)
-    except BaseException as e:
-        # print(e)
-        print("每小时更新数据库，错误")
 
 
     # 休眠状态

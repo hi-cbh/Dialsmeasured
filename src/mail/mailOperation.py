@@ -283,7 +283,7 @@ class EmailOperation(object):
 
 
 if __name__ == '__main__':
-    eo = EmailOperation("13697485262@139.com","chinasoft13")
+    eo = EmailOperation("@139.com","chinasoft13")
 #     eo.moveForlder(['INBOX','100' ]) 
 #     eo.moveForlder(['100', 'INBOX']) 
 #     eo.clearForlder(['已发送','已删除'])

@@ -1,5 +1,0 @@
-
-opython:S100"TRename method "testCaseLogin" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(œÌ§E8Ê¼Çð„,
-upython:S100"YRename method "testCaseOnBtnLogin" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(²‡¡©8Ð­æÖÁ,
-kpython:S100"ORename method "tearDown" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(•ûÜë8Ê¼Çð„,
-mpython:S100"LRename method "setUp" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(§˜œŽþÿÿÿÿ8Ê¼Çð„,
